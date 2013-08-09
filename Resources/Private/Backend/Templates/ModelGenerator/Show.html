@@ -1,0 +1,25 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+
+<f:flashMessages />
+
+<f:form action="show" name="generator" object="{generator}">
+	<f:form.hidden property="previousDatabaseTable" />
+	<f:form.select property="databaseTable" options="{databaseTables}" size="10" /><br />
+	
+	<f:if condition="{generator.databaseTable}">
+		<f:then>
+			<f:form.select property="databaseTableFields" options="{databaseTableFields}" optionLabelField="name" optionValueField="name" size="20" multiple="1" /><br />
+		</f:then>
+	</f:if>
+	
+	<f:form.submit value="{f:translate(key:'form.submit',default:'Submit')}" /><br />
+</f:form>
+<f:if condition="{generator.databaseTable}">
+	<f:then>
+		<f:form.textarea value="{extbaseClass}" rows="25" cols="100" /><br />
+		<f:form.textarea value="{TSMappings}" rows="15" cols="100" /><br />
+	</f:then>
+</f:if>
+</f:section>
