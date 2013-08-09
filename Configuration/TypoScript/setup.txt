@@ -1,0 +1,11 @@
+# Module configuration
+module.tx_x4ebase {
+	persistence {
+		storagePid = {$module.tx_x4ebase.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$module.tx_x4ebase.view.templateRootPath}
+		partialRootPath = {$module.tx_x4ebase.view.partialRootPath}
+		layoutRootPath = {$module.tx_x4ebase.view.layoutRootPath}
+	}
+}
