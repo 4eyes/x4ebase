@@ -5,7 +5,7 @@ namespace X4E\X4ebase\Controller;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,39 +33,39 @@ namespace X4E\X4ebase\Controller;
  *
  */
 class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
-	
+
 	/**
 	 * The response which will be returned by this action controller
 	 *
 	 * @var \TYPO3\CMS\Extbase\Mvc\Web\Response
 	 */
 	protected $response;
-	
+
 	/**
 	 * Initializes the controller before invoking an action method.
 	 *
 	 * @return void
 	 */
 	protected function initializeAction() {
-		
+
 	}
-	
+
 	/**
 	 * action show
 	 *
 	 * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-	 * 
+	 *
 	 * @param array $generator Extbase Model Generator
-	 * 
+	 *
 	 * @return void
 	 */
 	public function showAction(array $generator = NULL) {
 		global $TYPO3_DB;
-		
+
 		if ($generator === NULL) {
 			$generator = array();
 		}
-		
+
 		$databaseTables = array();
 		if (($res = $TYPO3_DB->sql_query('SHOW TABLES')) !== FALSE){
 			while(($row = $TYPO3_DB->sql_fetch_row($res)) !== FALSE){
@@ -75,9 +75,9 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 			natcasesort($databaseTables);
 			$databaseTables = array_combine($databaseTables, $databaseTables);
 		}
-		
+
 		$initDatabaseTableFields = !(isset($generator['databaseTable']) && isset($generator['previousDatabaseTable']) && $generator['databaseTable'] === $generator['previousDatabaseTable']);
-		
+
 		$databaseTableFields = array();
 		$databaseTableFieldOptions = array();
 		if (isset($generator['databaseTable']) && in_array($generator['databaseTable'], $databaseTables)) {
@@ -101,15 +101,15 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		
 		$extbaseClass = (isset($generator['databaseTable']) ? $this->getExtbaseClassFromFields($generator['databaseTable'], $databaseTableFields) : '');
 		$TSMappings = (isset($generator['databaseTable']) ? $this->getTSMappingsFromFields($generator['databaseTable'], $databaseTableFields) : '');
-		
+
 		$this->view->assign('generator', $generator);
 		$this->view->assign('databaseTables', $databaseTables);
 		$this->view->assign('databaseTableFields', $databaseTableFieldOptions);
 		$this->view->assign('extbaseClass', $extbaseClass);
 		$this->view->assign('TSMappings', $TSMappings);
 	}
-	
-	
+
+
 	protected function getSqlFieldType($sqlType){
 		$switchType = strtolower(preg_replace('/^(\w+).*/', '$1', $sqlType));
 		$type = NULL;
@@ -136,17 +136,17 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		}
 		return $type;
 	}
-	
+
 	protected function getExtbaseClassFromFields($table, $fieldsArray) {
 		$definitions = '';
 		$methods = '';
-		
+
 		$camelcaseTableName = ucfirst(preg_replace_callback('/_([a-z])/', function($matches){return strtoupper($matches[1]);}, strtolower($table)));
-		
+
 		foreach ($fieldsArray as $fieldArray) {
 			$camelcaseField = preg_replace_callback('/_([a-z])/', function($matches){return strtoupper($matches[1]);}, strtolower($fieldArray['name']));
-			$definitions .= 
-'	
+			$definitions .=
+'
 	/**
 	 * ' . $camelcaseField . '
 	 *
@@ -154,8 +154,8 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 */
 	protected $' . $camelcaseField . ';
 ';
-			$methods .= 
-'	
+			$methods .=
+'
 	/**
 	 * Returns the ' . $camelcaseField . '
 	 *
@@ -164,7 +164,7 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	public function get' . ucfirst($camelcaseField) . '() {
 		return $this->' . $camelcaseField . ';
 	}
-	
+
 	/**
 	 * Sets the ' . $camelcaseField . '
 	 *
@@ -176,7 +176,7 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	}
 ';
 		}
-		
+
 		$extbaseClass = 'class ' . $camelcaseTableName . ' extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	' . $definitions . '
 	/**
@@ -200,18 +200,18 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 }';
 		return $extbaseClass;
 	}
-	
+
 	protected function getTSMappingsFromFields($table, $fieldsArray) {
 		$mappings = '';
-		
+
 		$camelcaseTableName = ucfirst(preg_replace_callback('/_([a-z])/', function($matches){return strtoupper($matches[1]);}, strtolower($table)));
-		
+
 		foreach ($fieldsArray as $fieldArray) {
 			$camelcaseField = preg_replace_callback('/_([a-z])/', function($matches){return strtoupper($matches[1]);}, strtolower($fieldArray['name']));
 			$mappings .= '			' . $fieldArray['name'] . '.mapOnProperty = ' . $camelcaseField . "\n";
 		}
-		
-		$TSMappings = 
+
+		$TSMappings =
 '\\' . $camelcaseTableName . ' {
 	mapping {
 		tableName = ' . $table . '
