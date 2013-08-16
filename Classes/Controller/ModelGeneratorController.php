@@ -83,22 +83,21 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		if (isset($generator['databaseTable']) && in_array($generator['databaseTable'], $databaseTables)) {
 			if (($res = $TYPO3_DB->sql_query('SHOW COLUMNS FROM `' . mysql_real_escape_string($generator['databaseTable']) . '`')) !== FALSE){
 				while(($row = $TYPO3_DB->sql_fetch_assoc($res)) !== FALSE){
-					$databaseTableFields[] =  array('name' => $row['Field'], 'type' => $this->getSqlFieldType($row['Type']));
+					$databaseTableFields[$row['Field']] =  array('name' => $row['Field'], 'type' => $this->getSqlFieldType($row['Type']));
 					$databaseTableFieldOptions[$row['Field']] = $row['Field'];
 				}
 				$TYPO3_DB->sql_free_result($res);
 			}
 		}
 		
-		if ($initDatabaseTableFields && isset($generator['databaseTable'])) {
-			$excludeFields = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', 'uid, pid, tstamp, crdate, cruser_id, deleted, hidden, sorting, starttime, endtime, t3ver_oid, t3ver_id, t3ver_wsid, t3ver_label, t3ver_state, t3ver_stage, t3ver_count, t3ver_tstamp, t3ver_move_id, t3_origuid, sys_language_uid, l10n_parent, l10n_diffsource');
-			$generator['databaseTableFields'] = array_diff_key($databaseTableFieldOptions, array_flip($excludeFields));
-		}
-		
 		if (isset($generator['databaseTable'])) {
+			if ($initDatabaseTableFields) {
+				$excludeFields = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', 'uid, pid, tstamp, crdate, cruser_id, deleted, hidden, sorting, starttime, endtime, t3ver_oid, t3ver_id, t3ver_wsid, t3ver_label, t3ver_state, t3ver_stage, t3ver_count, t3ver_tstamp, t3ver_move_id, t3_origuid, sys_language_uid, l10n_parent, l10n_diffsource');
+				$generator['databaseTableFields'] = array_values(array_diff_key($databaseTableFieldOptions, array_flip($excludeFields)));
+			}
+			$databaseTableFields = array_intersect_key($databaseTableFields, array_flip($generator['databaseTableFields']));
 			$generator['previousDatabaseTable'] = $generator['databaseTable'];
 		}
-		
 		
 		$extbaseClass = (isset($generator['databaseTable']) ? $this->getExtbaseClassFromFields($generator['databaseTable'], $databaseTableFields) : '');
 		$TSMappings = (isset($generator['databaseTable']) ? $this->getTSMappingsFromFields($generator['databaseTable'], $databaseTableFields) : '');
@@ -172,7 +171,7 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @param ' . $fieldArray['type'] . ' $' . $camelcaseField . '
 	 * @return void
 	 */
-	public function set' . ucfirst($camelcaseField) . '() {
+	public function set' . ucfirst($camelcaseField) . '($' . $camelcaseField . ') {
 		$this->' . $camelcaseField . ' = $' . $camelcaseField . ';
 	}
 ';
