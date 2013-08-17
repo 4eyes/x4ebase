@@ -1,0 +1,3 @@
+
+  # cat=default; type=int[4-31]; label=Cost factor of the blowfish algorithm
+blowfishSaltCost = 10
