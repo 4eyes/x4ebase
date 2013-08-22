@@ -2,6 +2,60 @@ config.tx_extbase {
 	persistence {
 		classes {
 			
+			X4E\X4ebase\Domain\Model\Page {
+				mapping {
+					tableName = pages
+					columns {
+						perms_userid.mapOnProperty = permsUserid
+						perms_groupid.mapOnProperty = permsGroupid
+						perms_user.mapOnProperty = permsUser
+						perms_group.mapOnProperty = permsGroup
+						perms_everybody.mapOnProperty = permsEverybody
+						editlock.mapOnProperty = editlock
+						title.mapOnProperty = title
+						doktype.mapOnProperty = doktype
+						TSconfig.mapOnProperty = tsconfig
+						storage_pid.mapOnProperty = storagePid
+						is_siteroot.mapOnProperty = isSiteroot
+						php_tree_stop.mapOnProperty = phpTreeStop
+						url.mapOnProperty = url
+						urltype.mapOnProperty = urltype
+						shortcut.mapOnProperty = shortcut
+						shortcut_mode.mapOnProperty = shortcutMode
+						no_cache.mapOnProperty = noCache
+						fe_group.mapOnProperty = feGroup
+						subtitle.mapOnProperty = subtitle
+						layout.mapOnProperty = layout
+						target.mapOnProperty = target
+						media.mapOnProperty = media
+						lastUpdated.mapOnProperty = lastupdated
+						keywords.mapOnProperty = keywords
+						cache_timeout.mapOnProperty = cacheTimeout
+						newUntil.mapOnProperty = newuntil
+						description.mapOnProperty = description
+						no_search.mapOnProperty = noSearch
+						SYS_LASTCHANGED.mapOnProperty = sysLastchanged
+						abstract.mapOnProperty = abstract
+						module.mapOnProperty = module
+						extendToSubpages.mapOnProperty = extendtosubpages
+						author.mapOnProperty = author
+						author_email.mapOnProperty = authorEmail
+						nav_title.mapOnProperty = navTitle
+						nav_hide.mapOnProperty = navHide
+						content_from_pid.mapOnProperty = contentFromPid
+						mount_pid.mapOnProperty = mountPid
+						mount_pid_ol.mapOnProperty = mountPidOl
+						alias.mapOnProperty = alias
+						l18n_cfg.mapOnProperty = l18nCfg
+						fe_login_mode.mapOnProperty = feLoginMode
+						url_scheme.mapOnProperty = urlScheme
+						backend_layout.mapOnProperty = backendLayout
+						backend_layout_next_level.mapOnProperty = backendLayoutNextLevel
+						cache_tags.mapOnProperty = cacheTags
+					}
+				}
+			}
+			
 		}
 	}
 }
