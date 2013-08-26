@@ -34,7 +34,6 @@ config.tx_extbase {
 						newUntil.mapOnProperty = newuntil
 						description.mapOnProperty = description
 						no_search.mapOnProperty = noSearch
-						SYS_LASTCHANGED.mapOnProperty = sysLastchanged
 						abstract.mapOnProperty = abstract
 						module.mapOnProperty = module
 						extendToSubpages.mapOnProperty = extendtosubpages
