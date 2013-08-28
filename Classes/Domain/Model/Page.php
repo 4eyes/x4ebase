@@ -5,7 +5,7 @@ namespace X4E\X4ebase\Domain\Model;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,328 +33,340 @@ namespace X4E\X4ebase\Domain\Model;
  *
  */
 class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
-	
+
 	/**
 	 * permsUserid
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $permsUserid;
-	
+
 	/**
 	 * permsGroupid
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $permsGroupid;
-	
+
 	/**
 	 * permsUser
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $permsUser;
-	
+
 	/**
 	 * permsGroup
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $permsGroup;
-	
+
 	/**
 	 * permsEverybody
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $permsEverybody;
-	
+
 	/**
 	 * editlock
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $editlock;
-	
+
 	/**
 	 * title
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $title;
-	
+
 	/**
 	 * doktype
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $doktype;
-	
+
 	/**
 	 * tsconfig
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $tsconfig;
-	
+
 	/**
 	 * storagePid
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $storagePid;
-	
+
 	/**
 	 * isSiteroot
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $isSiteroot;
-	
+
 	/**
 	 * phpTreeStop
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $phpTreeStop;
-	
+
 	/**
 	 * url
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $url;
-	
+
 	/**
 	 * urltype
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $urltype;
-	
+
 	/**
 	 * shortcut
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $shortcut;
-	
+
 	/**
 	 * shortcutMode
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $shortcutMode;
-	
+
 	/**
 	 * noCache
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $noCache;
-	
+
 	/**
 	 * feGroup
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $feGroup;
-	
+
 	/**
 	 * subtitle
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $subtitle;
-	
+
 	/**
 	 * layout
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $layout;
-	
+
 	/**
 	 * target
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $target;
-	
+
 	/**
 	 * media
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $media;
-	
+
 	/**
 	 * lastupdated
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $lastupdated;
-	
+
 	/**
 	 * keywords
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $keywords;
-	
+
 	/**
 	 * cacheTimeout
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $cacheTimeout;
-	
+
 	/**
 	 * newuntil
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $newuntil;
-	
+
 	/**
 	 * description
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $description;
-	
+
 	/**
 	 * noSearch
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $noSearch;
-	
+
 	/**
 	 * sysLastchanged
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $sysLastchanged;
-	
+
 	/**
 	 * abstract
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $abstract;
-	
+
 	/**
 	 * module
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $module;
-	
+
 	/**
 	 * extendtosubpages
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $extendtosubpages;
-	
+
 	/**
 	 * author
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $author;
-	
+
 	/**
 	 * authorEmail
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $authorEmail;
-	
+
 	/**
 	 * navTitle
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $navTitle;
-	
+
 	/**
 	 * navHide
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $navHide;
-	
+
 	/**
 	 * contentFromPid
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $contentFromPid;
-	
+
 	/**
 	 * mountPid
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $mountPid;
-	
+
 	/**
 	 * mountPidOl
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $mountPidOl;
-	
+
 	/**
 	 * alias
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $alias;
-	
+
 	/**
 	 * l18nCfg
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $l18nCfg;
-	
+
 	/**
 	 * feLoginMode
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $feLoginMode;
-	
+
 	/**
 	 * urlScheme
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $urlScheme;
-	
+
 	/**
 	 * backendLayout
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $backendLayout;
-	
+
 	/**
 	 * backendLayoutNextLevel
 	 *
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $backendLayoutNextLevel;
-	
+
 	/**
 	 * cacheTags
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $cacheTags;
+
+	/**
+	 *
+	 * @var \DateTime
+	 */
+	protected $crdate;
+
+	/**
+	 *
+	 * @var \DateTime
+	 */
+	protected $tstamp;
 
 	/**
 	 * __construct
@@ -373,20 +385,20 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected function initStorageObjects() {
 		//$this->xyz = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
-		
+
 	/**
 	 * Returns the permsUserid
 	 *
-	 * @return integer $permsUserid
+	 * @return \integer $permsUserid
 	 */
 	public function getPermsUserid() {
 		return $this->permsUserid;
 	}
-	
+
 	/**
 	 * Sets the permsUserid
 	 *
-	 * @param integer $permsUserid
+	 * @param \integer $permsUserid
 	 * @return void
 	 */
 	public function setPermsUserid($permsUserid) {
@@ -396,7 +408,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the permsGroupid
 	 *
-	 * @return integer $permsGroupid
+	 * @return \integer $permsGroupid
 	 */
 	public function getPermsGroupid() {
 		return $this->permsGroupid;
@@ -405,7 +417,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the permsGroupid
 	 *
-	 * @param integer $permsGroupid
+	 * @param \integer $permsGroupid
 	 * @return void
 	 */
 	public function setPermsGroupid($permsGroupid) {
@@ -415,7 +427,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the permsUser
 	 *
-	 * @return integer $permsUser
+	 * @return \integer $permsUser
 	 */
 	public function getPermsUser() {
 		return $this->permsUser;
@@ -424,7 +436,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the permsUser
 	 *
-	 * @param integer $permsUser
+	 * @param \integer $permsUser
 	 * @return void
 	 */
 	public function setPermsUser($permsUser) {
@@ -434,7 +446,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the permsGroup
 	 *
-	 * @return integer $permsGroup
+	 * @return \integer $permsGroup
 	 */
 	public function getPermsGroup() {
 		return $this->permsGroup;
@@ -443,7 +455,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the permsGroup
 	 *
-	 * @param integer $permsGroup
+	 * @param \integer $permsGroup
 	 * @return void
 	 */
 	public function setPermsGroup($permsGroup) {
@@ -453,7 +465,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the permsEverybody
 	 *
-	 * @return integer $permsEverybody
+	 * @return \integer $permsEverybody
 	 */
 	public function getPermsEverybody() {
 		return $this->permsEverybody;
@@ -462,7 +474,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the permsEverybody
 	 *
-	 * @param integer $permsEverybody
+	 * @param \integer $permsEverybody
 	 * @return void
 	 */
 	public function setPermsEverybody($permsEverybody) {
@@ -472,7 +484,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the editlock
 	 *
-	 * @return integer $editlock
+	 * @return \integer $editlock
 	 */
 	public function getEditlock() {
 		return $this->editlock;
@@ -481,7 +493,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the editlock
 	 *
-	 * @param integer $editlock
+	 * @param \integer $editlock
 	 * @return void
 	 */
 	public function setEditlock($editlock) {
@@ -491,7 +503,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the title
 	 *
-	 * @return string $title
+	 * @return \string $title
 	 */
 	public function getTitle() {
 		return $this->title;
@@ -500,7 +512,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the title
 	 *
-	 * @param string $title
+	 * @param \string $title
 	 * @return void
 	 */
 	public function setTitle($title) {
@@ -510,7 +522,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the doktype
 	 *
-	 * @return integer $doktype
+	 * @return \integer $doktype
 	 */
 	public function getDoktype() {
 		return $this->doktype;
@@ -519,7 +531,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the doktype
 	 *
-	 * @param integer $doktype
+	 * @param \integer $doktype
 	 * @return void
 	 */
 	public function setDoktype($doktype) {
@@ -529,7 +541,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the tsconfig
 	 *
-	 * @return string $tsconfig
+	 * @return \string $tsconfig
 	 */
 	public function getTsconfig() {
 		return $this->tsconfig;
@@ -538,7 +550,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the tsconfig
 	 *
-	 * @param string $tsconfig
+	 * @param \string $tsconfig
 	 * @return void
 	 */
 	public function setTsconfig($tsconfig) {
@@ -548,7 +560,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the storagePid
 	 *
-	 * @return integer $storagePid
+	 * @return \integer $storagePid
 	 */
 	public function getStoragePid() {
 		return $this->storagePid;
@@ -557,7 +569,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the storagePid
 	 *
-	 * @param integer $storagePid
+	 * @param \integer $storagePid
 	 * @return void
 	 */
 	public function setStoragePid($storagePid) {
@@ -567,7 +579,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the isSiteroot
 	 *
-	 * @return integer $isSiteroot
+	 * @return \integer $isSiteroot
 	 */
 	public function getIsSiteroot() {
 		return $this->isSiteroot;
@@ -576,7 +588,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the isSiteroot
 	 *
-	 * @param integer $isSiteroot
+	 * @param \integer $isSiteroot
 	 * @return void
 	 */
 	public function setIsSiteroot($isSiteroot) {
@@ -586,7 +598,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the phpTreeStop
 	 *
-	 * @return integer $phpTreeStop
+	 * @return \integer $phpTreeStop
 	 */
 	public function getPhpTreeStop() {
 		return $this->phpTreeStop;
@@ -595,7 +607,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the phpTreeStop
 	 *
-	 * @param integer $phpTreeStop
+	 * @param \integer $phpTreeStop
 	 * @return void
 	 */
 	public function setPhpTreeStop($phpTreeStop) {
@@ -605,7 +617,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the url
 	 *
-	 * @return string $url
+	 * @return \string $url
 	 */
 	public function getUrl() {
 		return $this->url;
@@ -614,7 +626,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the url
 	 *
-	 * @param string $url
+	 * @param \string $url
 	 * @return void
 	 */
 	public function setUrl($url) {
@@ -624,7 +636,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the urltype
 	 *
-	 * @return integer $urltype
+	 * @return \integer $urltype
 	 */
 	public function getUrltype() {
 		return $this->urltype;
@@ -633,7 +645,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the urltype
 	 *
-	 * @param integer $urltype
+	 * @param \integer $urltype
 	 * @return void
 	 */
 	public function setUrltype($urltype) {
@@ -643,7 +655,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the shortcut
 	 *
-	 * @return integer $shortcut
+	 * @return \integer $shortcut
 	 */
 	public function getShortcut() {
 		return $this->shortcut;
@@ -652,7 +664,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the shortcut
 	 *
-	 * @param integer $shortcut
+	 * @param \integer $shortcut
 	 * @return void
 	 */
 	public function setShortcut($shortcut) {
@@ -662,7 +674,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the shortcutMode
 	 *
-	 * @return integer $shortcutMode
+	 * @return \integer $shortcutMode
 	 */
 	public function getShortcutMode() {
 		return $this->shortcutMode;
@@ -671,7 +683,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the shortcutMode
 	 *
-	 * @param integer $shortcutMode
+	 * @param \integer $shortcutMode
 	 * @return void
 	 */
 	public function setShortcutMode($shortcutMode) {
@@ -681,7 +693,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the noCache
 	 *
-	 * @return integer $noCache
+	 * @return \integer $noCache
 	 */
 	public function getNoCache() {
 		return $this->noCache;
@@ -690,7 +702,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the noCache
 	 *
-	 * @param integer $noCache
+	 * @param \integer $noCache
 	 * @return void
 	 */
 	public function setNoCache($noCache) {
@@ -700,7 +712,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the feGroup
 	 *
-	 * @return string $feGroup
+	 * @return \string $feGroup
 	 */
 	public function getFeGroup() {
 		return $this->feGroup;
@@ -709,7 +721,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the feGroup
 	 *
-	 * @param string $feGroup
+	 * @param \string $feGroup
 	 * @return void
 	 */
 	public function setFeGroup($feGroup) {
@@ -719,7 +731,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the subtitle
 	 *
-	 * @return string $subtitle
+	 * @return \string $subtitle
 	 */
 	public function getSubtitle() {
 		return $this->subtitle;
@@ -728,7 +740,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the subtitle
 	 *
-	 * @param string $subtitle
+	 * @param \string $subtitle
 	 * @return void
 	 */
 	public function setSubtitle($subtitle) {
@@ -738,7 +750,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the layout
 	 *
-	 * @return integer $layout
+	 * @return \integer $layout
 	 */
 	public function getLayout() {
 		return $this->layout;
@@ -747,7 +759,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the layout
 	 *
-	 * @param integer $layout
+	 * @param \integer $layout
 	 * @return void
 	 */
 	public function setLayout($layout) {
@@ -757,7 +769,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the target
 	 *
-	 * @return string $target
+	 * @return \string $target
 	 */
 	public function getTarget() {
 		return $this->target;
@@ -766,7 +778,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the target
 	 *
-	 * @param string $target
+	 * @param \string $target
 	 * @return void
 	 */
 	public function setTarget($target) {
@@ -776,7 +788,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the media
 	 *
-	 * @return string $media
+	 * @return \string $media
 	 */
 	public function getMedia() {
 		return $this->media;
@@ -785,7 +797,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the media
 	 *
-	 * @param string $media
+	 * @param \string $media
 	 * @return void
 	 */
 	public function setMedia($media) {
@@ -795,7 +807,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the lastupdated
 	 *
-	 * @return integer $lastupdated
+	 * @return \integer $lastupdated
 	 */
 	public function getLastupdated() {
 		return $this->lastupdated;
@@ -804,7 +816,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the lastupdated
 	 *
-	 * @param integer $lastupdated
+	 * @param \integer $lastupdated
 	 * @return void
 	 */
 	public function setLastupdated($lastupdated) {
@@ -814,7 +826,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the keywords
 	 *
-	 * @return string $keywords
+	 * @return \string $keywords
 	 */
 	public function getKeywords() {
 		return $this->keywords;
@@ -823,7 +835,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the keywords
 	 *
-	 * @param string $keywords
+	 * @param \string $keywords
 	 * @return void
 	 */
 	public function setKeywords($keywords) {
@@ -833,7 +845,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the cacheTimeout
 	 *
-	 * @return integer $cacheTimeout
+	 * @return \integer $cacheTimeout
 	 */
 	public function getCacheTimeout() {
 		return $this->cacheTimeout;
@@ -842,7 +854,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the cacheTimeout
 	 *
-	 * @param integer $cacheTimeout
+	 * @param \integer $cacheTimeout
 	 * @return void
 	 */
 	public function setCacheTimeout($cacheTimeout) {
@@ -852,7 +864,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the newuntil
 	 *
-	 * @return integer $newuntil
+	 * @return \integer $newuntil
 	 */
 	public function getNewuntil() {
 		return $this->newuntil;
@@ -861,7 +873,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the newuntil
 	 *
-	 * @param integer $newuntil
+	 * @param \integer $newuntil
 	 * @return void
 	 */
 	public function setNewuntil($newuntil) {
@@ -871,7 +883,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the description
 	 *
-	 * @return string $description
+	 * @return \string $description
 	 */
 	public function getDescription() {
 		return $this->description;
@@ -880,7 +892,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the description
 	 *
-	 * @param string $description
+	 * @param \string $description
 	 * @return void
 	 */
 	public function setDescription($description) {
@@ -890,7 +902,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the noSearch
 	 *
-	 * @return integer $noSearch
+	 * @return \integer $noSearch
 	 */
 	public function getNoSearch() {
 		return $this->noSearch;
@@ -899,7 +911,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the noSearch
 	 *
-	 * @param integer $noSearch
+	 * @param \integer $noSearch
 	 * @return void
 	 */
 	public function setNoSearch($noSearch) {
@@ -909,7 +921,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the abstract
 	 *
-	 * @return string $abstract
+	 * @return \string $abstract
 	 */
 	public function getAbstract() {
 		return $this->abstract;
@@ -918,7 +930,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the abstract
 	 *
-	 * @param string $abstract
+	 * @param \string $abstract
 	 * @return void
 	 */
 	public function setAbstract($abstract) {
@@ -928,7 +940,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the module
 	 *
-	 * @return string $module
+	 * @return \string $module
 	 */
 	public function getModule() {
 		return $this->module;
@@ -937,7 +949,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the module
 	 *
-	 * @param string $module
+	 * @param \string $module
 	 * @return void
 	 */
 	public function setModule($module) {
@@ -947,7 +959,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the extendtosubpages
 	 *
-	 * @return integer $extendtosubpages
+	 * @return \integer $extendtosubpages
 	 */
 	public function getExtendtosubpages() {
 		return $this->extendtosubpages;
@@ -956,7 +968,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the extendtosubpages
 	 *
-	 * @param integer $extendtosubpages
+	 * @param \integer $extendtosubpages
 	 * @return void
 	 */
 	public function setExtendtosubpages($extendtosubpages) {
@@ -966,7 +978,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the author
 	 *
-	 * @return string $author
+	 * @return \string $author
 	 */
 	public function getAuthor() {
 		return $this->author;
@@ -975,7 +987,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the author
 	 *
-	 * @param string $author
+	 * @param \string $author
 	 * @return void
 	 */
 	public function setAuthor($author) {
@@ -985,7 +997,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the authorEmail
 	 *
-	 * @return string $authorEmail
+	 * @return \string $authorEmail
 	 */
 	public function getAuthorEmail() {
 		return $this->authorEmail;
@@ -994,7 +1006,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the authorEmail
 	 *
-	 * @param string $authorEmail
+	 * @param \string $authorEmail
 	 * @return void
 	 */
 	public function setAuthorEmail($authorEmail) {
@@ -1004,7 +1016,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the navTitle
 	 *
-	 * @return string $navTitle
+	 * @return \string $navTitle
 	 */
 	public function getNavTitle() {
 		return $this->navTitle;
@@ -1013,7 +1025,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the navTitle
 	 *
-	 * @param string $navTitle
+	 * @param \string $navTitle
 	 * @return void
 	 */
 	public function setNavTitle($navTitle) {
@@ -1023,7 +1035,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the navHide
 	 *
-	 * @return integer $navHide
+	 * @return \integer $navHide
 	 */
 	public function getNavHide() {
 		return $this->navHide;
@@ -1032,7 +1044,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the navHide
 	 *
-	 * @param integer $navHide
+	 * @param \integer $navHide
 	 * @return void
 	 */
 	public function setNavHide($navHide) {
@@ -1042,7 +1054,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the contentFromPid
 	 *
-	 * @return integer $contentFromPid
+	 * @return \integer $contentFromPid
 	 */
 	public function getContentFromPid() {
 		return $this->contentFromPid;
@@ -1051,7 +1063,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the contentFromPid
 	 *
-	 * @param integer $contentFromPid
+	 * @param \integer $contentFromPid
 	 * @return void
 	 */
 	public function setContentFromPid($contentFromPid) {
@@ -1061,7 +1073,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the mountPid
 	 *
-	 * @return integer $mountPid
+	 * @return \integer $mountPid
 	 */
 	public function getMountPid() {
 		return $this->mountPid;
@@ -1070,7 +1082,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the mountPid
 	 *
-	 * @param integer $mountPid
+	 * @param \integer $mountPid
 	 * @return void
 	 */
 	public function setMountPid($mountPid) {
@@ -1080,7 +1092,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the mountPidOl
 	 *
-	 * @return integer $mountPidOl
+	 * @return \integer $mountPidOl
 	 */
 	public function getMountPidOl() {
 		return $this->mountPidOl;
@@ -1089,7 +1101,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the mountPidOl
 	 *
-	 * @param integer $mountPidOl
+	 * @param \integer $mountPidOl
 	 * @return void
 	 */
 	public function setMountPidOl($mountPidOl) {
@@ -1099,7 +1111,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the alias
 	 *
-	 * @return string $alias
+	 * @return \string $alias
 	 */
 	public function getAlias() {
 		return $this->alias;
@@ -1108,7 +1120,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the alias
 	 *
-	 * @param string $alias
+	 * @param \string $alias
 	 * @return void
 	 */
 	public function setAlias($alias) {
@@ -1118,7 +1130,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the l18nCfg
 	 *
-	 * @return integer $l18nCfg
+	 * @return \integer $l18nCfg
 	 */
 	public function getL18nCfg() {
 		return $this->l18nCfg;
@@ -1127,7 +1139,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the l18nCfg
 	 *
-	 * @param integer $l18nCfg
+	 * @param \integer $l18nCfg
 	 * @return void
 	 */
 	public function setL18nCfg($l18nCfg) {
@@ -1137,7 +1149,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the feLoginMode
 	 *
-	 * @return integer $feLoginMode
+	 * @return \integer $feLoginMode
 	 */
 	public function getFeLoginMode() {
 		return $this->feLoginMode;
@@ -1146,7 +1158,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the feLoginMode
 	 *
-	 * @param integer $feLoginMode
+	 * @param \integer $feLoginMode
 	 * @return void
 	 */
 	public function setFeLoginMode($feLoginMode) {
@@ -1156,7 +1168,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the urlScheme
 	 *
-	 * @return integer $urlScheme
+	 * @return \integer $urlScheme
 	 */
 	public function getUrlScheme() {
 		return $this->urlScheme;
@@ -1165,7 +1177,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the urlScheme
 	 *
-	 * @param integer $urlScheme
+	 * @param \integer $urlScheme
 	 * @return void
 	 */
 	public function setUrlScheme($urlScheme) {
@@ -1175,7 +1187,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the backendLayout
 	 *
-	 * @return integer $backendLayout
+	 * @return \integer $backendLayout
 	 */
 	public function getBackendLayout() {
 		return $this->backendLayout;
@@ -1184,7 +1196,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the backendLayout
 	 *
-	 * @param integer $backendLayout
+	 * @param \integer $backendLayout
 	 * @return void
 	 */
 	public function setBackendLayout($backendLayout) {
@@ -1194,7 +1206,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the backendLayoutNextLevel
 	 *
-	 * @return integer $backendLayoutNextLevel
+	 * @return \integer $backendLayoutNextLevel
 	 */
 	public function getBackendLayoutNextLevel() {
 		return $this->backendLayoutNextLevel;
@@ -1203,7 +1215,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the backendLayoutNextLevel
 	 *
-	 * @param integer $backendLayoutNextLevel
+	 * @param \integer $backendLayoutNextLevel
 	 * @return void
 	 */
 	public function setBackendLayoutNextLevel($backendLayoutNextLevel) {
@@ -1213,7 +1225,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the cacheTags
 	 *
-	 * @return string $cacheTags
+	 * @return \string $cacheTags
 	 */
 	public function getCacheTags() {
 		return $this->cacheTags;
@@ -1222,12 +1234,46 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the cacheTags
 	 *
-	 * @param string $cacheTags
+	 * @param \string $cacheTags
 	 * @return void
 	 */
 	public function setCacheTags($cacheTags) {
 		$this->cacheTags = $cacheTags;
 	}
+
+	/**
+	 *
+	 * @return \DateTime
+	 */
+	public function getCrdate() {
+		return $this->crdate;
+	}
+
+	/**
+	 *
+	 * @param \DateTime $crdate
+	 */
+	public function setCrdate($crdate) {
+		$this->crdate = $crdate;
+	}
+
+	/**
+	 *
+	 * @return \DateTime
+	 */
+	public function getTstamp() {
+		return $this->tstamp;
+	}
+
+	/**
+	 *
+	 * @param \DateTime $tstamp
+	 */
+	public function setTstamp($tstamp) {
+		$this->tstamp = $tstamp;
+	}
+
+
 
 }
 ?>
