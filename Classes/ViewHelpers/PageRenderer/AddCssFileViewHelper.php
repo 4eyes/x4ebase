@@ -72,11 +72,11 @@ class AddCssFileViewHelper extends AbstractPageRendererViewHelper {
 				$this->arguments['excludeFromConcatenation']
 			);
 		} else {
-			$TSFE->additionalHeaderData[md5($fullPath)] = '<link' . 
-					($this->hasArgument('rel') ? ' rel="' . htmlspecialchars($this->arguments['rel']) . '"' : '') . 
+			$TSFE->additionalHeaderData[\md5($fullPath)] = '<link' . 
+					($this->hasArgument('rel') ? ' rel="' . \htmlspecialchars($this->arguments['rel']) . '"' : '') . 
 					' type="text/css"' . 
-					($this->hasArgument('media') ? ' media="' . htmlspecialchars($this->arguments['media']) . '"' : '') . 
-					'" href="' . $fullPath . '" />';
+					($this->hasArgument('media') ? ' media="' . \htmlspecialchars($this->arguments['media']) . '"' : '') . 
+					'" href="' . \htmlspecialchars($fullPath) . '" />';
 		}
 	}
 	

@@ -68,7 +68,7 @@ class AddJsFileViewHelper extends AbstractPageRendererViewHelper {
 				$this->arguments['excludeFromConcatenation']
 			);
 		} else {
-			$TSFE->additionalHeaderData[md5($fullPath)] = '<script type="text/javascript" src="' . $fullPath . '"></script>';
+			$TSFE->additionalHeaderData[\md5($fullPath)] = '<script type="text/javascript" src="' . \htmlspecialchars($fullPath) . '"></script>';
 		}
 	}
 }
