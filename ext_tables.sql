@@ -3,11 +3,11 @@
 #
 CREATE TABLE be_users (
   password varchar(255) DEFAULT '' NOT NULL
-)
+);
 
 #
 # Table structure for table 'fe_users'
 #
 CREATE TABLE fe_users (
   password varchar(255) DEFAULT '' NOT NULL
-)
+);
