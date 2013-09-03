@@ -32,17 +32,17 @@ namespace X4E\X4ebase\Salt;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class BlowfishSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface {
+class SecurePasswordSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface {
 	
 	/**
-	 * Keeps length of a Blowfish salt.
+	 * Keeps length of a salt.
 	 *
 	 * @var integer
 	 */
 	static protected $saltLength = 22;
 	
 	/**
-	 * The CPU cost factor of the BlowFish implementation.
+	 * The CPU cost factor of the current algorithm.
 	 *
 	 * @var integer
 	 */
@@ -54,8 +54,8 @@ class BlowfishSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface {
 	public function __construct() {
 		require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('x4ebase').'Classes/Functions/password_hash.php';
 		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['x4ebase']);
-		if (isset($extConf['blowfishSaltCost'])) {
-			$cost = intval($extConf['blowfishSaltCost']);
+		if (isset($extConf['securePassword.']) && isset($extConf['securePassword.']['cost'])) {
+			$cost = intval($extConf['securePassword.']['cost']);
 			if ($cost > 3 && $cost < 32) {
 				$this->cost = $cost;
 			}
@@ -106,7 +106,7 @@ class BlowfishSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface {
 			if (!empty($salt) && $this->isValidSalt($salt)) {
 				$options['salt'] = $salt;
 			}
-			$saltedPW = password_hash($password, PASSWORD_BCRYPT, $options);
+			$saltedPW = password_hash($password, PASSWORD_DEFAULT, $options);
 		}
 		return $saltedPW;
 	}
@@ -126,7 +126,7 @@ class BlowfishSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface {
 	 * @return boolean Method available
 	 */
 	public function isAvailable() {
-		return PASSWORD_BCRYPT;
+		return PASSWORD_DEFAULT;
 	}
 	
 	/**
@@ -141,7 +141,7 @@ class BlowfishSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface {
 	 * @return boolean TRUE if salted hash needs an update, otherwise FALSE
 	 */
 	public function isHashUpdateNeeded($saltedPW) {
-		return password_needs_rehash($saltedPW, PASSWORD_BCRYPT, array('cost' => $this->cost));
+		return password_needs_rehash($saltedPW, PASSWORD_DEFAULT, array('cost' => $this->cost));
 	}
 
 	/**
@@ -162,7 +162,7 @@ class BlowfishSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface {
 	 */
 	public function isValidSaltedPW($saltedPW) {
 		$info = password_get_info($saltedPW);
-		return ($info['algo'] == PASSWORD_BCRYPT && isset($info['options']['cost']) && $info['options']['cost'] == $this->cost);
+		return ($info['algo'] == PASSWORD_DEFAULT && isset($info['options']['cost']) && $info['options']['cost'] == $this->cost);
 	}
 	
 }
