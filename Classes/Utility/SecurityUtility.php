@@ -83,4 +83,19 @@ class SecurityUtility {
 		}
 		return $isSaltedHash;
 	}
+	
+	/**
+	 * Checks if the password is correct
+	 *
+	 * @param string $password Password
+	 * @param string $hash The hash stored in the DB
+	 * @return boolean TRUE if password is matching the hash
+	 */
+	static public function checkPassword($password, $hash) {
+		$saltedpasswordsInstance = \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance($hash);
+		return $saltedpasswordsInstance->checkPassword($password, $hash);
+	}
+	
+	
+	
 }
