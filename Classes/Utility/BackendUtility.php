@@ -95,6 +95,46 @@ class BackendUtility {
 			);
 		}
 	}
+	
+	/**
+	 * Initialize Frontend 
+	 * @param integer $pageUid
+	 */
+	public static function initTSFE($pid) {
+		global $TYPO3_CONF_VARS;
+		if ($pid == 0) {
+			throw new Exception('No pageId defined!');
+		} else {
+			// TODO: refactor as compatibility layer is removed with 6.2
+			require_once(PATH_tslib . 'class.tslib_content.php'); 
+
+			\TYPO3\CMS\Frontend\Utility\EidUtility::connectDB(); //Connect to database
+			\TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser(); //Initializes FeUser
+
+			/* @var $GLOBALS['TT'] \TYPO3\CMS\Core\TimeTracker\TimeTracker */
+			$GLOBALS['TT'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker');
+			$GLOBALS['TT']->start();
+			
+			$GLOBALS['TSFE'] = new \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController($TYPO3_CONF_VARS, $pid, 0, true);
+			$GLOBALS['TSFE']->connectToDB();
+			$GLOBALS['TSFE']->initFEuser();
+			$GLOBALS['TSFE']->determineId();
+			$GLOBALS['TSFE']->getCompressedTCarray();
+			$GLOBALS['TSFE']->newCObj();
+			$GLOBALS['TSFE']->renderCharset = 'utf-8';
+			self::initTypoScript();
+			$GLOBALS['TSFE']->absRefPrefix = $GLOBALS['TSFE']->config['config']['absRefPrefix'];
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	private static function initTypoScript() {
+		$GLOBALS['TSFE']->getPageAndRootline();
+		$GLOBALS['TSFE']->initTemplate();
+		$GLOBALS['TSFE']->getConfigArray();
+	}
 
 }
 ?>
