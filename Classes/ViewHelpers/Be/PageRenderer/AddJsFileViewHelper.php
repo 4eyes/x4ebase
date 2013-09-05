@@ -61,7 +61,7 @@ class AddJsFileViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacken
 			$fullPath = $file;
 		} else {
 			$fullPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($file);
-			$fullPath = \TYPO3\CMS\Core\Utility\PathUtility::getRelativePath(PATH_typo3, $fullPath);
+			$fullPath = \rtrim(\TYPO3\CMS\Core\Utility\PathUtility::getRelativePath(PATH_typo3, $fullPath), '/');
 		}
 		$pageRenderer->addJsFile(
 			$fullPath,

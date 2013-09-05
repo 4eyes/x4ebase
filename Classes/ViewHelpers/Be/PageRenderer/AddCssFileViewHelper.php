@@ -63,7 +63,7 @@ class AddCssFileViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacke
 			$fullPath = $file;
 		} else {
 			$fullPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($file);
-			$fullPath = \TYPO3\CMS\Core\Utility\PathUtility::getRelativePath(PATH_typo3, $fullPath);
+			$fullPath = \rtrim(\TYPO3\CMS\Core\Utility\PathUtility::getRelativePath(PATH_typo3, $fullPath), '/');
 		}
 		$pageRenderer->addCssFile(
 			$fullPath,
