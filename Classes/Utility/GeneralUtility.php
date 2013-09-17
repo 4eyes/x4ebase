@@ -33,6 +33,12 @@ namespace X4E\X4ebase\Utility;
  *
  */
 class GeneralUtility {
+	/**
+	 *
+	 * @param \object $object
+	 * @param \string $property
+	 * @return \string
+	 */
 	public static function generateUidListForProperty($object, $property){
 		$uidList = '';
 		if($object){
