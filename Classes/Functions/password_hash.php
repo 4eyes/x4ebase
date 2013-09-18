@@ -126,7 +126,6 @@ if (!defined('PASSWORD_DEFAULT')) {
         $hash = $hash_format . $salt;
 
         $ret = crypt($password, $hash);
-		\TYPO3\CMS\Core\Utility\DebugUtility::debug(array($password,$hash,$ret,CRYPT_BLOWFISH), 'saltedpw');
 
         if (!is_string($ret) || strlen($ret) <= 13) {
             return false;
