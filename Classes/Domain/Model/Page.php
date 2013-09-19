@@ -376,7 +376,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function __construct() {
 		$this->initStorageObjects();
 	}
-
+	
 	/**
 	 * Initializes all ObjectStorage properties.
 	 *
@@ -385,7 +385,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected function initStorageObjects() {
 		//$this->xyz = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
-
+	
 	/**
 	 * Returns the permsUserid
 	 *

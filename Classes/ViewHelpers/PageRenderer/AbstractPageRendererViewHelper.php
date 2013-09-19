@@ -38,6 +38,11 @@ abstract class AbstractPageRendererViewHelper extends \TYPO3\CMS\Fluid\Core\View
 	 * @var \TYPO3\CMS\Core\Page\PageRenderer
 	 */
 	protected $pageRenderer;
+	
+	/**
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+	 */
+	protected $configurationManager;
 
 	/**
 	 * @param \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer
@@ -47,11 +52,20 @@ abstract class AbstractPageRendererViewHelper extends \TYPO3\CMS\Fluid\Core\View
 	}
 	
 	/**
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+	 * @return void
+	 */
+	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
+		$this->configurationManager = $configurationManager;
+	}
+	
+	/**
 	 * Returns TRUE if the output may be cached
 	 *
 	 * @return boolean
 	 */
 	protected function isCached() {
+		$this->configurationManager->getContentObject()->getUserObjectType();
 		$userObjType = $this->configurationManager->getContentObject()->getUserObjectType();
 		return ($userObjType !== \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::OBJECTTYPE_USER_INT);
 	}
