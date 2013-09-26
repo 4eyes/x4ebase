@@ -35,6 +35,13 @@ namespace X4E\X4ebase\Domain\Model;
 class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
+	 * sorting
+	 *
+	 * @var \integer
+	 */
+	protected $sorting;
+	
+	/**
 	 * permsUserid
 	 *
 	 * @var \integer
@@ -75,6 +82,13 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var \integer
 	 */
 	protected $editlock;
+	
+	/**
+	 * cruserId
+	 *
+	 * @var \integer
+	 */
+	protected $cruserId;
 
 	/**
 	 * title
@@ -387,6 +401,25 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 	
 	/**
+	 * Returns the sorting
+	 *
+	 * @return \integer $sorting
+	 */
+	public function getSorting() {
+		return $this->permsUserid;
+	}
+
+	/**
+	 * Sets the sorting
+	 *
+	 * @param \integer $sorting
+	 * @return void
+	 */
+	public function setSorting($sorting) {
+		$this->sorting = $sorting;
+	}
+	
+	/**
 	 * Returns the permsUserid
 	 *
 	 * @return \integer $permsUserid
@@ -498,6 +531,25 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setEditlock($editlock) {
 		$this->editlock = $editlock;
+	}
+
+	/**
+	 * Returns the cruserId
+	 *
+	 * @return \integer $cruserId
+	 */
+	public function getCruserId() {
+		return $this->cruserId;
+	}
+
+	/**
+	 * Sets the cruserId
+	 *
+	 * @param \integer $cruserId
+	 * @return void
+	 */
+	public function setCruserId($cruserId) {
+		$this->cruserId = $cruserId;
 	}
 
 	/**
