@@ -40,29 +40,34 @@ class GeneralUtility {
 	 * @return \string
 	 */
 	public static function generateUidListForProperty($object, $property){
-		$uidList = '';
+		return implode(',',self::generateUidArrayForProperty($object, $property));
+	}
+	/**
+	 *
+	 * @param \object $object
+	 * @param \string $property
+	 * @return \string
+	 */
+	public static function generateUidArrayForProperty($object, $property){
+		$uidArr = array();
 		if($object){
 			$method = 'get' . ucfirst($property);
 			if(method_exists($object, $method)){
 				$objects = call_user_func(array($object, $method));
 				if(is_object($objects) && $objects->count()){
-					$uidArr = array();
 					foreach($objects as $obj){
 						$uidArr [] = $obj->getUid();
 					}
-					$uidList = implode(',', $uidArr);
 				} else if(is_array($objects) && count($objects)){
-					$uidArr = array();
 					foreach($objects as $obj){
 						$uidArr [] = $obj['uid'];
 					}
-					$uidList = implode(',', $uidArr);
 				}
 			} else {
 				throw new \RuntimeException('Method ' . $method . ' does not exist in given object', 1379414199);
 			}
 		}
-		return $uidList;
+		return $uidArr;
 	}
 }
 ?>
