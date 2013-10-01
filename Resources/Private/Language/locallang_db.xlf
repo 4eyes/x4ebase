@@ -3,7 +3,27 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2013-08-08T16:16:36Z" product-name="x4ebase">
 		<header/>
 		<body>
-			
+			<trans-unit id="tx_x4ebase_domain_model_emaillog">
+				<source>Email Log</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.sender">
+				<source>Sender</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.recipient">
+				<source>Recipient</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.message">
+				<source>Message</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.is_sent">
+				<source>Is Sent</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.error">
+				<source>Error</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
