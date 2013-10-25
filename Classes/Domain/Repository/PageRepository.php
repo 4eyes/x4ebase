@@ -34,6 +34,10 @@ namespace X4E\X4ebase\Domain\Repository;
  */
 class PageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	
+	protected $defaultOrderings = array(
+		'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+	);
+	
 	public function initializeObject() {
 		/* @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
 		$querySettings = $this->objectManager->create('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
