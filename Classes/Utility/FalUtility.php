@@ -178,6 +178,25 @@ class FalUtility {
 		$GLOBALS['TYPO3_DB']->exec_UPDATEquery($tableNames, 'uid = ' . $uidForeign, array($fieldName => $fileRef));
 	}
 
+	static public function removeFileReference($uid){
+		// Update ref count on object
+		// get fileref row
+		$fileRef = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('*', 'sys_file_reference', 'uid = ' . $uid);
+
+		// get count on foreign table
+		$foreignField = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow($fileRef['fieldname'], $fileRef['tablenames'], 'uid = ' . $fileRef['uid_foreign']);
+
+		// decrement count
+		$foreignFieldCount = intval($foreignFieldCount[$fileRef['fieldname']]);
+		$foreignFieldCount--;
+
+		// update ref count
+		$GLOBALS['TYPO3_DB']->exec_UPDATEquery($fileRef['tablenames'], 'uid = ' . $fileRef['uid_foreign'], array($fileRef['fieldname'] => $foreignFieldCount));
+
+		// delete file reference
+		$GLOBALS['TYPO3_DB']->exec_DELETEquery('sys_file_reference', 'uid = ' . $uid);
+	}
+
 
 }
 ?>
