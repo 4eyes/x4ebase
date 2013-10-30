@@ -69,6 +69,8 @@ class GeneralUtility {
 		}
 		return $uidArr;
 	}
+<<<<<<< HEAD
+=======
 
 	/**
 	 * Returns the extConf of the extension matching the given extKey
@@ -79,5 +81,6 @@ class GeneralUtility {
 	public static function getExtConf($extKey){
 		return unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey]);
 	}
+>>>>>>> merged
 }
 ?>
