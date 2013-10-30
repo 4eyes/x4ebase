@@ -55,7 +55,7 @@ class LogHistoryUtility {
 				$workspaceId
 		);
 
-		$fieldArray = $dataHandler->compareFieldArrayWithCurrentAndUnset($tablename, $recuid, array());
+		$dataHandler->compareFieldArrayWithCurrentAndUnset($tablename, $recuid, $fieldArray);
 		// Set History data:
 		$dataHandler->setHistory($tablename, $recuid, $logId);
 	}
