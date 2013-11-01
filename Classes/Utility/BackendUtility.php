@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Utility;
 /**
  *
  *
- * @package x4eairmail
+ * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class BackendUtility {
