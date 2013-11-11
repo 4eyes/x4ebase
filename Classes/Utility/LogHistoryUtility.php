@@ -39,12 +39,15 @@ class LogHistoryUtility {
 		 * @var \TYPO3\CMS\Core\DataHandling\DataHandler
 		 */
 		$dataHandler = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+
+		self::fillMmHistoryRecords($dataHandler, $tablename, $fieldArray, $recuid);
+
 		$logId = self::writeLog(
 				4, // type, 4 = ext
 				0, // action
 				0, // error
 				0, // details nr
-				'Record \'%s\' (%s) was updated.', // details
+				$message, //details
 				'', // data
 				$tablename,
 				$recuid,
@@ -54,6 +57,11 @@ class LogHistoryUtility {
 				$userId,
 				$workspaceId
 		);
+
+		$feuser = $GLOBALS['TSFE']->fe_user->user;
+		if(isset($feuser['uid'])){
+			$fieldArray['lastchange'] = $feuser['username'] . ' (' . $feuser['uid'] . ')';
+		}
 
 		$dataHandler->compareFieldArrayWithCurrentAndUnset($tablename, $recuid, $fieldArray);
 		// Set History data:
@@ -82,7 +90,7 @@ class LogHistoryUtility {
 		$fields_values = array(
 			'userid' => $userId,
 			'type' => intval($type),
-			'action' => intval($action),
+			'action' => intval(2),
 			'error' => intval($error),
 			'details_nr' => intval($details_nr),
 			'details' => $details,
@@ -97,6 +105,32 @@ class LogHistoryUtility {
 		);
 		$GLOBALS['TYPO3_DB']->exec_INSERTquery('sys_log', $fields_values);
 		return $GLOBALS['TYPO3_DB']->sql_insert_id();
+	}
+
+
+	/**
+	 * Fill mm relations for history records to provide a corrent oldRecord entry in sys_history
+	 *
+	 * @global array $TCA
+	 * @param object $dataHandler
+	 * @param string $tablename
+	 * @param array $fieldArray
+	 * @param integer $recUid
+	 */
+	static public function fillMmHistoryRecords($dataHandler, $tablename, $fieldArray, $recUid){
+		global $TCA;
+
+		foreach($fieldArray as $fN => $v){
+			$fieldConf = $TCA[$tablename]['columns'][$fN]['config'];
+			if(isset($fieldConf['MM'])){
+				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid_foreign', $fieldConf['MM'], 'uid_local=' . (INT)$recUid, '', 'sorting');
+				$uids = array();
+				while($currentRecord = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)){
+					$uids[] = $currentRecord['uid_foreign'];
+				}
+				$dataHandler->mmHistoryRecords[($tablename . ':' . $recUid)]['oldRecord'][$fN] = implode(',',$uids);
+			}
+		}
 	}
 
 }
