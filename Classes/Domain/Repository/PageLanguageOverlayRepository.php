@@ -32,18 +32,19 @@ namespace X4E\X4ebase\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class PageRepository extends AbstractRepository {
+class PageLanguageOverlayRepository extends AbstractRepository {
 	
-	protected $defaultOrderings = array(
-		'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-	);
-	
+	/**
+	 * Initializes the object
+	 *
+	 * @return void
+	 */
 	public function initializeObject() {
 		/* @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
 		$querySettings = $this->objectManager->create('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
 		$querySettings->setRespectStoragePage(FALSE);
+		$querySettings->setRespectSysLanguage(FALSE);
 		$this->setDefaultQuerySettings($querySettings);
 	}
 	
 }
-?>

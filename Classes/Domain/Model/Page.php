@@ -838,9 +838,29 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Adds a FileReference
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
+	 * @return void
+	 */
+	public function addMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $media) {
+		$this->media->attach($media);
+	}
+
+	/**
+	 * Removes a FileReference
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove The FileReference to be removed
+	 * @return void
+	 */
+	public function removeMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove) {
+		$this->media->detach($mediaToRemove);
+	}
+	
+	/**
 	 * Returns the media
 	 *
-	 * @return \string $media
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $media
 	 */
 	public function getMedia() {
 		return $this->media;
@@ -849,10 +869,10 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the media
 	 *
-	 * @param \string $media
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $media
 	 * @return void
 	 */
-	public function setMedia($media) {
+	public function setMedia(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $media) {
 		$this->media = $media;
 	}
 

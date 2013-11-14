@@ -56,6 +56,37 @@ config.tx_extbase {
 					}
 				}
 			}
+			
+			X4E\X4ebase\Domain\Model\PageLanguageOverlay {
+				mapping {
+					tableName = pages_language_overlay
+					columns {
+						crdate.mapOnProperty = creationDate
+						cruser_id.mapOnProperty = backendUser
+/*
+						sys_language_uid.mapOnProperty = sysLanguageUid
+						title.mapOnProperty = title
+						hidden.mapOnProperty = hidden
+						starttime.mapOnProperty = starttime
+						endtime.mapOnProperty = endtime
+						deleted.mapOnProperty = deleted
+						subtitle.mapOnProperty = subtitle
+						nav_title.mapOnProperty = navTitle
+						media.mapOnProperty = media
+						keywords.mapOnProperty = keywords
+						description.mapOnProperty = description
+						abstract.mapOnProperty = abstract
+						author.mapOnProperty = author
+						author_email.mapOnProperty = authorEmail
+						doktype.mapOnProperty = doktype
+						url.mapOnProperty = url
+						urltype.mapOnProperty = urltype
+						shortcut.mapOnProperty = shortcut
+						shortcut_mode.mapOnProperty = shortcutMode
+*/
+					}
+				}
+			}
 
 		}
 	}
