@@ -48,7 +48,8 @@ class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Returns the translated record of a given record
 	 *
 	 * @param \TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $record
-	 * @param int $sysLanguageUid
+	 * @param \integer $sysLanguageUid
+	 * @param \boolean $forceLanguageUid
 	 * @return mixed
 	 */
 	public function getTranslation($record, $sysLanguageUid){

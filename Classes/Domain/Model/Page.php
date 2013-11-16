@@ -198,7 +198,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * media
 	 *
-	 * @var \string
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
 	 */
 	protected $media;
 

@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Domain\Repository;
+namespace X4E\X4ebase\ViewHelpers\Format;
 
 /***************************************************************
  *  Copyright notice
@@ -26,25 +26,32 @@ namespace X4E\X4ebase\Domain\Repository;
  ***************************************************************/
 
 /**
- * A TYPO3 page record repository for extbase
- *
- * @package x4ebase
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * Applies json_encode() escaping to a value
+ * @see http://www.php.net/manual/function.json_encode.php
  */
-class PageRepository extends AbstractRepository {
-	
-	protected $defaultOrderings = array(
-		'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-	);
-	
-	public function initializeObject() {
-		/* @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-		$querySettings = $this->objectManager->create('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
-		$querySettings->setRespectStoragePage(FALSE);
-		$querySettings->setRespectSysLanguage(FALSE);
-		$this->setDefaultQuerySettings($querySettings);
+class JsonEncodeViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Format\AbstractEncodingViewHelper implements \TYPO3\CMS\Core\SingletonInterface {
+
+	/**
+	 * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
+	 * can decode the text's entities.
+	 *
+	 * @var boolean
+	 */
+	protected $escapingInterceptorEnabled = FALSE;
+
+	/**
+	 * Encodes values using PHPs json_encode() function.
+	 *
+	 * @param string $value string to format
+	 * @return string the altered string
+	 * @see http://www.php.net/manual/function.json_encode.php
+	 */
+	public function render($value = NULL) {
+		if ($value === NULL) {
+			$value = $this->renderChildren();
+		}
+		return json_encode($value);
 	}
-	
 }
+
 ?>

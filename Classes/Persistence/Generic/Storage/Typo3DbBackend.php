@@ -48,7 +48,7 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 		}
 		
 		// If we do not have a table name here, we cannot do an overlay and return the original rows instead.
-		if (isset($tableName) && !\TYPO3\CMS\Backend\Utility\BackendUtility::getOriginalTranslationTable($tableName)) {
+		if (isset($tableName)) {
 			$pageRepository = $this->getPageRepository();
 			if (is_object($GLOBALS['TSFE'])) {
 				$languageMode = $GLOBALS['TSFE']->sys_language_mode;
@@ -73,12 +73,19 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 					if (isset($row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']])
 						&& $row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']] > 0
 					) {
-						$row = $this->databaseHandle->exec_SELECTgetSingleRow(
+						$newRow = $this->databaseHandle->exec_SELECTgetSingleRow(
 							$tableName . '.*',
 							$tableName,
 							$tableName . '.uid=' . (integer) $row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']] .
 								' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=0'
 						);
+						if (!$newRow) {
+							$overlayedRows[] = $row;
+							continue;
+						} else {
+							$row = $newRow;
+						}
+						unset($newRow);
 					}
 				}
 				$pageRepository->versionOL($tableName, $row, TRUE);
@@ -104,5 +111,5 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 		}
 		return $overlayedRows;
 	}
-
+	
 }
