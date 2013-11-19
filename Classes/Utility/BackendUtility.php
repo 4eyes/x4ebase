@@ -5,7 +5,7 @@ namespace X4E\X4ebase\Utility;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,7 +32,7 @@ namespace X4E\X4ebase\Utility;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class BackendUtility {
-	
+
 	/**
 	 * Returns the page uid of the selected storage folder from the context of the given page uid.
 	 *
@@ -47,10 +47,10 @@ class BackendUtility {
 			$pageUid = $pidRow['pid'];
 		}
 		$row = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecordWSOL('pages', $pageUid);
-		
+
 		$TSconfig = \TYPO3\CMS\Backend\Utility\BackendUtility::getTCEFORM_TSconfig('pages', $row);
 		$storagePid = intval($TSconfig['_STORAGE_PID']);
-		
+
 			// Check for alternative storage folder
 		if ($modTSConfigStorageRef !== NULL) {
 			$modTSConfig = \TYPO3\CMS\Backend\Utility\BackendUtility::getModTSconfig($pageUid, $modTSConfigStorageRef);
@@ -58,10 +58,10 @@ class BackendUtility {
 				$storagePid = intval($modTSConfig['value']);
 			}
 		}
-		
+
 		return $storagePid;
 	}
-	
+
 	/**
 	 * Returns a SQL query for selecting sys_language records.
 	 *
@@ -94,9 +94,9 @@ class BackendUtility {
 			);
 		}
 	}
-	
+
 	/**
-	 * Initialize Frontend 
+	 * Initialize Frontend
 	 * @param integer $pageUid
 	 */
 	public static function initTSFE($pid) {
@@ -104,25 +104,27 @@ class BackendUtility {
 		if ($pid == 0) {
 			throw new Exception('No pageId defined!');
 		} else {
-			// TODO: refactor as compatibility layer is removed with 6.2
-			require_once(PATH_tslib . 'class.tslib_content.php'); 
+			if(!isset($GLOBALS['TSFE'])){
+				// TODO: refactor as compatibility layer is removed with 6.2
+				require_once(PATH_tslib . 'class.tslib_content.php');
 
-			\TYPO3\CMS\Frontend\Utility\EidUtility::connectDB(); //Connect to database
-			\TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser(); //Initializes FeUser
+				\TYPO3\CMS\Frontend\Utility\EidUtility::connectDB(); //Connect to database
+				\TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser(); //Initializes FeUser
 
-			/* @var $GLOBALS['TT'] \TYPO3\CMS\Core\TimeTracker\TimeTracker */
-			$GLOBALS['TT'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker');
-			$GLOBALS['TT']->start();
-			
-			$GLOBALS['TSFE'] = new \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController($TYPO3_CONF_VARS, $pid, 0, true);
-			$GLOBALS['TSFE']->connectToDB();
-			$GLOBALS['TSFE']->initFEuser();
-			$GLOBALS['TSFE']->determineId();
-			$GLOBALS['TSFE']->getCompressedTCarray();
-			$GLOBALS['TSFE']->newCObj();
-			$GLOBALS['TSFE']->renderCharset = 'utf-8';
-			self::initTypoScript();
-			$GLOBALS['TSFE']->absRefPrefix = $GLOBALS['TSFE']->config['config']['absRefPrefix'];
+				/* @var $GLOBALS['TT'] \TYPO3\CMS\Core\TimeTracker\TimeTracker */
+				$GLOBALS['TT'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker');
+				$GLOBALS['TT']->start();
+
+				$GLOBALS['TSFE'] = new \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController($TYPO3_CONF_VARS, $pid, 0, true);
+				$GLOBALS['TSFE']->connectToDB();
+				$GLOBALS['TSFE']->initFEuser();
+				$GLOBALS['TSFE']->determineId();
+				$GLOBALS['TSFE']->getCompressedTCarray();
+				$GLOBALS['TSFE']->newCObj();
+				$GLOBALS['TSFE']->renderCharset = 'utf-8';
+				self::initTypoScript();
+				$GLOBALS['TSFE']->absRefPrefix = $GLOBALS['TSFE']->config['config']['absRefPrefix'];
+			}
 		}
 	}
 
