@@ -42,7 +42,7 @@ class PageRepository extends AbstractRepository {
 		/* @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
 		$querySettings = $this->objectManager->create('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
 		$querySettings->setRespectStoragePage(FALSE);
-		$querySettings->setRespectSysLanguage(FALSE);
+		//$querySettings->setRespectSysLanguage(FALSE);
 		$this->setDefaultQuerySettings($querySettings);
 	}
 	

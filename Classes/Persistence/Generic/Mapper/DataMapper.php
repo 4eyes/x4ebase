@@ -51,6 +51,78 @@ class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMappe
 		return $object;
 	}
 	
+	/**
+	 * Sets the given properties on the object.
+	 *
+	 * @param \TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $object The object to set properties on
+	 * @param array $row
+	 * @return void
+	 */
+	protected function thawProperties(\TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $object, array $row) {
+		$className = get_class($object);
+		$dataMap = $this->getDataMap($className);
+		$object->_setProperty('uid', intval($row['uid']));
+		$object->_setProperty('pid', intval($row['pid']));
+		$object->_setProperty('_localizedUid', intval($row['uid']));
+		if ($dataMap->getLanguageIdColumnName() !== NULL) {
+			if (!empty($row['_PAGES_OVERLAY']) && isset($row['_PAGES_OVERLAY_LANGUAGE'])) {
+				$object->_setProperty('_languageUid', intval($row['_PAGES_OVERLAY_LANGUAGE']));
+				if (isset($row['_PAGES_OVERLAY_UID'])) {
+					$object->_setProperty('_localizedUid', intval($row['_PAGES_OVERLAY_UID']));
+				}
+			} else {
+				$object->_setProperty('_languageUid', intval($row[$dataMap->getLanguageIdColumnName()]));
+				if (isset($row['_LOCALIZED_UID'])) {
+					$object->_setProperty('_localizedUid', intval($row['_LOCALIZED_UID']));
+				}
+			}
+		}
+		$properties = $object->_getProperties();
+		foreach ($properties as $propertyName => $propertyValue) {
+			if (!$dataMap->isPersistableProperty($propertyName)) {
+				continue;
+			}
+			$columnMap = $dataMap->getColumnMap($propertyName);
+			$columnName = $columnMap->getColumnName();
+			$propertyData = $this->reflectionService->getClassSchema($className)->getProperty($propertyName);
+			$propertyValue = NULL;
+			if ($row[$columnName] !== NULL) {
+				switch ($propertyData['type']) {
+					case 'integer':
+						$propertyValue = (integer) $row[$columnName];
+						break;
+					case 'float':
+						$propertyValue = (double) $row[$columnName];
+						break;
+					case 'boolean':
+						$propertyValue = (boolean) $row[$columnName];
+						break;
+					case 'string':
+						$propertyValue = (string) $row[$columnName];
+						break;
+					case 'array':
+						// $propertyValue = $this->mapArray($row[$columnName]); // Not supported, yet!
+						break;
+					case 'SplObjectStorage':
+					case 'Tx_Extbase_Persistence_ObjectStorage':
+					case 'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage':
+						$propertyValue = $this->mapResultToPropertyValue($object, $propertyName, $this->fetchRelated($object, $propertyName, $row[$columnName]));
+						break;
+					default:
+						if ($propertyData['type'] === 'DateTime' || in_array('DateTime', class_parents($propertyData['type']))) {
+							$propertyValue = $this->mapDateTime($row[$columnName], $columnMap->getDateTimeStorageFormat());
+						} else {
+							$propertyValue = $this->mapResultToPropertyValue($object, $propertyName, $this->fetchRelated($object, $propertyName, $row[$columnName]));
+						}
+						break;
+				}
+			}
+			if ($propertyValue !== NULL) {
+				$object->_setProperty($propertyName, $propertyValue);
+			}
+		}
+	}
+	
 }
 
 ?>

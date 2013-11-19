@@ -42,6 +42,13 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $sorting;
 	
 	/**
+	 * sysLanguageUid
+	 *
+	 * @var \integer
+	 */
+	protected $sysLanguageUid = 0;
+	
+	/**
 	 * permsUserid
 	 *
 	 * @var \integer
@@ -417,6 +424,25 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setSorting($sorting) {
 		$this->sorting = $sorting;
+	}
+	
+	/**
+	 * Returns the sysLanguageUid
+	 *
+	 * @return integer $sysLanguageUid
+	 */
+	public function getSysLanguageUid() {
+		return $this->sysLanguageUid;
+	}
+
+	/**
+	 * Sets the sysLanguageUid
+	 *
+	 * @param integer $sysLanguageUid
+	 * @return void
+	 */
+	public function setSysLanguageUid($sysLanguageUid) {
+		$this->sysLanguageUid = $sysLanguageUid;
 	}
 	
 	/**
