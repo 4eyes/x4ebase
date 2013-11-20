@@ -57,7 +57,8 @@ class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		
 		if (isset($languageIconTitles[$sysLanguageUid])) {
 			$query = $this->createQuery();
-			$query->getQuerySettings()->setRespectSysLanguage(TRUE);
+			$query->getQuerySettings()->setRespectSysLanguage(FALSE);
+			$query->getQuerySettings()->setRespectSysLanguageAlternative(TRUE);
 			$query->getQuerySettings()->setSysLanguageUid($sysLanguageUid);
 			$result = $query->matching(
 					$query->equals('uid', $record->getUid())

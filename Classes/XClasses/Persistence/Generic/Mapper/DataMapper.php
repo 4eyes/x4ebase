@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Persistence\Generic\Mapper;
+namespace X4E\X4ebase\XClasses\Persistence\Generic\Mapper;
 
 /***************************************************************
  *  Copyright notice
@@ -65,18 +65,18 @@ class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMappe
 		$object->_setProperty('pid', intval($row['pid']));
 		$object->_setProperty('_localizedUid', intval($row['uid']));
 		if ($dataMap->getLanguageIdColumnName() !== NULL) {
-			if (!empty($row['_PAGES_OVERLAY']) && isset($row['_PAGES_OVERLAY_LANGUAGE'])) {
-				$object->_setProperty('_languageUid', intval($row['_PAGES_OVERLAY_LANGUAGE']));
-				if (isset($row['_PAGES_OVERLAY_UID'])) {
-					$object->_setProperty('_localizedUid', intval($row['_PAGES_OVERLAY_UID']));
-				}
-			} else {
-				$object->_setProperty('_languageUid', intval($row[$dataMap->getLanguageIdColumnName()]));
-				if (isset($row['_LOCALIZED_UID'])) {
-					$object->_setProperty('_localizedUid', intval($row['_LOCALIZED_UID']));
-				}
+			$object->_setProperty('_languageUid', intval($row[$dataMap->getLanguageIdColumnName()]));
+			if (isset($row['_LOCALIZED_UID'])) {
+				$object->_setProperty('_localizedUid', intval($row['_LOCALIZED_UID']));
+			}
+		/* NEW @ 4eyes -- start */
+		} elseif(!empty($row['_PAGES_OVERLAY']) && isset($row['_PAGES_OVERLAY_LANGUAGE'])) {
+			$object->_setProperty('_languageUid', intval($row['_PAGES_OVERLAY_LANGUAGE']));
+			if (isset($row['_PAGES_OVERLAY_UID'])) {
+				//$object->_setProperty('_localizedUid', intval($row['_PAGES_OVERLAY_UID']));
 			}
 		}
+		/* NEW @ 4eyes -- end */
 		$properties = $object->_getProperties();
 		foreach ($properties as $propertyName => $propertyValue) {
 			if (!$dataMap->isPersistableProperty($propertyName)) {

@@ -1,11 +1,11 @@
 <?php
-namespace X4E\X4ebase\Domain\Repository;
+namespace X4E\X4ebase\XClasses\Persistence\Generic;
 
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,26 +26,24 @@ namespace X4E\X4ebase\Domain\Repository;
  ***************************************************************/
 
 /**
- * A TYPO3 page record repository for extbase
- *
- * @package x4ebase
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * A query settings interface. This interface is NOT part of the FLOW3 API.
  */
-class PageLanguageOverlayRepository extends AbstractRepository {
-	
+interface AlternativeQuerySettingsInterface extends \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface {
+
 	/**
-	 * Initializes the object
+	 * Sets the flag if an alternative language overlay should be performed.
 	 *
-	 * @return void
+	 * @param boolean $respectSysLanguageAlternative TRUE if an alternative language overlay should be performed.
+	 * @return \X4E\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface instance of $this to allow method chaining
+	 * @api
 	 */
-	public function initializeObject() {
-		/* @var $querySettings \X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings */
-		$querySettings = $this->objectManager->create('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings');
-		$querySettings->setRespectStoragePage(FALSE);
-		$querySettings->setRespectSysLanguage(FALSE);
-		//$querySettings->setRespectSysLanguageAlternative(FALSE);
-		$this->setDefaultQuerySettings($querySettings);
-	}
+	public function setRespectSysLanguageAlternative($respectSysLanguageAlternative);
+
+	/**
+	 * Returns the state, if an alternatvive language overlay should be performed.
+	 *
+	 * @return boolean TRUE, if a  and language overlay should be performed; otherwise FALSE.
+	 */
+	public function getRespectSysLanguageAlternative();
 	
 }

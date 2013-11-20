@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Persistence\Generic\Mapper;
+namespace X4E\X4ebase\XClasses\Persistence\Generic\Mapper;
 
 /***************************************************************
  *  Copyright notice
@@ -33,18 +33,7 @@ class DataMapFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataM
 	/**
 	 * @var \TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider 
 	 */
-	protected $translationConfigurationProvider;
-	
-	/**
-	 * Injects the TranslationConfigurationProvider 
-	 *
-	 * @todo DOENS'T WORK! TranslationConfigurationProvider needs to implement Singleton Interface
-	 * @param \TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider $translationConfigurationProvider
-	 * @return void
-	 */
-	public function injectTranslationConfigurationProvider(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider $translationConfigurationProvider) {
-		$this->translationConfigurationProvider = $translationConfigurationProvider;
-	}
+	//protected $translationConfigurationProvider;
 	
 	/**
 	 * Lifecycle method
@@ -53,9 +42,11 @@ class DataMapFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataM
 	 */
 	public function initializeObject() {
 		parent::initializeObject();
+		/*
 		if (!isset($this->translationConfigurationProvider)) {
 			$this->translationConfigurationProvider = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider');
 		}
+		*/
 	}
 	
 	/**
@@ -65,7 +56,7 @@ class DataMapFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataM
 	 */
 	protected function addMetaDataColumnNames(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap $dataMap, $tableName) {
 		$dataMap = parent::addMetaDataColumnNames($dataMap, $tableName);
-		
+		/*
 		if (!$this->translationConfigurationProvider->isTranslationInOwnTable($tableName)) {
 			$foreignTranslationTableName = $this->translationConfigurationProvider->foreignTranslationTable($tableName);
 			$controlSection = $this->getControlSection($foreignTranslationTableName);
@@ -76,7 +67,7 @@ class DataMapFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataM
 				$dataMap->setTranslationOriginColumnName($controlSection['transOrigPointerField']);
 			}
 		}
-		
+		*/
 		return $dataMap;
 	}
 
