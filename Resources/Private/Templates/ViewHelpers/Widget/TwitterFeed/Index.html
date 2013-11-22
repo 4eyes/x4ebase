@@ -1,0 +1,8 @@
+<f:renderChildren arguments="{contentArguments}" />
+
+<f:render section="ajax" arguments="{pagination: pagination}" />
+
+<f:section name="ajax">
+	<f:widget.link action="test">test-link</f:widget.link>
+	<f:widget.link action="test" ajax="1">test-link</f:widget.link>
+</f:section>
