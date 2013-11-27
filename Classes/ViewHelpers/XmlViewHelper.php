@@ -35,26 +35,61 @@ namespace X4E\X4ebase\ViewHelpers;
  */
 class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper {
 
+	protected $removeEmptyNodes = FALSE;
+	protected $ignoreWhitespace = TRUE;
+	protected $preserveAttributes = TRUE;
+	
 	/**
 	 * Render method
 	 *
 	 * @param mixed $content String or variable convertible to string which should be formatted
+	 * @param \boolean $removeEmptyNodes Set to TRUE if empty xml nodes should be completely removed from the output
+	 * @param \boolean $ignoreWhitespace Set to FALSE if nodes with only whitespace should not be considered empty
+	 * @param \boolean $preserveAttributes Set to FALSE if empty xml nodes with attributes should also be removed
 	 * @return mixed
 	 */
-	public function render($content=NULL) {
+	public function render($content = NULL, $removeEmptyNodes = FALSE, $ignoreWhitespace = TRUE, $preserveAttributes = TRUE) {
+		$this->removeEmptyNodes = $removeEmptyNodes;
+		$this->ignoreWhitespace = $ignoreWhitespace;
+		$this->preserveAttributes = $preserveAttributes;
 		if (!$content) {
-			return $this->_formatXmlString($this->renderChildren());
+			$content = $this->renderChildren();
 		}
-		return $this->_formatXmlString($content);
+		return $this->formatXmlString($content);
 	}
-
-	protected function _formatXmlString($xml) {
+	
+	/**
+	 * 
+	 * @param \string $xml
+	 * @param \boolean $removeEmptyNodes
+	 * @param \boolean $ignoreWhitespace
+	 * @param \boolean $preserveAttributes
+	 * @return \string
+	 */
+	protected function formatXmlString($xml) {
 		$sxe = new \SimpleXMLElement(trim($xml), LIBXML_NONET);
+		if ($this->removeEmptyNodes) {
+			$this->removeEmptyNodes($sxe);
+		}
 		$dom = new \DOMDocument('1.0');
 		$dom->preserveWhiteSpace = FALSE;
 		$dom->formatOutput = TRUE;
 		$dom->loadXML($sxe->asXML());
 		return $dom->saveXML();
+	}
+	
+	/**
+	 * 
+	 * @param \SimpleXMLElement $sxe
+	 */
+	protected function removeEmptyNodes(\SimpleXMLElement $sxe){
+		$expression = '//*[' . ($this->ignoreWhitespace ? 'not(*) and not(normalize-space())' : 'not(text())') . ($this->preserveAttributes ? ' and not(@*)' : '') . ']';
+		while (!!($nodes = $sxe->xpath($expression))) {
+			/* @var $node \SimpleXMLElement */
+			foreach($nodes as $node) {
+				unset($node[0]);
+			}
+		}
 	}
 }
 
