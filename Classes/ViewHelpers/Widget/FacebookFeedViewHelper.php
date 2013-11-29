@@ -28,7 +28,7 @@ namespace X4E\X4ebase\ViewHelpers\Widget;
 /**
  * @package x4ebase
  */
-class TwitterFeedViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper {
+class FacebookFeedViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper {
 	
 	/**
 	 * If set to TRUE, it is an AJAX widget.
@@ -38,15 +38,15 @@ class TwitterFeedViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetV
 	protected $ajaxWidget = TRUE;
 	
 	/**
-	 * @var \X4E\X4ebase\ViewHelpers\Widget\Controller\TwitterFeedController
+	 * @var \X4E\X4ebase\ViewHelpers\Widget\Controller\FacebookFeedController
 	 */
 	protected $controller;
 
 	/**
-	 * @param \X4E\X4ebase\ViewHelpers\Widget\Controller\TwitterFeedController $controller
+	 * @param \X4E\X4ebase\ViewHelpers\Widget\Controller\FacebookFeedController $controller
 	 * @return void
 	 */
-	public function injectController(\X4E\X4ebase\ViewHelpers\Widget\Controller\TwitterFeedController $controller) {
+	public function injectController(\X4E\X4ebase\ViewHelpers\Widget\Controller\FacebookFeedController $controller) {
 		$this->controller = $controller;
 	}
 

@@ -1,25 +1,33 @@
 <?php
 namespace X4E\X4ebase\ViewHelpers\Widget\Controller;
 
-/*                                                                        *
- * This script is backported from the TYPO3 Flow package "TYPO3.Fluid".   *
- *                                                                        *
- * It is free software; you can redistribute it and/or modify it under    *
- * the terms of the GNU Lesser General Public License, either version 3   *
- *  of the License, or (at your option) any later version.                *
- *                                                                        *
- *                                                                        *
- * This script is distributed in the hope that it will be useful, but     *
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
- * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser       *
- * General Public License for more details.                               *
- *                                                                        *
- * You should have received a copy of the GNU Lesser General Public       *
- * License along with the script.                                         *
- * If not, see http://www.gnu.org/licenses/lgpl.html                      *
- *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
- *                                                                        */
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
+ *  
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+
+/**
+ * @package x4ebase
+ */
 class TwitterFeedController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController {
 
 	protected static $consumerKey = 'wYjr3Xg9UPqZ4vHzFRc4bA';
@@ -57,33 +65,15 @@ class TwitterFeedController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetC
 	 * @return void
 	 */
 	public function indexAction($currentPage = 1) {
-		$connection = new \tmhOAuth(array(
-				'consumer_key'    => static::$consumerKey,
-				'consumer_secret' => static::$consumerSecret,
-				'token'           => static::$accessToken,
-				'secret'          => static::$accessTokenSecret
-			));
-		
-		$responseCode = $connection->request(
-				'GET',
-				$connection->url('1.1/' . $this->requestUrl),
-				$this->requestParams
-			);
+		$uniqueId = \X4E\X4ebase\Utility\GeneralUtility::generateUniqueString();
+		$this->view->assign('uniqueId', $uniqueId);
+		$this->view->assign('configuration', $this->configuration);
+		$this->view->assign('contentArguments', array());
+		return;
 		
 		
-		$tweets = array();
-		if ($responseCode == 200) {
-			$tweets = json_decode($connection->response['response'], TRUE);
-			
-			//\TYPO3\CMS\Core\Utility\DebugUtility::debug($tweets, 'twitter response');
-			//TODO cache tweets!!!
-		} else {
-			//\TYPO3\CMS\Core\Utility\DebugUtility::debug($responseCode, 'twitter response');
-		}
 		
-		// Reduce set to X elements
-		array_splice($tweets, intval($this->configuration['maxItems']));
-		
+		$tweets = $this->getTweetArray();
 		$this->view->assign('contentArguments', array(
 			$this->widgetConfiguration['as'] => $tweets
 		));
@@ -136,41 +126,49 @@ class TwitterFeedController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetC
 		return 'result: <pre>' . print_r($result, true) . '</pre>';
 	}
 	
-	protected function initializeTestAction(){
-		
+	/**
+	 * 
+	 * @return \string
+	 */
+	public function ajaxAction(){
+		$tweets = $this->getTweetArray();
+		$this->view->assign('tweets', $tweets);
+		$output = trim($this->view->render());
+		return $output;
 	}
 	
-	public function testAction(){
-		//$this->view->setTemplatePathAndFilename();
+	/**
+	 * Fetches tweets through an OpenAuth request
+	 * 
+	 * @return \array
+	 */
+	protected function getTweetArray(){
+		$connection = new \tmhOAuth(array(
+				'consumer_key'    => static::$consumerKey,
+				'consumer_secret' => static::$consumerSecret,
+				'token'           => static::$accessToken,
+				'secret'          => static::$accessTokenSecret
+			));
 		
-		
-		/* @var $view \TYPO3\CMS\Fluid\View\StandaloneView */
-		$view = $this->objectManager->create('TYPO3\CMS\Fluid\View\StandaloneView');
-		$resourcePath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('x4eairmail', 'Resources/Private/Backend/');
-		$view->setLayoutRootPath($resourcePath . 'Layouts/');
-		$view->setTemplatePathAndFilename($resourcePath . 'Templates/Issue/SingleFalRecord.html');
-		$view->assign('file', NULL);
-		$view->assign('fileStorageTableName', 'derp');
-		
-		$output = trim($view->render());
-		
-		header('Content-Type: application/json');
-		
-		return json_encode(
-				array(
-					'view' => $output,
-					'fileStorageTableName' => $fileStorageTableName,
-					'fileId' => $fileId,
-					'objectId' => $jsonArray[0],
-					'namePrefix' => $jsonArray[1],
-					'pageUid' => $jsonArray[2],
-					'recordTableName' => $jsonArray[3],
-					'recordUid' => $jsonArray[4],
-					'recordSysLanguageUid' => $jsonArray[5],
-					'recordFieldName' => $jsonArray[6],
-					'storageTableName' => $jsonArray[7],
-				)
+		$responseCode = $connection->request(
+				'GET',
+				$connection->url('1.1/' . $this->requestUrl),
+				$this->requestParams
 			);
+		
+		$tweets = array();
+		if ($responseCode == 200) {
+			$tweets = json_decode($connection->response['response'], TRUE);
+			//\TYPO3\CMS\Core\Utility\DebugUtility::debug($tweets, 'twitter response');
+			//TODO cache tweets!!!
+		} else {
+			//\TYPO3\CMS\Core\Utility\DebugUtility::debug($responseCode, 'twitter response');
+		}
+		
+		// Reduce set to X elements
+		array_splice($tweets, intval($this->configuration['maxItems']));
+		
+		return $tweets;
 	}
 
 }

@@ -33,6 +33,21 @@ namespace X4E\X4ebase\Utility;
  *
  */
 class GeneralUtility {
+	
+	protected static $uniqueId = 5378456;
+	
+	public static function generateUniqueId(){
+		return ++static::$uniqueId;
+	}
+	
+	public static function generateUniqueString(){
+		if (extension_loaded('gmp')) {
+			return gmp_strval(gmp_init(static::generateUniqueId(), 10), 62);
+		} else {
+			return base_convert(static::generateUniqueId(), 10, 36);
+		}
+	}
+	
 	/**
 	 *
 	 * @param \object $object
