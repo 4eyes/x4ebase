@@ -61,9 +61,10 @@ class EmailUtility {
 	 * @param \string $templateFolder
 	 * @param boolean $isHtml true for html emails
 	 * @param \array $attachments
+	 * @param \array $replyTo
 	 * @return boolean TRUE on success, otherwise false
 	 */
-	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = array(), $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = array()) {
+	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = array(), $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = array(), $replyTo = array()) {
 		$objectManager = self::getObjectManagerInstance();
 		$isSent = false;
 		$emailBody = '';
@@ -87,6 +88,7 @@ class EmailUtility {
 			$message = $objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
 			$message->setTo($recipient)
 					->setFrom($sender)
+					->setReplyTo($replyTo)
 					->setSubject($subject);
 
 			// Add attachments
