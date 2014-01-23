@@ -41,7 +41,7 @@ class GeneralUtility {
 	}
 	
 	public static function generateUniqueString(){
-		if (extension_loaded('gmp')) {
+		if (extension_loaded('gmp') && function_exists('gmp_init') && function_exists('gmp_strval')) {
 			return gmp_strval(gmp_init(static::generateUniqueId(), 10), 62);
 		} else {
 			return base_convert(static::generateUniqueId(), 10, 36);
