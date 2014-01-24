@@ -136,7 +136,6 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 		} elseif ($source instanceof \TYPO3\CMS\Extbase\Persistence\Generic\Qom\JoinInterface) {
 			$tableName = $source->getRight()->getSelectorName();
 		}
-		
 		// If we do not have a table name here, we cannot do an overlay and return the original rows instead.
 		if (isset($tableName)) {
 			$pageRepository = $this->getPageRepository();

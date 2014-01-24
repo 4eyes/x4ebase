@@ -38,8 +38,10 @@ class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMappe
 	 * @return object An object of the given class
 	 */
 	protected function mapSingleRow($className, array $row) {
+		// 4eyes start -->
 		$identifier = (!empty($row['_PAGES_OVERLAY']) ? $row['uid'] . '_' . $row['_PAGES_OVERLAY_UID'] : $row['uid'] );
 		if ($this->identityMap->hasIdentifier($identifier, $className)) {
+		// 4eyes end <--
 			$object = $this->identityMap->getObjectByIdentifier($identifier, $className);
 		} else {
 			$object = $this->createEmptyObject($className);
