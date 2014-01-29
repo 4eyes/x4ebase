@@ -78,4 +78,3 @@ class AddCssFileViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacke
 	}
 	
 }
-?>

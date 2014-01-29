@@ -47,4 +47,3 @@ class PageRepository extends AbstractRepository {
 	}
 	
 }
-?>

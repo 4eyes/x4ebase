@@ -43,5 +43,3 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\PageViewHelper {
 		return $this->tag->render();
 	}
 }
-
-?>

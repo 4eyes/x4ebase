@@ -206,4 +206,3 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 }
-?>

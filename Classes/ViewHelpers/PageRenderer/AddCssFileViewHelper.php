@@ -81,4 +81,3 @@ class AddCssFileViewHelper extends AbstractPageRendererViewHelper {
 	}
 	
 }
-?>

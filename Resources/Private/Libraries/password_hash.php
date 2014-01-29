@@ -218,6 +218,3 @@ if (!defined('PASSWORD_DEFAULT')) {
         return $status === 0;
     }
 }
-
-
-

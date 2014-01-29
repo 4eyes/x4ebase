@@ -150,5 +150,3 @@ $TCA['tx_x4ebase_domain_model_emaillog'] = array(
 		),
 	),
 );
-
-?>

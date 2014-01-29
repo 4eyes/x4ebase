@@ -12,4 +12,3 @@ class TemplateView extends \TYPO3\CMS\Fluid\View\TemplateView {
 	}
 
 }
-?>

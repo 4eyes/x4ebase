@@ -52,8 +52,7 @@ class SecurePasswordSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterfac
 	 * Requires dependant function implementation
 	 */
 	public function __construct() {
-		require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('x4ebase').'Classes/Functions/password_hash.php';
-		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['x4ebase']);
+		$extConf = \X4E\X4ebase\Utility\GeneralUtility::getExtConf('x4ebase');
 		if (isset($extConf['securePassword.']) && isset($extConf['securePassword.']['cost'])) {
 			$cost = intval($extConf['securePassword.']['cost']);
 			if ($cost > 3 && $cost < 32) {
@@ -166,4 +165,3 @@ class SecurePasswordSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterfac
 	}
 	
 }
-?>

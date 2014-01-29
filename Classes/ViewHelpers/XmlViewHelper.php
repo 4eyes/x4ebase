@@ -92,5 +92,3 @@ class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedVie
 		}
 	}
 }
-
-?>

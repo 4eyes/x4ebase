@@ -4,7 +4,8 @@ namespace X4E\X4ebase\Utility;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Michel Georgy <michel@4eyes.ch>, 4eyes GmbH
+ *  (c) 2014 Michel Georgy <michel@4eyes.ch>, 4eyes GmbH
+ *           Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
  *
  *  All rights reserved
  *
@@ -95,4 +96,3 @@ class GeneralUtility {
 		return unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey]);
 	}
 }
-?>

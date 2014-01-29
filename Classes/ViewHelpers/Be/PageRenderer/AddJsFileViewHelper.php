@@ -73,4 +73,3 @@ class AddJsFileViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacken
 		);
 	}
 }
-?>

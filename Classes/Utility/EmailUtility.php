@@ -152,4 +152,3 @@ class EmailUtility {
 		return self::$persistenceManager;
 	}
 }
-?>

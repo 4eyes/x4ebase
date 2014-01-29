@@ -93,5 +93,3 @@ abstract class AbstractBackendTagBasedViewHelper extends \TYPO3\CMS\Fluid\Core\V
 		return $doc;
 	}
 }
-
-?>

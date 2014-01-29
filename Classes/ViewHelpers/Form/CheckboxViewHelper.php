@@ -70,5 +70,3 @@ class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\CheckboxViewH
 		return '';
 	}
 }
-
-?>

@@ -72,4 +72,3 @@ class AddJsFileViewHelper extends AbstractPageRendererViewHelper {
 		}
 	}
 }
-?>

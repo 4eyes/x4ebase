@@ -2,11 +2,21 @@
 if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
+
+$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);
+
+//==============================================================================
+//   Password Hashing Methods
+//==============================================================================
+// password_hash implementation for PHP < 5.5
+require_once $extPath . 'Resources/Private/Libraries/password_hash.php';
 // Registering all available hashes to factory
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/saltedpasswords']['saltMethods']['X4E\\X4ebase\\Salt\\SecurePasswordSalt'] = 'X4E\\X4ebase\\Salt\\SecurePasswordSalt';
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['EXT:saltedpasswords/locallang.xml'][] = 'EXT:x4ebase/Resources/Private/Language/locallang_securepassword.xlf';
 
-// XClasses
+//==============================================================================
+//   XClasses
+//==============================================================================
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = array(
     'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings'
 );
@@ -29,4 +39,3 @@ $extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('
 // Singleton
 $extbaseObjectContainer->registerImplementation('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface', 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings');
 unset($extbaseObjectContainer);
-?>

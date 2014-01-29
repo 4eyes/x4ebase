@@ -1374,4 +1374,3 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 
 }
-?>

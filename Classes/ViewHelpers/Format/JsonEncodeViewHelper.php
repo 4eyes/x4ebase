@@ -53,5 +53,3 @@ class JsonEncodeViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Format\AbstractE
 		return json_encode($value);
 	}
 }
-
-?>

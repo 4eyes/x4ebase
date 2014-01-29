@@ -99,5 +99,3 @@ class NamingUtility implements \TYPO3\CMS\Core\SingletonInterface {
 	}
 
 }
-
-?>

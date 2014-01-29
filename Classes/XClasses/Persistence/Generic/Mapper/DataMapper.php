@@ -126,5 +126,3 @@ class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMappe
 	}
 	
 }
-
-?>

@@ -223,6 +223,3 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		return $TSMappings;
 	}
 }
-
-
-?>

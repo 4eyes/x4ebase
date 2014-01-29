@@ -86,5 +86,3 @@ class IfAdminOrHasRoleViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Securit
 		return $GLOBALS['BE_USER']->isAdmin();
 	}
 }
-
-?>

@@ -85,4 +85,3 @@ $TCA['tx_x4ebase_domain_model_emaillog'] = array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_x4ebase_domain_model_emaillog.gif'
 	),
 );
-?>

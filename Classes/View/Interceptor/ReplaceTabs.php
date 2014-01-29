@@ -42,4 +42,3 @@ class ReplaceTabs implements \TYPO3\CMS\Fluid\Core\Parser\InterceptorInterface {
 		);
 	}
 }
-?>

@@ -68,5 +68,3 @@ class NotTrimEmptyValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 	}
 
 }
-
-?>

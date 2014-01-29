@@ -14,9 +14,9 @@ $EM_CONF[$_EXTKEY] = array(
 	'title' => '4eyes Base',
 	'description' => 'Basic extbase and fluid functionality, models and viewhelpers',
 	'category' => 'misc',
-	'author' => 'Christoph Dörfel',
-	'author_email' => 'christoph@4eyes.ch',
-	'author_company' => '4eyes GmbH',
+	'author' => 'Alessandro Bellafronte, Christoph Dörfel, Michel Georgy',
+	'author_email' => 'alessandro@4eyes.ch, christoph@4eyes.ch, michel@4eyes.ch',
+	'author_company' => '4eyes GmbH, 4eyes GmbH, 4eyes GmbH',
 	'shy' => '',
 	'priority' => '',
 	'module' => '',
@@ -27,7 +27,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '1.0.0',
+	'version' => '6.0.1',
 	'constraints' => array(
 		'depends' => array(
 			'extbase' => '6.0',
@@ -41,5 +41,3 @@ $EM_CONF[$_EXTKEY] = array(
 		),
 	),
 );
-
-?>

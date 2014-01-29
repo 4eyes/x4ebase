@@ -30,5 +30,3 @@ class AddSlashesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
 		return addslashes($stringToFormat);
 	}
 }
-
-?>

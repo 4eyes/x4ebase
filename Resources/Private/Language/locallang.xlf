@@ -3,10 +3,6 @@
 	<file source-language="en" datatype="plaintext" original="messages" product-name="x4ebase">
 		<header/>
 		<body>
-			<trans-unit id="widget.facebook.post.read-more">
-				<source>Read more</source>
-			</trans-unit>
-			
 			<trans-unit id="tx_x4ebasexxx_domain_model_emaillog">
 				<source>EmailLog</source>
 			</trans-unit>
