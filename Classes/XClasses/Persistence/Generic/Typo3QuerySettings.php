@@ -50,7 +50,7 @@ class Typo3QuerySettings extends \TYPO3\CMS\Extbase\Persistence\Generic\Typo3Que
 	/**
 	 * Sets the flag if an alternative language overlay should be performed.
 	 *
-	 * @param boolean $respectSysLanguage TRUE if a  and language overlay should be performed.
+	 * @param boolean $respectSysLanguageAlternative TRUE if a  and language overlay should be performed.
 	 * @return \X4E\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface (fluent interface)
 	 * @api
 	 */
