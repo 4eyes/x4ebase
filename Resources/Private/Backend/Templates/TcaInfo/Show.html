@@ -1,0 +1,104 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+<f:flashMessages />
+
+<style>
+	table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 2px;
+	}
+
+	a {
+		text-decoration: underline;
+	}
+
+	p {
+		margin-bottom: 30px;
+	}
+</style>
+
+<h1>Database-Infomation</h1>
+
+	<p>
+		<f:form action="show" name="generator">
+			<f:form.select name="table" options="{tables}" value="{tableName}" additionalAttributes="{onChange: 'this.form.submit();'}" /><br />
+		</f:form>
+	</p>
+
+	<f:if condition="{table}">
+		<f:then>
+			<h2><f:translate key="{table.ctrl.title}" /> ({tableName})</h2>
+
+			<table>
+				<tr>
+					<th>Spalte</th>
+					<th>Bezeichnung</th>
+					<th>Typ</th>
+					<th>Beziehung</th>
+					<th>Wahlmöglichkeiten</th>
+				</tr>
+				<tr>
+					<td>uid</td>
+					<td>Eindeutige ID</td>
+					<td>integer</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<f:for each="{table.columns}" as="col" key="colname">
+					<tr>
+						<td>{colname}</td>
+						<td><f:translate key="{col.label}" /></td>
+						<td>
+							{col.config.type}
+							<f:if condition="{col.config.eval}">
+								({col.config.eval})
+							</f:if>
+						</td>
+						<td>
+							<f:if condition="{col.config.foreign_table}">
+								<f:then>
+									Tabelle <f:link.action action="show" arguments="{table: '{col.config.foreign_table}'}">{col.config.foreign_table}</f:link.action>
+									<f:if condition="{col.config.maxitems} > 1">
+										<br />Mehrfachbeziehung
+									</f:if>
+									<f:if condition="{col.config.foreign_field}">
+										<br />via {col.config.foreign_table}.{col.config.foreign_field}
+									</f:if>
+									<f:if condition="{col.config.MM}">
+										<br />via MM-Tabelle: {col.config.MM}
+									</f:if>
+
+								</f:then>
+								<f:else>
+									&nbsp;
+								</f:else>
+							</f:if>
+						</td>
+						<td>
+						<f:if condition="{col.config.items}">
+								<f:then>
+									<ul>
+										<f:for each="{col.config.items}" as="item">
+											<f:if condition="{item.0}">
+												<li>{item.1}: <f:translate key="{item.0}" /></li>
+											</f:if>
+										</f:for>
+									</ul>
+								</f:then>
+							</f:if>
+						</td>
+					</tr>
+				</f:for>
+
+			</table>
+
+		</f:then>
+	</f:if>
+
+
+
+
+</f:section>
