@@ -32,67 +32,112 @@
 			<h2><f:translate key="{table.ctrl.title}" /> ({tableName})</h2>
 
 			<table>
-				<tr>
-					<th>Spalte</th>
-					<th>Bezeichnung</th>
-					<th>Typ</th>
-					<th>Beziehung</th>
-					<th>Wahlmöglichkeiten</th>
-				</tr>
-				<tr>
-					<td>uid</td>
-					<td>Eindeutige ID</td>
-					<td>integer</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-
-				<f:for each="{table.columns}" as="col" key="colname">
+				<thead>
 					<tr>
-						<td>{colname}</td>
-						<td><f:translate key="{col.label}" /></td>
-						<td>
-							{col.config.type}
-							<f:if condition="{col.config.eval}">
-								({col.config.eval})
-							</f:if>
-						</td>
-						<td>
-							<f:if condition="{col.config.foreign_table}">
-								<f:then>
-									Tabelle <f:link.action action="show" arguments="{table: '{col.config.foreign_table}'}">{col.config.foreign_table}</f:link.action>
-									<f:if condition="{col.config.maxitems} > 1">
-										<br />Mehrfachbeziehung
-									</f:if>
-									<f:if condition="{col.config.foreign_field}">
-										<br />via {col.config.foreign_table}.{col.config.foreign_field}
-									</f:if>
-									<f:if condition="{col.config.MM}">
-										<br />via MM-Tabelle: {col.config.MM}
-									</f:if>
-
-								</f:then>
-								<f:else>
-									&nbsp;
-								</f:else>
-							</f:if>
-						</td>
-						<td>
-						<f:if condition="{col.config.items}">
-								<f:then>
-									<ul>
-										<f:for each="{col.config.items}" as="item">
-											<f:if condition="{item.0}">
-												<li>{item.1}: <f:translate key="{item.0}" /></li>
-											</f:if>
-										</f:for>
-									</ul>
-								</f:then>
-							</f:if>
-						</td>
+						<th>Spalte</th>
+						<th>Bezeichnung</th>
+						<th>Typ</th>
+						<th>Beziehung</th>
+						<th>Wahlmöglichkeiten</th>
 					</tr>
-				</f:for>
+				</thead>
 
+				<tbody>
+					<tr>
+						<td>uid</td>
+						<td>Eindeutige ID</td>
+						<td>integer</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+
+					<f:if condition="{table.ctrl.delete}">
+						<tr>
+							<td>deleted</td>
+							<td>Als gelöscht markiert</td>
+							<td>integer (0/1)</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</f:if>
+
+					<f:if condition="{table.ctrl.crdate}">
+						<tr>
+							<td>crdate</td>
+							<td>Erstellungsdatum</td>
+							<td>integer (timestamp)</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</f:if>
+
+					<f:if condition="{table.ctrl.tstamp}">
+						<tr>
+							<td>tstamp</td>
+							<td>Letzte Änderung</td>
+							<td>integer (timestamp)</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</f:if>
+
+					<f:if condition="{table.ctrl.cruser_id}">
+						<tr>
+							<td>cruser_id</td>
+							<td>ID des Erstellers (nur Backend)</td>
+							<td>integer</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</f:if>
+
+
+					<f:for each="{table.columns}" as="col" key="colname">
+						<tr>
+							<td>{colname}</td>
+							<td><f:translate key="{col.label}" /></td>
+							<td>
+								{col.config.type}
+								<f:if condition="{col.config.eval}">
+									({col.config.eval})
+								</f:if>
+							</td>
+							<td>
+								<f:if condition="{col.config.foreign_table}">
+									<f:then>
+										Tabelle <f:link.action action="show" arguments="{table: '{col.config.foreign_table}'}">{col.config.foreign_table}</f:link.action>
+										<f:if condition="{col.config.maxitems} > 1">
+											<br />Mehrfachbeziehung
+										</f:if>
+										<f:if condition="{col.config.foreign_field}">
+											<br />via {col.config.foreign_table}.{col.config.foreign_field}
+										</f:if>
+										<f:if condition="{col.config.MM}">
+											<br />via MM-Tabelle: {col.config.MM}
+										</f:if>
+
+									</f:then>
+									<f:else>
+										&nbsp;
+									</f:else>
+								</f:if>
+							</td>
+							<td>
+							<f:if condition="{col.config.items}">
+									<f:then>
+										<ul>
+											<f:for each="{col.config.items}" as="item">
+												<f:if condition="{item.0}">
+													<li>{item.1}: <f:translate key="{item.0}" default="{item.0}" /></li>
+												</f:if>
+											</f:for>
+										</ul>
+									</f:then>
+								</f:if>
+							</td>
+						</tr>
+					</f:for>
+				</tbody>
 			</table>
 
 		</f:then>
