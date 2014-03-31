@@ -50,10 +50,17 @@
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>
+					<tr>
+						<td>pid</td>
+						<td>Falls vorhanden: ID der Seite (oder Ordner) im Seitenbaum, in welcher der Datensatz abgelegt ist.</td>
+						<td>integer</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
 
 					<f:if condition="{table.ctrl.delete}">
 						<tr>
-							<td>deleted</td>
+							<td>{table.ctrl.delete}</td>
 							<td>Als gelöscht markiert</td>
 							<td>integer (0/1)</td>
 							<td>&nbsp;</td>
@@ -63,7 +70,7 @@
 
 					<f:if condition="{table.ctrl.crdate}">
 						<tr>
-							<td>crdate</td>
+							<td>{table.ctrl.crdate}</td>
 							<td>Erstellungsdatum</td>
 							<td>integer (timestamp)</td>
 							<td>&nbsp;</td>
@@ -73,7 +80,7 @@
 
 					<f:if condition="{table.ctrl.tstamp}">
 						<tr>
-							<td>tstamp</td>
+							<td>{table.ctrl.tstamp}</td>
 							<td>Letzte Änderung</td>
 							<td>integer (timestamp)</td>
 							<td>&nbsp;</td>
@@ -83,14 +90,13 @@
 
 					<f:if condition="{table.ctrl.cruser_id}">
 						<tr>
-							<td>cruser_id</td>
+							<td>{table.ctrl.cruser_id}</td>
 							<td>ID des Erstellers (nur Backend)</td>
 							<td>integer</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 						</tr>
 					</f:if>
-
 
 					<f:for each="{table.columns}" as="col" key="colname">
 						<tr>
@@ -139,6 +145,7 @@
 					</f:for>
 				</tbody>
 			</table>
+			<p>Die übrigend t3_**** Felder sind für eine Analyse der Daten nicht relevant.</p>
 
 		</f:then>
 	</f:if>
