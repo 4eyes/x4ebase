@@ -31,7 +31,7 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	 * @inject
 	 */
-	protected $configurationManager; 
+	protected $configurationManager;
 
 	/**
 	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
@@ -52,7 +52,6 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 			'source' => $uid,
 			'dontCheckPid' => 1
 		);
-		ssdf
 		return $this->cObj->RECORDS($conf);
     }
 }
