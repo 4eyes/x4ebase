@@ -39,6 +39,9 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBas
 		$linkText = ($tagContent ?: '');
 		$this->tag->setContent($linkText);
 		$this->tag->addAttribute('href', $linkHref);
+		if(strstr($parameter, 'http') || strstr($parameter, ' _blank')){
+			$this->tag->addAttribute('target', '_blank');
+		}
 		$this->tag->forceClosingTag(TRUE);
 		return $this->tag->render();
 	}
