@@ -37,28 +37,28 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * sender
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $sender;
 
 	/**
 	 * recipient
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $recipient;
 
 	/**
 	 * subject
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $subject;
 
 	/**
 	 * message
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $message;
 
@@ -72,14 +72,14 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * error
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $error;
 
 	/**
 	 * Returns the sender
 	 *
-	 * @return \string $sender
+	 * @return string $sender
 	 */
 	public function getSender() {
 		return $this->sender;
@@ -88,7 +88,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the sender
 	 *
-	 * @param \string $sender
+	 * @param string $sender
 	 * @return void
 	 */
 	public function setSender($sender) {
@@ -99,7 +99,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the recipient
 	 *
-	 * @return \string $recipient
+	 * @return string $recipient
 	 */
 	public function getRecipient() {
 		return $this->recipient;
@@ -108,7 +108,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the recipient
 	 *
-	 * @param \string $recipient
+	 * @param string $recipient
 	 * @return void
 	 */
 	public function setRecipient($recipient) {
@@ -119,7 +119,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the subject
 	 *
-	 * @return \string $subject
+	 * @return string $subject
 	 */
 	public function getSubject() {
 		return $this->subject;
@@ -128,7 +128,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the subject
 	 *
-	 * @param \string $subject
+	 * @param string $subject
 	 * @return void
 	 */
 	public function setSubject($subject) {
@@ -139,7 +139,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the message
 	 *
-	 * @return \string $message
+	 * @return string $message
 	 */
 	public function getMessage() {
 		return $this->message;
@@ -148,7 +148,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the message
 	 *
-	 * @param \string $message
+	 * @param string $message
 	 * @return void
 	 */
 	public function setMessage($message) {
@@ -188,7 +188,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the error
 	 *
-	 * @return \string $error
+	 * @return string $error
 	 */
 	public function getError() {
 		return $this->error;
@@ -197,7 +197,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the error
 	 *
-	 * @param \string $error
+	 * @param string $error
 	 * @return void
 	 */
 	public function setError($error) {
