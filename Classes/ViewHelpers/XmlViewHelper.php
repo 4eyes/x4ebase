@@ -43,9 +43,9 @@ class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedVie
 	 * Render method
 	 *
 	 * @param mixed $content String or variable convertible to string which should be formatted
-	 * @param \boolean $removeEmptyNodes Set to TRUE if empty xml nodes should be completely removed from the output
-	 * @param \boolean $ignoreWhitespace Set to FALSE if nodes with only whitespace should not be considered empty
-	 * @param \boolean $preserveAttributes Set to FALSE if empty xml nodes with attributes should also be removed
+	 * @param boolean $removeEmptyNodes Set to TRUE if empty xml nodes should be completely removed from the output
+	 * @param boolean $ignoreWhitespace Set to FALSE if nodes with only whitespace should not be considered empty
+	 * @param boolean $preserveAttributes Set to FALSE if empty xml nodes with attributes should also be removed
 	 * @return mixed
 	 */
 	public function render($content = NULL, $removeEmptyNodes = FALSE, $ignoreWhitespace = TRUE, $preserveAttributes = TRUE) {
@@ -60,11 +60,11 @@ class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedVie
 	
 	/**
 	 * 
-	 * @param \string $xml
-	 * @param \boolean $removeEmptyNodes
-	 * @param \boolean $ignoreWhitespace
-	 * @param \boolean $preserveAttributes
-	 * @return \string
+	 * @param string $xml
+	 * @param boolean $removeEmptyNodes
+	 * @param boolean $ignoreWhitespace
+	 * @param boolean $preserveAttributes
+	 * @return string
 	 */
 	protected function formatXmlString($xml) {
 		$sxe = new \SimpleXMLElement(trim($xml), LIBXML_NONET);

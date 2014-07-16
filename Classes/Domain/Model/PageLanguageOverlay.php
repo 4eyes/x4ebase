@@ -202,7 +202,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 	/**
 	 * Returns the creation date
 	 *
-	 * @return \integer $creationDate
+	 * @return integer $creationDate
 	 */
 	public function getCreationDate() {
 		return $this->creationDate;
@@ -211,7 +211,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 	/**
 	 * Sets the creation date
 	 *
-	 * @param \integer $creationDate
+	 * @param integer $creationDate
 	 * @return void
 	 */
 	public function setCreationDate($creationDate) {

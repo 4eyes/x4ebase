@@ -49,19 +49,19 @@ class EmailUtility {
 	 * Sends a email with a standalone view.
 	 * The email and it's content will be logged
 	 *
-	 * @param \array $recipient recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
-	 * @param \array $sender sender of the email in the format array('sender@domain.tld' => 'Sender Name')
-	 * @param \string $subject subject of the email
-	 * @param \string $templateName template name (UpperCamelCase)
-	 * @param \string $templateRootPath
-	 * @param \string $layoutRootPath
-	 * @param \string $partialRootPath
-	 * @param \array $variables variables to be passed to the Fluid view
-	 * @param \string $extensionName needed for f:translate
-	 * @param \string $templateFolder
+	 * @param array $recipient recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
+	 * @param array $sender sender of the email in the format array('sender@domain.tld' => 'Sender Name')
+	 * @param string $subject subject of the email
+	 * @param string $templateName template name (UpperCamelCase)
+	 * @param string $templateRootPath
+	 * @param string $layoutRootPath
+	 * @param string $partialRootPath
+	 * @param array $variables variables to be passed to the Fluid view
+	 * @param string $extensionName needed for f:translate
+	 * @param string $templateFolder
 	 * @param boolean $isHtml true for html emails
-	 * @param \array $attachments
-	 * @param \array $replyTo
+	 * @param array $attachments
+	 * @param array $replyTo
 	 * @return boolean TRUE on success, otherwise false
 	 */
 	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = array(), $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = array(), $replyTo = array()) {

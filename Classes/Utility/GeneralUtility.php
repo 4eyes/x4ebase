@@ -52,8 +52,8 @@ class GeneralUtility {
 	/**
 	 *
 	 * @param \object $object
-	 * @param \string $property
-	 * @return \string
+	 * @param string $property
+	 * @return string
 	 */
 	public static function generateUidListForProperty($object, $property){
 		return implode(',',self::generateUidArrayForProperty($object, $property));
@@ -61,8 +61,8 @@ class GeneralUtility {
 	/**
 	 *
 	 * @param \object $object
-	 * @param \string $property
-	 * @return \string
+	 * @param string $property
+	 * @return string
 	 */
 	public static function generateUidArrayForProperty($object, $property){
 		$uidArr = array();
@@ -89,7 +89,7 @@ class GeneralUtility {
 	/**
 	 * Returns the extConf of the extension matching the given extKey
 	 *
-	 * @param \string $extKey
+	 * @param string $extKey
 	 * @return array
 	 */
 	public static function getExtConf($extKey){

@@ -36,8 +36,8 @@ class ZipUtility {
 
 	/**
 	 * create a zip archive
-	 * @param \string $source
-	 * @param \string $destination
+	 * @param string $source
+	 * @param string $destination
 	 * @return boolean
 	 */
 	public static function create($source, $destination){
