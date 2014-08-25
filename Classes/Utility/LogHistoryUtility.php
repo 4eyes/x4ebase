@@ -47,7 +47,7 @@ class LogHistoryUtility {
 				0, // action
 				0, // error
 				0, // details nr
-				$message, //details
+				'', //details
 				'', // data
 				$tablename,
 				$recuid,
