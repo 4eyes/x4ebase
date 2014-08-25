@@ -97,12 +97,16 @@ class LogHistoryUtility {
 			'log_data' => serialize($data),
 			'tablename' => $tablename,
 			'recuid' => intval($recuid),
-			'IP' => \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REMOTE_ADDR'),
 			'tstamp' => $GLOBALS['EXEC_TIME'],
 			'event_pid' => intval($event_pid),
 			'NEWid' => $NEWid,
 			'workspace' => $workspace
 		);
+		
+		if (\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REMOTE_ADDR')) {
+			$fields_values['IP'] = \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REMOTE_ADDR');
+		}
+		
 		$GLOBALS['TYPO3_DB']->exec_INSERTquery('sys_log', $fields_values);
 		return $GLOBALS['TYPO3_DB']->sql_insert_id();
 	}
