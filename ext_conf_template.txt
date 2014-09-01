@@ -1,3 +1,2 @@
-
   # cat=default; type=int[4-31]; label=Cost factor of the PASSWORD_DEFAULT algorithm
 securePassword.cost = 10
