@@ -55,19 +55,8 @@ class DateTimeUtility {
 	 * Index 2 is the difference between $date and $referenceDate as an integer value
 	 */
 	static public function relativeDate($date, $referenceDate = NULL) {
-		if (is_object($date)) {
-			$date = $date->getTimestamp();
-		} elseif (!ctype_digit($date)) {
-			$date = strtotime($date);
-		}
-		
-		if ($referenceDate === NULL) {
-			$referenceDate = time();
-		} elseif (is_object($referenceDate)) {
-			$referenceDate = $referenceDate->getTimestamp();
-		} elseif (!ctype_digit($referenceDate)) {
-			$referenceDate = strtotime($referenceDate);
-		}
+		$date = self::getTimestampFromDate($date);
+		$referenceDate = self::getTimestampFromDate($referenceDate);
 		
 		$difference = $referenceDate - $date;
 		
@@ -175,5 +164,39 @@ class DateTimeUtility {
 				$difference
 			);
 		}
+	}
+	
+	/**
+	 * Converts a given whatever into a timestamp
+	 * 
+	 * @param integer|string|DateTime $date
+	 * @return integer|NULL
+	 */
+	protected static function getTimestampFromDate($date = NULL) {
+		$returnDate = NULL;
+		
+		if ($date === NULL) {
+			$returnDate = time();
+			
+		} elseif (is_int($date)) {
+			$returnDate = $date;
+			
+		} elseif ($date instanceof \DateTime) {
+			$returnDate = $date->getTimestamp();
+			
+		} elseif (is_string($date)) {
+			if (ctype_digit($date)) {
+				$returnDate = strtotime('@' . $date);
+				
+			} else {
+				$returnDate = strtotime($date);
+			}
+		}
+		
+		if ($returnDate !== FALSE) {
+			return $returnDate;
+		}
+		
+		return NULL;
 	}
 }
