@@ -106,8 +106,8 @@ class BackendUtility {
 		} else {
 			if(!isset($GLOBALS['TSFE'])){
 				// TODO: refactor as compatibility layer is removed with 6.2
-				require_once(PATH_tslib . 'class.tslib_content.php');
-
+				//require_once(PATH_tslib . 'class.tslib_content.php');
+				
 				\TYPO3\CMS\Frontend\Utility\EidUtility::connectDB(); //Connect to database
 				\TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser(); //Initializes FeUser
 
