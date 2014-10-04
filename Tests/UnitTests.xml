@@ -16,11 +16,24 @@
 >
 	
 	<logging>
-		<log type="coverage-html" target="build/coverage"/>
-		<log type="coverage-clover" target="build/logs/clover.xml"/>
-		<log type="coverage-crap4j" target="build/logs/crap4j.xml"/>
-		<log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+		<log type="coverage-html" target="../../../../coverage"/>
+		<log type="coverage-clover" target="../../../../logs/clover.xml"/>
+		<log type="coverage-crap4j" target="../../../../logs/crap4j.xml"/>
+		<log type="junit" target="../../../../logs/junit.xml" logIncompleteSkipped="false"/>
 	</logging>
+	
+	<filter>
+        <whitelist>
+            <directory suffix=".php">../../</directory>
+			<exclude>
+				<directory suffix=".php">../../x4ebase/Tests</directory>
+				<directory suffix=".php">../../x4ebase/Configuration/TCA</directory>
+				<file>../../x4ebase/ext_emconf.php</file>
+				<file>../../x4ebase/ext_tables.php</file>
+				<file>../../x4ebase/ext_localconf.php</file>
+			</exclude>
+        </whitelist>
+    </filter>
 	
 	<testsuites>
 		<testsuite name="x4ebase - Unit Tests">
