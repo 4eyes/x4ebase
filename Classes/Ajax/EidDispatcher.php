@@ -260,7 +260,7 @@ class EidDispatcher {
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
 		if (version_compare(TYPO3_version, '6.2.0', '>=')) {
-			\TYPO3\CMS\Core\Core\Bootstrap::getInstance();
+			\TYPO3\CMS\Core\Core\Bootstrap::getInstance()->loadCachedTca();
 		} else {
 			\TYPO3\CMS\Core\Core\Bootstrap::getInstance()->loadConfigurationAndInitialize();
 		}
