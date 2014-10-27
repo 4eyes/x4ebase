@@ -33,6 +33,15 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Core\\Localization\\P
     'className' => 'X4E\\X4ebase\\XClasses\\Localization\\Parser\\XliffParser'
 );
 
+//==============================================================================
+//   Hooks
+//==============================================================================
+// This hook enables save and preview functionality for articles
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewOnClickClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/SaveAndPreviewHook.php:&X4E\X4ebase\Hooks\SaveAndPreviewHook';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
+
+
 // We need to set the default implementation for Storage Backend & Query Settings
 // the code below is NO PUBLIC API! It's just to make sure that
 // Extbase works correctly in the backend if the page tree is empty or no
