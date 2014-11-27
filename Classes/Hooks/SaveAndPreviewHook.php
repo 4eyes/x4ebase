@@ -25,29 +25,27 @@ class SaveAndPreviewHook {
 		if($GLOBALS['_POST']['data']){
 			$table = key($GLOBALS['_POST']['data']);
 		}
-		if($table && $pageTs['x4ebase.']['preview.'][$table.'.']){
-			$previewPageTs = $pageTs['x4ebase.']['preview.'][$table.'.'];
-		} else if($pageTs['x4ebase.']['preview.']){
-			$previewPageTs = $pageTs['x4ebase.']['preview.'];
-		}
-		
-		if($previewPageTs){
-			// set preview page uid
-			if($previewPageTs['pageUid']){
-				$pageUid = $previewPageTs['pageUid'];
-			}
+		if($table && $pageTs['x4ebase.']['preview.'][$table.'.']) {
+			$previewPageTs = $pageTs['x4ebase.']['preview.'][$table . '.'];
 
-			// set viewScript, default is /index.php?id=
-			if($previewPageTs['viewScript']){
-				$viewScript = $previewPageTs['viewScript'];
+			if ($previewPageTs) {
+				// set preview page uid
+				if ($previewPageTs['pageUid']) {
+					$pageUid = $previewPageTs['pageUid'];
+				}
+
+				// set viewScript, default is /index.php?id=
+				if ($previewPageTs['viewScript']) {
+					$viewScript = $previewPageTs['viewScript'];
+				}
+
+				// add additional get vars
+				/*if($previewPageTs['additionalGetVars'] && !$previewPageTs['appendRecordId']){
+					$additionalGetVars .= $previewPageTs['additionalGetVars'];
+				}*/
+
+				// Appending of record id is done in tceMain hook! @see TceMainHook
 			}
-			
-			// add additional get vars
-			/*if($previewPageTs['additionalGetVars'] && !$previewPageTs['appendRecordId']){
-				$additionalGetVars .= $previewPageTs['additionalGetVars'];
-			}*/
-			
-			// Appending of record id is done in tceMain hook! @see TceMainHook
 		}
 	}
 }
