@@ -41,25 +41,8 @@ class NotTrimEmptyValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 	 */
 	public function isValid($value) {
 		if (is_string($value)) {
-			$valid = FALSE;
-			
 			$charlist = $this->options['charlist'] ?: " \t\n\r\0\x0B";
-			$mode = $this->options['mode'] ?: 'both';
-			switch ($mode) {
-				case 'left':
-				case 'ltrim':
-					$valid = !($value === NULL || ltrim($value, $charlist) === '');
-					break;
-				case 'right':
-				case 'rtrim':
-					$valid = !($value === NULL || rtrim($value, $charlist) === '');
-					break;
-				default:
-					$valid = !($value === NULL || trim($value, $charlist) === '');
-					break;
-			}
-			
-			if (!$valid) {
+			if (trim($value, $charlist) === '') {
 					// Why "437350901"? 4eyes + 0 + (Custom Error Range 900) + Error 2
 					// @todo Make a list of error codes and validators
 				$this->addError('The given subject was empty after trim.', 437350902);
