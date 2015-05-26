@@ -60,7 +60,7 @@ class EmailUtility {
 	 * @param string $extensionName needed for f:translate
 	 * @param string $templateFolder
 	 * @param boolean $isHtml true for html emails
-	 * @param array $attachments
+	 * @param array $attachments filepaths to attach to email
 	 * @param array $replyTo
 	 * @return boolean TRUE on success, otherwise false
 	 */
@@ -94,7 +94,7 @@ class EmailUtility {
 			// Add attachments
 			if(count($attachments)){
 				foreach ($attachments as $attachment) {
-					$message->attach($attachment);
+					$message->attach(\Swift_Attachment::fromPath($attachment));
 				}
 			}
 
