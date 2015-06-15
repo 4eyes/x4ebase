@@ -33,7 +33,7 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
  *
  * @author Alessandro Bellafronte <alessandro@4eyes.ch>
  */
-class DateTimeUtilityTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	protected $dateTimeUtility = NULL;
 	

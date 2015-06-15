@@ -36,7 +36,7 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
  * @author Jonas Witmer <jonas@4eyes.ch>
  * @author Markus Stauffiger <markus@4eyes.ch>
  */
-class NamingUtilityTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @var \X4E\X4ebase\Utility\NamingUtility
