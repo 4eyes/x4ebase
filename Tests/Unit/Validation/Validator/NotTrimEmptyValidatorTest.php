@@ -36,7 +36,7 @@ use X4E\X4ebase\Validation\Validator\NotTrimEmptyValidator;
  *
  * @author Alessandro Bellafronte <alessandro@4eyes.ch>
  */
-class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 *
