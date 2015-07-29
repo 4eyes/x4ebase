@@ -184,13 +184,13 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 					$row['uid'] = $row['_ORIG_uid'];
 				}
 				if ($tableName == 'pages') {
-					$row = $pageRepository->getPageOverlay($row, $querySettings->getSysLanguageUid());
+					$row = $pageRepository->getPageOverlay($row, $querySettings->getLanguageUid());
 				} elseif (isset($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])
 					&& $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] !== ''
 				) {
 					if (in_array($row[$GLOBALS['TCA'][$tableName]['ctrl']['languageField']], array(-1, 0))) {
 						$overlayMode = $languageMode === 'strict' ? 'hideNonTranslated' : '';
-						$row = $pageRepository->getRecordOverlay($tableName, $row, $querySettings->getSysLanguageUid(), $overlayMode);
+						$row = $pageRepository->getRecordOverlay($tableName, $row, $querySettings->getLanguageUid(), $overlayMode);
 					}
 				}
 				if ($row !== NULL && is_array($row)) {
