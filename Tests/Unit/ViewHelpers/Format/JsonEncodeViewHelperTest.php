@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Format;
 
 /* * *************************************************************
  *  Copyright notice
@@ -25,10 +25,10 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Validation\Exception;
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\EmailLogRepository
+ * Test case for class \X4E\X4ebase\ViewHelpers\Format\JsonEncodeViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,20 +36,37 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class EmailLogRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class JsonEncodeViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	public function testInitializeObject() {
-		$this->mockSubject("setDefaultQuerySettings");
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\Format\JsonEncodeViewHelper */
+	protected $subject;
 
-		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectStoragePage"), array(), "", FALSE);
-		$querySettings->expects($this->once())->method("setRespectStoragePage");
+	public function testRender() {
+		$testCases = array(
+			array("Lorem", 1, "Hello" => "World"),
+			array("My" => "Name", "Is" => "Spock")
+		);
 
-		$objectManager = $this->getMock(ObjectManager::class, array("create"), array(), "", FALSE);
-		$objectManager->expects($this->once())->method("create")->with('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
+		$this->renderFromArgument($testCases);
+		$this->renderFromChildren($testCases);
+	}
 
-		$this->subject->expects($this->once())->method("setDefaultQuerySettings")->with($querySettings);
-		$this->subject->_set("objectManager", $objectManager);
+	public function renderFromArgument($testCases) {
 
-		$this->subject->initializeObject();
+		foreach ($testCases as $testCase) {
+			$this->assertSame(json_encode($testCase), $this->subject->render($testCase));
+		}
+	}
+
+	public function renderFromChildren($testCases) {
+		$this->mockSubject('renderChildren');
+
+		for ($i = 0; $i < count($testCases); $i++) {
+			$this->subject->expects($this->at($i))->method('renderChildren')
+				->will($this->returnValue($testCases[$i]));
+		}
+		foreach ($testCases as $testCase) {
+			$this->assertSame(json_encode($testCase), $this->subject->render());
+		}
 	}
 }

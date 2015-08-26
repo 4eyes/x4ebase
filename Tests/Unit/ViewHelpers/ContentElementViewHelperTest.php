@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
+namespace X4E\X4ebase\Tests\Unit\ViewHelpers;
 
 /* * *************************************************************
  *  Copyright notice
@@ -25,10 +25,10 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * Test case for class \X4E\X4ebase\XClasses\Localization\Parser\XliffParser
+ * Test case for class \X4E\X4ebase\ViewHelpers\ContentElementViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,53 +36,21 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class ContentElementViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	public function setUp() {
-
-		if (function_exists('xdebug_disable')) {
-			xdebug_disable();
-		}
-	}
-
-	public function tearDown() {
-
-		if (function_exists('xdebug_enable')) {
-			xdebug_enable();
-		}
-	}
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\ContentElementViewHelper */
+	protected $subject;
 
 	/**
 	 * @test
 	 */
-	public function testGetParseData() {
-		$this->markTestSkipped(
-			"What exactly is the purpose of this xclass? Not sure if test or class work incorrectly"
+	public function testRender_CallsMethodRECORDSonce() {
+		$contentObjectRenderer = $this->getMock(
+			\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class,
+			array('RECORDS')
 		);
-
-		$sourcePath = dirname(__FILE__) . '/../../../../Fixtures/Unit/XClasses/Localization/Parser/XliffParserTest/locallang.xlf';
-		$languageKey = "de";
-		//$charset = "utf8";
-		$expectedResult = array(
-			"de" => array(
-				"headerComment" => array(
-					0 => array(
-						"source" => "Foo",
-						"target" => "Oof",
-					)
-				),
-				"generator" => array(
-					0 => array(
-						"source" => "Bar",
-						"target" => "Rab",
-					)
-				)
-			)
-
-		);
-
-		$xliffParser = new \X4E\X4ebase\XClasses\Localization\Parser\XliffParser();
-		$this->assertEquals($expectedResult, $xliffParser->getParsedData($sourcePath, $languageKey));
+		$contentObjectRenderer->expects($this->once())->method("RECORDS");
+		$this->subject->_set("cObj", $contentObjectRenderer);
+		$this->subject->render(1);
 	}
-
 }

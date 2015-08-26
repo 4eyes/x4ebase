@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\PageLanguageOverlayRepository
+ * Test case for class \X4E\X4ebase\Domain\Repository\PageRepository
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,14 +35,13 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class PageLanguageOverlayRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class PageRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
 
 	public function testInitializeObject() {
 		$this->mockSubject("setDefaultQuerySettings");
 
-		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectStoragePage", "setRespectSysLanguage"), array(), "", FALSE);
+		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectStoragePage"), array(), "", FALSE);
 		$querySettings->expects($this->once())->method("setRespectStoragePage");
-		$querySettings->expects($this->once())->method("setRespectSysLanguage");
 
 		$objectManager = $this->getMock(ObjectManager::class, array("create"), array(), "", FALSE);
 		$objectManager->expects($this->once())->method("create")->with('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);

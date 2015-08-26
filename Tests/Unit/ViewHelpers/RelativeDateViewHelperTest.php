@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
+namespace X4E\X4ebase\Tests\Unit\ViewHelpers;
 
 /* * *************************************************************
  *  Copyright notice
@@ -25,10 +25,10 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * Test case for class \X4E\X4ebase\XClasses\Localization\Parser\XliffParser
+ * Test case for class \X4E\X4ebase\ViewHelpers\RelativeDateViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,53 +36,23 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class RelativeDateViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	public function setUp() {
-
-		if (function_exists('xdebug_disable')) {
-			xdebug_disable();
-		}
-	}
-
-	public function tearDown() {
-
-		if (function_exists('xdebug_enable')) {
-			xdebug_enable();
-		}
-	}
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\RelativeDateViewHelper */
+	protected $subject;
 
 	/**
 	 * @test
 	 */
-	public function testGetParseData() {
-		$this->markTestSkipped(
-			"What exactly is the purpose of this xclass? Not sure if test or class work incorrectly"
-		);
+	public function testRender() {
+		$this->mockSubject("renderChildren");
+		$this->templateVariableContainer = $this->getMock(
+			\TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer::class,
+			array("add", "remove"));
+		$this->templateVariableContainer->expects($this->once())->method("add");
+		$this->templateVariableContainer->expects($this->once())->method("remove");
+		$this->subject->_set("templateVariableContainer", $this->templateVariableContainer);
 
-		$sourcePath = dirname(__FILE__) . '/../../../../Fixtures/Unit/XClasses/Localization/Parser/XliffParserTest/locallang.xlf';
-		$languageKey = "de";
-		//$charset = "utf8";
-		$expectedResult = array(
-			"de" => array(
-				"headerComment" => array(
-					0 => array(
-						"source" => "Foo",
-						"target" => "Oof",
-					)
-				),
-				"generator" => array(
-					0 => array(
-						"source" => "Bar",
-						"target" => "Rab",
-					)
-				)
-			)
-
-		);
-
-		$xliffParser = new \X4E\X4ebase\XClasses\Localization\Parser\XliffParser();
-		$this->assertEquals($expectedResult, $xliffParser->getParsedData($sourcePath, $languageKey));
+		$this->subject->render(new \DateTime(), "test");
 	}
-
 }

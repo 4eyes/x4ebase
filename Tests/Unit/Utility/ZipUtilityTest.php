@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
+namespace X4E\X4ebase\Tests\Unit\Utility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -25,10 +25,10 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use X4E\X4ebase\Utility\ZipUtility;
 
 /**
- * Test case for class \X4E\X4ebase\XClasses\Localization\Parser\XliffParser
+ * Test case for class \X4E\X4ebase\Utility\ZipUtility
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,17 +36,21 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class ZipUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+	protected $testPath;
+	protected $testFile;
+	protected $resultFile;
 
 	public function setUp() {
-
 		if (function_exists('xdebug_disable')) {
 			xdebug_disable();
 		}
+		$this->testPath = dirname(__FILE__) . '/../../Fixtures/Unit/Utility/ZipUtilityTest/';
+		$this->testFile = 'test.txt';
+		$this->resultFile = 'test.zip';
 	}
 
 	public function tearDown() {
-
 		if (function_exists('xdebug_enable')) {
 			xdebug_enable();
 		}
@@ -55,34 +59,25 @@ class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function testGetParseData() {
-		$this->markTestSkipped(
-			"What exactly is the purpose of this xclass? Not sure if test or class work incorrectly"
-		);
-
-		$sourcePath = dirname(__FILE__) . '/../../../../Fixtures/Unit/XClasses/Localization/Parser/XliffParserTest/locallang.xlf';
-		$languageKey = "de";
-		//$charset = "utf8";
-		$expectedResult = array(
-			"de" => array(
-				"headerComment" => array(
-					0 => array(
-						"source" => "Foo",
-						"target" => "Oof",
-					)
-				),
-				"generator" => array(
-					0 => array(
-						"source" => "Bar",
-						"target" => "Rab",
-					)
-				)
-			)
-
-		);
-
-		$xliffParser = new \X4E\X4ebase\XClasses\Localization\Parser\XliffParser();
-		$this->assertEquals($expectedResult, $xliffParser->getParsedData($sourcePath, $languageKey));
+	public function testCreateThrowsFileNotExistException() {
+		$this->setExpectedException("Exception");
+		ZipUtility::create(dirname(__FILE__) . '/HelloWorld', "test");
 	}
 
+	/**
+	 * @test
+	 */
+	public function testCreate() {
+		ZipUtility::create($this->testPath . $this->testFile, $this->testPath . $this->resultFile);
+		$this->assertFileExists($this->testPath . $this->resultFile);
+		unlink($this->testPath . $this->resultFile);
+	}
+
+	/**
+	 * @test
+	 */
+	public function testExtractThrowsException() {
+		$this->setExpectedException("Exception");
+		ZipUtility::extract();
+	}
 }

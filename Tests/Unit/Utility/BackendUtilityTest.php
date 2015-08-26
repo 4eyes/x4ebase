@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4E\X4ebase\Tests\Unit\Utility;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\PageLanguageOverlayRepository
+ * Test case for class \X4E\X4ebase\Utility\BackendUtility
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,21 +35,36 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class PageLanguageOverlayRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class BackendUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
-	public function testInitializeObject() {
-		$this->mockSubject("setDefaultQuerySettings");
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\Utility\/BackendUtility */
+	protected $subject;
 
-		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectStoragePage", "setRespectSysLanguage"), array(), "", FALSE);
-		$querySettings->expects($this->once())->method("setRespectStoragePage");
-		$querySettings->expects($this->once())->method("setRespectSysLanguage");
+	public function testInitTypoScript() {
+		$this->mockSubject();
+		$tsfeObject = $this->getMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, array("getPageAndRootline", "initTemplate", "getConfigArray"), array(), "", FALSE);
+		$tsfeObject->expects($this->once())->method("getPageAndRootline");
+		$tsfeObject->expects($this->once())->method("initTemplate");
+		$tsfeObject->expects($this->once())->method("getConfigArray");
+		$GLOBALS['TSFE'] = $tsfeObject;
+		$this->subject->_call("initTypoScript");
+	}
 
-		$objectManager = $this->getMock(ObjectManager::class, array("create"), array(), "", FALSE);
-		$objectManager->expects($this->once())->method("create")->with('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
+	public function testInitTSFE() {
+		$this->markTestIncomplete(
+			"Untestable (Static Method Calls)"
+		);
+	}
 
-		$this->subject->expects($this->once())->method("setDefaultQuerySettings")->with($querySettings);
-		$this->subject->_set("objectManager", $objectManager);
+	public function testExec_languageQuery() {
+		$this->markTestIncomplete(
+			"Untestable (Static Method Calls)"
+		);
+	}
 
-		$this->subject->initializeObject();
+	public function testGetStorageFolderPid() {
+		$this->markTestIncomplete(
+			"Untestable (Static Method Calls)"
+		);
 	}
 }

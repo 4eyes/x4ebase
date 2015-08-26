@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4E\X4ebase\Tests\Unit\Controller;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\PageLanguageOverlayRepository
+ * Test case for class \X4E\X4ebase\Unit\Controller\TcaInfoController
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,21 +35,52 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class PageLanguageOverlayRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class TcaInfoControllerTest extends \X4E\X4ebase\Tests\Unit\Base\ControllerTestBase {
 
-	public function testInitializeObject() {
-		$this->mockSubject("setDefaultQuerySettings");
+	protected function prepareGlobals() {
+		$GLOBALS['TCA'] = array();
+	}
 
-		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectStoragePage", "setRespectSysLanguage"), array(), "", FALSE);
-		$querySettings->expects($this->once())->method("setRespectStoragePage");
-		$querySettings->expects($this->once())->method("setRespectSysLanguage");
+	/**
+	 * @test
+	 */
+	public function showActionCanBeCalled() {
+		$this->mockSubject();
+		$this->prepareGlobals();
+		$this->subject->showAction();
+	}
 
-		$objectManager = $this->getMock(ObjectManager::class, array("create"), array(), "", FALSE);
-		$objectManager->expects($this->once())->method("create")->with('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
+	/**
+	 * @test
+	 */
+	public function testShowActionWithTableArgument() {
+		$this->mockSubject();
+		$this->prepareGlobals();
+		$this->setArguments(array('table' => ''));
 
-		$this->subject->expects($this->once())->method("setDefaultQuerySettings")->with($querySettings);
-		$this->subject->_set("objectManager", $objectManager);
+		$this->viewAssignCalledTest(array(
+			array('table', $this->equalTo(NULL)),
+			array('tableName', $this->equalTo("")),
+			array('tables', $this->equalTo(array()))
+		));
 
-		$this->subject->initializeObject();
+		$this->subject->showAction();
+	}
+
+	/**
+	 * @test
+	 */
+	public function testShowActionWithoutTableArgument() {
+		$this->mockSubject();
+		$this->prepareGlobals();
+		$this->viewAssignCalledTest(array('tables', array()));
+
+		$this->subject->showAction();
+	}
+
+	public function testGetTableArray() {
+		$this->markTestIncomplete(
+			"Untestable (Static Method calls)"
+		);
 	}
 }

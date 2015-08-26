@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Form;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\PageLanguageOverlayRepository
+ * Test case for class \X4E\X4ebase\ViewHelpers\Form\CheckboxViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,21 +35,15 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class PageLanguageOverlayRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class CheckboxViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	public function testInitializeObject() {
-		$this->mockSubject("setDefaultQuerySettings");
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\Form\CheckboxViewHelper */
+	protected $subject;
 
-		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectStoragePage", "setRespectSysLanguage"), array(), "", FALSE);
-		$querySettings->expects($this->once())->method("setRespectStoragePage");
-		$querySettings->expects($this->once())->method("setRespectSysLanguage");
-
-		$objectManager = $this->getMock(ObjectManager::class, array("create"), array(), "", FALSE);
-		$objectManager->expects($this->once())->method("create")->with('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
-
-		$this->subject->expects($this->once())->method("setDefaultQuerySettings")->with($querySettings);
-		$this->subject->_set("objectManager", $objectManager);
-
-		$this->subject->initializeObject();
+	public function testInitializeArguments() {
+		$this->mockSubject('registerUniversalTagAttributes', 'registerArgument', 'overrideArgument');
+		$this->checkIfInitializeArgumentsGotCalledNTimes(6);
+		$this->subject->initializeArguments();
 	}
+
 }

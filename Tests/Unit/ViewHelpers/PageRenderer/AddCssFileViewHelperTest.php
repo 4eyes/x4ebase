@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
+namespace X4E\X4ebase\Tests\Unit\ViewHelpers\PageRenderer;
 
 /* * *************************************************************
  *  Copyright notice
@@ -25,10 +25,11 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Core\Page\PageRenderer;
 
 /**
- * Test case for class \X4E\X4ebase\XClasses\Localization\Parser\XliffParser
+ * Test case for class \X4E\X4ebase\ViewHelpers\PageRenderer\AddCssFileViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,53 +37,36 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class AddCssFileViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	public function setUp() {
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\PageRenderer\AddCssFileViewHelper */
+	protected $subject;
 
-		if (function_exists('xdebug_disable')) {
-			xdebug_disable();
-		}
-	}
-
-	public function tearDown() {
-
-		if (function_exists('xdebug_enable')) {
-			xdebug_enable();
-		}
+	/**
+	 * @test
+	 */
+	public function testInitializeArguments() {
+		$this->initializeArgumentsTest(8);
 	}
 
 	/**
 	 * @test
 	 */
-	public function testGetParseData() {
-		$this->markTestSkipped(
-			"What exactly is the purpose of this xclass? Not sure if test or class work incorrectly"
-		);
+	public function testRender() {
+		$this->mockSubject('isCached');
+		$this->subject->expects($this->at(0))->method("isCached")->will($this->returnValue(FALSE));
+		$this->subject->expects($this->at(1))->method("isCached")->will($this->returnValue(TRUE));
 
-		$sourcePath = dirname(__FILE__) . '/../../../../Fixtures/Unit/XClasses/Localization/Parser/XliffParserTest/locallang.xlf';
-		$languageKey = "de";
-		//$charset = "utf8";
-		$expectedResult = array(
-			"de" => array(
-				"headerComment" => array(
-					0 => array(
-						"source" => "Foo",
-						"target" => "Oof",
-					)
-				),
-				"generator" => array(
-					0 => array(
-						"source" => "Bar",
-						"target" => "Rab",
-					)
-				)
-			)
+		$file = "test";
 
-		);
+		$pageRenderer = $this->getMock(PageRenderer::class, array('addCssFile'), array(), '', FALSE);
+		$pageRenderer->expects($this->once())->method('addCssFile');
+		$this->subject->_set("pageRenderer", $pageRenderer);
 
-		$xliffParser = new \X4E\X4ebase\XClasses\Localization\Parser\XliffParser();
-		$this->assertEquals($expectedResult, $xliffParser->getParsedData($sourcePath, $languageKey));
+		//Avoid TSFE-Action
+		$this->subject->setArguments(array("external" => TRUE));
+		for ($i = 0; $i < 2; $i++) {
+			$this->subject->render($file);
+		}
 	}
-
 }

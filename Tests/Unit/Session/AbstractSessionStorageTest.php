@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4E\X4ebase\Tests\Unit\Session;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\PageLanguageOverlayRepository
+ * Test case for class \X4E\X4ebase\Session\AbstractSessionStorage
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,21 +35,27 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class PageLanguageOverlayRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class AbstractSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
-	public function testInitializeObject() {
-		$this->mockSubject("setDefaultQuerySettings");
+	public function testGetKey() {
+		$this->markTestSkipped(
+			"SessionNamespace does not exist"
+		);
+	}
 
-		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectStoragePage", "setRespectSysLanguage"), array(), "", FALSE);
-		$querySettings->expects($this->once())->method("setRespectStoragePage");
-		$querySettings->expects($this->once())->method("setRespectSysLanguage");
+	public function testGet() {
+		$this->markTestSkipped(
+			"I think this class requires an abstract method 'get', as it depends on proper return values in method 'has'"
+		);
+	}
 
-		$objectManager = $this->getMock(ObjectManager::class, array("create"), array(), "", FALSE);
-		$objectManager->expects($this->once())->method("create")->with('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
+	public function testHas() {
+		$this->subject = $this->getMockForAbstractClass($this->getSubjectClassName());
+		$key = "lorem";
+		$type = "ipsum";
 
-		$this->subject->expects($this->once())->method("setDefaultQuerySettings")->with($querySettings);
-		$this->subject->_set("objectManager", $objectManager);
+		$this->subject->expects($this->once())->method("get")->with($key, $type);
 
-		$this->subject->initializeObject();
+		$this->assertInternalType("boolean", $this->subject->has($key, $type));
 	}
 }
