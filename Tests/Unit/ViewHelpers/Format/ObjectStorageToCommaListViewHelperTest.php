@@ -53,7 +53,7 @@ class ObjectStorageToCommaListViewHelperTest extends \X4E\X4ebase\Tests\Unit\Bas
 		}
 		$expectedResult = implode(',', $expectedResult);
 
-		$this->assertSame($expectedResult, $this->subject->render($objectStorage, "property"));
+		$this->assertSame($expectedResult, $this->subject->render($objectStorage, 'property'));
 	}
 }
 

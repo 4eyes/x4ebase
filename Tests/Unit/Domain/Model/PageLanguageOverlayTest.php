@@ -39,29 +39,29 @@ class PageLanguageOverlayTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase
 
 	public function testInitialValues() {
 		$this->markTestSkipped(
-			"Attribute is called crdate but getters and setters are called creationDate"
+			'Attribute is called crdate but getters and setters are called creationDate'
 		);
-		$this->initialValueTest("crDate", NULL);
-		$this->initialValueTest("backendUser", NULL);
-		$this->initialValueTest("sysLanguageUid", NULL);
-		$this->initialValueTest("title", NULL);
-		$this->initialValueTest("hidden", NULL);
-		$this->initialValueTest("starttime", NULL);
-		$this->initialValueTest("endtime", NULL);
-		$this->initialValueTest("deleted", NULL);
-		$this->initialValueTest("subtitle", NULL);
-		$this->initialValueTest("navTitle", NULL);
-		$this->initialValueTest("media", NULL);
-		$this->initialValueTest("keywords", NULL);
-		$this->initialValueTest("description", NULL);
-		$this->initialValueTest("abstract", NULL);
-		$this->initialValueTest("author", NULL);
-		$this->initialValueTest("authorEmail", NULL);
-		$this->initialValueTest("doktype", NULL);
-		$this->initialValueTest("url", NULL);
-		$this->initialValueTest("urltype", NULL);
-		$this->initialValueTest("shortcut", NULL);
-		$this->initialValueTest("shortcutMode", NULL);
+		$this->initialValueTest('crDate', NULL);
+		$this->initialValueTest('backendUser', NULL);
+		$this->initialValueTest('sysLanguageUid', NULL);
+		$this->initialValueTest('title', NULL);
+		$this->initialValueTest('hidden', NULL);
+		$this->initialValueTest('starttime', NULL);
+		$this->initialValueTest('endtime', NULL);
+		$this->initialValueTest('deleted', NULL);
+		$this->initialValueTest('subtitle', NULL);
+		$this->initialValueTest('navTitle', NULL);
+		$this->initialValueTest('media', NULL);
+		$this->initialValueTest('keywords', NULL);
+		$this->initialValueTest('description', NULL);
+		$this->initialValueTest('abstract', NULL);
+		$this->initialValueTest('author', NULL);
+		$this->initialValueTest('authorEmail', NULL);
+		$this->initialValueTest('doktype', NULL);
+		$this->initialValueTest('url', NULL);
+		$this->initialValueTest('urltype', NULL);
+		$this->initialValueTest('shortcut', NULL);
+		$this->initialValueTest('shortcutMode', NULL);
 	}
 
 	/**
@@ -69,36 +69,36 @@ class PageLanguageOverlayTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase
 	 */
 	public function testGettersSetters() {
 		$this->markTestSkipped(
-			"Attribute is called crdate but getters and setters are called creationDate"
+			'Attribute is called crdate but getters and setters are called creationDate'
 		);
-		$this->integerGetterSetterTest("crDate");
-		$this->integerGetterSetterTest("backendUser");
-		$this->integerGetterSetterTest("sysLanguageUid");
-		$this->stringGetterSetterTest("title");
-		$this->integerGetterSetterTest("hidden");
-		$this->integerGetterSetterTest("starttime");
-		$this->integerGetterSetterTest("endtime");
-		$this->integerGetterSetterTest("deleted");
-		$this->stringGetterSetterTest("subtitle");
-		$this->stringGetterSetterTest("navTitle");
-		$this->objectStorageGetterSetterTest("media");
-		$this->stringGetterSetterTest("keywords");
-		$this->stringGetterSetterTest("description");
-		$this->stringGetterSetterTest("abstract");
-		$this->stringGetterSetterTest("author");
-		$this->stringGetterSetterTest("authorEmail");
-		$this->integerGetterSetterTest("doktype");
-		$this->stringGetterSetterTest("url");
-		$this->integerGetterSetterTest("urltype");
-		$this->integerGetterSetterTest("shortcut");
-		$this->integerGetterSetterTest("shortcutMode");
+		$this->integerGetterSetterTest('crDate');
+		$this->integerGetterSetterTest('backendUser');
+		$this->integerGetterSetterTest('sysLanguageUid');
+		$this->stringGetterSetterTest('title');
+		$this->integerGetterSetterTest('hidden');
+		$this->integerGetterSetterTest('starttime');
+		$this->integerGetterSetterTest('endtime');
+		$this->integerGetterSetterTest('deleted');
+		$this->stringGetterSetterTest('subtitle');
+		$this->stringGetterSetterTest('navTitle');
+		$this->objectStorageGetterSetterTest('media');
+		$this->stringGetterSetterTest('keywords');
+		$this->stringGetterSetterTest('description');
+		$this->stringGetterSetterTest('abstract');
+		$this->stringGetterSetterTest('author');
+		$this->stringGetterSetterTest('authorEmail');
+		$this->integerGetterSetterTest('doktype');
+		$this->stringGetterSetterTest('url');
+		$this->integerGetterSetterTest('urltype');
+		$this->integerGetterSetterTest('shortcut');
+		$this->integerGetterSetterTest('shortcutMode');
 	}
 
 	/**
 	 * @test
 	 */
 	public function testAddingRemoving() {
-		$this->objectStorageAddRemoveTest("media", \TYPO3\CMS\Extbase\Domain\Model\FileReference::class);
+		$this->objectStorageAddRemoveTest('media', \TYPO3\CMS\Extbase\Domain\Model\FileReference::class);
 	}
 
 }

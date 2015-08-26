@@ -41,28 +41,28 @@ class EmailLogTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 * @test
 	 */
 	public function testInitialValues() {
-		$this->initialValueTest("sender", NULL);
-		$this->initialValueTest("recipient", NULL);
-		$this->initialValueTest("subject", NULL);
-		$this->initialValueTest("message", NULL);
-		$this->initialValueTest("is_sent", FALSE);
-		$this->initialValueTest("error", NULL);
+		$this->initialValueTest('sender', NULL);
+		$this->initialValueTest('recipient', NULL);
+		$this->initialValueTest('subject', NULL);
+		$this->initialValueTest('message', NULL);
+		$this->initialValueTest('is_sent', FALSE);
+		$this->initialValueTest('error', NULL);
 	}
 
 	/**
 	 * @test
 	 */
 	public function testGettersSetters() {
-		$this->stringGetterSetterTest("sender");
-		$this->stringGetterSetterTest("recipient");
-		$this->stringGetterSetterTest("subject");
-		$this->stringGetterSetterTest("message");
-		$this->booleanGetterSetterTest("is_sent");
-		$this->stringGetterSetterTest("error");
+		$this->stringGetterSetterTest('sender');
+		$this->stringGetterSetterTest('recipient');
+		$this->stringGetterSetterTest('subject');
+		$this->stringGetterSetterTest('message');
+		$this->booleanGetterSetterTest('is_sent');
+		$this->stringGetterSetterTest('error');
 	}
 
 	public function testIs() {
-		$this->isTest("is_sent");
+		$this->isTest('is_sent');
 	}
 
 }

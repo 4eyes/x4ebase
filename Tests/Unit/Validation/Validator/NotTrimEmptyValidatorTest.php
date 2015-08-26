@@ -101,11 +101,11 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 //		// Test the default chars
 //		$stringsToTest = array(
-//			"Hallo Welt " => 'Hallo Welt',
-//			"\tHallo" => 'tabHallo',
-//			"Welt\n" => 'Weltnewline',
-//			"\r Test" => 'carriagereturn Test',
-//			"\0\x0B Foo" => 'vertTab Foo'
+//			'Hallo Welt ' => 'Hallo Welt',
+//			'\tHallo' => 'tabHallo',
+//			'Welt\n' => 'Weltnewline',
+//			'\r Test' => 'carriagereturn Test',
+//			'\0\x0B Foo' => 'vertTab Foo'
 //		);
 //
 //		foreach($stringsToTest as $string => $title){
@@ -124,14 +124,14 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 //		// Test the default chars
 //		$stringsToTest = array(
-//			" ",
-//			"\t",
-//			"\n",
-//			"\r",
-//			"\0\x0B",
-//			"\n \t",
-//			"\r\n",
-//			"\0\x0B\0\x0B"
+//			' ',
+//			'\t',
+//			'\n',
+//			'\r',
+//			'\0\x0B',
+//			'\n \t',
+//			'\r\n',
+//			'\0\x0B\0\x0B'
 //		);
 //
 //		foreach($stringsToTest as $string){
@@ -151,17 +151,17 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		);
 
 //		// custom chars to trim
-//		$charList = "aä@bB";
+//		$charList = 'aä@bB';
 //
 //		// Test the default chars
 //		$stringsToTest = array(
-//			"aA",
-//			"foob",
-//			"michel@test",
-//			"äs_",
-//			"bBvc",
-//			"@vbc@",
-//			"ädfda",
+//			'aA',
+//			'foob',
+//			'michel@test',
+//			'äs_',
+//			'bBvc',
+//			'@vbc@',
+//			'ädfda',
 //		);
 //
 //		foreach($stringsToTest as $string){
@@ -182,17 +182,17 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		);
 
 //		// custom chars to trim
-//		$charList = "aä@bB";
+//		$charList = 'aä@bB';
 //
 //		// Test the default chars
 //		$stringsToTest = array(
-//			"a",
-//			"b",
-//			"@",
-//			"ä",
-//			"bB",
-//			"@@",
-//			"äa",
+//			'a',
+//			'b',
+//			'@',
+//			'ä',
+//			'bB',
+//			'@@',
+//			'äa',
 //		);
 //
 //		foreach($stringsToTest as $string){

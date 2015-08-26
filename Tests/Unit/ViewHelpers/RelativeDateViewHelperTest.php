@@ -45,14 +45,14 @@ class RelativeDateViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelper
 	 * @test
 	 */
 	public function testRender() {
-		$this->mockSubject("renderChildren");
+		$this->mockSubject('renderChildren');
 		$this->templateVariableContainer = $this->getMock(
 			\TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer::class,
-			array("add", "remove"));
-		$this->templateVariableContainer->expects($this->once())->method("add");
-		$this->templateVariableContainer->expects($this->once())->method("remove");
-		$this->subject->_set("templateVariableContainer", $this->templateVariableContainer);
+			array('add', 'remove'));
+		$this->templateVariableContainer->expects($this->once())->method('add');
+		$this->templateVariableContainer->expects($this->once())->method('remove');
+		$this->subject->_set('templateVariableContainer', $this->templateVariableContainer);
 
-		$this->subject->render(new \DateTime(), "test");
+		$this->subject->render(new \DateTime(), 'test');
 	}
 }

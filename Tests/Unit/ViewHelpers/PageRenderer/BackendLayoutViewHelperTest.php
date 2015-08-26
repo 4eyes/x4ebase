@@ -56,11 +56,11 @@ class BackendLayoutViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelpe
 		global $TYPO3_DB;
 		$TYPO3_DB = $this->getMock(
 			\TYPO3\CMS\Core\Database\DatabaseConnection::class,
-			array("exec_SELECTgetSingleRow")
+			array('exec_SELECTgetSingleRow')
 		);
-		$TYPO3_DB->expects($this->once())->method("exec_SELECTgetSingleRow")->will($this->returnValue(FALSE));
+		$TYPO3_DB->expects($this->once())->method('exec_SELECTgetSingleRow')->will($this->returnValue(FALSE));
 
-		$this->subject->setArguments(array("pageUid" => 1));
+		$this->subject->setArguments(array('pageUid' => 1));
 		$this->assertEquals(FALSE, $this->subject->render());
 	}
 
@@ -71,14 +71,14 @@ class BackendLayoutViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelpe
 		global $TYPO3_DB;
 		$TYPO3_DB = $this->getMock(
 			\TYPO3\CMS\Core\Database\DatabaseConnection::class,
-			array("exec_SELECTgetSingleRow")
+			array('exec_SELECTgetSingleRow')
 		);
 		$page = array(
-			"backend_layout" => 1
+			'backend_layout' => 1
 		);
-		$TYPO3_DB->expects($this->once())->method("exec_SELECTgetSingleRow")->will($this->returnValue($page));
+		$TYPO3_DB->expects($this->once())->method('exec_SELECTgetSingleRow')->will($this->returnValue($page));
 
-		$this->subject->setArguments(array("pageUid" => 1));
+		$this->subject->setArguments(array('pageUid' => 1));
 		$this->assertEquals(1, $this->subject->render());
 	}
 
@@ -90,27 +90,27 @@ class BackendLayoutViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelpe
 		global $TSFE;
 		$TYPO3_DB = $this->getMock(
 			\TYPO3\CMS\Core\Database\DatabaseConnection::class,
-			array("exec_SELECTgetSingleRow")
+			array('exec_SELECTgetSingleRow')
 		);
 		$page = array(
-			"backend_layout" => FALSE
+			'backend_layout' => FALSE
 		);
-		$TYPO3_DB->expects($this->once())->method("exec_SELECTgetSingleRow")->will($this->returnValue($page));
+		$TYPO3_DB->expects($this->once())->method('exec_SELECTgetSingleRow')->will($this->returnValue($page));
 
 		$TSFE = new TSFE_object();
 		$TSFE->sys_page = $this->getMock(
 			\TYPO3\CMS\Frontend\Page\PageRepository::class,
-			array("getRootLine")
+			array('getRootLine')
 		);
 		$rootline = array(
 			array(
-				"backend_layout_next_level" => 1,
-				"uid" => 0
+				'backend_layout_next_level' => 1,
+				'uid' => 0
 			)
 		);
-		$TSFE->sys_page->expects($this->once())->method("getRootLine")->will($this->returnValue($rootline));
+		$TSFE->sys_page->expects($this->once())->method('getRootLine')->will($this->returnValue($rootline));
 
-		$this->subject->setArguments(array("pageUid" => 1));
+		$this->subject->setArguments(array('pageUid' => 1));
 		$this->assertEquals(1, $this->subject->render());
 	}
 
@@ -122,27 +122,27 @@ class BackendLayoutViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelpe
 		global $TSFE;
 		$TYPO3_DB = $this->getMock(
 			\TYPO3\CMS\Core\Database\DatabaseConnection::class,
-			array("exec_SELECTgetSingleRow")
+			array('exec_SELECTgetSingleRow')
 		);
 		$page = array(
-			"backend_layout" => FALSE
+			'backend_layout' => FALSE
 		);
-		$TYPO3_DB->expects($this->once())->method("exec_SELECTgetSingleRow")->will($this->returnValue($page));
+		$TYPO3_DB->expects($this->once())->method('exec_SELECTgetSingleRow')->will($this->returnValue($page));
 
 		$TSFE = new TSFE_object();
 		$TSFE->sys_page = $this->getMock(
 			\TYPO3\CMS\Frontend\Page\PageRepository::class,
-			array("getRootLine")
+			array('getRootLine')
 		);
 		$rootline = array(
 			array(
-				"backend_layout_next_level" => 1,
-				"uid" => 1
+				'backend_layout_next_level' => 1,
+				'uid' => 1
 			)
 		);
-		$TSFE->sys_page->expects($this->once())->method("getRootLine")->will($this->returnValue($rootline));
+		$TSFE->sys_page->expects($this->once())->method('getRootLine')->will($this->returnValue($rootline));
 
-		$this->subject->setArguments(array("pageUid" => 1));
+		$this->subject->setArguments(array('pageUid' => 1));
 		$this->assertEquals(FALSE, $this->subject->render());
 	}
 

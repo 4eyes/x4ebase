@@ -44,22 +44,22 @@ class SecurePasswordSaltTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase 
 	 * @test
 	 */
 	public function testInitialValues() {
-		$this->initialValueTest("cost", 10);
-		$this->initialValueTest("saltLength", 22);
+		$this->initialValueTest('cost', 10);
+		$this->initialValueTest('saltLength', 22);
 	}
 
 	/**
 	 * @test
 	 */
 	public function testGettersSetters() {
-		$this->integerGetterSetterTest("cost");
+		$this->integerGetterSetterTest('cost');
 	}
 
 	/**
 	 * @test
 	 */
 	public function testCheckPassword() {
-		$this->assertInternalType("boolean", $this->subject->checkPassword("test", password_hash("test", PASSWORD_DEFAULT)));
+		$this->assertInternalType('boolean', $this->subject->checkPassword('test', password_hash('test', PASSWORD_DEFAULT)));
 	}
 
 	/**
@@ -69,10 +69,10 @@ class SecurePasswordSaltTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase 
 		$this->mockSubject();
 		//array($plainPW, $salt, $expectedResult(hashed PW)
 		$testCases = array(
-			array("test", ""),
-			array("lorem", "ipsum"),
-			array("foo", ""),
-			array("bar", "")
+			array('test', ''),
+			array('lorem', 'ipsum'),
+			array('foo', ''),
+			array('bar', '')
 		);
 		foreach ($testCases as $testCase) {
 			$this->assertTrue(password_verify($testCase[0], $this->subject->getHashedPassword($testCase[0], $testCase[1])));
@@ -83,16 +83,16 @@ class SecurePasswordSaltTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase 
 	 * @test
 	 */
 	public function testIsHashUpdateNeeded() {
-		$this->assertInternalType("boolean", $this->subject->isHashUpdateNeeded("test"));
+		$this->assertInternalType('boolean', $this->subject->isHashUpdateNeeded('test'));
 	}
 
 	public function testIsValidSalt() {
 		$this->mockSubject();
 		//array($salt, $expectedResult(Boolean)
 		$testCases = array(
-			array("a", FALSE),
-			array("*abcdEFGhijKlmNoP1589452", FALSE),
-			array("abcdEFGhijKlmNoP1589452", TRUE)
+			array('a', FALSE),
+			array('*abcdEFGhijKlmNoP1589452', FALSE),
+			array('abcdEFGhijKlmNoP1589452', TRUE)
 		);
 		foreach ($testCases as $testCase) {
 			$this->assertSame($testCase[1], $this->subject->isValidSalt($testCase[0]));
@@ -103,8 +103,8 @@ class SecurePasswordSaltTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase 
 		$this->mockSubject();
 		//array($saltedPW, $expectedResult(Boolean)
 		$testCases = array(
-			array(password_hash("HelloWorld", PASSWORD_DEFAULT, array('cost' => 11)), FALSE),
-			array(password_hash("HelloWorld", PASSWORD_DEFAULT, array('cost' => 10)), TRUE),
+			array(password_hash('HelloWorld', PASSWORD_DEFAULT, array('cost' => 11)), FALSE),
+			array(password_hash('HelloWorld', PASSWORD_DEFAULT, array('cost' => 10)), TRUE),
 		);
 		foreach ($testCases as $testCase) {
 			$this->assertSame($testCase[1], $this->subject->isValidSaltedPW($testCase[0]));
@@ -113,7 +113,7 @@ class SecurePasswordSaltTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase 
 
 	public function testConstruct() {
 		$this->markTestIncomplete(
-			"Untestable (Static method call)"
+			'Untestable (Static method call)'
 		);
 	}
 

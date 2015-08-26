@@ -56,7 +56,7 @@ class TestCaseBase extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	protected function mockSubject() {
 		$methods = func_get_args();
 		if (empty($methods)) {
-			$methods = array("dummy");
+			$methods = array('dummy');
 		}
 		$this->subject = $this->getAccessibleSubjectInstance($methods);
 	}
@@ -67,9 +67,9 @@ class TestCaseBase extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	protected function getSubjectClassName() {
 		//get class name of viewHelperTest
 		$class = get_class($this);
-		//trim "test" off the viewHelperTest
+		//trim 'test' off the viewHelperTest
 		$class = substr($class, 0, -4);
-		//delete "Tests\Unit\" from namespace
+		//delete 'Tests\Unit\' from namespace
 		$class = str_replace('Tests\\Unit\\', '', $class);
 		return $class;
 	}

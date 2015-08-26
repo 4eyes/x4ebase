@@ -41,7 +41,7 @@ class Typo3QuerySettingsTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase 
 	 * @test
 	 */
 	public function testGettersSetters() {
-		$this->booleanGetterSetterTest("respectSysLanguageAlternative");
+		$this->booleanGetterSetterTest('respectSysLanguageAlternative');
 	}
 
 }

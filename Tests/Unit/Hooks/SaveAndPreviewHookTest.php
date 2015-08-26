@@ -45,41 +45,41 @@ class SaveAndPreviewHookTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	public function testPreProcess() {
 		$this->markTestIncomplete(
-			"Untestable thanks to the use of BackendUtility"
+			'Untestable thanks to the use of BackendUtility'
 		);
 
 		$this->mockSubject();
 		$pageUid = 1;
-		$backPath = "";
+		$backPath = '';
 		$rootLine = array();
 		$anchorSection = array();
-		$viewScript = "";
+		$viewScript = '';
 		$additionalGetVars = array();
 		$switchFocus = FALSE;
 
 		$tableData = array(
-			"pageUid" => 1,
-			"viewScript" => "helloWorld"
+			'pageUid' => 1,
+			'viewScript' => 'helloWorld'
 		);
 
-		$table = "testTable";
+		$table = 'testTable';
 
 		$pageTs = array(
-			"x4ebase." => array(
-				"preview." => array(
-					$table . "." => $tableData
+			'x4ebase.' => array(
+				'preview.' => array(
+					$table . '.' => $tableData
 				)
 			)
 		);
 
-		$backendUtility = $this->getAccessibleMock(\TYPO3\CMS\Backend\Utility\BackendUtility::class, array("getPageTSconfig"), array(), "\\TYPO3\\CMS\\Backend\\Utility\\BackendUtility", FALSE);
-		$backendUtility->expects($this->once())->method("getPageTSconfig")->will($this->returnValue($pageTs));
+		$backendUtility = $this->getAccessibleMock(\TYPO3\CMS\Backend\Utility\BackendUtility::class, array('getPageTSconfig'), array(), '\\TYPO3\\CMS\\Backend\\Utility\\BackendUtility', FALSE);
+		$backendUtility->expects($this->once())->method('getPageTSconfig')->will($this->returnValue($pageTs));
 
-		$GLOBALS["_POST"]["data"] = array($table => array());
+		$GLOBALS['_POST']['data'] = array($table => array());
 
 		$this->subject->preProcess($pageUid, $backPath, $rootLine, $anchorSection, $viewScript, $additionalGetVars, $switchFocus);
 
-		$this->assertEquals($tableData["pageUid"], $pageUid);
-		$this->assertEquals($tableData["viewScript"], $viewScript);
+		$this->assertEquals($tableData['pageUid'], $pageUid);
+		$this->assertEquals($tableData['viewScript'], $viewScript);
 	}
 }

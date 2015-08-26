@@ -46,8 +46,8 @@ class ExplodeViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestB
 	 */
 	public function testRender() {
 		$testCases = array(
-			array("Hallo Welt", " ", array("Hallo", "Welt")),
-			array("My Name+Is+Spock'", "+", array("My Name", "Is", "Spock'")),
+			array('Hallo Welt', ' ', array('Hallo', 'Welt')),
+			array('My Name+Is+Spock', '+', array('My Name', 'Is', 'Spock')),
 		);
 
 		foreach ($testCases as $testCase) {

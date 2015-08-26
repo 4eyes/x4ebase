@@ -45,9 +45,9 @@ class XmlViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase 
 	 * @test
 	 */
 	public function testRender_GetsContentFromChildren() {
-		$this->mockSubject("renderChildren", "formatXmlString");
-		$this->subject->expects($this->once())->method("renderChildren");
-		$this->subject->expects($this->once())->method("formatXmlString");
+		$this->mockSubject('renderChildren', 'formatXmlString');
+		$this->subject->expects($this->once())->method('renderChildren');
+		$this->subject->expects($this->once())->method('formatXmlString');
 		$this->subject->render();
 	}
 
@@ -55,21 +55,21 @@ class XmlViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase 
 	 * @test
 	 */
 	public function testRender_WithContent() {
-		$this->mockSubject("renderChildren", "formatXmlString");
-		$this->subject->expects($this->never())->method("renderChildren");
-		$this->subject->expects($this->once())->method("formatXmlString");
-		$this->subject->render("test");
+		$this->mockSubject('renderChildren', 'formatXmlString');
+		$this->subject->expects($this->never())->method('renderChildren');
+		$this->subject->expects($this->once())->method('formatXmlString');
+		$this->subject->render('test');
 	}
 
 	public function testFormatXmlString() {
 		$this->markTestIncomplete(
-			"Untestable because >new< objects cannot be mocked"
+			'Untestable because >new< objects cannot be mocked'
 		);
 	}
 
 	public function testRemoveEmptyNodes() {
 		$this->markTestIncomplete(
-			"TODO - Not sure how this method really works"
+			'TODO - Not sure how this method really works'
 		);
 	}
 }

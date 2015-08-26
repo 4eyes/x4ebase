@@ -45,21 +45,21 @@ class DataMapperTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	public function testMapSingleRow_HasIdentifierCalledWithNewValue() {
 		$this->mockSubject();
-		$className = "Lorem";
+		$className = 'Lorem';
 		$row = array(
-			"_PAGES_OVERLAY" => 1,
-			"uid" => 1,
-			"_PAGES_OVERLAY_UID" => 2
+			'_PAGES_OVERLAY' => 1,
+			'uid' => 1,
+			'_PAGES_OVERLAY_UID' => 2
 		);
-		$expectedResult = $row['uid'] . "_" . $row['_PAGES_OVERLAY_UID'];
+		$expectedResult = $row['uid'] . '_' . $row['_PAGES_OVERLAY_UID'];
 
 		$identityMap = null;
 		$identityMap = $this->getMock(
 			\TYPO3\CMS\Extbase\Persistence\Generic\IdentityMap::class,
-			array("hasIdentifier", "getObjectByIdentifier")
+			array('hasIdentifier', 'getObjectByIdentifier')
 		);
-		$identityMap->expects($this->once())->method("hasIdentifier")->with($expectedResult, $className)->will($this->returnValue(TRUE));
-		$identityMap->expects($this->once())->method("getObjectByIdentifier")->will($this->returnValue(TRUE));
+		$identityMap->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->will($this->returnValue(TRUE));
+		$identityMap->expects($this->once())->method('getObjectByIdentifier')->will($this->returnValue(TRUE));
 
 		$this->subject->_set('identityMap', $identityMap);
 
@@ -71,22 +71,22 @@ class DataMapperTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	public function testMapSingleRow_HasIdentifierCalledWithOldValue() {
 		$this->mockSubject();
-		$className = "Lorem";
+		$className = 'Lorem';
 		$row = array(
-			"uid" => 1
+			'uid' => 1
 		);
 		$expectedResult = $row['uid'];
 
 		$identityMap = null;
 		$identityMap = $this->getMock(
 			\TYPO3\CMS\Extbase\Persistence\Generic\IdentityMap::class,
-			array("hasIdentifier", "getObjectByIdentifier"),
+			array('hasIdentifier', 'getObjectByIdentifier'),
 			array(),
-			"",
+			'',
 			FALSE
 		);
-		$identityMap->expects($this->once())->method("hasIdentifier")->with($expectedResult, $className)->will($this->returnValue(TRUE));
-		$identityMap->expects($this->once())->method("getObjectByIdentifier")->will($this->returnValue(TRUE));
+		$identityMap->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->will($this->returnValue(TRUE));
+		$identityMap->expects($this->once())->method('getObjectByIdentifier')->will($this->returnValue(TRUE));
 
 		$this->subject->_set('identityMap', $identityMap);
 
@@ -97,21 +97,21 @@ class DataMapperTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @test
 	 */
 	public function testThawProperties() {
-		$this->mockSubject("getDataMap");
+		$this->mockSubject('getDataMap');
 
-		$dataMap = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap::class, array("getLanguageIdColumnName"), array(), "", FALSE);
-		$dataMap->expects($this->once())->method("getLanguageIdColumnName")->will($this->returnValue(NULL));
-		$this->subject->expects($this->once())->method("getDataMap")->will($this->returnValue($dataMap));
+		$dataMap = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap::class, array('getLanguageIdColumnName'), array(), '', FALSE);
+		$dataMap->expects($this->once())->method('getLanguageIdColumnName')->will($this->returnValue(NULL));
+		$this->subject->expects($this->once())->method('getDataMap')->will($this->returnValue($dataMap));
 		$row = array(
-			"_PAGES_OVERLAY" => 1,
-			"_PAGES_OVERLAY_LANGUAGE" => 1,
-			"_PAGES_OVERLAY_UID" => 1
+			'_PAGES_OVERLAY' => 1,
+			'_PAGES_OVERLAY_LANGUAGE' => 1,
+			'_PAGES_OVERLAY_UID' => 1
 		);
 
-		$object = $this->getMock(\TYPO3\CMS\Belog\Domain\Model\LogEntry::class, array("_setProperty", "_getProperties"));
-		$object->expects($this->once())->method("_getProperties")->will($this->returnValue(array()));
-		$object->expects($this->exactly(4))->method("_setProperty");
+		$object = $this->getMock(\TYPO3\CMS\Belog\Domain\Model\LogEntry::class, array('_setProperty', '_getProperties'));
+		$object->expects($this->once())->method('_getProperties')->will($this->returnValue(array()));
+		$object->expects($this->exactly(4))->method('_setProperty');
 
-		$this->subject->_callRef("thawProperties", $object, $row);
+		$this->subject->_callRef('thawProperties', $object, $row);
 	}
 }

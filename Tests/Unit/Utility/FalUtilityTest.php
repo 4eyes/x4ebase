@@ -45,33 +45,33 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testHandyFileUpload() {
 		$this->markTestIncomplete(
-			"Untestable thanks to static method calls"
+			'Untestable thanks to static method calls'
 		);
 	}
 
 	public function testGetStorage() {
 		$this->markTestIncomplete(
-			"Untestable thanks to static method calls"
+			'Untestable thanks to static method calls'
 		);
 	}
 
 	public function testGetFolderObject_WithFolderName_CallsCreateFolderIfSubfolderNotExists_ELSE_CallsGetSubfolder() {
 		$this->mockSubject();
 
-		$subSubFolder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array("hasFolder", "createFolder", "getSubfolder"), array(), "", FALSE);
+		$subSubFolder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFolder', 'createFolder', 'getSubfolder'), array(), '', FALSE);
 
-		$subFolder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array("hasFolder", "createFolder", "getSubfolder"), array(), "", FALSE);
-		$subFolder->expects($this->once())->method("hasFolder")->will($this->returnValue(FALSE));
-		$subFolder->expects($this->once())->method("createFolder")->will($this->returnValue($subSubFolder));
+		$subFolder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFolder', 'createFolder', 'getSubfolder'), array(), '', FALSE);
+		$subFolder->expects($this->once())->method('hasFolder')->will($this->returnValue(FALSE));
+		$subFolder->expects($this->once())->method('createFolder')->will($this->returnValue($subSubFolder));
 
-		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array("hasFolder", "createFolder", "getSubfolder"), array(), "", FALSE);
-		$folder->expects($this->once())->method("hasFolder")->will($this->returnValue(TRUE));
-		$folder->expects($this->once())->method("getSubfolder")->will($this->returnValue($subFolder));
+		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFolder', 'createFolder', 'getSubfolder'), array(), '', FALSE);
+		$folder->expects($this->once())->method('hasFolder')->will($this->returnValue(TRUE));
+		$folder->expects($this->once())->method('getSubfolder')->will($this->returnValue($subFolder));
 
-		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array("getDefaultFolder"), array(), "", FALSE);
-		$storage->expects($this->once())->method("getDefaultFolder")->will($this->returnValue($folder));
+		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('getDefaultFolder'), array(), '', FALSE);
+		$storage->expects($this->once())->method('getDefaultFolder')->will($this->returnValue($folder));
 
-		$folderName = "lorem/ipsum";
+		$folderName = 'lorem/ipsum';
 
 		$this->assertSame($subSubFolder, $this->subject->getFolderObject($storage, $folderName));
 	}
@@ -79,10 +79,10 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testGetFolderObject_WithoutFolderName() {
 		$this->mockSubject();
 
-		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array(), array(), "", FALSE);
+		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array(), array(), '', FALSE);
 
-		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array("getDefaultFolder"), array(), "", FALSE);
-		$storage->expects($this->once())->method("getDefaultFolder")->will($this->returnValue($folder));
+		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('getDefaultFolder'), array(), '', FALSE);
+		$storage->expects($this->once())->method('getDefaultFolder')->will($this->returnValue($folder));
 
 		$this->assertSame($folder, $this->subject->getFolderObject($storage));
 	}
@@ -90,16 +90,16 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testAddUploadedFile_ConflictModeCancel() {
 		$this->mockSubject();
 
-		$fileObject = $this->getMock(\TYPO3\CMS\Core\Resource\FileReference::class, array(), array(), "", FALSE);
+		$fileObject = $this->getMock(\TYPO3\CMS\Core\Resource\FileReference::class, array(), array(), '', FALSE);
 
-		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array("getFile", "addUploadedFile"), array(), "", FALSE);
-		$storage->expects($this->once())->method("getFile")->will($this->returnValue($fileObject));
-		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array("hasFile", "getIdentifier"), array(), "", FALSE);
-		$folder->expects($this->once())->method("hasFile")->will($this->returnValue(TRUE));
-		$folder->expects($this->once())->method("getIdentifier");
+		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('getFile', 'addUploadedFile'), array(), '', FALSE);
+		$storage->expects($this->once())->method('getFile')->will($this->returnValue($fileObject));
+		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFile', 'getIdentifier'), array(), '', FALSE);
+		$folder->expects($this->once())->method('hasFile')->will($this->returnValue(TRUE));
+		$folder->expects($this->once())->method('getIdentifier');
 
 		$fileInfo = array(
-			"name" => "lorem"
+			'name' => 'lorem'
 		);
 
 		$this->assertSame($fileObject, $this->subject->addUploadedFile($storage, $fileInfo, $folder));
@@ -108,15 +108,15 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testAddUploadedFile_NoConflict() {
 		$this->mockSubject();
 
-		$fileObject = $this->getMock(\TYPO3\CMS\Core\Resource\FileReference::class, array(), array(), "", FALSE);
+		$fileObject = $this->getMock(\TYPO3\CMS\Core\Resource\FileReference::class, array(), array(), '', FALSE);
 
-		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array("addUploadedFile"), array(), "", FALSE);
-		$storage->expects($this->once())->method("addUploadedFile")->will($this->returnValue($fileObject));
-		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array("hasFile", "getIdentifier"), array(), "", FALSE);
-		$folder->expects($this->once())->method("hasFile")->will($this->returnValue(FALSE));
+		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('addUploadedFile'), array(), '', FALSE);
+		$storage->expects($this->once())->method('addUploadedFile')->will($this->returnValue($fileObject));
+		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFile', 'getIdentifier'), array(), '', FALSE);
+		$folder->expects($this->once())->method('hasFile')->will($this->returnValue(FALSE));
 
 		$fileInfo = array(
-			"name" => "lorem"
+			'name' => 'lorem'
 		);
 
 		$this->assertSame($fileObject, $this->subject->addUploadedFile($storage, $fileInfo, $folder));
@@ -125,13 +125,13 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testAddUploadedFile_HandlesException() {
 		$this->mockSubject();
 
-		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array("addUploadedFile"), array(), "", FALSE);
-		$storage->expects($this->once())->method("addUploadedFile")->will($this->throwException(new \TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException));
-		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array("hasFile", "getIdentifier"), array(), "", FALSE);
-		$folder->expects($this->once())->method("hasFile")->will($this->returnValue(FALSE));
+		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('addUploadedFile'), array(), '', FALSE);
+		$storage->expects($this->once())->method('addUploadedFile')->will($this->throwException(new \TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException));
+		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFile', 'getIdentifier'), array(), '', FALSE);
+		$folder->expects($this->once())->method('hasFile')->will($this->returnValue(FALSE));
 
 		$fileInfo = array(
-			"name" => "lorem"
+			'name' => 'lorem'
 		);
 
 		$this->assertEquals(NULL, $this->subject->addUploadedFile($storage, $fileInfo, $folder));
@@ -142,25 +142,25 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 		$uidLocal = 1;
 		$uidForeign = 2;
-		$tableNames = "lorem";
-		$fieldName = "ipsum";
+		$tableNames = 'lorem';
+		$fieldName = 'ipsum';
 		$pid = 3;
-		$tableLocal = "sys_file";
+		$tableLocal = 'sys_file';
 
 		$databaseConnection = $this->getMock(
 			\TYPO3\CMS\Core\Database\DatabaseConnection::class,
 			array(
-				"exec_INSERTquery",
-				"exec_SELECTgetSingleRow",
-				"exec_UPDATEquery",
-				"exec_DELETEquery"
+				'exec_INSERTquery',
+				'exec_SELECTgetSingleRow',
+				'exec_UPDATEquery',
+				'exec_DELETEquery'
 			),
-			array(), "", FALSE
+			array(), '', FALSE
 		);
-		$databaseConnection->expects($this->once())->method("exec_INSERTquery");
-		$databaseConnection->expects($this->once())->method("exec_SELECTgetSingleRow");
-		$databaseConnection->expects($this->once())->method("exec_UPDATEquery");
-		$GLOBALS["TYPO3_DB"] = $databaseConnection;
+		$databaseConnection->expects($this->once())->method('exec_INSERTquery');
+		$databaseConnection->expects($this->once())->method('exec_SELECTgetSingleRow');
+		$databaseConnection->expects($this->once())->method('exec_UPDATEquery');
+		$GLOBALS['TYPO3_DB'] = $databaseConnection;
 
 		$this->subject->addFileReference($uidLocal, $uidForeign, $tableNames, $fieldName, $pid, $tableLocal);
 	}
@@ -173,17 +173,17 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$databaseConnection = $this->getMock(
 			\TYPO3\CMS\Core\Database\DatabaseConnection::class,
 			array(
-				"exec_INSERTquery",
-				"exec_SELECTgetSingleRow",
-				"exec_UPDATEquery",
-				"exec_DELETEquery"
+				'exec_INSERTquery',
+				'exec_SELECTgetSingleRow',
+				'exec_UPDATEquery',
+				'exec_DELETEquery'
 			),
-			array(), "", FALSE
+			array(), '', FALSE
 		);
-		$databaseConnection->expects($this->exactly(2))->method("exec_SELECTgetSingleRow");
-		$databaseConnection->expects($this->once())->method("exec_UPDATEquery");
-		$databaseConnection->expects($this->once())->method("exec_DELETEquery");
-		$GLOBALS["TYPO3_DB"] = $databaseConnection;
+		$databaseConnection->expects($this->exactly(2))->method('exec_SELECTgetSingleRow');
+		$databaseConnection->expects($this->once())->method('exec_UPDATEquery');
+		$databaseConnection->expects($this->once())->method('exec_DELETEquery');
+		$GLOBALS['TYPO3_DB'] = $databaseConnection;
 
 		$this->subject->removeFileReference($uid);
 	}

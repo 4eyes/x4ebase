@@ -42,7 +42,7 @@ class UserAgentUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testAll() {
 		$this->markTestIncomplete(
-			"How Shall this be testable?"
+			'How Shall this be testable?'
 		);
 	}
 

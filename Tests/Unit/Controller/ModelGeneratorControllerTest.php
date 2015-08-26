@@ -44,29 +44,29 @@ class ModelGeneratorControllerTest extends \X4E\X4ebase\Tests\Unit\Base\Controll
 	 * @test
 	 */
 	public function testShowAction_WithGenerator() {
-		$this->mockSubject("getSqlFieldType", "getExtbaseClassFromFields", "getTSMappingsFromFields");
-		$this->subject->expects($this->once())->method("getSqlFieldType")->willReturn("Integer");
-		$this->subject->expects($this->once())->method("getExtbaseClassFromFields");
-		$this->subject->expects($this->once())->method("getTSMappingsFromFields");
+		$this->mockSubject('getSqlFieldType', 'getExtbaseClassFromFields', 'getTSMappingsFromFields');
+		$this->subject->expects($this->once())->method('getSqlFieldType')->willReturn('Integer');
+		$this->subject->expects($this->once())->method('getExtbaseClassFromFields');
+		$this->subject->expects($this->once())->method('getTSMappingsFromFields');
 
 		$generator = array(
-			"databaseTable" => "Lorem",
-			"previousDatabaseTable" => "Ipsum",
+			'databaseTable' => 'Lorem',
+			'previousDatabaseTable' => 'Ipsum',
 		);
 
 		global $TYPO3_DB;
-		$databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, array("sql_query", "sql_fetch_row", "sql_free_result", "sql_fetch_assoc"));
+		$databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, array('sql_query', 'sql_fetch_row', 'sql_free_result', 'sql_fetch_assoc'));
 
-		$databaseConnection->expects($this->exactly(2))->method("sql_free_result");
-		$databaseConnection->expects($this->at(0))->method("sql_query")->willReturn(TRUE);
-		$databaseConnection->expects($this->at(1))->method("sql_query")->willReturn(FALSE);
-		$databaseConnection->expects($this->at(1))->method("sql_fetch_row")->willReturn(array("Lorem"));
-		$databaseConnection->expects($this->at(2))->method("sql_fetch_row")->willReturn(FALSE);
-		$databaseConnection->expects($this->at(1))->method("sql_fetch_assoc")->willReturn(array(
-			"Field" => "Dolor",
-			"Type" => "int",
+		$databaseConnection->expects($this->exactly(2))->method('sql_free_result');
+		$databaseConnection->expects($this->at(0))->method('sql_query')->willReturn(TRUE);
+		$databaseConnection->expects($this->at(1))->method('sql_query')->willReturn(FALSE);
+		$databaseConnection->expects($this->at(1))->method('sql_fetch_row')->willReturn(array('Lorem'));
+		$databaseConnection->expects($this->at(2))->method('sql_fetch_row')->willReturn(FALSE);
+		$databaseConnection->expects($this->at(1))->method('sql_fetch_assoc')->willReturn(array(
+			'Field' => 'Dolor',
+			'Type' => 'int',
 		));
-		$databaseConnection->expects($this->at(2))->method("sql_fetch_assoc")->willReturn(FALSE);
+		$databaseConnection->expects($this->at(2))->method('sql_fetch_assoc')->willReturn(FALSE);
 
 		$TYPO3_DB = $databaseConnection;
 
@@ -78,54 +78,54 @@ class ModelGeneratorControllerTest extends \X4E\X4ebase\Tests\Unit\Base\Controll
 	public function testGetSqlFieldType() {
 		$this->mockSubject();
 		$testCases = array(
-			array("tinyint", "integer"),
-			array("mediumint", "integer"),
-			array("int", "integer"),
-			array("integer", "integer"),
-			array("bigint", "integer"),
-			array("decimal", "integer"),
-			array("numeric", "integer"),
-			array("dec", "integer"),
-			array("float", "integer"),
-			array("double", "integer"),
+			array('tinyint', 'integer'),
+			array('mediumint', 'integer'),
+			array('int', 'integer'),
+			array('integer', 'integer'),
+			array('bigint', 'integer'),
+			array('decimal', 'integer'),
+			array('numeric', 'integer'),
+			array('dec', 'integer'),
+			array('float', 'integer'),
+			array('double', 'integer'),
 
-			array("bool", "boolean"),
-			array("boolean", "boolean"),
+			array('bool', 'boolean'),
+			array('boolean', 'boolean'),
 
-			array("whatever", "string"),
+			array('whatever', 'string'),
 		);
 		foreach ($testCases as $testCase) {
-			$this->assertEquals($testCase[1], $this->subject->_callRef("getSqlFieldType", $testCase[0]));
+			$this->assertEquals($testCase[1], $this->subject->_callRef('getSqlFieldType', $testCase[0]));
 		}
 	}
 
 	public function testGetExtbaseClassFromFields() {
 		$this->mockSubject();
 
-		$table = "Lorem";
+		$table = 'Lorem';
 		$fieldsArray = array(
 			array(
-				"name" => "Ipsum",
-				"type" => "int",
+				'name' => 'Ipsum',
+				'type' => 'int',
 			)
 		);
 
-		$this->assertInternalType("string", $this->subject->_callRef("getExtbaseClassFromFields", $table, $fieldsArray));
+		$this->assertInternalType('string', $this->subject->_callRef('getExtbaseClassFromFields', $table, $fieldsArray));
 	}
 
 	public function testGetTSMappingFromFields() {
 		$this->mockSubject();
 
-		$table = "Lorem";
+		$table = 'Lorem';
 		$fieldsArray = array(
 			array(
-				"name" => "Ipsum",
-				"type" => "int"
+				'name' => 'Ipsum',
+				'type' => 'int'
 			)
 		);
 
-		$result = "\\Lorem {\n	mapping {\n		tableName = Lorem\n		columns {\n			Ipsum.mapOnProperty = ipsum\n\n		}\n	}\n}";
+		$result = '\\Lorem {\n	mapping {\n		tableName = Lorem\n		columns {\n			Ipsum.mapOnProperty = ipsum\n\n		}\n	}\n}';
 
-		$this->assertEquals($result, $this->subject->_callRef("getTSMappingsFromFields", $table, $fieldsArray));
+		$this->assertEquals($result, $this->subject->_callRef('getTSMappingsFromFields', $table, $fieldsArray));
 	}
 }

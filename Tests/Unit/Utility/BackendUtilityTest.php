@@ -42,29 +42,29 @@ class BackendUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testInitTypoScript() {
 		$this->mockSubject();
-		$tsfeObject = $this->getMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, array("getPageAndRootline", "initTemplate", "getConfigArray"), array(), "", FALSE);
-		$tsfeObject->expects($this->once())->method("getPageAndRootline");
-		$tsfeObject->expects($this->once())->method("initTemplate");
-		$tsfeObject->expects($this->once())->method("getConfigArray");
+		$tsfeObject = $this->getMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, array('getPageAndRootline', 'initTemplate', 'getConfigArray'), array(), '', FALSE);
+		$tsfeObject->expects($this->once())->method('getPageAndRootline');
+		$tsfeObject->expects($this->once())->method('initTemplate');
+		$tsfeObject->expects($this->once())->method('getConfigArray');
 		$GLOBALS['TSFE'] = $tsfeObject;
-		$this->subject->_call("initTypoScript");
+		$this->subject->_call('initTypoScript');
 	}
 
 	public function testInitTSFE() {
 		$this->markTestIncomplete(
-			"Untestable (Static Method Calls)"
+			'Untestable (Static Method Calls)'
 		);
 	}
 
 	public function testExec_languageQuery() {
 		$this->markTestIncomplete(
-			"Untestable (Static Method Calls)"
+			'Untestable (Static Method Calls)'
 		);
 	}
 
 	public function testGetStorageFolderPid() {
 		$this->markTestIncomplete(
-			"Untestable (Static Method Calls)"
+			'Untestable (Static Method Calls)'
 		);
 	}
 }

@@ -44,7 +44,7 @@ class ActionViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBa
 	public function testRender() {
 
 		$this->markTestIncomplete(
-			"Untestable thanks to static method call"
+			'Untestable thanks to static method call'
 		);
 	}
 

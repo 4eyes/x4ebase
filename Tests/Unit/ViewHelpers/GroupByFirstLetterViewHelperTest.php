@@ -45,43 +45,43 @@ class GroupByFirstLetterViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\View
 	 * @test
 	 */
 	public function testRender_WithIncompatibleType_ThrowsException() {
-		$this->setExpectedException("\\Exception", "Unsupported element type.");
-		$this->subject->render(array(""), "");
+		$this->setExpectedException('\\Exception', 'Unsupported element type.');
+		$this->subject->render(array(''), '');
 	}
 
 	public function testRender_WithArray_NotIssetProperty_ThrowsException() {
-		$this->setExpectedException("\\Exception", "The given property does not exist.");
-		$this->subject->render(array(array("test" => "one")), "lorem");
+		$this->setExpectedException('\\Exception', 'The given property does not exist.');
+		$this->subject->render(array(array('test' => 'one')), 'lorem');
 	}
 
 	public function testRender_WithArray_ReturnsGroupedArray() {
 		$testCase = array(
-			array("test" => "lorem"),
-			array("test" => "ipsum"),
-			array("test" => "lorem"),
+			array('test' => 'lorem'),
+			array('test' => 'ipsum'),
+			array('test' => 'lorem'),
 		);
 		$expectedResult = array(
-			"L" => array(array("test" => "lorem"), array("test" => "lorem")),
-			"I" => array(array("test" => "ipsum"))
+			'L' => array(array('test' => 'lorem'), array('test' => 'lorem')),
+			'I' => array(array('test' => 'ipsum'))
 		);
-		$this->assertEquals($expectedResult, $this->subject->render($testCase, "test"));
+		$this->assertEquals($expectedResult, $this->subject->render($testCase, 'test'));
 	}
 
 	public function testRender_WithObject_NotIssetProperty_ThrowsException() {
 		$this->markTestSkipped(
-			"Error in ViewHelper: Getters don't throw Exceptions"
+			'Error in ViewHelper: Getters do not throw Exceptions'
 		);
 
-		$this->setExpectedException("\\Exception", "The given property does not exist.");
-		$this->subject->render(new testClass(), "lorem");
+		$this->setExpectedException('\\Exception', 'The given property does not exist.');
+		$this->subject->render(new testClass(), 'lorem');
 	}
 
 	public function testRender_WithObject_ReturnsGroupedArray() {
 		$expectedResult = array(
-			"L" => array(new InnerTestClass("lorem"), new InnerTestClass("lorem")),
-			"I" => array(new InnerTestClass("ipsum"))
+			'L' => array(new InnerTestClass('lorem'), new InnerTestClass('lorem')),
+			'I' => array(new InnerTestClass('ipsum'))
 		);
-		$this->assertEquals($expectedResult, $this->subject->render(new testClass(), "test"));
+		$this->assertEquals($expectedResult, $this->subject->render(new testClass(), 'test'));
 	}
 
 }
@@ -92,9 +92,9 @@ class testClass {
 	public $obj3;
 
 	function __construct() {
-		$this->obj1 = new innerTestClass("lorem");
-		$this->obj2 = new innerTestClass("ipsum");
-		$this->obj3 = new innerTestClass("lorem");
+		$this->obj1 = new innerTestClass('lorem');
+		$this->obj2 = new innerTestClass('ipsum');
+		$this->obj3 = new innerTestClass('lorem');
 	}
 }
 

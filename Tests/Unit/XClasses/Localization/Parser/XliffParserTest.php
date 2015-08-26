@@ -57,24 +57,24 @@ class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function testGetParseData() {
 		$this->markTestSkipped(
-			"What exactly is the purpose of this xclass? Not sure if test or class work incorrectly"
+			'What exactly is the purpose of this xclass? Not sure if test or class work incorrectly'
 		);
 
 		$sourcePath = dirname(__FILE__) . '/../../../../Fixtures/Unit/XClasses/Localization/Parser/XliffParserTest/locallang.xlf';
-		$languageKey = "de";
-		//$charset = "utf8";
+		$languageKey = 'de';
+		//$charset = 'utf8';
 		$expectedResult = array(
-			"de" => array(
-				"headerComment" => array(
+			'de' => array(
+				'headerComment' => array(
 					0 => array(
-						"source" => "Foo",
-						"target" => "Oof",
+						'source' => 'Foo',
+						'target' => 'Oof',
 					)
 				),
-				"generator" => array(
+				'generator' => array(
 					0 => array(
-						"source" => "Bar",
-						"target" => "Rab",
+						'source' => 'Bar',
+						'target' => 'Rab',
 					)
 				)
 			)

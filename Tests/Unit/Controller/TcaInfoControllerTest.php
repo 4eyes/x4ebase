@@ -60,7 +60,7 @@ class TcaInfoControllerTest extends \X4E\X4ebase\Tests\Unit\Base\ControllerTestB
 
 		$this->viewAssignCalledTest(array(
 			array('table', $this->equalTo(NULL)),
-			array('tableName', $this->equalTo("")),
+			array('tableName', $this->equalTo('')),
 			array('tables', $this->equalTo(array()))
 		));
 
@@ -80,7 +80,7 @@ class TcaInfoControllerTest extends \X4E\X4ebase\Tests\Unit\Base\ControllerTestB
 
 	public function testGetTableArray() {
 		$this->markTestIncomplete(
-			"Untestable (Static Method calls)"
+			'Untestable (Static Method calls)'
 		);
 	}
 }

@@ -45,51 +45,51 @@ class AbstractBackendTagBasedViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base
 	public function testGetDocInstance_DocEcists() {
 		$this->subject = $this->getAccessibleMockForAbstractClass(
 			$this->getSubjectClassName(),
-			array("createDocInstance")
+			array('createDocInstance')
 		);
 
 		$this->viewHelperVariableContainer = $this->getMock(
 			\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class,
-			array("exists", "get")
+			array('exists', 'get')
 		);
-		$this->viewHelperVariableContainer->expects($this->once())->method("exists")->will($this->returnValue(TRUE));
-		$this->viewHelperVariableContainer->expects($this->once())->method("get");
+		$this->viewHelperVariableContainer->expects($this->once())->method('exists')->will($this->returnValue(TRUE));
+		$this->viewHelperVariableContainer->expects($this->once())->method('get');
 
-		$this->subject->_set("viewHelperVariableContainer", $this->viewHelperVariableContainer);
+		$this->subject->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);
 
 		$this->subject->getDocInstance();
 	}
 
 	public function testGetDocInstance_DocDoesNotExist_CallsCreateDocInstance() {
-		$doc = $this->getMock(\TYPO3\CMS\Backend\Template\DocumentTemplate::class, array(), array(), "", FALSE);
+		$doc = $this->getMock(\TYPO3\CMS\Backend\Template\DocumentTemplate::class, array(), array(), '', FALSE);
 
 		$this->subject = $this->getMockBuilder($this->getSubjectClassName())
-			->setMethods(array("createDocInstance"))
+			->setMethods(array('createDocInstance'))
 			->getMockForAbstractClass();
 
 		$this->subject = $this->getAccessibleMockForAbstractClass(
 			$this->getSubjectClassName()
 		);
 		$this->markTestIncomplete(
-			"methods of abstract classes cannot be mocked for accessible mocks"
+			'methods of abstract classes cannot be mocked for accessible mocks'
 		);
-		//$this->subject->expects($this->once())->method("createDocInstance")->will($this->returnValue($doc));
+		//$this->subject->expects($this->once())->method('createDocInstance')->will($this->returnValue($doc));
 
 		$this->viewHelperVariableContainer = $this->getMock(
 			\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class,
-			array("exists", "add")
+			array('exists', 'add')
 		);
-		$this->viewHelperVariableContainer->expects($this->once())->method("exists")->will($this->returnValue(FALSE));
-		$this->viewHelperVariableContainer->expects($this->once())->method("add");
+		$this->viewHelperVariableContainer->expects($this->once())->method('exists')->will($this->returnValue(FALSE));
+		$this->viewHelperVariableContainer->expects($this->once())->method('add');
 
-		$this->subject->_set("viewHelperVariableContainer", $this->viewHelperVariableContainer);
+		$this->subject->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);
 
 		$this->subject->getDocInstance();
 	}
 
 	public function testCreateDocInstance() {
 		$this->markTestIncomplete(
-			"untestable thanks to static method calls"
+			'untestable thanks to static method calls'
 		);
 	}
 }

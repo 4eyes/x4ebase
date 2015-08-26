@@ -41,66 +41,66 @@ class BackendSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBas
 	protected $subject;
 
 	public function testGet() {
-		$this->mockSubject("getKey", "getBackendUser");
-		$backendUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, array("getSessionData"));
-		$backendUser->expects($this->once())->method("getSessionData");
+		$this->mockSubject('getKey', 'getBackendUser');
+		$backendUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, array('getSessionData'));
+		$backendUser->expects($this->once())->method('getSessionData');
 
-		$this->subject->expects($this->once())->method("getBackendUser")->willReturn($backendUser);
-		$this->subject->expects($this->once())->method("getKey")->with("lorem");
-		$this->subject->get("lorem");
+		$this->subject->expects($this->once())->method('getBackendUser')->willReturn($backendUser);
+		$this->subject->expects($this->once())->method('getKey')->with('lorem');
+		$this->subject->get('lorem');
 	}
 
 	public function testSet() {
-		$this->mockSubject("getKey", "getBackendUser");
-		$backendUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, array("setAndSaveSessionData"));
-		$backendUser->expects($this->once())->method("setAndSaveSessionData")->with("lorem", "ipsum");
+		$this->mockSubject('getKey', 'getBackendUser');
+		$backendUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, array('setAndSaveSessionData'));
+		$backendUser->expects($this->once())->method('setAndSaveSessionData')->with('lorem', 'ipsum');
 
-		$this->subject->expects($this->once())->method("getBackendUser")->willReturn($backendUser);
-		$this->subject->expects($this->once())->method("getKey")->with("lorem")->willReturn("lorem");
-		$this->subject->set("lorem", "ipsum");
+		$this->subject->expects($this->once())->method('getBackendUser')->willReturn($backendUser);
+		$this->subject->expects($this->once())->method('getKey')->with('lorem')->willReturn('lorem');
+		$this->subject->set('lorem', 'ipsum');
 	}
 
 	public function testRemove_NotHasKey_CallsNoDbUpdate() {
-		$this->mockSubject("has");
-		$this->subject->expects($this->once())->method("has")->willReturn(FALSE);
-		$databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, array("exec_UPDATEquery"));
-		$databaseConnection->expects($this->never())->method("exec_UPDATEquery");
-		$GLOBALS["TYPO3_DB"] = $databaseConnection;
+		$this->mockSubject('has');
+		$this->subject->expects($this->once())->method('has')->willReturn(FALSE);
+		$databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, array('exec_UPDATEquery'));
+		$databaseConnection->expects($this->never())->method('exec_UPDATEquery');
+		$GLOBALS['TYPO3_DB'] = $databaseConnection;
 
-		$this->subject->remove("lorem");
+		$this->subject->remove('lorem');
 	}
 
 	public function testRemove() {
-		$this->mockSubject("has", "getKey", "getBackendUser");
+		$this->mockSubject('has', 'getKey', 'getBackendUser');
 
-		$ses_data = serialize(array("lorem" => 42));
+		$ses_data = serialize(array('lorem' => 42));
 		$user = array(
-			"ses_data" => $ses_data,
-			"ses_id" => 1,
-			"writeDevLog" => FALSE
+			'ses_data' => $ses_data,
+			'ses_id' => 1,
+			'writeDevLog' => FALSE
 		);
-		$session_table = "be_sessions";
+		$session_table = 'be_sessions';
 		$backendUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class);
 		$backendUser->user = $user;
 		$backendUser->session_table = $session_table;
 
-		$databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, array("exec_UPDATEquery", "fullQuoteStr"));
-		$databaseConnection->expects($this->once())->method("fullQuoteStr")->with(1, "be_sessions")->willReturn("HelloWorld");
-		$databaseConnection->expects($this->once())->method("exec_UPDATEquery")->with(
-			$session_table, "ses_id=HelloWorld", array("ses_data" => "")
+		$databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, array('exec_UPDATEquery', 'fullQuoteStr'));
+		$databaseConnection->expects($this->once())->method('fullQuoteStr')->with(1, 'be_sessions')->willReturn('HelloWorld');
+		$databaseConnection->expects($this->once())->method('exec_UPDATEquery')->with(
+			$session_table, 'ses_id=HelloWorld', array('ses_data' => '')
 		);
-		$GLOBALS["TYPO3_DB"] = $databaseConnection;
+		$GLOBALS['TYPO3_DB'] = $databaseConnection;
 
-		$this->subject->expects($this->once())->method("has")->willReturn(TRUE);
-		$this->subject->expects($this->any())->method("getBackendUser")->willReturn($backendUser);
-		$this->subject->expects($this->once())->method("getKey")->willReturn("lorem");
+		$this->subject->expects($this->once())->method('has')->willReturn(TRUE);
+		$this->subject->expects($this->any())->method('getBackendUser')->willReturn($backendUser);
+		$this->subject->expects($this->once())->method('getKey')->willReturn('lorem');
 
-		$this->subject->remove("lorem");
+		$this->subject->remove('lorem');
 	}
 
 	public function testGetBackendUser() {
 		$this->mockSubject();
-		$GLOBALS["BE_USER"] = "LoremIpsumDolor";
-		$this->assertSame("LoremIpsumDolor", $this->subject->_call("getBackendUser"));
+		$GLOBALS['BE_USER'] = 'LoremIpsumDolor';
+		$this->assertSame('LoremIpsumDolor', $this->subject->_call('getBackendUser'));
 	}
 }

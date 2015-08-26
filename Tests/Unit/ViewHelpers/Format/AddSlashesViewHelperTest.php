@@ -47,11 +47,11 @@ class AddSlashesViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTe
 	public function testRender() {
 		$this->mockSubject('renderChildren');
 		$testCases = array(
-			array("Lorem", "Lorem"),
-			array("Lorem'", "Lorem\\'"),
-			array('Lorem"', 'Lorem\\"'),
-			array("Lorem\\", "Lorem\\\\"),
-			array("Lorem\\'", "Lorem\\\\\\'")
+			array('Lorem', 'Lorem'),
+			array('Lorem', 'Lorem\\'),
+			array('Lorem', 'Lorem\\'),
+			array('Lorem\\', 'Lorem\\\\'),
+			array('Lorem\\', 'Lorem\\\\\\')
 		);
 
 		for ($i = 0; $i < count($testCases); $i++) {

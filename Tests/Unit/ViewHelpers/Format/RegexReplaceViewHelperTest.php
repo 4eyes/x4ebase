@@ -48,7 +48,7 @@ class RegexReplaceViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelper
 		//subject | pattern | replacement | result
 		$testCases = array(
 			array('15. April 2003', '/(\d+)\. (\w+) (\d+)/i', '${2}1,$3', 'April1,2003'),
-			array('Der schnelle braune Fuchs sprang über den faulen Hund.', array("/schnelle/", "/braune/", "/Fuchs/"), array("Bär", "schwarze", "langsame"), "Der Bär schwarze langsame sprang über den faulen Hund.")
+			array('Der schnelle braune Fuchs sprang über den faulen Hund.', array('/schnelle/', '/braune/', '/Fuchs/'), array('Bär', 'schwarze', 'langsame'), 'Der Bär schwarze langsame sprang über den faulen Hund.')
 		);
 
 		$this->renderFromArgument($testCases);

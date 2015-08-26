@@ -41,40 +41,40 @@ class AbstractRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTest
 	 * @test
 	 */
 	public function testGetTranslation() {
-		$this->mockSubject("getSystemLanguages", "createQuery");
+		$this->mockSubject('getSystemLanguages', 'createQuery');
 
-		$record = $this->getMock(\TYPO3\CMS\Documentation\Domain\Model\Document::class, array("getPid"), array(), "", FALSE);
-		$record->expects($this->once())->method("getPid")->willReturn(1);
+		$record = $this->getMock(\TYPO3\CMS\Documentation\Domain\Model\Document::class, array('getPid'), array(), '', FALSE);
+		$record->expects($this->once())->method('getPid')->willReturn(1);
 		$languageIconTitles = array(
-			"0" => 1
+			'0' => 1
 		);
 
-		$this->subject->expects($this->once())->method("getSystemLanguages")->willReturn($languageIconTitles);
+		$this->subject->expects($this->once())->method('getSystemLanguages')->willReturn($languageIconTitles);
 
-		$mockQueryResult = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, array("getFirst"), array(), "", FALSE);
-		$mockQueryResult->expects($this->once())->method("getFirst");
+		$mockQueryResult = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, array('getFirst'), array(), '', FALSE);
+		$mockQueryResult->expects($this->once())->method('getFirst');
 
-		$mockQuerySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectSysLanguage", "setRespectSysLanguageAlternative", "setSysLanguageUid"), array(), "", FALSE);
-		$mockQuerySettings->expects($this->once())->method("setRespectSysLanguage")->with(FALSE);
-		$mockQuerySettings->expects($this->once())->method("setRespectSysLanguageAlternative")->with(TRUE);
-		$mockQuerySettings->expects($this->once())->method("setSysLanguageUid");
+		$mockQuerySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array('setRespectSysLanguage', 'setRespectSysLanguageAlternative', 'setSysLanguageUid'), array(), '', FALSE);
+		$mockQuerySettings->expects($this->once())->method('setRespectSysLanguage')->with(FALSE);
+		$mockQuerySettings->expects($this->once())->method('setRespectSysLanguageAlternative')->with(TRUE);
+		$mockQuerySettings->expects($this->once())->method('setSysLanguageUid');
 
-		$mockQuery = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, array("createQuery", "getQuerySettings", "matching", "equals", "execute"), array(), "", FALSE);
-		$this->subject->expects($this->once())->method("createQuery")->willReturn($mockQuery);
-		$mockQuery->expects($this->exactly(3))->method("getQuerySettings")->willReturn($mockQuerySettings);
-		$mockQuery->expects($this->once())->method("matching")->willReturn($mockQuery);
-		$mockQuery->expects($this->once())->method("execute")->willReturn($mockQueryResult);
+		$mockQuery = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, array('createQuery', 'getQuerySettings', 'matching', 'equals', 'execute'), array(), '', FALSE);
+		$this->subject->expects($this->once())->method('createQuery')->willReturn($mockQuery);
+		$mockQuery->expects($this->exactly(3))->method('getQuerySettings')->willReturn($mockQuerySettings);
+		$mockQuery->expects($this->once())->method('matching')->willReturn($mockQuery);
+		$mockQuery->expects($this->once())->method('execute')->willReturn($mockQueryResult);
 
 		$this->subject->getTranslation($record, 0);
 	}
 
 	public function testGetTranslation_WithoutSysLanguageUid_ReturnsNull() {
-		$this->mockSubject("getSystemLanguages");
+		$this->mockSubject('getSystemLanguages');
 		$languageIconTitles = array();
-		$this->subject->expects($this->once())->method("getSystemLanguages")->willReturn($languageIconTitles);
+		$this->subject->expects($this->once())->method('getSystemLanguages')->willReturn($languageIconTitles);
 
-		$record = $this->getMock(\TYPO3\CMS\Documentation\Domain\Model\Document::class, array("getPid"), array(), "", FALSE);
-		$record->expects($this->once())->method("getPid")->willReturn(1);
+		$record = $this->getMock(\TYPO3\CMS\Documentation\Domain\Model\Document::class, array('getPid'), array(), '', FALSE);
+		$record->expects($this->once())->method('getPid')->willReturn(1);
 		$this->assertFalse($this->subject->getTranslation($record, 1));
 	}
 
@@ -83,9 +83,9 @@ class AbstractRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTest
 	 */
 	public function testGetTranslateTools_ReturnsTranslateTools() {
 		$this->mockSubject();
-		$translateTools = $this->getMock(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider::class, array(), array(), "", FALSE);
-		$this->subject->_set("translateTools", $translateTools);
-		$this->assertSame($translateTools, $this->subject->_call("getTranslateTools"));
+		$translateTools = $this->getMock(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider::class, array(), array(), '', FALSE);
+		$this->subject->_set('translateTools', $translateTools);
+		$this->assertSame($translateTools, $this->subject->_call('getTranslateTools'));
 	}
 
 	/**
@@ -93,7 +93,7 @@ class AbstractRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTest
 	 */
 	public function testGetTranslateTools_CreatesTranslateTools() {
 		$this->markTestIncomplete(
-			"Untestable thanks to static method call"
+			'Untestable thanks to static method call'
 		);
 	}
 
@@ -101,16 +101,16 @@ class AbstractRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTest
 	 * @test
 	 */
 	public function testGetSystemLanguages() {
-		$this->mockSubject("getTranslateTools");
+		$this->mockSubject('getTranslateTools');
 		$cachedLanguageIconTitles = array(
-			"0" => "test"
+			'0' => 'test'
 		);
 
-		$translateTools = $this->getMock(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider::class, array("getSystemLanguages"), array(), "", FALSE);
-		$translateTools->expects($this->once())->method("getSystemLanguages")->willReturn($cachedLanguageIconTitles["0"]);
-		$this->subject->expects($this->once())->method("getTranslateTools")->willReturn($translateTools);
+		$translateTools = $this->getMock(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider::class, array('getSystemLanguages'), array(), '', FALSE);
+		$translateTools->expects($this->once())->method('getSystemLanguages')->willReturn($cachedLanguageIconTitles['0']);
+		$this->subject->expects($this->once())->method('getTranslateTools')->willReturn($translateTools);
 
-		$this->subject->_call("getSystemLanguages");
-		$this->assertEquals($cachedLanguageIconTitles, $this->subject->_get("cachedLanguageIconTitles"));
+		$this->subject->_call('getSystemLanguages');
+		$this->assertEquals($cachedLanguageIconTitles, $this->subject->_get('cachedLanguageIconTitles'));
 	}
 }

@@ -39,23 +39,23 @@ class AbstractSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBa
 
 	public function testGetKey() {
 		$this->markTestSkipped(
-			"SessionNamespace does not exist"
+			'SessionNamespace does not exist'
 		);
 	}
 
 	public function testGet() {
 		$this->markTestSkipped(
-			"I think this class requires an abstract method 'get', as it depends on proper return values in method 'has'"
+			'I think this class requires an abstract method >get<, as it depends on proper return values in method >has<'
 		);
 	}
 
 	public function testHas() {
 		$this->subject = $this->getMockForAbstractClass($this->getSubjectClassName());
-		$key = "lorem";
-		$type = "ipsum";
+		$key = 'lorem';
+		$type = 'ipsum';
 
-		$this->subject->expects($this->once())->method("get")->with($key, $type);
+		$this->subject->expects($this->once())->method('get')->with($key, $type);
 
-		$this->assertInternalType("boolean", $this->subject->has($key, $type));
+		$this->assertInternalType('boolean', $this->subject->has($key, $type));
 	}
 }

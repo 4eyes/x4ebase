@@ -47,8 +47,8 @@ class StrtolowerViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTe
 	public function testRender() {
 		//testCase | Result
 		$testCases = array(
-			array("Lorem ipsum Dolor", "lorem ipsum dolor"),
-			array("Hello_World", "hello_world")
+			array('Lorem ipsum Dolor', 'lorem ipsum dolor'),
+			array('Hello_World', 'hello_world')
 		);
 
 		$this->renderFromChildren($testCases);

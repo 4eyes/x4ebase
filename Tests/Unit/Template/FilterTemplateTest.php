@@ -44,20 +44,20 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 * @test
 	 */
 	public function testInitialValues() {
-		$this->initialValueTest("filterArray", array());
-		$this->initialValueTest("searchStrings", array());
-		$this->initialValueTest("searchableParameters", array());
-		$this->initialValueTest("filterMethods", array());
+		$this->initialValueTest('filterArray', array());
+		$this->initialValueTest('searchStrings', array());
+		$this->initialValueTest('searchableParameters', array());
+		$this->initialValueTest('filterMethods', array());
 	}
 
 	/**
 	 * @test
 	 */
 	public function testGettersSetters() {
-		$this->arrayGetterSetterTest("filterArray");
-		$this->arrayGetterSetterTest("searchStrings");
-		$this->arrayGetterSetterTest("searchableParameters");
-		$this->arrayGetterSetterTest("filterMethods");
+		$this->arrayGetterSetterTest('filterArray');
+		$this->arrayGetterSetterTest('searchStrings');
+		$this->arrayGetterSetterTest('searchableParameters');
+		$this->arrayGetterSetterTest('filterMethods');
 	}
 
 	/**
@@ -66,10 +66,10 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	public function testAddSearchableParameterAddsParameterOnlyOnce() {
 		$this->subject->setSearchableParameters(array());
 		$testCases = array(
-			array("lorem", array("lorem")),
-			array("ipsum", array("lorem", "ipsum")),
-			array("dolor", array("lorem", "ipsum", "dolor")),
-			array("lorem", array("lorem", "ipsum", "dolor")),
+			array('lorem', array('lorem')),
+			array('ipsum', array('lorem', 'ipsum')),
+			array('dolor', array('lorem', 'ipsum', 'dolor')),
+			array('lorem', array('lorem', 'ipsum', 'dolor')),
 		);
 		foreach ($testCases as $testCase) {
 			$this->subject->addSearchableParameter($testCase[0]);
@@ -81,12 +81,12 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 * @test
 	 */
 	public function testAddMultipleSearchableParametersCallsAddSearchableParameterNTimes() {
-		$this->mockSubject("addSearchableParameter");
+		$this->mockSubject('addSearchableParameter');
 		$testCases = array(
-			array(array("lorem"), 1),
-			array(array("lorem", "ipsum"), 2),
-			array(array("lorem", "ipsum", "dolor"), 3),
-			array(array("lorem", "ipsum", "dolor", "sit"), 4)
+			array(array('lorem'), 1),
+			array(array('lorem', 'ipsum'), 2),
+			array(array('lorem', 'ipsum', 'dolor'), 3),
+			array(array('lorem', 'ipsum', 'dolor', 'sit'), 4)
 		);
 
 		foreach ($testCases as $testCase) {
@@ -94,7 +94,7 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 			foreach ($testCase[0] as $testParameter) {
 				$this->subject
 					->expects($this->at($i))
-					->method("addSearchableParameter")
+					->method('addSearchableParameter')
 					->with($testParameter);
 				$i++;
 			}
@@ -106,11 +106,11 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 * @test
 	 */
 	public function testRemoveSearchableParameter() {
-		$initialState = array("lorem", "ipsum", "dolor", "sit", "amet");
+		$initialState = array('lorem', 'ipsum', 'dolor', 'sit', 'amet');
 		//array($parameter, $result)
 		$testCases = array(
-			array("ipsum", array("lorem", "dolor", "sit", "amet")),
-			array("lorem", array("ipsum", "dolor", "sit", "amet")),
+			array('ipsum', array('lorem', 'dolor', 'sit', 'amet')),
+			array('lorem', array('ipsum', 'dolor', 'sit', 'amet')),
 		);
 		foreach ($testCases as $testCase) {
 			$this->subject->setSearchableParameters($initialState);
@@ -126,10 +126,10 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 		$this->subject->setFilterArray(array());
 		//array(filterKey, filterValue, expectedResult)
 		$testCases = array(
-			array("lorem", "a", array("lorem" => "a")),
-			array("ipsum", "a", array("lorem" => "a", "ipsum" => "a")),
-			array("dolor", "b", array("lorem" => "a", "ipsum" => "a", "dolor" => "b")),
-			array("lorem", "b", array("lorem" => "b", "ipsum" => "a", "dolor" => "b")),
+			array('lorem', 'a', array('lorem' => 'a')),
+			array('ipsum', 'a', array('lorem' => 'a', 'ipsum' => 'a')),
+			array('dolor', 'b', array('lorem' => 'a', 'ipsum' => 'a', 'dolor' => 'b')),
+			array('lorem', 'b', array('lorem' => 'b', 'ipsum' => 'a', 'dolor' => 'b')),
 		);
 		foreach ($testCases as $testCase) {
 			$this->subject->addFilterToFilterArray($testCase[0], $testCase[1]);
@@ -141,10 +141,10 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 * @test
 	 */
 	public function testRemoveFilterFromFilterArray() {
-		$initialState = array("lorem" => "a", "ipsum" => "a", "dolor" => "b", "sit" => "b", "amet" => "c");
+		$initialState = array('lorem' => 'a', 'ipsum' => 'a', 'dolor' => 'b', 'sit' => 'b', 'amet' => 'c');
 		$testCases = array(
-			array("lorem", array("ipsum" => "a", "dolor" => "b", "sit" => "b", "amet" => "c")),
-			array("dolor", array("lorem" => "a", "ipsum" => "a", "sit" => "b", "amet" => "c")),
+			array('lorem', array('ipsum' => 'a', 'dolor' => 'b', 'sit' => 'b', 'amet' => 'c')),
+			array('dolor', array('lorem' => 'a', 'ipsum' => 'a', 'sit' => 'b', 'amet' => 'c')),
 		);
 		foreach ($testCases as $testCase) {
 			$this->subject->setFilterArray($initialState);
@@ -158,9 +158,9 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 */
 	public function testSetSearchStringsFromSpaceSeparatedList() {
 		$testCases = array(
-			array("Lorem", array("Lorem")),
-			array("Lorem! Ipsum", array("Lorem!", "Ipsum")),
-			array("Lorem ! Ipsum", array("Lorem", "!", "Ipsum"))
+			array('Lorem', array('Lorem')),
+			array('Lorem! Ipsum', array('Lorem!', 'Ipsum')),
+			array('Lorem ! Ipsum', array('Lorem', '!', 'Ipsum'))
 		);
 		foreach ($testCases as $testCase) {
 			$this->subject->setSearchStringsFromSpaceSeparatedList($testCase[0]);
@@ -172,11 +172,11 @@ class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 * @test
 	 */
 	public function testGetFilterMethodForParameter() {
-		$initialState = array("lorem" => "a", "ipsum" => "a", "dolor" => "b", "sit" => "b", "amet" => "c");
+		$initialState = array('lorem' => 'a', 'ipsum' => 'a', 'dolor' => 'b', 'sit' => 'b', 'amet' => 'c');
 		$testCases = array(
-			array("lorem", "a"),
-			array("amet", "c"),
-			array("sit", "b")
+			array('lorem', 'a'),
+			array('amet', 'c'),
+			array('sit', 'b')
 		);
 		foreach ($testCases as $testCase) {
 			$this->subject->setFilterMethods($initialState);

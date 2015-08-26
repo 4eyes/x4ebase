@@ -54,17 +54,17 @@ class AddJsFileViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTes
 	 */
 	public function testRender() {
 		$this->mockSubject('isCached');
-		$this->subject->expects($this->at(0))->method("isCached")->will($this->returnValue(FALSE));
-		$this->subject->expects($this->at(1))->method("isCached")->will($this->returnValue(TRUE));
+		$this->subject->expects($this->at(0))->method('isCached')->will($this->returnValue(FALSE));
+		$this->subject->expects($this->at(1))->method('isCached')->will($this->returnValue(TRUE));
 
-		$file = "test";
+		$file = 'test';
 
 		$pageRenderer = $this->getMock(PageRenderer::class, array('addJsFile'), array(), '', FALSE);
 		$pageRenderer->expects($this->once())->method('addJsFile');
-		$this->subject->_set("pageRenderer", $pageRenderer);
+		$this->subject->_set('pageRenderer', $pageRenderer);
 
 		//Avoid TSFE-Action
-		$this->subject->setArguments(array("external" => TRUE));
+		$this->subject->setArguments(array('external' => TRUE));
 		for ($i = 0; $i < 2; $i++) {
 			$this->subject->render($file);
 		}

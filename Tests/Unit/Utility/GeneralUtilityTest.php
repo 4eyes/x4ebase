@@ -69,44 +69,44 @@ class GeneralUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function testGenerateUidArrayForPropertyWithWrongObjectReturnsEmptyArray() {
-		$this->assertSame(array(), GeneralUtility::generateUidArrayForProperty(FALSE, "test"));
+		$this->assertSame(array(), GeneralUtility::generateUidArrayForProperty(FALSE, 'test'));
 	}
 
 	/**
 	 * @test
 	 */
 	public function testGenerateUidArrayForPropertyWithWrongPropertyThrowsException() {
-		$this->setExpectedException("\\RuntimeException");
-		GeneralUtility::generateUidArrayForProperty(new \stdClass(), "test");
+		$this->setExpectedException('\\RuntimeException');
+		GeneralUtility::generateUidArrayForProperty(new \stdClass(), 'test');
 	}
 
 	/**
 	 * @test
 	 */
 	public function testGenerateUidArrayForPropertyWithObjectReturnsArray() {
-		$this->assertSame(array(1, 5), GeneralUtility::generateUidArrayForProperty(new TestClass(1), "objects"));
+		$this->assertSame(array(1, 5), GeneralUtility::generateUidArrayForProperty(new TestClass(1), 'objects'));
 	}
 
 	/**
 	 * @test
 	 */
 	public function testGenerateUidArrayForPropertyWithArrayReturnsArray() {
-		$this->assertSame(array(1, 5), GeneralUtility::generateUidArrayForProperty(new TestClass(1), "array"));
+		$this->assertSame(array(1, 5), GeneralUtility::generateUidArrayForProperty(new TestClass(1), 'array'));
 	}
 
 	/**
 	 * @test
 	 */
 	public function testGenerateUidListForPropertyReturnsString() {
-		$this->assertInternalType('string', GeneralUtility::generateUidListForProperty("", ""));
+		$this->assertInternalType('string', GeneralUtility::generateUidListForProperty('', ''));
 	}
 
 	public function testGetExtConfReturnsArrayOrNull() {
 		$this->assertSame(false, GeneralUtility::getExtConf('testExt'));
 
-		$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['testExt'] = serialize(array("uid" => 1));
+		$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['testExt'] = serialize(array('uid' => 1));
 
-		$this->assertSame(array("uid" => 1), GeneralUtility::getExtConf('testExt'));
+		$this->assertSame(array('uid' => 1), GeneralUtility::getExtConf('testExt'));
 	}
 }
 

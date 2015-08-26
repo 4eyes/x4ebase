@@ -49,8 +49,8 @@ class ContentElementViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelp
 			\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class,
 			array('RECORDS')
 		);
-		$contentObjectRenderer->expects($this->once())->method("RECORDS");
-		$this->subject->_set("cObj", $contentObjectRenderer);
+		$contentObjectRenderer->expects($this->once())->method('RECORDS');
+		$this->subject->_set('cObj', $contentObjectRenderer);
 		$this->subject->render(1);
 	}
 }

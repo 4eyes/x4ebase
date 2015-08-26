@@ -45,17 +45,17 @@ class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase
 	 */
 	public function testInitializeActionFeMode() {
 		$this->mockSubject();
-		$environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, array("isEnvironmentInFrontendMode", "isEnvironmentInBackendMode"));
-		$environmentService->expects($this->once())->method("isEnvironmentInFrontendMode")->will($this->returnValue(TRUE));
-		$this->subject->_set("environmentService", $environmentService);
+		$environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, array('isEnvironmentInFrontendMode', 'isEnvironmentInBackendMode'));
+		$environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->will($this->returnValue(TRUE));
+		$this->subject->_set('environmentService', $environmentService);
 
-		$GLOBALS["TSFE"] = $this->getMock(TypoScriptFrontendController::class, array(), array(), "", FALSE);
+		$GLOBALS['TSFE'] = $this->getMock(TypoScriptFrontendController::class, array(), array(), '', FALSE);
 		$GLOBALS['TSFE']->id = 0;
 
-		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array("findByUid"), array(), "", FALSE);
-		$pageRepository->expects($this->once())->method("findByUid");
+		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array('findByUid'), array(), '', FALSE);
+		$pageRepository->expects($this->once())->method('findByUid');
 
-		$this->subject->_set("pageRepository", $pageRepository);
+		$this->subject->_set('pageRepository', $pageRepository);
 
 		$this->subject->initializeAction();
 	}
@@ -65,17 +65,17 @@ class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase
 	 */
 	public function testInitializeActionBeMode() {
 		$this->mockSubject();
-		$environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, array("isEnvironmentInFrontendMode", "isEnvironmentInBackendMode"));
-		$environmentService->expects($this->once())->method("isEnvironmentInFrontendMode")->will($this->returnValue(FALSE));
-		$environmentService->expects($this->once())->method("isEnvironmentInBackendMode")->will($this->returnValue(TRUE));
-		$this->subject->_set("environmentService", $environmentService);
+		$environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, array('isEnvironmentInFrontendMode', 'isEnvironmentInBackendMode'));
+		$environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->will($this->returnValue(FALSE));
+		$environmentService->expects($this->once())->method('isEnvironmentInBackendMode')->will($this->returnValue(TRUE));
+		$this->subject->_set('environmentService', $environmentService);
 
 		$GLOBALS['_GET']['id'] = 0;
 
-		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array("findByUid"), array(), "", FALSE);
-		$pageRepository->expects($this->once())->method("findByUid");
+		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array('findByUid'), array(), '', FALSE);
+		$pageRepository->expects($this->once())->method('findByUid');
 
-		$this->subject->_set("pageRepository", $pageRepository);
+		$this->subject->_set('pageRepository', $pageRepository);
 
 		$this->subject->initializeAction();
 	}
@@ -85,8 +85,8 @@ class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase
 	 */
 	public function testInjectPageRepository() {
 		$this->mockSubject();
-		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array(), array(), "", FALSE);
+		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array(), array(), '', FALSE);
 		$this->subject->injectPageRepository($pageRepository);
-		$this->assertSame($pageRepository, $this->subject->_get("pageRepository"));
+		$this->assertSame($pageRepository, $this->subject->_get('pageRepository'));
 	}
 }

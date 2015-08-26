@@ -115,7 +115,7 @@ class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function testResolveTableNameRegularExtension() {
-		$tableName = $this->callInaccessibleMethod($this->nameUtility, "resolveTableName", 'X4E\X4ebase\Utility\NamingUtility');
+		$tableName = $this->callInaccessibleMethod($this->nameUtility, 'resolveTableName', 'X4E\X4ebase\Utility\NamingUtility');
 		$this->assertEquals('tx_x4ebase_utility_namingutility', $tableName);
 	}
 
@@ -123,7 +123,7 @@ class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function testResolveTableNameTypo3Extension() {
-		$tableName = $this->callInaccessibleMethod($this->nameUtility, "resolveTableName", 'TYPO3\CMS\Abc\Def\GClass');
+		$tableName = $this->callInaccessibleMethod($this->nameUtility, 'resolveTableName', 'TYPO3\CMS\Abc\Def\GClass');
 		$this->assertEquals('tx_abc_def_gclass', $tableName);
 	}
 
@@ -131,7 +131,7 @@ class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function testResolveTableNoSlash() {
-		$tableName = $this->callInaccessibleMethod($this->nameUtility, "resolveTableName", 'JonasWasHere');
+		$tableName = $this->callInaccessibleMethod($this->nameUtility, 'resolveTableName', 'JonasWasHere');
 		$this->assertEquals('jonaswashere', $tableName);
 	}
 }

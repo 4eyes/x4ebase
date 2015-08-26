@@ -54,7 +54,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	protected function genericSetter($parameterName, $parameterValue) {
 		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
-		call_user_func_array(array($this->subject, "set" . $parameterName), array($parameterValue));
+		call_user_func_array(array($this->subject, 'set' . $parameterName), array($parameterValue));
 	}
 
 	/**
@@ -65,7 +65,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	protected function genericGetter($parameterName) {
 		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
-		return call_user_func(array($this->subject, "get" . $parameterName));
+		return call_user_func(array($this->subject, 'get' . $parameterName));
 	}
 
 	/**
@@ -76,7 +76,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	protected function genericAddTest($parameterName, $testValue) {
 		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
-		call_user_func_array(array($this->subject, "add" . $parameterName), array($testValue));
+		call_user_func_array(array($this->subject, 'add' . $parameterName), array($testValue));
 		$this->assertTrue(
 			$this->genericGetter($parameterName)->contains($testValue)
 		);
@@ -90,7 +90,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	protected function genericRemoveTest($parameterName, $testValue) {
 		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
-		call_user_func_array(array($this->subject, "remove" . $parameterName), array($testValue));
+		call_user_func_array(array($this->subject, 'remove' . $parameterName), array($testValue));
 		$this->assertFalse(
 			$this->genericGetter($parameterName)->contains($testValue)
 		);
@@ -112,7 +112,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	protected function isTest($parameterName) {
 		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
 		$this->genericSetter($parameterName, TRUE);
-		$this->assertTrue($this->subject->{"is" . $parameterName}());
+		$this->assertTrue($this->subject->{'is' . $parameterName}());
 	}
 
 	/**
@@ -131,7 +131,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param String $parameterName The name of the model parameter
 	 */
 	protected function stringGetterSetterTest($parameterName) {
-		$testVars = array("test", "123");
+		$testVars = array('test', '123');
 		foreach ($testVars as $testVar) {
 			$this->genericGetterSetterTest($parameterName, $testVar);
 		}
@@ -188,7 +188,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$testVars = array(
 			array(1, 2, 3),
 			array(3, 4, 5),
-			array("a", "b", "c")
+			array('a', 'b', 'c')
 		);
 		foreach ($testVars as $testVar) {
 			$this->genericGetterSetterTest($parameterName, $testVar);

@@ -42,14 +42,14 @@ class SecurityUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testSaltPassword() {
 		$this->markTestIncomplete(
-			"Untestable thanks to static method calls"
+			'Untestable thanks to static method calls'
 		);
 
 		$testCases = array(
-			array("Lorem", ""),
-			array("ipsum", ""),
-			array("Dolor", ""),
-			array("sit", ""),
+			array('Lorem', ''),
+			array('ipsum', ''),
+			array('Dolor', ''),
+			array('sit', ''),
 		);
 		foreach ($testCases as $testCase) {
 			$this->assertSame($testCase[1], SecurityUtility::saltPassword($testCase[0]));
@@ -58,14 +58,14 @@ class SecurityUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testIsSaltedHash() {
 		$this->markTestIncomplete(
-			"Untestable thanks to static method calls"
+			'Untestable thanks to static method calls'
 		);
 
 		$testCases = array(
-			array("\$M", TRUE),
-			array("\$C", TRUE),
-			array("", FALSE),
-			array("", TRUE)
+			array('\$M', TRUE),
+			array('\$C', TRUE),
+			array('', FALSE),
+			array('', TRUE)
 		);
 		foreach ($testCases as $testCase) {
 			$this->assertSame($testCase[1], SecurityUtility::isSaltedHash($testCase[0]));
@@ -73,10 +73,10 @@ class SecurityUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	public function testIsSaltedHashReturnsBoolean() {
-		$this->assertInternalType("boolean", SecurityUtility::isSaltedHash(""));
+		$this->assertInternalType('boolean', SecurityUtility::isSaltedHash(''));
 	}
 
 	public function testCheckPasswordReturnsBoolean() {
-		$this->assertInternalType("boolean", SecurityUtility::checkPassword("", ""));
+		$this->assertInternalType('boolean', SecurityUtility::checkPassword('', ''));
 	}
 }

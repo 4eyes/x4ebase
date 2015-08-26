@@ -42,22 +42,22 @@ class TemplateViewTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	public function testBuildParserConfiguration() {
 		$this->mockSubject();
-		$parserConfiguration = $this->getMock(\TYPO3\CMS\Fluid\Core\Parser\Configuration::class, array("addInterceptor"));
-		$parserConfiguration->expects($this->once())->method("addInterceptor")->with(new \X4E\X4ebase\View\Interceptor\ReplaceTabs());
+		$parserConfiguration = $this->getMock(\TYPO3\CMS\Fluid\Core\Parser\Configuration::class, array('addInterceptor'));
+		$parserConfiguration->expects($this->once())->method('addInterceptor')->with(new \X4E\X4ebase\View\Interceptor\ReplaceTabs());
 
-		$objectManager = $this->getMock(\TYPO3\CMS\Extbase\Object\ObjectManager::class, array("get"), array(), "", FALSE);
-		$objectManager->expects($this->at(0))->method("get")->will($this->returnValue($parserConfiguration));
-		$objectManager->expects($this->at(1))->method("get")->will($this->returnValue(new \X4E\X4ebase\View\Interceptor\ReplaceTabs()));
+		$objectManager = $this->getMock(\TYPO3\CMS\Extbase\Object\ObjectManager::class, array('get'), array(), '', FALSE);
+		$objectManager->expects($this->at(0))->method('get')->will($this->returnValue($parserConfiguration));
+		$objectManager->expects($this->at(1))->method('get')->will($this->returnValue(new \X4E\X4ebase\View\Interceptor\ReplaceTabs()));
 
-		$request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array("getFormat"));
-		$request->expects($this->once())->method("getFormat")->will($this->returnValue("json"));
+		$request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array('getFormat'));
+		$request->expects($this->once())->method('getFormat')->will($this->returnValue('json'));
 
-		$controllerContext = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext::class, array("getRequest"));
-		$controllerContext->expects($this->once())->method("getRequest")->will($this->returnValue($request));
+		$controllerContext = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext::class, array('getRequest'));
+		$controllerContext->expects($this->once())->method('getRequest')->will($this->returnValue($request));
 
-		$this->subject->_set("objectManager", $objectManager);
-		$this->subject->_set("controllerContext", $controllerContext);
+		$this->subject->_set('objectManager', $objectManager);
+		$this->subject->_set('controllerContext', $controllerContext);
 
-		$this->subject->_call("buildParserConfiguration");
+		$this->subject->_call('buildParserConfiguration');
 	}
 }

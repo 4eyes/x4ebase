@@ -43,7 +43,7 @@ class NullSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testAll() {
 
 		$this->markTestSkipped(
-			"What about implementing another Interface instead of introducing empty methods?"
+			'What about implementing another Interface instead of introducing empty methods?'
 		);
 	}
 }

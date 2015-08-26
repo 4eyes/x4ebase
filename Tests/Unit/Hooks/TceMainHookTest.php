@@ -44,25 +44,25 @@ class TceMainHookTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @test
 	 */
 	public function testProcessDatamap_afterDatabaseOperations_SetsPreviewVars() {
-		$this->mockSubject("setPreviewVars");
-		$this->subject->expects($this->once())->method("setPreviewVars");
+		$this->mockSubject('setPreviewVars');
+		$this->subject->expects($this->once())->method('setPreviewVars');
 		$GLOBALS['_POST']['_savedokview_x'] = TRUE;
-		$this->subject->processDatamap_afterDatabaseOperations("", "", "", array(), "");
+		$this->subject->processDatamap_afterDatabaseOperations('', '', '', array(), '');
 	}
 
 	/**
 	 * @test
 	 */
 	public function testProcessDatamap_afterDatabaseOperations_SetsNoPreviewVars() {
-		$this->mockSubject("setPreviewVars");
-		$this->subject->expects($this->never())->method("setPreviewVars");
+		$this->mockSubject('setPreviewVars');
+		$this->subject->expects($this->never())->method('setPreviewVars');
 		unset($GLOBALS['_POST']['_savedokview_x']);
-		$this->subject->processDatamap_afterDatabaseOperations("", "", "", array(), "");
+		$this->subject->processDatamap_afterDatabaseOperations('', '', '', array(), '');
 	}
 
 	public function testSetPreviewVars() {
 		$this->markTestIncomplete(
-			"Untestable thanks to the use of BackendUtility"
+			'Untestable thanks to the use of BackendUtility'
 		);
 	}
 }

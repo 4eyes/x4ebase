@@ -59,21 +59,21 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	protected function mockSubject() {
 		call_user_func_array('parent::' . __FUNCTION__, func_get_args());
-		$this->subject->_set("view", $this->view);
-		$this->subject->_set("request", $this->request);
-		$this->subject->_set("settings", $this->settings);
-		$this->subject->_set("environmentService", $this->environmentService);
+		$this->subject->_set('view', $this->view);
+		$this->subject->_set('request', $this->request);
+		$this->subject->_set('settings', $this->settings);
+		$this->subject->_set('environmentService', $this->environmentService);
 	}
 
 	/**
-	 * With this helper function "request" arguments can be set with ease
+	 * With this helper function 'request' arguments can be set with ease
 	 *
 	 * @param array $arguments The arguments of the request
 	 */
 	protected function setArguments($arguments) {
 		$this->request = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array('dummy'), array(), '', FALSE);
 		$this->request->_set('arguments', $arguments);
-		$this->subject->_set("request", $this->request);
+		$this->subject->_set('request', $this->request);
 	}
 
 	/**
@@ -96,7 +96,7 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			->_get('view')
 			->expects($this->exactly(count($assignments)))
 			->method('assign');
-		call_user_func_array(array($methodObject, "withConsecutive"), $assignments);
+		call_user_func_array(array($methodObject, 'withConsecutive'), $assignments);
 	}
 
 	/**

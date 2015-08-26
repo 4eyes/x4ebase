@@ -47,7 +47,7 @@ class UrlencodeViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTes
 	public function testRender() {
 		//input
 		$testCases = array(
-			"Lorem-IpsumçDolor Sit_amet"
+			'Lorem-IpsumçDolor Sit_amet'
 		);
 
 		$this->renderFromArgument($testCases);

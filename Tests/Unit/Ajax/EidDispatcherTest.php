@@ -44,34 +44,34 @@ class EidDispatcherTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 * @test
 	 */
 	public function testInitialValues() {
-		$this->initialValueTest("vendor", NULL);
-		$this->initialValueTest("extensionName", NULL);
-		$this->initialValueTest("pluginName", NULL);
-		$this->initialValueTest("controller", NULL);
-		$this->initialValueTest("action", NULL);
-		$this->initialValueTest("forceVendor", TRUE);
-		$this->initialValueTest("forceExtensionName", TRUE);
-		$this->initialValueTest("forcePluginName", FALSE);
-		$this->initialValueTest("forceController", FALSE);
-		$this->initialValueTest("forceAction", FALSE);
-		$this->initialValueTest("requestFormat", "html");
+		$this->initialValueTest('vendor', NULL);
+		$this->initialValueTest('extensionName', NULL);
+		$this->initialValueTest('pluginName', NULL);
+		$this->initialValueTest('controller', NULL);
+		$this->initialValueTest('action', NULL);
+		$this->initialValueTest('forceVendor', TRUE);
+		$this->initialValueTest('forceExtensionName', TRUE);
+		$this->initialValueTest('forcePluginName', FALSE);
+		$this->initialValueTest('forceController', FALSE);
+		$this->initialValueTest('forceAction', FALSE);
+		$this->initialValueTest('requestFormat', 'html');
 	}
 
 	/**
 	 * @test
 	 */
 	public function testGettersSetters() {
-		$this->stringGetterSetterTest("vendor");
-		$this->stringGetterSetterTest("extensionName");
-		$this->stringGetterSetterTest("pluginName");
-		$this->stringGetterSetterTest("controller");
-		$this->stringGetterSetterTest("action");
-		$this->booleanGetterSetterTest("forceVendor");
-		$this->booleanGetterSetterTest("forceExtensionName");
-		$this->booleanGetterSetterTest("forcePluginName");
-		$this->booleanGetterSetterTest("forceController");
-		$this->booleanGetterSetterTest("forceAction");
-		$this->stringGetterSetterTest("requestFormat");
+		$this->stringGetterSetterTest('vendor');
+		$this->stringGetterSetterTest('extensionName');
+		$this->stringGetterSetterTest('pluginName');
+		$this->stringGetterSetterTest('controller');
+		$this->stringGetterSetterTest('action');
+		$this->booleanGetterSetterTest('forceVendor');
+		$this->booleanGetterSetterTest('forceExtensionName');
+		$this->booleanGetterSetterTest('forcePluginName');
+		$this->booleanGetterSetterTest('forceController');
+		$this->booleanGetterSetterTest('forceAction');
+		$this->stringGetterSetterTest('requestFormat');
 	}
 
 	public function testBootstrapAndDispatch() {
@@ -82,18 +82,18 @@ class EidDispatcherTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 
 	public function testConstruct() {
 		$this->mockSubject();
-		$vendor = "Lorem";
-		$extensionName = "Ipsum";
-		$pluginName = "Dolor";
-		$controller = "Sit";
-		$action = "Amet";
+		$vendor = 'Lorem';
+		$extensionName = 'Ipsum';
+		$pluginName = 'Dolor';
+		$controller = 'Sit';
+		$action = 'Amet';
 
 		$this->subject->__construct($vendor, $extensionName, $pluginName, $controller, $action);
 
-		$this->assertEquals($vendor, $this->subject->_get("vendor"));
-		$this->assertEquals($extensionName, $this->subject->_get("extensionName"));
-		$this->assertEquals($pluginName, $this->subject->_get("pluginName"));
-		$this->assertEquals($controller, $this->subject->_get("controller"));
-		$this->assertEquals($action, $this->subject->_get("action"));
+		$this->assertEquals($vendor, $this->subject->_get('vendor'));
+		$this->assertEquals($extensionName, $this->subject->_get('extensionName'));
+		$this->assertEquals($pluginName, $this->subject->_get('pluginName'));
+		$this->assertEquals($controller, $this->subject->_get('controller'));
+		$this->assertEquals($action, $this->subject->_get('action'));
 	}
 }

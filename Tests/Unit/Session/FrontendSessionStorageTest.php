@@ -41,71 +41,71 @@ class FrontendSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBa
 	protected $subject;
 
 	public function testGet() {
-		$this->mockSubject("getFrontendUser", "getKey");
+		$this->mockSubject('getFrontendUser', 'getKey');
 
-		$key = "lorem";
+		$key = 'lorem';
 		$type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
 
-		$frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, array("getKey"));
-		$frontendUser->expects($this->once())->method("getKey")->with($type, $key);
+		$frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, array('getKey'));
+		$frontendUser->expects($this->once())->method('getKey')->with($type, $key);
 
-		$this->subject->expects($this->once())->method("getFrontendUser")->willReturn($frontendUser);
-		$this->subject->expects($this->once())->method("getKey")->with($key)->willReturn($key);
+		$this->subject->expects($this->once())->method('getFrontendUser')->willReturn($frontendUser);
+		$this->subject->expects($this->once())->method('getKey')->with($key)->willReturn($key);
 
 		$this->subject->get($key, $type);
 	}
 
 	public function testSet() {
-		$this->mockSubject("getFrontendUser", "getKey");
+		$this->mockSubject('getFrontendUser', 'getKey');
 
-		$key = "lorem";
-		$data = "";
+		$key = 'lorem';
+		$data = '';
 		$type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
 
-		$frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, array("setKey"));
-		$frontendUser->expects($this->once())->method("setKey")->with($type, $key, $data);
-		$this->subject->expects($this->once())->method("getFrontendUser")->willReturn($frontendUser);
-		$this->subject->expects($this->once())->method("getKey")->with($key)->willReturn($key);
+		$frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, array('setKey'));
+		$frontendUser->expects($this->once())->method('setKey')->with($type, $key, $data);
+		$this->subject->expects($this->once())->method('getFrontendUser')->willReturn($frontendUser);
+		$this->subject->expects($this->once())->method('getKey')->with($key)->willReturn($key);
 
 		$this->subject->set($key, $data, $type);
 	}
 
 	public function testRemove_HasKey_CallsSetWithNull() {
-		$this->mockSubject("has", "set");
+		$this->mockSubject('has', 'set');
 
-		$key = "lorem";
+		$key = 'lorem';
 		$data = NULL;
 		$type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
 
-		$this->subject->expects($this->once())->method("has")->with($key, $type)->willReturn(TRUE);
-		$this->subject->expects($this->once())->method("set")->with($key, $data, $type);
+		$this->subject->expects($this->once())->method('has')->with($key, $type)->willReturn(TRUE);
+		$this->subject->expects($this->once())->method('set')->with($key, $data, $type);
 
 		$this->subject->remove($key, $type);
 	}
 
 	public function testRemove_NotHasKey_NotCallsSet() {
-		$this->mockSubject("has", "set");
-		$this->subject->expects($this->once())->method("has")->willReturn(FALSE);
-		$this->subject->expects($this->never())->method("set");
+		$this->mockSubject('has', 'set');
+		$this->subject->expects($this->once())->method('has')->willReturn(FALSE);
+		$this->subject->expects($this->never())->method('set');
 
-		$this->subject->remove("");
+		$this->subject->remove('');
 	}
 
 	public function testGetAll() {
-		$this->mockSubject("getFrontendUser");
-		$frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, array("setKey"));
-		$frontendUser->sesData = "HelloWorld";
-		$this->subject->expects($this->once())->method("getFrontendUser")->willReturn($frontendUser);
+		$this->mockSubject('getFrontendUser');
+		$frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, array('setKey'));
+		$frontendUser->sesData = 'HelloWorld';
+		$this->subject->expects($this->once())->method('getFrontendUser')->willReturn($frontendUser);
 
-		$this->assertEquals("HelloWorld", $this->subject->getAll());
+		$this->assertEquals('HelloWorld', $this->subject->getAll());
 	}
 
 	public function testGetFrontendUser() {
 		$this->mockSubject();
-		$tsfe = $this->getMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, array(), array(), "", FALSE);
-		$tsfe->fe_user = "test";
-		$GLOBALS["TSFE"] = $tsfe;
-		$this->assertSame("test", $this->subject->_call("getFrontendUser"));
+		$tsfe = $this->getMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, array(), array(), '', FALSE);
+		$tsfe->fe_user = 'test';
+		$GLOBALS['TSFE'] = $tsfe;
+		$this->assertSame('test', $this->subject->_call('getFrontendUser'));
 	}
 
 }

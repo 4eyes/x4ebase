@@ -60,8 +60,8 @@ class ZipUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function testCreateThrowsFileNotExistException() {
-		$this->setExpectedException("Exception");
-		ZipUtility::create(dirname(__FILE__) . '/HelloWorld', "test");
+		$this->setExpectedException('Exception');
+		ZipUtility::create(dirname(__FILE__) . '/HelloWorld', 'test');
 	}
 
 	/**
@@ -77,7 +77,7 @@ class ZipUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function testExtractThrowsException() {
-		$this->setExpectedException("Exception");
+		$this->setExpectedException('Exception');
 		ZipUtility::extract();
 	}
 }

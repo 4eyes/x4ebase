@@ -43,8 +43,8 @@ class JsonEncodeViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTe
 
 	public function testRender() {
 		$testCases = array(
-			array("Lorem", 1, "Hello" => "World"),
-			array("My" => "Name", "Is" => "Spock")
+			array('Lorem', 1, 'Hello' => 'World'),
+			array('My' => 'Name', 'Is' => 'Spock')
 		);
 
 		$this->renderFromArgument($testCases);

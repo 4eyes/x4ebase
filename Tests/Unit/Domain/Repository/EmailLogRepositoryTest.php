@@ -39,16 +39,16 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 class EmailLogRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
 
 	public function testInitializeObject() {
-		$this->mockSubject("setDefaultQuerySettings");
+		$this->mockSubject('setDefaultQuerySettings');
 
-		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array("setRespectStoragePage"), array(), "", FALSE);
-		$querySettings->expects($this->once())->method("setRespectStoragePage");
+		$querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, array('setRespectStoragePage'), array(), '', FALSE);
+		$querySettings->expects($this->once())->method('setRespectStoragePage');
 
-		$objectManager = $this->getMock(ObjectManager::class, array("create"), array(), "", FALSE);
-		$objectManager->expects($this->once())->method("create")->with('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
+		$objectManager = $this->getMock(ObjectManager::class, array('create'), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('create')->with('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
 
-		$this->subject->expects($this->once())->method("setDefaultQuerySettings")->with($querySettings);
-		$this->subject->_set("objectManager", $objectManager);
+		$this->subject->expects($this->once())->method('setDefaultQuerySettings')->with($querySettings);
+		$this->subject->_set('objectManager', $objectManager);
 
 		$this->subject->initializeObject();
 	}
