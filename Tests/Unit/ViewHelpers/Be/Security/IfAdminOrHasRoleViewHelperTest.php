@@ -67,7 +67,7 @@ class IfAdminOrHasRoleViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHe
 		$this->mockSubject('backendUserIsAdmin', 'renderThenChild');
 		$this->subject->expects($this->once())
 			->method('backendUserIsAdmin')
-			->will($this->returnValue(TRUE));
+			->willReturn(TRUE);
 		$this->subject->expects($this->once())
 			->method('renderThenChild');
 

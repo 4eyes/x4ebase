@@ -56,7 +56,7 @@ class AddSlashesViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTe
 
 		for ($i = 0; $i < count($testCases); $i++) {
 			$this->subject->expects($this->at($i))->method('renderChildren')
-				->will($this->returnValue($testCases[$i][0]));
+				->willReturn($testCases[$i][0]);
 		}
 		foreach ($testCases as $testCase) {
 			$this->assertSame($testCase[1], $this->subject->render());

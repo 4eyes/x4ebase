@@ -46,14 +46,14 @@ class TemplateViewTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$parserConfiguration->expects($this->once())->method('addInterceptor')->with(new \X4E\X4ebase\View\Interceptor\ReplaceTabs());
 
 		$objectManager = $this->getMock(\TYPO3\CMS\Extbase\Object\ObjectManager::class, array('get'), array(), '', FALSE);
-		$objectManager->expects($this->at(0))->method('get')->will($this->returnValue($parserConfiguration));
-		$objectManager->expects($this->at(1))->method('get')->will($this->returnValue(new \X4E\X4ebase\View\Interceptor\ReplaceTabs()));
+		$objectManager->expects($this->at(0))->method('get')->willReturn($parserConfiguration);
+		$objectManager->expects($this->at(1))->method('get')->willReturn(new \X4E\X4ebase\View\Interceptor\ReplaceTabs());
 
 		$request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array('getFormat'));
-		$request->expects($this->once())->method('getFormat')->will($this->returnValue('json'));
+		$request->expects($this->once())->method('getFormat')->willReturn('json');
 
 		$controllerContext = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext::class, array('getRequest'));
-		$controllerContext->expects($this->once())->method('getRequest')->will($this->returnValue($request));
+		$controllerContext->expects($this->once())->method('getRequest')->willReturn($request);
 
 		$this->subject->_set('objectManager', $objectManager);
 		$this->subject->_set('controllerContext', $controllerContext);

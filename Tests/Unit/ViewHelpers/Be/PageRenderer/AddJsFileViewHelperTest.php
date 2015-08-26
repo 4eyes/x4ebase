@@ -61,10 +61,10 @@ class AddJsFileViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTes
 		$this->subject
 			->expects($this->once())
 			->method('getDocInstance')
-			->will($this->returnValue($doc));
+			->willReturn($doc);
 		$doc->expects($this->once())
 			->method('getPageRenderer')
-			->will($this->returnValue($pageRenderer));
+			->willReturn($pageRenderer);
 		$pageRenderer->expects($this->once())
 			->method('addJsFile');
 
@@ -85,10 +85,10 @@ class AddJsFileViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTes
 		$this->subject
 			->expects($this->once())
 			->method('getDocInstance')
-			->will($this->returnValue($doc));
+			->willReturn($doc);
 		$doc->expects($this->once())
 			->method('getPageRenderer')
-			->will($this->returnValue($pageRenderer));
+			->willReturn($pageRenderer);
 		$pageRenderer->expects($this->once())
 			->method('addJsFile');
 

@@ -73,7 +73,7 @@ class SaveAndPreviewHookTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 
 		$backendUtility = $this->getAccessibleMock(\TYPO3\CMS\Backend\Utility\BackendUtility::class, array('getPageTSconfig'), array(), '\\TYPO3\\CMS\\Backend\\Utility\\BackendUtility', FALSE);
-		$backendUtility->expects($this->once())->method('getPageTSconfig')->will($this->returnValue($pageTs));
+		$backendUtility->expects($this->once())->method('getPageTSconfig')->willReturn($pageTs);
 
 		$GLOBALS['_POST']['data'] = array($table => array());
 

@@ -52,7 +52,7 @@ class AbstractBackendTagBasedViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base
 			\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class,
 			array('exists', 'get')
 		);
-		$this->viewHelperVariableContainer->expects($this->once())->method('exists')->will($this->returnValue(TRUE));
+		$this->viewHelperVariableContainer->expects($this->once())->method('exists')->willReturn(TRUE);
 		$this->viewHelperVariableContainer->expects($this->once())->method('get');
 
 		$this->subject->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);
@@ -73,13 +73,13 @@ class AbstractBackendTagBasedViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base
 		$this->markTestIncomplete(
 			'methods of abstract classes cannot be mocked for accessible mocks'
 		);
-		//$this->subject->expects($this->once())->method('createDocInstance')->will($this->returnValue($doc));
+		//$this->subject->expects($this->once())->method('createDocInstance')->willReturn($doc);
 
 		$this->viewHelperVariableContainer = $this->getMock(
 			\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class,
 			array('exists', 'add')
 		);
-		$this->viewHelperVariableContainer->expects($this->once())->method('exists')->will($this->returnValue(FALSE));
+		$this->viewHelperVariableContainer->expects($this->once())->method('exists')->willReturn(FALSE);
 		$this->viewHelperVariableContainer->expects($this->once())->method('add');
 
 		$this->subject->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);

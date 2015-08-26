@@ -131,6 +131,6 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			->expects($this->once())
 			->method($method)
 			->withConsecutive($argumentsArray)
-			->will($this->returnValue($expectedReturnValue));
+			->willReturn($expectedReturnValue);
 	}
 }

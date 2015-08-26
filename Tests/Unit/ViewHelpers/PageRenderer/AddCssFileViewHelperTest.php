@@ -54,8 +54,8 @@ class AddCssFileViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTe
 	 */
 	public function testRender() {
 		$this->mockSubject('isCached');
-		$this->subject->expects($this->at(0))->method('isCached')->will($this->returnValue(FALSE));
-		$this->subject->expects($this->at(1))->method('isCached')->will($this->returnValue(TRUE));
+		$this->subject->expects($this->at(0))->method('isCached')->willReturn(FALSE);
+		$this->subject->expects($this->at(1))->method('isCached')->willReturn(TRUE);
 
 		$file = 'test';
 

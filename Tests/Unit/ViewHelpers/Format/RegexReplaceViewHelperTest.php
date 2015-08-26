@@ -66,7 +66,7 @@ class RegexReplaceViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelper
 
 		for ($i = 0; $i < count($testCases); $i++) {
 			$this->subject->expects($this->at($i))->method('renderChildren')
-				->will($this->returnValue($testCases[$i][0]));
+				->willReturn($testCases[$i][0]);
 		}
 		foreach ($testCases as $testCase) {
 			$this->assertSame($testCase[3], $this->subject->render($testCase[1], $testCase[2]));

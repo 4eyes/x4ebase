@@ -88,7 +88,7 @@ class ReplaceTabsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->replaceTabs->_get('objectManager')
 			->expects($this->once())
 			->method('create')
-			->will($this->returnValue($this->isInstanceOf('\\TYPO3\\CMS\\Fluid\\Core\\Parser\\SyntaxTree\\NodeInterface')));
+			->willReturn($this->isInstanceOf('\\TYPO3\\CMS\\Fluid\\Core\\Parser\\SyntaxTree\\NodeInterface'));
 		$this->replaceTabs->process($textNode, 1, $parsingState);
 	}
 

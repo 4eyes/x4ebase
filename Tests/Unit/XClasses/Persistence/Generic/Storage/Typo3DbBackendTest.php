@@ -56,9 +56,9 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$tableName = '';
 		$sql = array();
 
-		$querySettings->expects($this->once())->method('getRespectSysLanguage')->will($this->returnValue(FALSE));
-		$querySettings->expects($this->once())->method('getRespectSysLanguageAlternative')->will($this->returnValue(TRUE));
-		$querySettings->expects($this->once())->method('getRespectStoragePage')->will($this->returnValue(FALSE));
+		$querySettings->expects($this->once())->method('getRespectSysLanguage')->willReturn(FALSE);
+		$querySettings->expects($this->once())->method('getRespectSysLanguageAlternative')->willReturn(TRUE);
+		$querySettings->expects($this->once())->method('getRespectStoragePage')->willReturn(FALSE);
 		$this->subject->expects($this->never())->method('addSysLanguageStatement');
 		$this->subject->expects($this->once())->method('addAlternativeSysLanguageStatement');
 		$this->subject->expects($this->never())->method('addPageIdStatement');
@@ -78,9 +78,9 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$tableName = '';
 		$sql = array();
 
-		$querySettings->expects($this->once())->method('getRespectSysLanguage')->will($this->returnValue(FALSE));
-		$querySettings->expects($this->once())->method('getRespectSysLanguageAlternative')->will($this->returnValue(FALSE));
-		$querySettings->expects($this->once())->method('getRespectStoragePage')->will($this->returnValue(FALSE));
+		$querySettings->expects($this->once())->method('getRespectSysLanguage')->willReturn(FALSE);
+		$querySettings->expects($this->once())->method('getRespectSysLanguageAlternative')->willReturn(FALSE);
+		$querySettings->expects($this->once())->method('getRespectStoragePage')->willReturn(FALSE);
 		$this->subject->expects($this->never())->method('addSysLanguageStatement');
 		$this->subject->expects($this->never())->method('addAlternativeSysLanguageStatement');
 		$this->subject->expects($this->never())->method('addPageIdStatement');
@@ -103,7 +103,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getSysLanguageUid')
 		);
-		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->will($this->returnValue(1));
+		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->willReturn(1);
 
 		$expectedResult = ' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval(1);
 
@@ -126,7 +126,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getSysLanguageUid')
 		);
-		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->will($this->returnValue(1));
+		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->willReturn(1);
 
 		$expectedResult = $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . ' IN (-1,0) OR ('
 			. $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval($querySettings->getSysLanguageUid())
@@ -152,7 +152,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getSysLanguageUid')
 		);
-		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->will($this->returnValue(0));
+		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->willReturn(0);
 
 		$expectedResult = $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . ' IN (-1,0)';
 
@@ -172,7 +172,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getSysLanguageUid')
 		);
-		$querySettings->expects($this->any())->method('getSysLanguageUid')->will($this->returnValue(0));
+		$querySettings->expects($this->any())->method('getSysLanguageUid')->willReturn(0);
 
 		$GLOBALS['TCA'][$tableName]['ctrl'] = array(
 			'languageField' => 'language',
@@ -180,13 +180,13 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 
 		$source = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Selector::class, array('getSelectorName'), array(), '', FALSE);
-		$source->expects($this->once())->method('getSelectorName')->will($this->returnValue($tableName));
+		$source->expects($this->once())->method('getSelectorName')->willReturn($tableName);
 		$databaseHandle = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, array('exec_SELECTgetSingleRow'));
-		$databaseHandle->expects($this->once())->method('exec_SELECTgetSingleRow')->will($this->returnValue($newRow));
+		$databaseHandle->expects($this->once())->method('exec_SELECTgetSingleRow')->willReturn($newRow);
 		$this->subject->_set('databaseHandle', $databaseHandle);
 		$pageRepository = $this->getMock(\TYPO3\CMS\Frontend\Page\PageRepository::class, array('versionOL', 'getPageOverlay', 'getRecordOverlay'));
 
-		$this->subject->expects($this->once())->method('getPageRepository')->will($this->returnValue($pageRepository));
+		$this->subject->expects($this->once())->method('getPageRepository')->willReturn($pageRepository);
 
 		$rows = array(array('1' => 1));
 

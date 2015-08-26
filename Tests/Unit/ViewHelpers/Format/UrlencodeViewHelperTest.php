@@ -65,7 +65,7 @@ class UrlencodeViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTes
 
 		for ($i = 0; $i < count($testCases); $i++) {
 			$this->subject->expects($this->at($i))->method('renderChildren')
-				->will($this->returnValue($testCases[$i]));
+				->willReturn($testCases[$i]);
 		}
 		foreach ($testCases as $testCase) {
 			$this->assertSame(str_replace('%20', ' ', rawurlencode($testCase)), $this->subject->render());

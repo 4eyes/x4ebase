@@ -72,7 +72,7 @@ class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			->expects($this->any())
 			->method('getConfiguration')
 			->withAnyParameters()
-			->will($this->returnValue($this->configArray));
+			->willReturn($this->configArray);
 
 		$this->nameUtility->injectConfigurationManager($configurationManagerMock);
 	}

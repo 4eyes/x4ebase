@@ -50,20 +50,20 @@ class TypolinkViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTest
 	protected function createEmptyLinkHref() {
 		$mock = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, array('getTypoLink_URL'));
 		$mock->expects($this->any())->method('getTypoLink_URL')
-			->will($this->returnValue(FALSE));
+			->willReturn(FALSE);
 		return $mock;
 	}
 
 	public function createNonEmptyLinkHref() {
 		$mock = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, array('getTypoLink_URL'));
 		$mock->expects($this->any())->method('getTypoLink_URL')
-			->will($this->returnValue('Hello'));
+			->willReturn('Hello');
 		return $mock;
 	}
 
 	protected function mockObjectManager($mockedContentObjectRenderer) {
 		$mock = $this->getMock(ObjectManager::class, array('get'));
-		$mock->expects($this->any())->method('get')->will($this->returnValue($mockedContentObjectRenderer));
+		$mock->expects($this->any())->method('get')->willReturn($mockedContentObjectRenderer);
 		return $mock;
 	}
 
@@ -71,7 +71,7 @@ class TypolinkViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTest
 		//invalid $parameter and $keepContent FALSE
 		$this->mockSubject('renderChildren');
 		$this->subject->expects($this->any())->method('renderChildren')
-			->will($this->returnValue('Hello'));
+			->willReturn('Hello');
 		$this->subject->_set('objectManager', $this->mockObjectManager($this->createEmptyLinkHref()));
 		$this->assertEquals('', $this->subject->render('Hello'));
 

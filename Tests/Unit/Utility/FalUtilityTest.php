@@ -61,15 +61,15 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$subSubFolder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFolder', 'createFolder', 'getSubfolder'), array(), '', FALSE);
 
 		$subFolder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFolder', 'createFolder', 'getSubfolder'), array(), '', FALSE);
-		$subFolder->expects($this->once())->method('hasFolder')->will($this->returnValue(FALSE));
-		$subFolder->expects($this->once())->method('createFolder')->will($this->returnValue($subSubFolder));
+		$subFolder->expects($this->once())->method('hasFolder')->willReturn(FALSE);
+		$subFolder->expects($this->once())->method('createFolder')->willReturn($subSubFolder);
 
 		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFolder', 'createFolder', 'getSubfolder'), array(), '', FALSE);
-		$folder->expects($this->once())->method('hasFolder')->will($this->returnValue(TRUE));
-		$folder->expects($this->once())->method('getSubfolder')->will($this->returnValue($subFolder));
+		$folder->expects($this->once())->method('hasFolder')->willReturn(TRUE);
+		$folder->expects($this->once())->method('getSubfolder')->willReturn($subFolder);
 
 		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('getDefaultFolder'), array(), '', FALSE);
-		$storage->expects($this->once())->method('getDefaultFolder')->will($this->returnValue($folder));
+		$storage->expects($this->once())->method('getDefaultFolder')->willReturn($folder);
 
 		$folderName = 'lorem/ipsum';
 
@@ -82,7 +82,7 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array(), array(), '', FALSE);
 
 		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('getDefaultFolder'), array(), '', FALSE);
-		$storage->expects($this->once())->method('getDefaultFolder')->will($this->returnValue($folder));
+		$storage->expects($this->once())->method('getDefaultFolder')->willReturn($folder);
 
 		$this->assertSame($folder, $this->subject->getFolderObject($storage));
 	}
@@ -93,9 +93,9 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$fileObject = $this->getMock(\TYPO3\CMS\Core\Resource\FileReference::class, array(), array(), '', FALSE);
 
 		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('getFile', 'addUploadedFile'), array(), '', FALSE);
-		$storage->expects($this->once())->method('getFile')->will($this->returnValue($fileObject));
+		$storage->expects($this->once())->method('getFile')->willReturn($fileObject);
 		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFile', 'getIdentifier'), array(), '', FALSE);
-		$folder->expects($this->once())->method('hasFile')->will($this->returnValue(TRUE));
+		$folder->expects($this->once())->method('hasFile')->willReturn(TRUE);
 		$folder->expects($this->once())->method('getIdentifier');
 
 		$fileInfo = array(
@@ -111,9 +111,9 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$fileObject = $this->getMock(\TYPO3\CMS\Core\Resource\FileReference::class, array(), array(), '', FALSE);
 
 		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('addUploadedFile'), array(), '', FALSE);
-		$storage->expects($this->once())->method('addUploadedFile')->will($this->returnValue($fileObject));
+		$storage->expects($this->once())->method('addUploadedFile')->willReturn($fileObject);
 		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFile', 'getIdentifier'), array(), '', FALSE);
-		$folder->expects($this->once())->method('hasFile')->will($this->returnValue(FALSE));
+		$folder->expects($this->once())->method('hasFile')->willReturn(FALSE);
 
 		$fileInfo = array(
 			'name' => 'lorem'
@@ -128,7 +128,7 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, array('addUploadedFile'), array(), '', FALSE);
 		$storage->expects($this->once())->method('addUploadedFile')->will($this->throwException(new \TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException));
 		$folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, array('hasFile', 'getIdentifier'), array(), '', FALSE);
-		$folder->expects($this->once())->method('hasFile')->will($this->returnValue(FALSE));
+		$folder->expects($this->once())->method('hasFile')->willReturn(FALSE);
 
 		$fileInfo = array(
 			'name' => 'lorem'

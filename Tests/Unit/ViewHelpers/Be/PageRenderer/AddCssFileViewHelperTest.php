@@ -61,10 +61,10 @@ class AddCssFileViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTe
 		$this->subject
 			->expects($this->once())
 			->method('getDocInstance')
-			->will($this->returnValue($doc));
+			->willReturn($doc);
 		$doc->expects($this->once())
 			->method('getPageRenderer')
-			->will($this->returnValue($pageRenderer));
+			->willReturn($pageRenderer);
 		$pageRenderer->expects($this->once())
 			->method('addCssFile');
 
@@ -82,10 +82,10 @@ class AddCssFileViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTe
 		$this->subject
 			->expects($this->once())
 			->method('getDocInstance')
-			->will($this->returnValue($doc));
+			->willReturn($doc);
 		$doc->expects($this->once())
 			->method('getPageRenderer')
-			->will($this->returnValue($pageRenderer));
+			->willReturn($pageRenderer);
 		$pageRenderer->expects($this->once())
 			->method('addCssFile');
 

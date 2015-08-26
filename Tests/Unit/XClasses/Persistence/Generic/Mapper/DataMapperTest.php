@@ -58,8 +58,8 @@ class DataMapperTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			\TYPO3\CMS\Extbase\Persistence\Generic\IdentityMap::class,
 			array('hasIdentifier', 'getObjectByIdentifier')
 		);
-		$identityMap->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->will($this->returnValue(TRUE));
-		$identityMap->expects($this->once())->method('getObjectByIdentifier')->will($this->returnValue(TRUE));
+		$identityMap->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->willReturn(TRUE);
+		$identityMap->expects($this->once())->method('getObjectByIdentifier')->willReturn(TRUE);
 
 		$this->subject->_set('identityMap', $identityMap);
 
@@ -85,8 +85,8 @@ class DataMapperTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			'',
 			FALSE
 		);
-		$identityMap->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->will($this->returnValue(TRUE));
-		$identityMap->expects($this->once())->method('getObjectByIdentifier')->will($this->returnValue(TRUE));
+		$identityMap->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->willReturn(TRUE);
+		$identityMap->expects($this->once())->method('getObjectByIdentifier')->willReturn(TRUE);
 
 		$this->subject->_set('identityMap', $identityMap);
 
@@ -100,8 +100,8 @@ class DataMapperTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$this->mockSubject('getDataMap');
 
 		$dataMap = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap::class, array('getLanguageIdColumnName'), array(), '', FALSE);
-		$dataMap->expects($this->once())->method('getLanguageIdColumnName')->will($this->returnValue(NULL));
-		$this->subject->expects($this->once())->method('getDataMap')->will($this->returnValue($dataMap));
+		$dataMap->expects($this->once())->method('getLanguageIdColumnName')->willReturn(NULL);
+		$this->subject->expects($this->once())->method('getDataMap')->willReturn($dataMap);
 		$row = array(
 			'_PAGES_OVERLAY' => 1,
 			'_PAGES_OVERLAY_LANGUAGE' => 1,
@@ -109,7 +109,7 @@ class DataMapperTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 
 		$object = $this->getMock(\TYPO3\CMS\Belog\Domain\Model\LogEntry::class, array('_setProperty', '_getProperties'));
-		$object->expects($this->once())->method('_getProperties')->will($this->returnValue(array()));
+		$object->expects($this->once())->method('_getProperties')->willReturn(array());
 		$object->expects($this->exactly(4))->method('_setProperty');
 
 		$this->subject->_callRef('thawProperties', $object, $row);

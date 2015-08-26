@@ -46,7 +46,7 @@ class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase
 	public function testInitializeActionFeMode() {
 		$this->mockSubject();
 		$environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, array('isEnvironmentInFrontendMode', 'isEnvironmentInBackendMode'));
-		$environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->will($this->returnValue(TRUE));
+		$environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->willReturn(TRUE);
 		$this->subject->_set('environmentService', $environmentService);
 
 		$GLOBALS['TSFE'] = $this->getMock(TypoScriptFrontendController::class, array(), array(), '', FALSE);
@@ -66,8 +66,8 @@ class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase
 	public function testInitializeActionBeMode() {
 		$this->mockSubject();
 		$environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, array('isEnvironmentInFrontendMode', 'isEnvironmentInBackendMode'));
-		$environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->will($this->returnValue(FALSE));
-		$environmentService->expects($this->once())->method('isEnvironmentInBackendMode')->will($this->returnValue(TRUE));
+		$environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->willReturn(FALSE);
+		$environmentService->expects($this->once())->method('isEnvironmentInBackendMode')->willReturn(TRUE);
 		$this->subject->_set('environmentService', $environmentService);
 
 		$GLOBALS['_GET']['id'] = 0;

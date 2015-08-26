@@ -74,9 +74,9 @@ class YouTubeVideoViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelper
 		$this->templateVariableContainer->expects($this->exactly(2))->method('add');
 		$this->templateVariableContainer->expects($this->exactly(2))->method('remove');
 		$this->subject->_set('templateVariableContainer', $this->templateVariableContainer);
-		$this->subject->expects($this->once())->method('retrieveYoutubeHash')->will($this->returnValue('4BXpi7056RM'));
+		$this->subject->expects($this->once())->method('retrieveYoutubeHash')->willReturn('4BXpi7056RM');
 		$this->subject->expects($this->once())->method('renderChildren');
-		$this->subject->expects($this->once())->method('getThumbnail')->will($this->returnValue('https://i3.ytimg.com/vi/4BXpi7056RM/0.jpg'));
+		$this->subject->expects($this->once())->method('getThumbnail')->willReturn('https://i3.ytimg.com/vi/4BXpi7056RM/0.jpg');
 
 		$this->subject->render('https://www.youtube.com/watch?v=4BXpi7056RM');
 	}

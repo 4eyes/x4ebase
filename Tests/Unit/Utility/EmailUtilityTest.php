@@ -49,23 +49,23 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array(), array(), '', FALSE);
 
 		$emailView = $this->getMock(\TYPO3\CMS\Fluid\View\StandaloneView::class, array('render', 'assignMultiple', 'getRequest'), array(), '', FALSE);
-		$emailView->expects($this->once())->method('render')->will($this->returnValue('Hello'));
-		$emailView->expects($this->once())->method('getRequest')->will($this->returnValue($request));
+		$emailView->expects($this->once())->method('render')->willReturn('Hello');
+		$emailView->expects($this->once())->method('getRequest')->willReturn($request);
 		$message = $this->getMock(\TYPO3\CMS\Core\Mail\MailMessage::class, array('send', 'isSent', 'setTo', 'setFrom', 'setReplyTo', 'setSubject', 'attach', 'setBody'), array(), '', FALSE);
 		$message->expects($this->once())->method('send');
-		$message->expects($this->once())->method('isSent')->will($this->returnValue(TRUE));
-		$message->expects($this->once())->method('setTo')->will($this->returnValue($message));
-		$message->expects($this->once())->method('setFrom')->will($this->returnValue($message));
-		$message->expects($this->once())->method('setReplyTo')->will($this->returnValue($message));
-		$message->expects($this->once())->method('setSubject')->will($this->returnValue($message));
-		$message->expects($this->once())->method('attach')->will($this->returnValue($message));
-		$message->expects($this->once())->method('setBody')->will($this->returnValue($message));
+		$message->expects($this->once())->method('isSent')->willReturn(TRUE);
+		$message->expects($this->once())->method('setTo')->willReturn($message);
+		$message->expects($this->once())->method('setFrom')->willReturn($message);
+		$message->expects($this->once())->method('setReplyTo')->willReturn($message);
+		$message->expects($this->once())->method('setSubject')->willReturn($message);
+		$message->expects($this->once())->method('attach')->willReturn($message);
+		$message->expects($this->once())->method('setBody')->willReturn($message);
 
 		$objectManager = $this->getMock(
 			ObjectManager::class, array('get'), array(), '', FALSE
 		);
-		$objectManager->expects($this->at(0))->method('get')->will($this->returnValue($emailView));
-		$objectManager->expects($this->at(1))->method('get')->will($this->returnValue($message));
+		$objectManager->expects($this->at(0))->method('get')->willReturn($emailView);
+		$objectManager->expects($this->at(1))->method('get')->willReturn($message);
 
 		$subject = $this->subject;
 
@@ -92,11 +92,11 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 		$objectManager->expects($this->at(0))->method('get')
 			->with('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository')
-			->will($this->returnValue($emailLogRepository));
+			->willReturn($emailLogRepository);
 
 		$objectManager->expects($this->at(1))->method('get')
 			->with('X4E\\X4ebase\\Domain\\Model\\EmailLog')
-			->will($this->returnValue($emailLog));
+			->willReturn($emailLog);
 
 		$persistenceManager = $this->getMock(PersistenceManager::class, array('persistAll'), array(), '', FALSE);
 		$persistenceManager->expects($this->once())->method('persistAll');
@@ -120,7 +120,7 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 		$objectManager->expects($this->at(0))->method('get')
 			->with('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository')
-			->will($this->returnValue(FALSE));
+			->willReturn(FALSE);
 
 		$persistenceManager = $this->getMock(PersistenceManager::class, array('persistAll'), array(), '', FALSE);
 
@@ -172,7 +172,7 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			ObjectManager::class, array('get'), array(), '', FALSE
 		);
 		$objectManager->expects($this->once())->method('get')
-			->will($this->returnValue($persistenceManager));
+			->willReturn($persistenceManager);
 		$this->subject->_setStatic('objectManager', $objectManager);
 		$this->subject->_setStatic('persistenceManager', FALSE);
 
