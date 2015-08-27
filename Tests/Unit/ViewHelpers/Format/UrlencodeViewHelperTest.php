@@ -44,24 +44,25 @@ class UrlencodeViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTes
 	/**
 	 * @test
 	 */
-	public function testRender() {
-		//input
+	public function testRenderFromArgument() {
 		$testCases = array(
 			'Lorem-IpsumçDolor Sit_amet'
 		);
 
-		$this->renderFromArgument($testCases);
-		$this->renderFromChildren($testCases);
-	}
-
-	public function renderFromArgument($testCases) {
 		foreach ($testCases as $testCase) {
 			$this->assertSame(str_replace('%20', ' ', rawurlencode($testCase)), $this->subject->render(TRUE, $testCase));
 		}
 	}
 
-	public function renderFromChildren($testCases) {
+	/**
+	 * @test
+	 */
+	public function testRenderFromChildren() {
 		$this->mockSubject('renderChildren');
+
+		$testCases = array(
+			'Lorem-IpsumçDolor Sit_amet'
+		);
 
 		for ($i = 0; $i < count($testCases); $i++) {
 			$this->subject->expects($this->at($i))->method('renderChildren')
@@ -70,5 +71,12 @@ class UrlencodeViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTes
 		foreach ($testCases as $testCase) {
 			$this->assertSame(str_replace('%20', ' ', rawurlencode($testCase)), $this->subject->render());
 		}
+	}
+
+	/**
+	 * @test
+	 */
+	public function testRenderWithInvalidValue() {
+		$this->assertEquals(5, $this->subject->render(TRUE,5));
 	}
 }

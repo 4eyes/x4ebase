@@ -93,7 +93,7 @@ class AbstractFilterRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\Reposito
 		$query->expects($this->never())->method('logicalOr');
 		$query->expects($this->never())->method('like');
 
-		$this->subject->searchByParameter($query, $searchableParameters, $searchString);
+		$this->assertNull($this->subject->searchByParameter($query, $searchableParameters, $searchString));
 	}
 
 	/**

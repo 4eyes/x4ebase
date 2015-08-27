@@ -93,7 +93,7 @@ class AbstractRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTest
 	 */
 	public function testGetTranslateTools_CreatesTranslateTools() {
 		$this->markTestIncomplete(
-			'Untestable thanks to static method call'
+			'Untestable - Static method calls'
 		);
 	}
 

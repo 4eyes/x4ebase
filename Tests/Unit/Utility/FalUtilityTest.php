@@ -45,13 +45,13 @@ class FalUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testHandyFileUpload() {
 		$this->markTestIncomplete(
-			'Untestable thanks to static method calls'
+			'Untestable - Static method calls'
 		);
 	}
 
 	public function testGetStorage() {
 		$this->markTestIncomplete(
-			'Untestable thanks to static method calls'
+			'Untestable - Static method calls'
 		);
 	}
 

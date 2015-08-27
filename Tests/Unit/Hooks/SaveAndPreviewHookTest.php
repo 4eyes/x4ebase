@@ -45,7 +45,7 @@ class SaveAndPreviewHookTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	public function testPreProcess() {
 		$this->markTestIncomplete(
-			'Untestable thanks to the use of BackendUtility'
+			'Untestable - Static method calls'
 		);
 
 		$this->mockSubject();

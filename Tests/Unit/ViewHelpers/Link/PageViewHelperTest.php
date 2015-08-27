@@ -44,7 +44,7 @@ class PageViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase
 	public function testRender() {
 
 		$this->markTestIncomplete(
-			'Untestable thanks to static method call'
+			'Untestable - Static method calls'
 		);
 	}
 

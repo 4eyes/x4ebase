@@ -38,10 +38,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Model;
 class PageLanguageOverlayTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 
 	public function testInitialValues() {
-		$this->markTestSkipped(
-			'Attribute is called crdate but getters and setters are called creationDate'
-		);
-		$this->initialValueTest('crDate', NULL);
+		$this->initialValueTest('crdate', NULL);
 		$this->initialValueTest('backendUser', NULL);
 		$this->initialValueTest('sysLanguageUid', NULL);
 		$this->initialValueTest('title', NULL);
@@ -68,10 +65,7 @@ class PageLanguageOverlayTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase
 	 * @test
 	 */
 	public function testGettersSetters() {
-		$this->markTestSkipped(
-			'Attribute is called crdate but getters and setters are called creationDate'
-		);
-		$this->integerGetterSetterTest('crDate');
+		$this->integerGetterSetterTest('crdate');
 		$this->integerGetterSetterTest('backendUser');
 		$this->integerGetterSetterTest('sysLanguageUid');
 		$this->stringGetterSetterTest('title');

@@ -71,10 +71,9 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 		$this->subject->_setStatic('objectManager', $objectManager);
 
-		/*****************************************************
-		 * WOULD THROW EXCEPTION WHEN CALLING self::logEmail *
-		 *****************************************************/
-		$this->markTestIncomplete('Untestable thanks to static method call.');
+		$this->markTestIncomplete(
+			'Untestable - Static method calls'
+		);
 
 		$this->subject->sendTemplateEmail(array('test@example.org'), array(''), '', '', '', '', '', array(), 'x4ebase', 'Email', true, array(1));
 	}
@@ -147,7 +146,7 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testGetObjectManagerInstance_CreatesObjectManager() {
 		$this->markTestIncomplete(
-			'Untestable (static method call)'
+			'Untestable - Static method calls'
 		);
 	}
 

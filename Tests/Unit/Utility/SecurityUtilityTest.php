@@ -42,7 +42,7 @@ class SecurityUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testSaltPassword() {
 		$this->markTestIncomplete(
-			'Untestable thanks to static method calls'
+			'Untestable - Static method calls'
 		);
 
 		$testCases = array(
@@ -58,7 +58,7 @@ class SecurityUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testIsSaltedHash() {
 		$this->markTestIncomplete(
-			'Untestable thanks to static method calls'
+			'Untestable - Static method calls'
 		);
 
 		$testCases = array(

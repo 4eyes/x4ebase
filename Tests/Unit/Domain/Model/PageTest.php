@@ -37,9 +37,6 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Model;
  */
 class PageTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	public function testInitialValues() {
-		$this->markTestSkipped(
-			'getSorting returns permsUserid'
-		);
 		$this->initialValueTest('sorting', NULL);
 		$this->initialValueTest('sysLanguageUid', 0);
 		$this->initialValueTest('permsUserid', NULL);
@@ -71,7 +68,6 @@ class PageTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 		$this->initialValueTest('newuntil', NULL);
 		$this->initialValueTest('description', NULL);
 		$this->initialValueTest('noSearch', NULL);
-		//$this->initialValueTest('sysLastchanged', NULL);
 		$this->initialValueTest('abstract', NULL);
 		$this->initialValueTest('module', NULL);
 		$this->initialValueTest('extendtosubpages', NULL);
@@ -97,10 +93,7 @@ class PageTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	 * @test
 	 */
 	public function testGettersSetters() {
-		$this->markTestSkipped(
-			'getSorting returns permsUserid (setSorting is correct)'
-		);
-		//$this->integerGetterSetterTest('sorting');
+		$this->integerGetterSetterTest('sorting');
 		$this->integerGetterSetterTest('sysLanguageUid');
 		$this->integerGetterSetterTest('permsUserid');
 		$this->integerGetterSetterTest('permsGroupid');
@@ -131,7 +124,6 @@ class PageTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 		$this->integerGetterSetterTest('newuntil');
 		$this->stringGetterSetterTest('description');
 		$this->integerGetterSetterTest('noSearch');
-		//$this->integerGetterSetterTest('sysLastchanged');
 		$this->stringGetterSetterTest('abstract');
 		$this->stringGetterSetterTest('module');
 		$this->integerGetterSetterTest('extendtosubpages');

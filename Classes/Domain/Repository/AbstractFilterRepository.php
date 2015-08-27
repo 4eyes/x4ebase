@@ -50,7 +50,7 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if(!empty($parameterValues) && !empty($filterMethod)) {
             $constraints = array();
             foreach($parameterValues as $parameterValue) {
-                $constraints[] = call_user_func_array(array($query, $filterMethod), array($parameterName, $parameterValue));
+                $constraints[] = $query->$filterMethod($parameterName,$parameterValue);
             }
             if(!empty($constraints))
                 return $query->logicalOr($constraints);
@@ -67,7 +67,7 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function searchByParameter(&$query, $searchableParameters, $searchString) {
         $constraints = array();
         foreach($searchableParameters as $searchParameter=>$searchMethod) {
-            $constraints[] = call_user_func_array(array($query, $searchMethod), array($searchParameter,'%'.$searchString.'%'));
+            $constraints[] = $query->$searchMethod($searchParameter,"%".$searchString."%");
         }
         if(!empty($constraints))
             return $query->logicalOr($constraints);

@@ -113,7 +113,7 @@ class SecurePasswordSaltTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase 
 
 	public function testConstruct() {
 		$this->markTestIncomplete(
-			'Untestable (Static method call)'
+			'Untestable - Static method calls'
 		);
 	}
 

@@ -133,8 +133,10 @@ class FilterTemplate {
      * @param String $searchableParameter A parameter the user should not be able to search in anymore
      */
     public function removeSearchableParameter($searchableParameter) {
-        if(($key = array_search($searchableParameter, $this->searchableParameters)) !== false)
+        if(($key = array_search($searchableParameter, $this->searchableParameters)) !== false) {
             unset($this->searchableParameters[$key]);
+            $this->searchableParameters = array_values($this->searchableParameters);
+        }
     }
 
     /**
@@ -149,7 +151,7 @@ class FilterTemplate {
     /**
      * @param String $filterName The filter-key
      */
-    public function removeFilterToFilterArray($filterName) {
+    public function removeFilterFromFilterArray($filterName) {
         unset($this->filterArray[$filterName]);
     }
 

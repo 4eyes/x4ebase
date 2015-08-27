@@ -21,9 +21,6 @@ if(version_compare(TYPO3_branch, '6.2', '<=')) {
 	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = array(
 		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings'
 	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapFactory'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapFactory'
-	);
 	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapper'] = array(
 		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapper'
 	);

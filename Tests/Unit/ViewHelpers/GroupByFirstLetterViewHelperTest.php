@@ -68,10 +68,6 @@ class GroupByFirstLetterViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\View
 	}
 
 	public function testRender_WithObject_NotIssetProperty_ThrowsException() {
-		$this->markTestSkipped(
-			'Error in ViewHelper: Getters do not throw Exceptions'
-		);
-
 		$this->setExpectedException('\\Exception', 'The given property does not exist.');
 		$this->subject->render(new testClass(), 'lorem');
 	}

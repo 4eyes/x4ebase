@@ -89,7 +89,7 @@ class AbstractBackendTagBasedViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base
 
 	public function testCreateDocInstance() {
 		$this->markTestIncomplete(
-			'untestable thanks to static method calls'
+			'Untestable - Static method calls'
 		);
 	}
 }

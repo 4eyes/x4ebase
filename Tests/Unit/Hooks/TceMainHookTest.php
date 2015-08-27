@@ -62,7 +62,7 @@ class TceMainHookTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testSetPreviewVars() {
 		$this->markTestIncomplete(
-			'Untestable thanks to the use of BackendUtility'
+			'Untestable - Static method calls'
 		);
 	}
 }

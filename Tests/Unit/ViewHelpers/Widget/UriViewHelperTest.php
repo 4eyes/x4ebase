@@ -47,4 +47,8 @@ class UriViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase 
 	public function testInitializeArguments() {
 		$this->initializeArgumentsTest(1);
 	}
+
+	public function testGetAjaxUri() {
+
+	}
 }

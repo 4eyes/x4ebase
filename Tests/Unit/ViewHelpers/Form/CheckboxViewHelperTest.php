@@ -46,4 +46,17 @@ class CheckboxViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTest
 		$this->subject->initializeArguments();
 	}
 
+	public function testRenderHiddenFieldsForEmptyValue() {
+		$this->mockSubject("getName");
+		$this->subject->expects($this->once())->method("getName")->willReturn("test[]");
+		$this->viewHelperVariableContainer = $this->getMock(\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class, array("exists", "get", "addOrUpdate"), array(), "", FALSE);
+		$this->viewHelperVariableContainer->expects($this->once())->method("exists")->willReturn(TRUE);
+		$this->viewHelperVariableContainer->expects($this->once())->method("get")->willReturn(array("hello"));
+		$this->viewHelperVariableContainer->expects($this->once())->method("addOrUpdate")->with('TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper', 'renderedHiddenFields', array("hello", "test"));
+		$this->subject->setArguments(array("defaultHiddenValue"=>"default"));
+		$this->subject->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);
+
+		$this->assertEquals('<input type="hidden" name="test" value="default" />', $this->subject->_call('renderHiddenFieldForEmptyValue'));
+	}
+
 }

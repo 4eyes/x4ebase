@@ -64,5 +64,4 @@ class EmailLogTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 	public function testIs() {
 		$this->isTest('is_sent');
 	}
-
 }

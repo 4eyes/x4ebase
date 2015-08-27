@@ -76,7 +76,7 @@ class EidDispatcherTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 
 	public function testBootstrapAndDispatch() {
 		$this->markTestIncomplete(
-			'How to test this? - Untestable thanks to the use of static method calls'
+			'Untestable - Static method calls'
 		);
 	}
 

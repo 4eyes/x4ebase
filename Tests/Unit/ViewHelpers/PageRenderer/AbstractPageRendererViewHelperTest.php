@@ -54,4 +54,18 @@ class AbstractPageRendererViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\Vi
 		$this->subject->injectConfigurationManager($configurationManager);
 		$this->assertEquals($configurationManager, $this->subject->_get('configurationManager'));
 	}
+
+	public function testIsCached() {
+		$this->mockSubject();
+
+		$contentObject = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, array('getUserObjectType'), array(), '', FALSE);
+		$contentObject->expects($this->atLeastOnce())->method('getUserObjectType')->willReturn(1);
+
+		$configurationManager = $this->getMock(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class, array('getContentObject'),array(), '', FALSE);
+		$configurationManager->expects($this->atLeastOnce())->method('getContentObject')->willReturn($contentObject);
+
+		$this->subject->_set('configurationManager', $configurationManager);
+
+		$this->subject->_call('isCached');
+	}
 }

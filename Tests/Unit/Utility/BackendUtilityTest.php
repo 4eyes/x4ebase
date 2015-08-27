@@ -52,19 +52,19 @@ class BackendUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testInitTSFE() {
 		$this->markTestIncomplete(
-			'Untestable (Static Method Calls)'
+			'Untestable - Static method calls'
 		);
 	}
 
 	public function testExec_languageQuery() {
 		$this->markTestIncomplete(
-			'Untestable (Static Method Calls)'
+			'Untestable - Static method calls'
 		);
 	}
 
 	public function testGetStorageFolderPid() {
 		$this->markTestIncomplete(
-			'Untestable (Static Method Calls)'
+			'Untestable - Static method calls'
 		);
 	}
 }

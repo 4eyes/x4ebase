@@ -80,7 +80,7 @@ class TcaInfoControllerTest extends \X4E\X4ebase\Tests\Unit\Base\ControllerTestB
 
 	public function testGetTableArray() {
 		$this->markTestIncomplete(
-			'Untestable (Static Method calls)'
+			'Untestable - Static method calls'
 		);
 	}
 }

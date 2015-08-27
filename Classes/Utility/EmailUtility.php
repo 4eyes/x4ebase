@@ -64,7 +64,9 @@ class EmailUtility {
 	 * @param array $replyTo
 	 * @return boolean TRUE on success, otherwise false
 	 */
-	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = array(), $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = array(), $replyTo = array()) {
+	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath,
+											 $layoutRootPath, $partialRootPath, $variables = array(), $extensionName = 'x4ebase',
+											 $templateFolder = 'Email', $isHtml = true, $attachments = array(), $replyTo = array()) {
 		$objectManager = self::getObjectManagerInstance();
 		$isSent = false;
 		$emailBody = '';

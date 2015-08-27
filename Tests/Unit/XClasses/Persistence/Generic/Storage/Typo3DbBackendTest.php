@@ -43,11 +43,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	/**
 	 * @test
 	 */
-	public function testAdditionalWhereClause_QuerySettingsInstanceOfAlternativeQuerySettingsInterface_AND_RespectSysLanguageAlternative_CallsAddAlternativeSysLanguageStatement() {
-		$this->markTestIncomplete(
-			'Error: Method accepts String for SQL, but method >addVisiblityConstraintStatement< expects array!'
-		);
-
+	public function testAddAdditionalWhereClause_QuerySettingsInstanceOfAlternativeQuerySettingsInterface_AND_RespectSysLanguageAlternative_CallsAddAlternativeSysLanguageStatement() {
 		$this->mockSubject('addVisibilityConstraintStatement', 'addSysLanguageStatement', 'addAlternativeSysLanguageStatement', 'addPageIdStatement');
 		$querySettings = $this->getMock(
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
@@ -69,7 +65,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	/**
 	 * @test
 	 */
-	public function testAdditionalWhereClause_QuerySettingsInstanceOfAlternativeQuerySettingsInterface_ANDNOT_RespectSysLanguageAlternative_NotCallsAddAlternativeSysLanguageStatement() {
+	public function testAddAdditionalWhereClause_QuerySettingsInstanceOfAlternativeQuerySettingsInterface_ANDNOT_RespectSysLanguageAlternative_NotCallsAddAlternativeSysLanguageStatement() {
 		$this->mockSubject('addVisibilityConstraintStatement', 'addSysLanguageStatement', 'addAlternativeSysLanguageStatement', 'addPageIdStatement');
 		$querySettings = $this->getMock(
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,

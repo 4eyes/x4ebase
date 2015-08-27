@@ -124,7 +124,7 @@ class ModelGeneratorControllerTest extends \X4E\X4ebase\Tests\Unit\Base\Controll
 			)
 		);
 
-		$result = '\\Lorem {\n	mapping {\n		tableName = Lorem\n		columns {\n			Ipsum.mapOnProperty = ipsum\n\n		}\n	}\n}';
+		$result = "\\Lorem {\n	mapping {\n		tableName = Lorem\n		columns {\n			Ipsum.mapOnProperty = ipsum\n\n		}\n	}\n}";
 
 		$this->assertEquals($result, $this->subject->_callRef('getTSMappingsFromFields', $table, $fieldsArray));
 	}
