@@ -188,4 +188,46 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 		$this->assertTrue(in_array($rows[0], $this->subject->_callRef('doLanguageAndWorkspaceOverlay', $source, $rows, $querySettings)));
 	}
+
+	/**
+	 * @test
+	 */
+	public function testDoLanguageAndWorkspaceOverlay_WithNewRow() {
+		$this->mockSubject('getPageRepository');
+		$tableName = 'lorem';
+		$transOrigPointerField = 1;
+		$newRow = array(
+			'_ORIG_uid' => 1,
+			'language' => 5
+		);
+		$querySettings = $this->getMock(
+			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
+			array('getSysLanguageUid')
+		);
+		$querySettings->expects($this->any())->method('getSysLanguageUid')->willReturn(0);
+
+		$GLOBALS['TCA'][$tableName]['ctrl'] = array(
+			'languageField' => 'language',
+			'transOrigPointerField' => $transOrigPointerField
+		);
+
+		$source = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Selector::class, array('getSelectorName'), array(), '', FALSE);
+		$source->expects($this->once())->method('getSelectorName')->willReturn($tableName);
+		$databaseHandle = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, array('exec_SELECTgetSingleRow'));
+		$databaseHandle->expects($this->once())->method('exec_SELECTgetSingleRow')->willReturn($newRow);
+		$this->subject->_set('databaseHandle', $databaseHandle);
+		$pageRepository = $this->getMock(\TYPO3\CMS\Frontend\Page\PageRepository::class, array('versionOL', 'getPageOverlay', 'getRecordOverlay'));
+		$pageRepository->versioningPreview = TRUE;
+
+		$this->subject->expects($this->once())->method('getPageRepository')->willReturn($pageRepository);
+
+		$rows = array(array('1' => 1));
+		$overlayedRows = array(array(
+			'_ORIG_uid' => 1,
+			'language' => 5,
+			'uid' => 1
+		));
+
+		$this->assertEquals($overlayedRows, $this->subject->_callRef('doLanguageAndWorkspaceOverlay', $source, $rows, $querySettings));
+	}
 }

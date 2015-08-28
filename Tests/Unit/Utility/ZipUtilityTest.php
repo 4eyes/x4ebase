@@ -37,29 +37,30 @@ use X4E\X4ebase\Utility\ZipUtility;
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
 class ZipUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
-	protected $testPath;
-	protected $testFile;
-	protected $resultFile;
 
 	public function setUp() {
 		if (function_exists('xdebug_disable')) {
 			xdebug_disable();
 		}
-		$this->testPath = dirname(__FILE__) . '/../../Fixtures/Unit/Utility/ZipUtilityTest/';
-		$this->testFile = 'test.txt';
-		$this->resultFile = 'test.zip';
 	}
 
 	public function tearDown() {
+		unset($this->subject);
 		if (function_exists('xdebug_enable')) {
 			xdebug_enable();
 		}
 	}
 
+	public function testCreate_ThrowsZipExtensionNotInstalledException() {
+		$this->markTestIncomplete(
+			'Untestable - cannot unload php extensions with phpunit'
+		);
+	}
+
 	/**
 	 * @test
 	 */
-	public function testCreateThrowsFileNotExistException() {
+	public function testCreate_ThrowsFileNotExistException() {
 		$this->setExpectedException('Exception');
 		ZipUtility::create(dirname(__FILE__) . '/HelloWorld', 'test');
 	}
@@ -67,16 +68,39 @@ class ZipUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function testCreate() {
-		ZipUtility::create($this->testPath . $this->testFile, $this->testPath . $this->resultFile);
-		$this->assertFileExists($this->testPath . $this->resultFile);
-		unlink($this->testPath . $this->resultFile);
+	public function testCreate_Folder() {
+		$testPath = dirname(__FILE__) . '/../../Fixtures/Unit/Utility/ZipUtilityTest/';
+		$testFile = 'foldertest';
+		$resultFile = 'Result/foldertest.zip';
+		ZipUtility::create($testPath . $testFile, $testPath . $resultFile);
+		$this->assertFileExists($testPath . $resultFile);
+		unlink($testPath . $resultFile);
 	}
 
 	/**
 	 * @test
 	 */
-	public function testExtractThrowsException() {
+	public function testCreate() {
+		$testPath = dirname(__FILE__) . '/../../Fixtures/Unit/Utility/ZipUtilityTest/';
+		$testFile = 'test.txt';
+		$resultFile = 'Result/test.zip';
+		ZipUtility::create($testPath . $testFile, $testPath . $resultFile);
+		$this->assertFileExists($testPath . $resultFile);
+		unlink($testPath . $resultFile);
+	}
+
+	public function testCreate_InNonExistentDirectory_NotCreatesZip() {
+		$testPath = dirname(__FILE__) . '/../../Fixtures/Unit/Utility/ZipUtilityTest/';
+		$testFile = 'test.txt';
+		$resultFile = 'noResult/test.zip';
+		ZipUtility::create($testPath . $testFile, $testPath . $resultFile);
+		$this->assertFileNotExists($testPath . $resultFile);
+	}
+
+	/**
+	 * @test
+	 */
+	public function testExtract_ThrowsException() {
 		$this->setExpectedException('Exception');
 		ZipUtility::extract();
 	}

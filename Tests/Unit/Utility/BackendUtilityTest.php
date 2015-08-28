@@ -37,7 +37,7 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
  */
 class BackendUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\Utility\/BackendUtility */
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\Utility\BackendUtility */
 	protected $subject;
 
 	public function testInitTypoScript() {

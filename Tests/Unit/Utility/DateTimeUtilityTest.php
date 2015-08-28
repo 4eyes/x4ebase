@@ -176,6 +176,12 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 				'offset' => 3
 			),
 			array(
+				'title' => 'Yesterday (Less than a day)',
+				'referenceDate' => strtotime('2014-06-12 12:15:07'),
+				'offsetType' => -6,
+				'offset' => 1
+			),
+			array(
 				'title' => '1 hours ago',
 				'referenceDate' => strtotime('2014-06-13 11:14:07'),
 				'offsetType' => -4,
@@ -234,6 +240,12 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 				'referenceDate' => strtotime('2014-06-13 18:14:07'),
 				'offsetType' => 5,
 				'offset' => 6
+			),
+			array(
+				'title' => 'Tomorrow (Less than a day)',
+				'referenceDate' => strtotime('2014-06-14 12:13:07'),
+				'offsetType' => 6,
+				'offset' => 1
 			),
 			array(
 				'title' => 'Tomorrow',

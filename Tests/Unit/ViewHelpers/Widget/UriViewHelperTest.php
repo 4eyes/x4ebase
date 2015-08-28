@@ -48,7 +48,9 @@ class UriViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase 
 		$this->initializeArgumentsTest(1);
 	}
 
-	public function testGetAjaxUri() {
-
+	public function testGetAjaxUri_WithArguments() {
+		$this->markTestSkipped(
+			'Method will throw error: MVC-Request does not have method >getWidgetContext<'
+		);
 	}
 }

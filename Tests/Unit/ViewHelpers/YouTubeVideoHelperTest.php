@@ -69,6 +69,14 @@ class YouTubeVideoViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelper
 		}
 	}
 
+	public function testGetThumbnail_WithThumbnailType() {
+		$testCases = array('0','1','2','3','default','hqdefault','mqdefault','sddefault','maxresdefault');
+
+		foreach ($testCases as $testCase) {
+			$this->assertNotFalse(strpos($this->subject->getThumbnail("Hello",$testCase),'/' . $testCase . '.jpg'));
+		}
+	}
+
 	public function testRender() {
 		$this->mockSubject('retrieveYoutubeHash', 'renderChildren', 'getThumbnail');
 		$this->templateVariableContainer->expects($this->exactly(2))->method('add');

@@ -44,6 +44,10 @@ class ModelGeneratorControllerTest extends \X4E\X4ebase\Tests\Unit\Base\Controll
 	 * @test
 	 */
 	public function testShowAction_WithGenerator() {
+		$this->markTestIncomplete(
+			"Untestable - Use of mysql_real_escape_string"
+		);
+
 		$this->mockSubject('getSqlFieldType', 'getExtbaseClassFromFields', 'getTSMappingsFromFields');
 		$this->subject->expects($this->once())->method('getSqlFieldType')->willReturn('Integer');
 		$this->subject->expects($this->once())->method('getExtbaseClassFromFields');
