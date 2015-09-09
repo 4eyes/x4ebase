@@ -48,10 +48,17 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function setUp() {
 		parent::setUp();
 		$this->view = $this->getMock(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface::class);
-		$this->subject = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class);
 		$this->request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class);
 		$this->settings = array('magicNumber' => 10);
 		$this->environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class);
+		$this->mockSubject();
+	}
+
+	public function tearDown() {
+		unset($this->request);
+		unset($this->settings);
+		unset($this->environmentService);
+		parent::tearDown();
 	}
 
 	/**
