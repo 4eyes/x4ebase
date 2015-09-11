@@ -38,7 +38,7 @@ class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedVie
 	protected $removeEmptyNodes = FALSE;
 	protected $ignoreWhitespace = TRUE;
 	protected $preserveAttributes = TRUE;
-	
+
 	/**
 	 * Render method
 	 *
@@ -57,9 +57,9 @@ class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedVie
 		}
 		return $this->formatXmlString($content);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $xml
 	 * @param boolean $removeEmptyNodes
 	 * @param boolean $ignoreWhitespace
@@ -67,19 +67,19 @@ class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedVie
 	 * @return string
 	 */
 	protected function formatXmlString($xml) {
-		$sxe = new \SimpleXMLElement(trim($xml), LIBXML_NONET);
+		$sxe = $this->createNewObject(\SimpleXMLElement::class, trim($xml), LIBXML_NONET);
 		if ($this->removeEmptyNodes) {
 			$this->removeEmptyNodes($sxe);
 		}
-		$dom = new \DOMDocument('1.0');
+		$dom = $this->createNewObject(\DOMDocument::class, '1.0');
 		$dom->preserveWhiteSpace = FALSE;
 		$dom->formatOutput = TRUE;
 		$dom->loadXML($sxe->asXML());
 		return $dom->saveXML();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param \SimpleXMLElement $sxe
 	 */
 	protected function removeEmptyNodes(\SimpleXMLElement $sxe){
@@ -90,5 +90,11 @@ class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedVie
 				unset($node[0]);
 			}
 		}
+	}
+
+	protected function createNewObject($className) {
+		$arguments = func_get_args();
+		$r = new \ReflectionClass(array_shift($arguments));
+		return $r->newInstanceArgs($arguments);
 	}
 }

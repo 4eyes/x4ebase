@@ -44,9 +44,9 @@ class GroupByFirstLetterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 		foreach ($element as $item) {
 			if (is_object($item)) {
 				$getter = 'get' . ucfirst($property);
-				try {
+				if (method_exists($item, $getter)) {
 					$string = $item->$getter();
-				} catch(\Exception $e){
+				} else {
 					throw new \Exception ('The given property does not exist.');
 				}
 			} else if (is_array($item)) {

@@ -1,39 +1,40 @@
 <phpunit
-	backupGlobals="true"
-	backupStaticAttributes="false"
-	bootstrap="../../../../typo3/sysext/core/Build/UnitTestsBootstrap.php"
-	colors="true"
-	convertErrorsToExceptions="true"
-	convertWarningsToExceptions="true"
-	forceCoversAnnotation="false"
-	processIsolation="false"
-	stopOnError="false"
-	stopOnFailure="false"
-	stopOnIncomplete="false"
-	stopOnSkipped="false"
-	verbose="false"
->
-	
-	<logging>
-		<log type="coverage-html" target="../../../../coverage"/>
-		<log type="coverage-clover" target="../../../../logs/clover.xml"/>
-		<log type="coverage-crap4j" target="../../../../logs/crap4j.xml"/>
-		<log type="junit" target="../../../../logs/junit.xml" logIncompleteSkipped="false"/>
-	</logging>
-	
+		backupGlobals="true"
+		backupStaticAttributes="false"
+		bootstrap="../../../../typo3/sysext/core/Build/UnitTestsBootstrap.php"
+		colors="true"
+		convertErrorsToExceptions="true"
+		convertWarningsToExceptions="true"
+		forceCoversAnnotation="false"
+		processIsolation="false"
+		stopOnError="false"
+		stopOnFailure="false"
+		stopOnIncomplete="false"
+		stopOnSkipped="false"
+		verbose="false"
+		>
+
+	<php>
+		<env name="TYPO3_PATH_WEB" value="../../../.."/>
+	</php>
+
 	<filter>
-        <whitelist>
-            <directory suffix=".php">../../</directory>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">../</directory>
 			<exclude>
-				<directory suffix=".php">../../x4ebase/Tests</directory>
-				<directory suffix=".php">../../x4ebase/Configuration/TCA</directory>
-				<file>../../x4ebase/ext_emconf.php</file>
-				<file>../../x4ebase/ext_tables.php</file>
-				<file>../../x4ebase/ext_localconf.php</file>
+				<directory suffix=".php">../Tests</directory>
+				<directory suffix=".php">../Configuration/TCA</directory>
+				<directory suffix=".php">../Classes/Libraries</directory>
+				<directory suffix=".php">../doc</directory>
+				<directory suffix=".php">../Documentation</directory>
+				<directory suffix=".php">../Resources</directory>
+				<file>../ext_emconf.php</file>
+				<file>../ext_tables.php</file>
+				<file>../ext_localconf.php</file>
 			</exclude>
-        </whitelist>
-    </filter>
-	
+		</whitelist>
+	</filter>
+
 	<testsuites>
 		<testsuite name="x4ebase - Unit Tests">
 			<directory>Unit/*/</directory>
