@@ -43,12 +43,6 @@ class AbstractSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBa
 		);
 	}
 
-	public function testGet() {
-		$this->markTestSkipped(
-			'I think this class requires an abstract method >get<, as it depends on proper return values in method >has<'
-		);
-	}
-
 	public function testHas() {
 		$this->subject = $this->getMockForAbstractClass($this->getSubjectClassName());
 		$key = 'lorem';

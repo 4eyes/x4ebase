@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4eequinella\Tests\Unit\Domain\Service;
+namespace X4E\X4ebase\Tests\Validation\Validator;
 
 /***************************************************************
  *  Copyright notice
