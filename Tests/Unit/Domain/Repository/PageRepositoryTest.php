@@ -25,6 +25,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 *
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 * ************************************************************* */
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4E\X4ebase\Domain\Repository\PageRepository

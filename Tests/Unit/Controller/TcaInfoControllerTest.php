@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Controller;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Unit\Controller\TcaInfoController
+ * Test case for class \X4E\X4ebase\Controller\TcaInfoController
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors

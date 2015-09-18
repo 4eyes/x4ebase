@@ -74,9 +74,9 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param $parameterName
 	 * @param $testValue
 	 */
-	protected function genericAddTest($parameterName, $testValue) {
+	protected function genericAddTest($parameterName, $testValue, $addAlias) {
 		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
-		call_user_func_array(array($this->subject, 'add' . $parameterName), array($testValue));
+		call_user_func_array(array($this->subject, 'add' . $addAlias), array($testValue));
 		$this->assertTrue(
 			$this->genericGetter($parameterName)->contains($testValue)
 		);
@@ -88,9 +88,9 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param $parameterName
 	 * @param $testValue
 	 */
-	protected function genericRemoveTest($parameterName, $testValue) {
+	protected function genericRemoveTest($parameterName, $testValue, $removeAlias) {
 		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
-		call_user_func_array(array($this->subject, 'remove' . $parameterName), array($testValue));
+		call_user_func_array(array($this->subject, 'remove' . $removeAlias), array($testValue));
 		$this->assertFalse(
 			$this->genericGetter($parameterName)->contains($testValue)
 		);
@@ -123,8 +123,13 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param $testObject
 	 */
 	protected function genericAddRemoveTest($parameterName, $testObject) {
-		$this->genericAddTest($parameterName, $testObject);
-		$this->genericRemoveTest($parameterName, $testObject);
+		if(substr($parameterName, -1) == 's') {
+			$addRemoveAlias = substr($parameterName, 0, -1);
+		} else {
+			$addRemoveAlias = $parameterName;
+		}
+		$this->genericAddTest($parameterName, $testObject, $addRemoveAlias);
+		$this->genericRemoveTest($parameterName, $testObject, $addRemoveAlias);
 	}
 
 	/**
@@ -164,11 +169,12 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		}
 	}
 
-	protected function objectStorageGetterSetterTest($parameterName) {
-		$testVars = array(new \TYPO3\CMS\Extbase\Persistence\ObjectStorage);
-		foreach ($testVars as $testVar) {
-			$this->genericGetterSetterTest($parameterName, $testVar);
-		}
+	protected function objectStorageGetterSetterTest($parameterName, $typeOfModel) {
+		$item = new $typeOfModel;
+		$objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+		$objectStorage->attach($item);
+
+		$this->genericGetterSetterTest($parameterName, $objectStorage);
 	}
 
 	protected function objectStorageAddRemoveTest($parameterName, $typeOfModel) {
@@ -180,8 +186,19 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		}
 	}
 
+	protected function objectGetterSetterTest($parameterName, $class) {
+		$testVars = array(new $class);
+		foreach ($testVars as $testVar) {
+			$this->genericGetterSetterTest($parameterName, $testVar);
+		}
+	}
+
 	protected function initialValueTest($parameterName, $expectedInitialValue) {
-		$this->assertSame($expectedInitialValue, $this->genericGetter($parameterName));
+		$this->assertAttributeEquals(
+			$expectedInitialValue,
+			$parameterName,
+			$this->subject
+		);
 	}
 
 	protected function arrayGetterSetterTest($parameterName) {

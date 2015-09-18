@@ -40,6 +40,7 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	/** @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
 	protected $subject = NULL;
 
+	/** @var \TYPO3\CMS\Extbase\Mvc\View\ViewInterface|\PHPUnit_Framework_MockObject_MockObject $view */
 	protected $view;
 	protected $request;
 	protected $settings;
@@ -117,27 +118,5 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			->expects($this->once())
 			->method('assignMultiple')
 			->with($assignments);
-	}
-
-	/**
-	 * @param String $repository The name of the controller property holding the repository
-	 * @param String $method The name of the method of the repository that will be called
-	 * @param array $argumentsArray An array holding all arguments the method will be called with
-	 */
-	protected function repositoryMethodCalledTest($repository, $method, $argumentsArray) {
-		$this->subject
-			->_get($repository)
-			->expects($this->once())
-			->method($method)
-			->withConsecutive($argumentsArray);
-	}
-
-	protected function repositoryMethodReturnsTest($repository, $method, $argumentsArray, $expectedReturnValue) {
-		$this->subject
-			->_get($repository)
-			->expects($this->once())
-			->method($method)
-			->withConsecutive($argumentsArray)
-			->willReturn($expectedReturnValue);
 	}
 }
