@@ -42,7 +42,7 @@ class CheckboxViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTest
 
 	public function testInitializeArguments() {
 		$this->mockSubject('registerUniversalTagAttributes', 'registerArgument', 'overrideArgument');
-		$this->checkIfInitializeArgumentsGotCalledNTimes(6);
+		$this->checkIfRegisterArgumentsGotCalledNTimes(6);
 		$this->subject->initializeArguments();
 	}
 
