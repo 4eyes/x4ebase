@@ -45,7 +45,7 @@ class EmailLogTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 		$this->initialValueTest('recipient', NULL);
 		$this->initialValueTest('subject', NULL);
 		$this->initialValueTest('message', NULL);
-		$this->initialValueTest('is_sent', FALSE);
+		$this->initialValueTest('isSent', FALSE);
 		$this->initialValueTest('error', NULL);
 	}
 

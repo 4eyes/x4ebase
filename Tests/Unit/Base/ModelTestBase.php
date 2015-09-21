@@ -26,6 +26,7 @@ namespace X4E\X4ebase\Tests\Unit\Base;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Base class for all Model test classes
@@ -45,6 +46,24 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		parent::setUp();
 		$this->mockSubject();
 	}
+
+	/**
+	 * @param array $methods
+	 *
+	 * @return \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface
+	 */
+	protected function getAccessibleSubjectInstance(array $methods = array('dummy')) {
+		return $this->getAccessibleMock(
+			$this->getSubjectClassName(),
+			$methods
+		);
+	}
+
+	/**************************************
+	 *                                    *
+	 *         GENERIC FUNCTIONS          *
+	 *                                    *
+	 *************************************/
 
 	/**
 	 * Generic function to set $parameterName to $parameterValue
@@ -73,13 +92,10 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 *
 	 * @param $parameterName
 	 * @param $testValue
+	 * @param $addAlias
 	 */
-	protected function genericAddTest($parameterName, $testValue, $addAlias) {
-		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
+	protected function genericAdd($addAlias, $testValue) {
 		call_user_func_array(array($this->subject, 'add' . $addAlias), array($testValue));
-		$this->assertTrue(
-			$this->genericGetter($parameterName)->contains($testValue)
-		);
 	}
 
 	/**
@@ -88,12 +104,8 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param $parameterName
 	 * @param $testValue
 	 */
-	protected function genericRemoveTest($parameterName, $testValue, $removeAlias) {
-		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
+	protected function genericRemove($removeAlias, $testValue) {
 		call_user_func_array(array($this->subject, 'remove' . $removeAlias), array($testValue));
-		$this->assertFalse(
-			$this->genericGetter($parameterName)->contains($testValue)
-		);
 	}
 
 	/**
@@ -106,8 +118,29 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	/**
+	 * Generic function that prepares the $parameterName and tests for adding and removing
+	 * $testObject to/from it
+	 *
+	 * @param $parameterName
+	 * @param $testObject
+	 * @param $addRemoveAlias
+	 */
+	protected function genericAddRemoveTest($parameterName, $testObject, $addRemoveAlias) {
+		if(empty($addRemoveAlias)) {
+			if(substr($parameterName, -1) == 's') {
+				$addRemoveAlias = substr($parameterName, 0, -1);
+			} else {
+				$addRemoveAlias = $parameterName;
+			}
+		}
+		$this->genericAdd($addRemoveAlias, $testObject);
+		$this->genericRemove($addRemoveAlias, $testObject);
+	}
+
+	/**
+	 * Generic function that prepares the $parameterName and tests the isParameterName method
+	 *
 	 * @param String $parameterName The name of the model parameter
-	 * @param mixed $parameterValue The value the model parameter should be tested with
 	 */
 	protected function isTest($parameterName) {
 		$parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
@@ -115,24 +148,19 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$this->assertTrue($this->subject->{'is' . $parameterName}());
 	}
 
-	/**
-	 * Generic function that prepares the $parameterName and tests for adding and removing
-	 * $testObject to/from it
-	 *
-	 * @param $parameterName
-	 * @param $testObject
-	 */
-	protected function genericAddRemoveTest($parameterName, $testObject) {
-		if(substr($parameterName, -1) == 's') {
-			$addRemoveAlias = substr($parameterName, 0, -1);
-		} else {
-			$addRemoveAlias = $parameterName;
-		}
-		$this->genericAddTest($parameterName, $testObject, $addRemoveAlias);
-		$this->genericRemoveTest($parameterName, $testObject, $addRemoveAlias);
-	}
+
+
+	/**************************************
+	 *                                    *
+	 *  SPECIFIC GETTER/SETTER FUNCTIONS  *
+	 *                                    *
+	 *************************************/
+
+
 
 	/**
+	 * Test Getter and Setter methods for string attributes
+	 *
 	 * @param String $parameterName The name of the model parameter
 	 */
 	protected function stringGetterSetterTest($parameterName) {
@@ -143,6 +171,8 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	/**
+	 * Test Getter and Setter methods for integer attributes
+	 *
 	 * @param String $parameterName The name of the model parameter
 	 */
 	protected function integerGetterSetterTest($parameterName) {
@@ -153,6 +183,8 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	/**
+	 * Test Getter and Setter methods for boolean attributes
+	 *
 	 * @param String $parameterName The name of the model parameter
 	 */
 	protected function booleanGetterSetterTest($parameterName) {
@@ -162,6 +194,11 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		}
 	}
 
+	/**
+	 * Test Getter and Setter methods for \DateTime attributes
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 */
 	protected function dateTimeGetterSetterTest($parameterName) {
 		$testVars = array(new \DateTime());
 		foreach ($testVars as $testVar) {
@@ -169,23 +206,12 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		}
 	}
 
-	protected function objectStorageGetterSetterTest($parameterName, $typeOfModel) {
-		$item = new $typeOfModel;
-		$objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-		$objectStorage->attach($item);
-
-		$this->genericGetterSetterTest($parameterName, $objectStorage);
-	}
-
-	protected function objectStorageAddRemoveTest($parameterName, $typeOfModel) {
-		$storage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-		$this->genericSetter($parameterName, $storage);
-		$newItems = array(new $typeOfModel);
-		foreach ($newItems as $newItem) {
-			$this->genericAddRemoveTest($parameterName, $newItem);
-		}
-	}
-
+	/**
+	 * Test Getter and Setter methods for custom object-class attributes
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 * @param String $class The object class to get and set
+	 */
 	protected function objectGetterSetterTest($parameterName, $class) {
 		$testVars = array(new $class);
 		foreach ($testVars as $testVar) {
@@ -193,14 +219,11 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		}
 	}
 
-	protected function initialValueTest($parameterName, $expectedInitialValue) {
-		$this->assertAttributeEquals(
-			$expectedInitialValue,
-			$parameterName,
-			$this->subject
-		);
-	}
-
+	/**
+	 * Test Getter and Setter methods for array attributes
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 */
 	protected function arrayGetterSetterTest($parameterName) {
 		$testVars = array(
 			array(1, 2, 3),
@@ -211,4 +234,77 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			$this->genericGetterSetterTest($parameterName, $testVar);
 		}
 	}
+
+	/**
+	 * Test Getter and Setter methods for \TYPO3\CMS\Extbase\Persistence\ObjectStorage attributes
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 * @param String $typeOfModel The object class inside the object storage
+	 */
+	protected function objectStorageGetterSetterTest($parameterName, $typeOfModel) {
+		$item = new $typeOfModel;
+		$objectStorage = new ObjectStorage;
+		$objectStorage->attach($item);
+
+		$this->genericGetterSetterTest($parameterName, $objectStorage);
+	}
+
+	/**************************************
+	 *                                    *
+	 *        ADD/REMOVE FUNCTIONS        *
+	 *                                    *
+	 *************************************/
+
+	 /**
+	  * Test Add and Remove methods
+	  *
+	 * @param String $parameterName The name of the model parameter
+	 * @param String $typeOfModel The object class inside the object storage
+	 * @param null|String $addRemoveAlias The alias for add/remove-Class (addObject for parameterName='objects' (note the s) will be adapted automatically)
+	 */
+	protected function objectStorageAddRemoveTest($parameterName, $typeOfModel, $addRemoveAlias=NULL) {
+		$newItem = new $typeOfModel;
+		$storage = $this->getMock(ObjectStorage::class, array('attach', 'detach'), array(), '', FALSE);
+		$storage->expects($this->atLeastOnce())->method('attach')->with($this->equalTo($newItem));
+		$storage->expects($this->atLeastOnce())->method('detach')->with($this->equalTo($newItem));
+		$this->genericSetter($parameterName, $storage);
+
+		$this->genericAddRemoveTest($parameterName, $newItem, $addRemoveAlias);
+	}
+
+
+	/**************************************
+	 *                                    *
+	 *       INITIAL VALUE FUNCTIONS      *
+	 *                                    *
+	 *************************************/
+
+	/**
+	 * Test the initial value
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 * @param mixed $expectedInitialValue The expected initial value
+	 */
+	protected function initialValueTest($parameterName, $expectedInitialValue) {
+		$this->assertAttributeEquals(
+			$expectedInitialValue,
+			$parameterName,
+			$this->subject
+		);
+	}
+
+	/**
+	 * Test the initial value for attributes being of type \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 */
+	protected function initialValueObjectStorageTest($parameterName) {
+		$this->assertAttributeInstanceOf(
+			ObjectStorage::class,
+			$parameterName,
+			$this->subject
+		);
+	}
+
+
 }
