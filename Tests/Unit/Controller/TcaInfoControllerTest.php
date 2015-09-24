@@ -58,11 +58,11 @@ class TcaInfoControllerTest extends \X4E\X4ebase\Tests\Unit\Base\ControllerTestB
 		$this->prepareGlobals();
 		$this->setArguments(array('table' => ''));
 
-		$this->viewAssignCalledTest(array(
+		$this->viewAssignCalledTest(
 			array('table', $this->equalTo(NULL)),
 			array('tableName', $this->equalTo('')),
 			array('tables', $this->equalTo(array()))
-		));
+		);
 
 		$this->subject->showAction();
 	}

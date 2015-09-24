@@ -128,7 +128,7 @@ class ViewHelperTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	protected function initializeArgumentsTest($arguments, $tagAttributes=0) {
-		$this->mockSubject('registerArgument');
+		$this->mockSubject('registerArgument', 'registerTagAttribute');
 		$this->checkIfRegisterArgumentsGotCalledNTimes($arguments);
 		$this->checkIfRegisterTagAttributeGotCalledNTimes($tagAttributes);
 		$this->subject->initializeArguments();
