@@ -29,7 +29,7 @@ class ReplaceTabs implements \TYPO3\CMS\Fluid\Core\Parser\InterceptorInterface {
 	 */
 	public function process(\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\NodeInterface $node, $interceptorPosition, \TYPO3\CMS\Fluid\Core\Parser\ParsingState $parsingState) {
 		$nodeText = $node->getText();
-		$replacedNode = $this->objectManager->create('TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\TextNode', str_replace(chr(9), chr(8204), $nodeText));
+		$replacedNode = $this->objectManager->get('TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\TextNode', str_replace(chr(9), chr(8204), $nodeText));
 		return $replacedNode;
 	}
 
