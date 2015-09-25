@@ -80,6 +80,11 @@ class GroupByFirstLetterViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\View
 		$this->assertEquals($expectedResult, $this->subject->render(new testClass(), 'test'));
 	}
 
+	public function testRender_WithObjectInstanceOfLazy_ResolvesLazy() {
+		//@todo: write test for lazy objects
+		$this->markTestIncomplete('Need test for lazy objects');
+	}
+
 }
 
 class testClass {
