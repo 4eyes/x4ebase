@@ -148,6 +148,23 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	/**
+<<<<<<< Updated upstream
+=======
+	 * Test Getter and Setter methods for float attributes
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 */
+	protected function floatGetterSetterTest($parameterName) {
+		$testVars = array(0.0, 4.2);
+		foreach ($testVars as $testVar) {
+			$this->genericGetterSetterTest($parameterName, $testVar);
+		}
+	}
+
+	/**
+	 * Test Getter and Setter methods for boolean attributes
+	 *
+>>>>>>> Stashed changes
 	 * @param String $parameterName The name of the model parameter
 	 */
 	protected function booleanGetterSetterTest($parameterName) {
@@ -164,8 +181,19 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		}
 	}
 
+<<<<<<< Updated upstream
 	protected function objectStorageGetterSetterTest($parameterName) {
 		$testVars = array(new \TYPO3\CMS\Extbase\Persistence\ObjectStorage);
+=======
+	/**
+	 * Test Getter and Setter methods for custom object-class attributes
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 * @param String $class The object class to get and set
+	 */
+	protected function objectGetterSetterTest($parameterName, $class) {
+		$testVars = array($this->getMock($class, array(), array(), '', FALSE));
+>>>>>>> Stashed changes
 		foreach ($testVars as $testVar) {
 			$this->genericGetterSetterTest($parameterName, $testVar);
 		}
@@ -194,4 +222,80 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			$this->genericGetterSetterTest($parameterName, $testVar);
 		}
 	}
+<<<<<<< Updated upstream
+=======
+
+	/**
+	 * Test Getter and Setter methods for \TYPO3\CMS\Extbase\Persistence\ObjectStorage attributes
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 * @param String $typeOfModel The object class inside the object storage
+	 */
+	protected function objectStorageGetterSetterTest($parameterName, $typeOfModel) {
+		$item = $this->getMock($typeOfModel, array(), array(), '', FALSE);
+		$objectStorage = new ObjectStorage;
+		$objectStorage->attach($item);
+
+		$this->genericGetterSetterTest($parameterName, $objectStorage);
+	}
+
+	/**************************************
+	 *                                    *
+	 *        ADD/REMOVE FUNCTIONS        *
+	 *                                    *
+	 *************************************/
+
+	 /**
+	  * Test Add and Remove methods
+	  *
+	 * @param String $parameterName The name of the model parameter
+	 * @param String $typeOfModel The object class inside the object storage
+	 * @param null|String $addRemoveAlias The alias for add/remove-Class (addObject for parameterName='objects' (note the s) will be adapted automatically)
+	 */
+	protected function objectStorageAddRemoveTest($parameterName, $typeOfModel, $addRemoveAlias=NULL) {
+		$newItem = $this->getMock($typeOfModel, array(), array(), '', FALSE);;
+		$storage = $this->getMock(ObjectStorage::class, array('attach', 'detach'), array(), '', FALSE);
+		$storage->expects($this->atLeastOnce())->method('attach')->with($this->equalTo($newItem));
+		$storage->expects($this->atLeastOnce())->method('detach')->with($this->equalTo($newItem));
+		$this->genericSetter($parameterName, $storage);
+
+		$this->genericAddRemoveTest($parameterName, $newItem, $addRemoveAlias);
+	}
+
+
+	/**************************************
+	 *                                    *
+	 *       INITIAL VALUE FUNCTIONS      *
+	 *                                    *
+	 *************************************/
+
+	/**
+	 * Test the initial value
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 * @param mixed $expectedInitialValue The expected initial value
+	 */
+	protected function initialValueTest($parameterName, $expectedInitialValue) {
+		$this->assertAttributeEquals(
+			$expectedInitialValue,
+			$parameterName,
+			$this->subject
+		);
+	}
+
+	/**
+	 * Test the initial value for attributes being of type \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 */
+	protected function initialValueObjectStorageTest($parameterName) {
+		$this->assertAttributeInstanceOf(
+			ObjectStorage::class,
+			$parameterName,
+			$this->subject
+		);
+	}
+
+
+>>>>>>> Stashed changes
 }

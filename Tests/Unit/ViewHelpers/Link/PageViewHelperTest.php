@@ -41,8 +41,11 @@ class PageViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase
 	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\Link\PageViewHelper */
 	protected $subject;
 
-	public function testRender() {
+	public function testInitializeArguments() {
+		$this->initializeArgumentsTest(0, 2, TRUE);
+	}
 
+	public function testRender() {
 		$this->markTestIncomplete(
 			'Untestable - Static method calls'
 		);

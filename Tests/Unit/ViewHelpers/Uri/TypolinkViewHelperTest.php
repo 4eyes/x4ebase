@@ -45,9 +45,7 @@ class TypolinkViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTest
 	 * @test
 	 */
 	public function testInitializeArguments() {
-		$this->mockSubject('registerUniversalTagAttributes', 'registerTagAttribute');
-		$this->subject->expects($this->once())->method('registerUniversalTagAttributes');
-		$this->subject->initializeArguments();
+		$this->initializeArgumentsTest(0,0,true);
 	}
 
 	/**
