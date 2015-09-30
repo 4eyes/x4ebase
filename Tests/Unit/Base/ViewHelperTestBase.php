@@ -127,13 +127,14 @@ class ViewHelperTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$this->injectDependenciesIntoViewHelper($this->subject);
 	}
 
-	protected function initializeArgumentsTest($n) {
-		$this->mockSubject('registerArgument');
-		$this->checkIfInitializeArgumentsGotCalledNTimes($n);
+	protected function initializeArgumentsTest($arguments, $tagAttributes=0) {
+		$this->mockSubject('registerArgument', 'registerTagAttribute');
+		$this->checkIfRegisterArgumentsGotCalledNTimes($arguments);
+		$this->checkIfRegisterTagAttributeGotCalledNTimes($tagAttributes);
 		$this->subject->initializeArguments();
 	}
 
-	protected function checkIfInitializeArgumentsGotCalledNTimes($n) {
+	protected function checkIfRegisterArgumentsGotCalledNTimes($n) {
 		$this->subject
 			->expects($this->exactly($n))
 			->method('registerArgument');

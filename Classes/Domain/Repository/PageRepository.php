@@ -40,7 +40,7 @@ class PageRepository extends AbstractRepository {
 	
 	public function initializeObject() {
 		/* @var $querySettings \X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings */
-		$querySettings = $this->objectManager->create('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings');
+		$querySettings = $this->objectManager->get('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings');
 		$querySettings->setRespectStoragePage(FALSE);
 		//$querySettings->setRespectSysLanguage(FALSE);
 		$this->setDefaultQuerySettings($querySettings);

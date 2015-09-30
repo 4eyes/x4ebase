@@ -75,7 +75,7 @@ class PageLanguageOverlayTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase
 		$this->integerGetterSetterTest('deleted');
 		$this->stringGetterSetterTest('subtitle');
 		$this->stringGetterSetterTest('navTitle');
-		$this->objectStorageGetterSetterTest('media');
+		$this->objectStorageGetterSetterTest('media', \TYPO3\CMS\Extbase\Domain\Model\FileReference::class);
 		$this->stringGetterSetterTest('keywords');
 		$this->stringGetterSetterTest('description');
 		$this->stringGetterSetterTest('abstract');

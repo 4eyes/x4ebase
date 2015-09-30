@@ -42,9 +42,7 @@ class TypolinkViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTest
 	protected $subject;
 
 	public function testInitializeArguments() {
-		$this->mockSubject('registerUniversalTagAttributes', 'registerTagAttribute');
-		$this->checkIfRegisterTagAttributeGotCalledNTimes(4);
-		$this->subject->initializeArguments();
+		$this->initializeArgumentsTest(0, 13);
 	}
 
 	protected function createEmptyLinkHref() {

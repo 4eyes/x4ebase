@@ -67,7 +67,7 @@ class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			return $result;
 			
 			/* @var $dataMapFactory \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory */
-			$dataMapFactory = $this->objectManager->create('TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory');
+			$dataMapFactory = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory');
 			/* @var $dataMap \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap */
 			$dataMap = $dataMapFactory->buildDataMap(get_class($record));
 			$translationOriginColumnName = $dataMap->getTranslationOriginColumnName();

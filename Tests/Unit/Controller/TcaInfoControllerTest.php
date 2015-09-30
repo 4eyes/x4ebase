@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Controller;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Unit\Controller\TcaInfoController
+ * Test case for class \X4E\X4ebase\Controller\TcaInfoController
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -58,11 +58,11 @@ class TcaInfoControllerTest extends \X4E\X4ebase\Tests\Unit\Base\ControllerTestB
 		$this->prepareGlobals();
 		$this->setArguments(array('table' => ''));
 
-		$this->viewAssignCalledTest(array(
+		$this->viewAssignCalledTest(
 			array('table', $this->equalTo(NULL)),
 			array('tableName', $this->equalTo('')),
 			array('tables', $this->equalTo(array()))
-		));
+		);
 
 		$this->subject->showAction();
 	}
