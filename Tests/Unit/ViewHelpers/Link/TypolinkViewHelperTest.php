@@ -42,7 +42,7 @@ class TypolinkViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTest
 	protected $subject;
 
 	public function testInitializeArguments() {
-		$this->initializeArgumentsTest(0, 13);
+		$this->initializeArgumentsTest(0, 4, TRUE);
 	}
 
 	protected function createEmptyLinkHref() {

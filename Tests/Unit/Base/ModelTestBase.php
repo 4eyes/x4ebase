@@ -183,6 +183,18 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	/**
+	 * Test Getter and Setter methods for float attributes
+	 *
+	 * @param String $parameterName The name of the model parameter
+	 */
+	protected function floatGetterSetterTest($parameterName) {
+		$testVars = array(0.0, 4.2);
+		foreach ($testVars as $testVar) {
+			$this->genericGetterSetterTest($parameterName, $testVar);
+		}
+	}
+
+	/**
 	 * Test Getter and Setter methods for boolean attributes
 	 *
 	 * @param String $parameterName The name of the model parameter
@@ -213,7 +225,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param String $class The object class to get and set
 	 */
 	protected function objectGetterSetterTest($parameterName, $class) {
-		$testVars = array(new $class);
+		$testVars = array($this->getMock($class, array(), array(), '', FALSE));
 		foreach ($testVars as $testVar) {
 			$this->genericGetterSetterTest($parameterName, $testVar);
 		}
@@ -242,7 +254,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param String $typeOfModel The object class inside the object storage
 	 */
 	protected function objectStorageGetterSetterTest($parameterName, $typeOfModel) {
-		$item = new $typeOfModel;
+		$item = $this->getMock($typeOfModel, array(), array(), '', FALSE);
 		$objectStorage = new ObjectStorage;
 		$objectStorage->attach($item);
 
@@ -263,7 +275,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param null|String $addRemoveAlias The alias for add/remove-Class (addObject for parameterName='objects' (note the s) will be adapted automatically)
 	 */
 	protected function objectStorageAddRemoveTest($parameterName, $typeOfModel, $addRemoveAlias=NULL) {
-		$newItem = new $typeOfModel;
+		$newItem = $this->getMock($typeOfModel, array(), array(), '', FALSE);
 		$storage = $this->getMock(ObjectStorage::class, array('attach', 'detach'), array(), '', FALSE);
 		$storage->expects($this->atLeastOnce())->method('attach')->with($this->equalTo($newItem));
 		$storage->expects($this->atLeastOnce())->method('detach')->with($this->equalTo($newItem));

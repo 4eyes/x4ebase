@@ -88,7 +88,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @test
 	 */
 	public function testAddSysLanguageStatement() {
-		$this->mockSubject('dummy');
+		$this->mockSubject();
 		$tableName = 'lorem';
 		$sql = array();
 		$GLOBALS['TCA'][$tableName]['ctrl'] = array(
@@ -97,9 +97,9 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 		$querySettings = $this->getMock(
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
-			array('getSysLanguageUid')
+			array('getLanguageUid')
 		);
-		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->willReturn(1);
+		$querySettings->expects($this->atLeastOnce())->method('getLanguageUid')->willReturn(1);
 
 		$expectedResult = ' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval(1);
 
@@ -111,7 +111,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @test
 	 */
 	public function testAddAlternativeSysLanguageStatement_WithSysLanguageUid() {
-		$this->mockSubject('dummy');
+		$this->mockSubject();
 		$tableName = 'lorem';
 		$sql = array();
 		$GLOBALS['TCA'][$tableName]['ctrl'] = array(
@@ -120,9 +120,9 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 		$querySettings = $this->getMock(
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
-			array('getSysLanguageUid')
+			array('getLanguageUid')
 		);
-		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->willReturn(1);
+		$querySettings->expects($this->atLeastOnce())->method('getLanguageUid')->willReturn(1);
 
 		$expectedResult = $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . ' IN (-1,0) OR ('
 			. $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval($querySettings->getSysLanguageUid())
@@ -137,7 +137,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @test
 	 */
 	public function testAddAlternativeSysLanguageStatement_WithoutSysLanguageUid() {
-		$this->mockSubject('dummy');
+		$this->mockSubject();
 		$tableName = 'lorem';
 		$sql = array();
 		$GLOBALS['TCA'][$tableName]['ctrl'] = array(
@@ -146,9 +146,9 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 		$querySettings = $this->getMock(
 			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
-			array('getSysLanguageUid')
+			array('getLanguageUid')
 		);
-		$querySettings->expects($this->atLeastOnce())->method('getSysLanguageUid')->willReturn(0);
+		$querySettings->expects($this->atLeastOnce())->method('getLanguageUid')->willReturn(0);
 
 		$expectedResult = $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . ' IN (-1,0)';
 

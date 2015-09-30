@@ -25,6 +25,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 *
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 * ************************************************************* */
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4E\X4ebase\Domain\Repository\PageLanguageOverlayRepository
@@ -44,8 +45,8 @@ class PageLanguageOverlayRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\Rep
 		$querySettings->expects($this->once())->method('setRespectStoragePage');
 		$querySettings->expects($this->once())->method('setRespectSysLanguage');
 
-		$objectManager = $this->getMock(ObjectManager::class, array('create'), array(), '', FALSE);
-		$objectManager->expects($this->once())->method('create')->with('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
+		$objectManager = $this->getMock(ObjectManager::class, array('get'), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('get')->with('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
 
 		$this->subject->expects($this->once())->method('setDefaultQuerySettings')->with($querySettings);
 		$this->subject->_set('objectManager', $objectManager);

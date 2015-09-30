@@ -55,7 +55,7 @@ class ReplaceTabsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		);
 		$this->objectManager = $this->getMock(
 			ObjectManager::class,
-			array('create'),
+			array('get'),
 			array(),
 			'',
 			FALSE
@@ -87,7 +87,7 @@ class ReplaceTabsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->replaceTabs->_set('objectManager', $this->objectManager);
 		$this->replaceTabs->_get('objectManager')
 			->expects($this->once())
-			->method('create')
+			->method('get')
 			->willReturn($this->isInstanceOf('\\TYPO3\\CMS\\Fluid\\Core\\Parser\\SyntaxTree\\NodeInterface'));
 		$this->replaceTabs->process($textNode, 1, $parsingState);
 	}

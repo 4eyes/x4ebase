@@ -15,11 +15,11 @@
 >
 
 	<php>
-		<env name="TYPO3_PATH_WEB" value="../../../.."/>
+		<!--<env name="TYPO3_PATH_WEB" value="../../../.."/>-->
 	</php>
 
 	<filter>
-		<whitelist processUncoveredFilesFromWhitelist="true">
+		<whitelist processUncoveredFilesFromWhitelist="true" addUncoveredFilesFromWhitelist="false">
 			<directory suffix=".php">../</directory>
 			<exclude>
 				<directory suffix=".php">../Tests</directory>
