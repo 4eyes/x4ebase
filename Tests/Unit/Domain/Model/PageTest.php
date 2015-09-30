@@ -117,7 +117,7 @@ class PageTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
 		$this->stringGetterSetterTest('subtitle');
 		$this->integerGetterSetterTest('layout');
 		$this->stringGetterSetterTest('target');
-		$this->objectStorageGetterSetterTest('media');
+		$this->objectStorageGetterSetterTest('media', \TYPO3\CMS\Extbase\Domain\Model\FileReference::class);
 		$this->integerGetterSetterTest('lastupdated');
 		$this->stringGetterSetterTest('keywords');
 		$this->integerGetterSetterTest('cacheTimeout');

@@ -305,7 +305,7 @@ class EidDispatcher {
 		$request->setControllerActionName($ajax['action']);
 		$request->setArguments($ajax['arguments'] ?: array());
 
-		$response = $objectManager->create('TYPO3\CMS\Extbase\Mvc\ResponseInterface');
+		$response = $objectManager->get('TYPO3\CMS\Extbase\Mvc\ResponseInterface');
 
 		$dispatcher = $objectManager->get('TYPO3\CMS\Extbase\Mvc\Dispatcher');
 

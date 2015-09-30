@@ -65,11 +65,11 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 		if (is_array($GLOBALS['TCA'][$tableName]['ctrl'])) {
 			if (!empty($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])) {
 				// Select all entries for the current language
-				$additionalWhereClause = $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . ' IN (' . intval($querySettings->getSysLanguageUid()) . ',-1)';
+				$additionalWhereClause = $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . ' IN (' . intval($querySettings->getLanguageUid()) . ',-1)';
 				// If any language is set -> get those entries which are not translated yet
 				// They will be removed by t3lib_page::getRecordOverlay if not matching overlay mode
 				if (isset($GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'])
-					&& $querySettings->getSysLanguageUid() > 0
+					&& $querySettings->getLanguageUid() > 0
 				) {
 					$additionalWhereClause .= ' OR (' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=0' .
 						' AND ' . $tableName . '.uid NOT IN (SELECT ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'] .
@@ -77,7 +77,7 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 						' WHERE ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'] . '>0' .
 						/* NEW @ 4eyes -- start */
 						//' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '>0';
-						' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval($querySettings->getSysLanguageUid());
+						' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval($querySettings->getLanguageUid());
 						/* NEW @ 4eyes -- end */
 
 					// Add delete clause to ensure all entries are loaded
@@ -108,10 +108,10 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 				// If any language is set -> get those entries which are not translated yet
 				// They will be removed by t3lib_page::getRecordOverlay if not matching overlay mode
 				if (isset($GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'])
-					&& $querySettings->getSysLanguageUid() > 0
+					&& $querySettings->getLanguageUid() > 0
 				) {
 					$additionalWhereClause .= ' OR ('
-						. $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval($querySettings->getSysLanguageUid())
+						. $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval($querySettings->getLanguageUid())
 						. ' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'] . '=0'
 						. ')';
 				}
@@ -184,13 +184,13 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 					$row['uid'] = $row['_ORIG_uid'];
 				}
 				if ($tableName == 'pages') {
-					$row = $pageRepository->getPageOverlay($row, $querySettings->getSysLanguageUid());
+					$row = $pageRepository->getPageOverlay($row, $querySettings->getLanguageUid());
 				} elseif (isset($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])
 					&& $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] !== ''
 				) {
 					if (in_array($row[$GLOBALS['TCA'][$tableName]['ctrl']['languageField']], array(-1, 0))) {
 						$overlayMode = $languageMode === 'strict' ? 'hideNonTranslated' : '';
-						$row = $pageRepository->getRecordOverlay($tableName, $row, $querySettings->getSysLanguageUid(), $overlayMode);
+						$row = $pageRepository->getRecordOverlay($tableName, $row, $querySettings->getLanguageUid(), $overlayMode);
 					}
 				}
 				if ($row !== NULL && is_array($row)) {

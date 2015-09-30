@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Tests\Unit\Controller;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * Test case for class \X4E\X4ebase\Unit\Controller\ModelGeneratorController
+ * Test case for class \X4E\X4ebase\Controller\ModelGeneratorController
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -74,7 +74,7 @@ class ModelGeneratorControllerTest extends \X4E\X4ebase\Tests\Unit\Base\Controll
 
 		$TYPO3_DB = $databaseConnection;
 
-		$this->viewAssignCalledTest(array(array(), array(), array(), array(), array()));
+		$this->viewAssignCalledTest(array(), array(), array(), array(), array());
 
 		$this->subject->showAction($generator);
 	}

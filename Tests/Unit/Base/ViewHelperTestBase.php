@@ -127,11 +127,6 @@ class ViewHelperTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$this->injectDependenciesIntoViewHelper($this->subject);
 	}
 
-<<<<<<< Updated upstream
-	protected function initializeArgumentsTest($n) {
-		$this->mockSubject('registerArgument');
-		$this->checkIfInitializeArgumentsGotCalledNTimes($n);
-=======
 	protected function initializeArgumentsTest($arguments, $tagAttributes=0, $universalTagAttributes=FALSE) {
 		$this->mockSubject('registerArgument', 'registerTagAttribute', 'registerUniversalTagAttributes');
 		$this->checkIfRegisterArgumentsGotCalledNTimes($arguments);
@@ -140,11 +135,10 @@ class ViewHelperTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			$this->checkIfRegisterUniversalTagAttributesGetsCalled();
 		}
 
->>>>>>> Stashed changes
 		$this->subject->initializeArguments();
 	}
 
-	protected function checkIfInitializeArgumentsGotCalledNTimes($n) {
+	protected function checkIfRegisterArgumentsGotCalledNTimes($n) {
 		$this->subject
 			->expects($this->exactly($n))
 			->method('registerArgument');

@@ -40,6 +40,7 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	/** @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
 	protected $subject = NULL;
 
+	/** @var \TYPO3\CMS\Extbase\Mvc\View\ViewInterface|\PHPUnit_Framework_MockObject_MockObject $view */
 	protected $view;
 	protected $request;
 	protected $settings;
@@ -84,21 +85,12 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	/**
-	 * This method tests if $view->assign was called. By making $assignments an array of arrays, $view->assign can be
-	 * testet with multiple calls. Each array inside the top array holds the assignmentName, assignmentValue pair which
-	 * forms the arguments for $view-assign
-	 *
-	 * @param array $assignments Can be a simple array($assignmentName, $assignmentValue) or an array of arrays:
-	 * array(
-	 *  array($assignmentName, $assignmentValue),       //1st call of $view->assign($assignmentName,$assignmentValue)
-	 *  array($assignmentName, $assignmentValue),       //2nd call of $view->assign($assignmentName,$assignmentValue)
-	 *  ...                                             //nth call of $view->assign($assignmentName,$assignmentValue)
-	 * )
+	 * Pass in any number of arrays to test if view->assign(array[0], array[1]) gets called that many times.
+	 * Number of arrays may be zero (to test if assign gets never called).
 	 */
-	protected function viewAssignCalledTest($assignments) {
-		if (is_string($assignments[0])) {
-			$assignments = array($assignments);
-		}
+	protected function viewAssignCalledTest() {
+		$assignments = func_get_args();
+
 		$methodObject = $this->subject
 			->_get('view')
 			->expects($this->exactly(count($assignments)))
@@ -117,27 +109,5 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			->expects($this->once())
 			->method('assignMultiple')
 			->with($assignments);
-	}
-
-	/**
-	 * @param String $repository The name of the controller property holding the repository
-	 * @param String $method The name of the method of the repository that will be called
-	 * @param array $argumentsArray An array holding all arguments the method will be called with
-	 */
-	protected function repositoryMethodCalledTest($repository, $method, $argumentsArray) {
-		$this->subject
-			->_get($repository)
-			->expects($this->once())
-			->method($method)
-			->withConsecutive($argumentsArray);
-	}
-
-	protected function repositoryMethodReturnsTest($repository, $method, $argumentsArray, $expectedReturnValue) {
-		$this->subject
-			->_get($repository)
-			->expects($this->once())
-			->method($method)
-			->withConsecutive($argumentsArray)
-			->willReturn($expectedReturnValue);
 	}
 }
