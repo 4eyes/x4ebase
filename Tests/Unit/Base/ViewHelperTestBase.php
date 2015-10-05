@@ -127,10 +127,14 @@ class ViewHelperTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$this->injectDependenciesIntoViewHelper($this->subject);
 	}
 
-	protected function initializeArgumentsTest($arguments, $tagAttributes=0) {
-		$this->mockSubject('registerArgument');
+	protected function initializeArgumentsTest($arguments, $tagAttributes=0, $universalTagAttributes=FALSE) {
+		$this->mockSubject('registerArgument', 'registerTagAttribute', 'registerUniversalTagAttributes');
 		$this->checkIfRegisterArgumentsGotCalledNTimes($arguments);
 		$this->checkIfRegisterTagAttributeGotCalledNTimes($tagAttributes);
+		if($universalTagAttributes) {
+			$this->checkIfRegisterUniversalTagAttributesGetsCalled();
+		}
+
 		$this->subject->initializeArguments();
 	}
 
@@ -144,6 +148,12 @@ class ViewHelperTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$this->subject
 			->expects($this->exactly($n))
 			->method('registerTagAttribute');
+	}
+
+	protected function checkIfRegisterUniversalTagAttributesGetsCalled() {
+		$this->subject
+			->expects($this->once())
+			->method('registerUniversalTagAttributes');
 	}
 
 }

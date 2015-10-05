@@ -85,21 +85,12 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	}
 
 	/**
-	 * This method tests if $view->assign was called. By making $assignments an array of arrays, $view->assign can be
-	 * testet with multiple calls. Each array inside the top array holds the assignmentName, assignmentValue pair which
-	 * forms the arguments for $view-assign
-	 *
-	 * @param array $assignments Can be a simple array($assignmentName, $assignmentValue) or an array of arrays:
-	 * array(
-	 *  array($assignmentName, $assignmentValue),       //1st call of $view->assign($assignmentName,$assignmentValue)
-	 *  array($assignmentName, $assignmentValue),       //2nd call of $view->assign($assignmentName,$assignmentValue)
-	 *  ...                                             //nth call of $view->assign($assignmentName,$assignmentValue)
-	 * )
+	 * Pass in any number of arrays to test if view->assign(array[0], array[1]) gets called that many times.
+	 * Number of arrays may be zero (to test if assign gets never called).
 	 */
-	protected function viewAssignCalledTest($assignments) {
-		if (is_string($assignments[0])) {
-			$assignments = array($assignments);
-		}
+	protected function viewAssignCalledTest() {
+		$assignments = func_get_args();
+
 		$methodObject = $this->subject
 			->_get('view')
 			->expects($this->exactly(count($assignments)))
