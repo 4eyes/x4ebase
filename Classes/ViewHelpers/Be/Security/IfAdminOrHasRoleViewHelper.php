@@ -70,7 +70,7 @@ class IfAdminOrHasRoleViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Securit
 	 * @return string the rendered string
 	 */
 	public function render($role) {
-		if ($this->backendUserIsAdmin() || $this->evaluateCondition(array('role' => $role))) {
+		if ($this->backendUserIsAdmin() || self::evaluateCondition(array('role' => $role))) {
 			return $this->renderThenChild();
 		} else {
 			return $this->renderElseChild();
