@@ -44,15 +44,13 @@ class IfAdminOrHasRoleViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHe
 	 * @test
 	 */
 	public function testRenderElseChild() {
-		$this->mockSubject('backendUserIsAdmin', 'evaluateCondition', 'renderElseChild');
+		$this->mockSubject('backendUserIsAdmin', 'renderElseChild');
 		$beUser = new \TYPO3\CMS\Core\Authentication\BackendUserAuthentication();
 		$beUser->user = array('admin' => TRUE);
 		$GLOBALS['BE_USER'] = $beUser;
 
 		$this->subject->expects($this->once())
 			->method('backendUserIsAdmin');
-		$this->subject->expects($this->once())
-			->method('evaluateCondition');
 
 		$this->subject->expects($this->once())
 			->method('renderElseChild');
