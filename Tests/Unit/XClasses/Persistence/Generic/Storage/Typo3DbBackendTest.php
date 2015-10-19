@@ -125,7 +125,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$querySettings->expects($this->atLeastOnce())->method('getLanguageUid')->willReturn(1);
 
 		$expectedResult = $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . ' IN (-1,0) OR ('
-			. $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval($querySettings->getSysLanguageUid())
+			. $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=' . intval($querySettings->getLanguageUid())
 			. ' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'] . '=0'
 			. ')';
 
