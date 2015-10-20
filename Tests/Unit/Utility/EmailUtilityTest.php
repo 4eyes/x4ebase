@@ -44,6 +44,9 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	protected $subject;
 
 	public function testLogEmail_SendsEmail_AND_LogsEmail() {
+		$this->markTestIncomplete(
+			'Untestable - Static method calls'
+		);
 		$this->mockSubject('logEmail');
 
 		$request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array(), array(), '', FALSE);
@@ -70,10 +73,6 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$subject = $this->subject;
 
 		$this->subject->_setStatic('objectManager', $objectManager);
-
-		$this->markTestIncomplete(
-			'Untestable - Static method calls'
-		);
 
 		$this->subject->sendTemplateEmail(array('test@example.org'), array(''), '', '', '', '', '', array(), 'x4ebase', 'Email', true, array(1));
 	}
