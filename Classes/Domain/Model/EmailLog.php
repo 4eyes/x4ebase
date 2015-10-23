@@ -89,7 +89,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the sender
 	 *
 	 * @param string $sender
-	 * @return void
+	 * @return \X4E\X4ebase\Domain\Model\EmailLog
 	 */
 	public function setSender($sender) {
 		$this->sender = $sender;
@@ -109,7 +109,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the recipient
 	 *
 	 * @param string $recipient
-	 * @return void
+	 * @return \X4E\X4ebase\Domain\Model\EmailLog
 	 */
 	public function setRecipient($recipient) {
 		$this->recipient = $recipient;
@@ -129,7 +129,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the subject
 	 *
 	 * @param string $subject
-	 * @return void
+	 * @return \X4E\X4ebase\Domain\Model\EmailLog
 	 */
 	public function setSubject($subject) {
 		$this->subject = $subject;
@@ -149,7 +149,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the message
 	 *
 	 * @param string $message
-	 * @return void
+	 * @return \X4E\X4ebase\Domain\Model\EmailLog
 	 */
 	public function setMessage($message) {
 		$this->message = $message;
@@ -169,7 +169,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the isSent
 	 *
 	 * @param boolean $isSent
-	 * @return void
+	 * @return \X4E\X4ebase\Domain\Model\EmailLog
 	 */
 	public function setIsSent($isSent) {
 		$this->isSent = $isSent;
@@ -198,7 +198,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the error
 	 *
 	 * @param string $error
-	 * @return void
+	 * @return \X4E\X4ebase\Domain\Model\EmailLog
 	 */
 	public function setError($error) {
 		$this->error = $error;

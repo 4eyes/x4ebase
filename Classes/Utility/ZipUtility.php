@@ -36,9 +36,11 @@ class ZipUtility {
 
 	/**
 	 * create a zip archive
+	 *
 	 * @param string $source
 	 * @param string $destination
-	 * @return boolean
+	 * @return bool
+	 * @throws \Exception
 	 */
 	public static function create($source, $destination){
 		if (!extension_loaded('zip')) {

@@ -120,7 +120,7 @@ class SecurePasswordSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterfac
 	}
 	
 	/**
-	 * Returns wether all prequesites for the hashing methods are matched
+	 * Returns whether all prerequisites for the hashing methods are matched
 	 *
 	 * @return boolean Method available
 	 */

@@ -29,16 +29,16 @@ namespace X4E\X4ebase\XClasses\Persistence\Generic\Storage;
  * A Storage backend
  */
 class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbBackend {
-	
+
 	/**
 	 * Adds additional WHERE statements according to the query settings.
 	 *
 	 * @param \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface $querySettings The TYPO3 CMS specific query settings
 	 * @param string $tableName The table name to add the additional where clause for
-	 * @param string &$sql
+	 * @param array &$sql
 	 * @return void
 	 */
-	protected function addAdditionalWhereClause(\TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface $querySettings, $tableName, &$sql) {
+	protected function addAdditionalWhereClause(\TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface $querySettings, $tableName, array &$sql) {
 		$this->addVisibilityConstraintStatement($querySettings, $tableName, $sql);
 		if ($querySettings->getRespectSysLanguage()) {
 			$this->addSysLanguageStatement($tableName, $sql, $querySettings);
@@ -52,7 +52,7 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 			$this->addPageIdStatement($tableName, $sql, $querySettings->getStoragePageIds());
 		}
 	}
-	
+
 	/**
 	 * Builds the language field statement
 	 *
@@ -90,7 +90,7 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 			}
 		}
 	}
-	
+
 	/**
 	 * NEW @ 4eyes
 	 * Builds the alternative language field statement
@@ -119,7 +119,7 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 			}
 		}
 	}
-	
+
 	/**
 	 * Performs workspace and language overlay on the given row array. The language and workspace id is automatically
 	 * detected (depending on FE or BE context). You can also explicitly set the language/workspace id.
@@ -202,5 +202,5 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 		}
 		return $overlayedRows;
 	}
-	
+
 }

@@ -40,14 +40,14 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var integer
 	 */
 	protected $sorting;
-	
+
 	/**
 	 * sysLanguageUid
 	 *
 	 * @var integer
 	 */
 	protected $sysLanguageUid = 0;
-	
+
 	/**
 	 * permsUserid
 	 *
@@ -89,7 +89,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var integer
 	 */
 	protected $editlock;
-	
+
 	/**
 	 * cruserId
 	 *
@@ -389,31 +389,14 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $tstamp;
 
-	/**
-	 * __construct
-	 *
-	 * @return Pages
-	 */
-	public function __construct() {
-		$this->initStorageObjects();
-	}
-	
-	/**
-	 * Initializes all ObjectStorage properties.
-	 *
-	 * @return void
-	 */
-	protected function initStorageObjects() {
-		//$this->xyz = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-	}
-	
+
 	/**
 	 * Returns the sorting
 	 *
 	 * @return integer $sorting
 	 */
 	public function getSorting() {
-		return $this->permsUserid;
+		return $this->sorting;
 	}
 
 	/**
@@ -425,7 +408,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setSorting($sorting) {
 		$this->sorting = $sorting;
 	}
-	
+
 	/**
 	 * Returns the sysLanguageUid
 	 *
@@ -444,7 +427,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setSysLanguageUid($sysLanguageUid) {
 		$this->sysLanguageUid = $sysLanguageUid;
 	}
-	
+
 	/**
 	 * Returns the permsUserid
 	 *
@@ -882,7 +865,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function removeMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove) {
 		$this->media->detach($mediaToRemove);
 	}
-	
+
 	/**
 	 * Returns the media
 	 *

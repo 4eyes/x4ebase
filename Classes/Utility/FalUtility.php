@@ -147,12 +147,11 @@ class FalUtility {
 	 * @param string $fieldName
 	 * @param integer $pid
 	 * @param string $tableLocal
-	 * @param integer $beUser
 	 * @return boolean
 	 */
 	static public function addFileReference($uidLocal, $uidForeign, $tableNames, $fieldName, $pid, $tableLocal = 'sys_file'){
 		/**
-		 * Apparrently there is no better way to do this right now.
+		 * Apparently there is no better way to do this right now.
 		 * This has to be changed as soon as an extbase way is documented
 		 * Check http://wiki.typo3.org/File_Abstraction_Layer#Usage_in_Extbase_.28in_progress.29
 		 * http://forum.typo3.org/index.php/t/196218/

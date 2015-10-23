@@ -1,28 +1,29 @@
 <?php
 namespace X4E\X4ebase\Tests\Unit\Utility;
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2014 Alessandro Bellafronte <alessandro@4eyes.ch>, 4eyes GmbH
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+
+	/***************************************************************
+	 *  Copyright notice
+	 *
+	 *  (c) 2014 Alessandro Bellafronte <alessandro@4eyes.ch>, 4eyes GmbH
+	 *
+	 *  All rights reserved
+	 *
+	 *  This script is part of the TYPO3 project. The TYPO3 project is
+	 *  free software; you can redistribute it and/or modify
+	 *  it under the terms of the GNU General Public License as published by
+	 *  the Free Software Foundation; either version 2 of the License, or
+	 *  (at your option) any later version.
+	 *
+	 *  The GNU General Public License can be found at
+	 *  http://www.gnu.org/copyleft/gpl.html.
+	 *
+	 *  This script is distributed in the hope that it will be useful,
+	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 *  GNU General Public License for more details.
+	 *
+	 *  This copyright notice MUST APPEAR in all copies of the script!
+	 ***************************************************************/
 
 /**
  * Test case for class \X4E\X4ebase\Utility\DateTimeUtility.
@@ -36,7 +37,7 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
 class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	protected $dateTimeUtility = NULL;
-	
+
 	public function setUp() {
 		$this->dateTimeUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('X4E\X4ebase\Utility\DateTimeUtility');
 	}
@@ -44,7 +45,7 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function tearDown() {
 		$this->dateTimeUtility = NULL;
 	}
-	
+
 	/**
 	 * Test for getTimestampFromDate() method
 	 *
@@ -56,7 +57,9 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			array(
 				'title' => 'Case 1: $value: null',
 				'value' => null,
-				'expectedResult' => function() { return time(); }
+				'expectedResult' => function () {
+					return time();
+				}
 			),
 			//Case 2: $value: timestamp integer
 			array(
@@ -91,35 +94,34 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			// Case 7: $value: random array(),
 			array(
 				'title' => 'Case 7: $value: random array()',
-				'value' => array((string) rand(0, 666)),
+				'value' => array((string)rand(0, 666)),
 				'expectedResult' => NULL
 			)
 		);
 
 		foreach ($cases as $case) {
-			$value = ( is_callable($case['value']) ? $case['value']() : $case['value'] );
-			$expectedResult = ( is_callable($case['expectedResult']) ? $case['expectedResult']() : $case['expectedResult'] );
+			$value = (is_callable($case['value']) ? $case['value']() : $case['value']);
+			$expectedResult = (is_callable($case['expectedResult']) ? $case['expectedResult']() : $case['expectedResult']);
 			$actualResult = $this->callInaccessibleMethod($this->dateTimeUtility, 'getTimestampFromDate', $value);
 			$this->assertEquals($actualResult, $expectedResult, $case['title']);
 		}
 	}
-	
-	
+
 	/**
 	 * Offet types:
-	 * 0:		Now
-	 * 1/-1:	Just now / Soon
-	 * 2/-2:	1 minute ago / In 1 minute
-	 * 3/-3:	x minutes ago / In x minutes
-	 * 4/-4:	1 hours ago / In 1 hours
-	 * 5/-5:	x hours ago / In x hours
-	 * 6/-6:	Yesterday / Tomorrow
-	 * 7/-7:	x days ago / In x days
-	 * 8/-8:	Last week / Next week
-	 * 9/-9:	x weeks ago / In x weeks
-	 * 10/-10:	Last month / Next month
-	 * 11/-11:	More than a month ago / In more than a month
-	 * 
+	 * 0:        Now
+	 * 1/-1:    Just now / Soon
+	 * 2/-2:    1 minute ago / In 1 minute
+	 * 3/-3:    x minutes ago / In x minutes
+	 * 4/-4:    1 hours ago / In 1 hours
+	 * 5/-5:    x hours ago / In x hours
+	 * 6/-6:    Yesterday / Tomorrow
+	 * 7/-7:    x days ago / In x days
+	 * 8/-8:    Last week / Next week
+	 * 9/-9:    x weeks ago / In x weeks
+	 * 10/-10:    Last month / Next month
+	 * 11/-11:    More than a month ago / In more than a month
+	 *
 	 * @param integer|string|DateTime $date
 	 * @param integer|string|DateTime $referenceDate
 	 * @return array Returns an array with 3 elements.
@@ -129,7 +131,7 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function testRelativeDate() {
 		$now = strtotime('2014-06-13 12:14:07');
-		
+
 		$cases = array(
 			array(
 				'title' => 'More than a month ago',
@@ -172,6 +174,12 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 				'referenceDate' => strtotime('2014-06-13 09:14:07'),
 				'offsetType' => -5,
 				'offset' => 3
+			),
+			array(
+				'title' => 'Yesterday (Less than a day)',
+				'referenceDate' => strtotime('2014-06-12 12:15:07'),
+				'offsetType' => -6,
+				'offset' => 1
 			),
 			array(
 				'title' => '1 hours ago',
@@ -234,6 +242,12 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 				'offset' => 6
 			),
 			array(
+				'title' => 'Tomorrow (Less than a day)',
+				'referenceDate' => strtotime('2014-06-14 12:13:07'),
+				'offsetType' => 6,
+				'offset' => 1
+			),
+			array(
 				'title' => 'Tomorrow',
 				'referenceDate' => strtotime('2014-06-14 12:14:07'),
 				'offsetType' => 6,
@@ -277,18 +291,18 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$referenceDate = $case['referenceDate'];
 			$offsetType = $case['offsetType'];
 			$offset = $case['offset'];
-			
+
 			$difference = abs($referenceDate - $now);
-			
+
 			$expectedResult = array(
 				$offsetType,
 				$offset,
 				$difference
 			);
-			
+
 			$actualResult = $this->dateTimeUtility->relativeDate($now, $referenceDate);
 			$this->assertEquals($actualResult, $expectedResult, 'Case ' . $count . ': ' . $title);
-			
+
 			$count++;
 		}
 	}
