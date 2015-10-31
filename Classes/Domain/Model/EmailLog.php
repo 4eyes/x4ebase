@@ -49,6 +49,13 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $recipient;
 
 	/**
+	 * replyTo
+	 *
+	 * @var string
+	 */
+	protected $replyTo;
+
+	/**
 	 * subject
 	 *
 	 * @var string
@@ -68,6 +75,20 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var boolean
 	 */
 	protected $isSent = FALSE;
+
+	/**
+	 * queued
+	 *
+	 * @var boolean
+	 */
+	protected $queued = FALSE;
+
+	/**
+	 * isHTML
+	 *
+	 * @var boolean
+	 */
+	protected $isHtml = TRUE;
 
 	/**
 	 * error
@@ -113,6 +134,26 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setRecipient($recipient) {
 		$this->recipient = $recipient;
+		return $this;
+	}
+
+	/**
+	 * Returns the replyto
+	 *
+	 * @return string $replyTo
+	 */
+	public function getReplyTo() {
+		return $this->getReplyTo;
+	}
+
+	/**
+	 * Sets the replyTo
+	 *
+	 * @param string $replyTo
+	 * @return void
+	 */
+	public function setReplyTo($replyTo) {
+		$this->replyTo = $replyTo;
 		return $this;
 	}
 
@@ -166,6 +207,26 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Sets the isHtml
+	 *
+	 * @param boolean $isHtml
+	 * @return void
+	 */
+	public function setIsHtml($isHtml) {
+		$this->isHtml = $isHtml;
+		return $this;
+	}
+
+	/**
+	 * Returns the isHtml
+	 *
+	 * @return boolean $isHtml
+	 */
+	public function getIsHtml() {
+		return $this->isHtml;
+	}
+
+	/**
 	 * Sets the isSent
 	 *
 	 * @param boolean $isSent
@@ -173,6 +234,26 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setIsSent($isSent) {
 		$this->isSent = $isSent;
+		return $this;
+	}
+
+	/**
+	 * Returns the inQueue
+	 *
+	 * @return boolean $inQueue
+	 */
+	public function getQueued() {
+		return $this->queued();
+	}
+
+	/**
+	 * Sets the inQueue
+	 *
+	 * @param boolean $queued
+	 * @return void
+	 */
+	public function setQueued($queued) {
+		$this->queued = $queued;
 		return $this;
 	}
 

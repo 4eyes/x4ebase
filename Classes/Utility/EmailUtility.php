@@ -62,60 +62,78 @@ class EmailUtility {
 	 * @param boolean $isHtml true for html emails
 	 * @param array $attachments filepaths to attach to email
 	 * @param array $replyTo
-	 * @return boolean TRUE on success, otherwise false
+	 * @param boolean $queued put email in queue rather than sent right away
+	 *
+	 * @return boolean TRUE if send or queued
 	 */
-	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = array(), $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = array(), $replyTo = array()) {
-		$objectManager = self::getObjectManagerInstance();
-		$isSent = false;
+	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath,
+												$layoutRootPath, $partialRootPath,
+												$variables = array(), $extensionName = 'x4ebase',
+												$templateFolder = 'Email', $isHtml = true, $attachments = array(),
+												$replyTo = array(), $queued = FALSE) {
+		$success = false;
 		$emailBody = '';
 		try {
-			/**
-			 * @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView
-			 */
-			$emailView = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+			$message = self::createMailMessage($recipient, $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables, $extensionName, $templateFolder, $isHtml, $attachments, $replyTo);
+			$emailBody = $message->getBody();
 
-			$templatePathAndFilename = $templateRootPath . $templateFolder . '/' . $templateName . '.html';
-			$emailView->setLayoutRootPath($layoutRootPath);
-			$emailView->setPartialRootPath($partialRootPath);
-			$emailView->setTemplatePathAndFilename($templatePathAndFilename);
-			$emailView->assignMultiple($variables);
-			$emailView->getRequest()->setControllerExtensionName($extensionName);
-			$emailBody = $emailView->render();
-
-			/**
-			 * @var $message \TYPO3\CMS\Core\Mail\MailMessage
-			 */
-			$message = $objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-			$message->setTo($recipient)
-					->setFrom($sender)
-					->setReplyTo($replyTo)
-					->setSubject($subject);
-
-			// Add attachments
-			if(count($attachments)){
-				foreach ($attachments as $attachment) {
-					$message->attach(\Swift_Attachment::fromPath($attachment));
-				}
-			}
-
-			if($isHtml){
-				// HTML Email
-				$message->setBody($emailBody, 'text/html');
+				// queue can't handle mails with attachments
+			if ($useQueue && isEmpty($attachments)) {
+				self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, NULL);
+				$success = true;
 			} else {
-				// Plain text Email
-				$message->setBody($emailBody, 'text/plain');
+				//$message->send();
+				$success = $message->isSent();
+				self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, NULL);
 			}
 
-			$message->send();
-			$isSent = $message->isSent();
-			self::logEmail($recipient, $sender, $subject, $emailBody, $isSent, $e);
 		} catch(\Exception $e){
-			self::logEmail($recipient, $sender, $subject, $emailBody, $isSent, $e->getMessage());
+			self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, $e->getMessage());
 		}
-		return $isSent;
+		return $success;
 	}
 
-	public static function logEmail($recipient, $sender, $subject, $message, $isSent, $error = NULL){
+	/**
+	 * Sends a mail from the queue
+	 *
+	 * @param \X4E\X4ebase\Domain\Model\EmailLog $emailLog
+	 * @return boolean
+	 */
+	public static function sendQueuedEmail(\X4E\X4ebase\Domain\Model\EmailLog $emailLog) {
+		$objectManager = self::getObjectManagerInstance();
+		$persistenceManager = self::getPersistenceManagerInstance();
+		$emailLogRepository = $objectManager->get('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository');
+		$isSent = FALSE;
+
+		$message = self::createBasicMailMessage(
+			unserialize($emailLog->getRecipient()),
+			unserialize($emailLog->getSender()),
+			$emailLog->getSubject(),
+			$emailLog->getMessage(),
+			$emailLog->getIsHtml(),
+			$emailLog->getReplyTo()
+			);
+
+		try {
+			$isSent = $message->send();
+			$emailLog->setIsSent($isSent);
+			$emailLog->setQueued(!$isSent);
+			$emailLog->setError('');
+			$emailLogRepository->update($emailLog);
+			$persistenceManager->persistAll();
+
+			return $isSent;
+		} catch(\Exception $e) {
+			$emailLog->setError($e->getMessage());
+			$emailLog->setIsSent(false);
+			$emailLogRepository->update($emailLog);
+			$persistenceManager->persistAll();
+
+			return $isSent;
+		}
+	}
+
+	public static function logEmail($recipient, $sender, $subject, $message, $isHtml, $replyTo, $queued, $isSent, $error = NULL) {
 		$objectManager = self::getObjectManagerInstance();
 		$persistenceManager = self::getPersistenceManagerInstance();
 
@@ -128,7 +146,10 @@ class EmailUtility {
 					 ->setSubject($subject)
 					 ->setMessage($message)
 					 ->setIsSent($isSent)
-					 ->setError($error);
+					 ->setError($error)
+					 ->setQueued($queued)
+					 ->setIsHtml($isHtml)
+					 ->setReplyTo($replyTo);
 					 //->setPid;
 
 			$emailLogRepository->add($emailLog);
@@ -136,6 +157,88 @@ class EmailUtility {
 		} else {
 			throw new \TYPO3\CMS\Extbase\Persistence\Exception;
 		}
+	}
+
+	/**
+	 * Creates a mail message according to the input, ready to send
+	 *
+	 * @param array $recipient recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
+	 * @param array $sender sender of the email in the format array('sender@domain.tld' => 'Sender Name')
+	 * @param string $subject subject of the email
+	 * @param string $templateName template name (UpperCamelCase)
+	 * @param string $templateRootPath
+	 * @param string $layoutRootPath
+	 * @param string $partialRootPath
+	 * @param array $variables variables to be passed to the Fluid view
+	 * @param string $extensionName needed for f:translate
+	 * @param string $templateFolder
+	 * @param boolean $isHtml true for html emails
+	 * @param array $attachments filepaths to attach to email
+	 * @param array $replyTo
+	 *
+	 * @return TYPO3\CMS\Core\Mail\MailMessage
+	 */
+	protected static function createMailMessage(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = array(), $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = array(), $replyTo = array()) {
+		$objectManager = self::getObjectManagerInstance();
+
+		/**
+		 * @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView
+		 */
+		$emailView = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+
+		$templatePathAndFilename = $templateRootPath . $templateFolder . '/' . $templateName . '.html';
+		$emailView->setLayoutRootPath($layoutRootPath);
+		$emailView->setPartialRootPath($partialRootPath);
+		$emailView->setTemplatePathAndFilename($templatePathAndFilename);
+		$emailView->assignMultiple($variables);
+		$emailView->getRequest()->setControllerExtensionName($extensionName);
+		$emailBody = $emailView->render();
+
+		$message = self::createBasicMailMessage($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo);
+
+		// Add attachments
+		if(count($attachments)){
+			foreach ($attachments as $attachment) {
+				$message->attach(\Swift_Attachment::fromPath($attachment));
+			}
+		}
+
+		return $message;
+	}
+
+	/**
+	 * Creates a basic MailMessage without attachments
+	 *
+	 * @param array $recipient recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
+	 * @param array $sender sender of the email in the format array('sender@domain.tld' => 'Sender Name')
+	 * @param string $subject subject of the email
+	 * @param string $emailBody
+	 * @param boolean|true $isHtml true for html emails
+	 * @param array $replyTo
+	 *
+	 * @return \TYPO3\CMS\Core\Mail\MailMessage
+	 */
+	protected static function createBasicMailMessage(array $recipient, array $sender, $subject, $emailBody, $isHtml = true, $replyTo = array()) {
+		$objectManager = self::getObjectManagerInstance();
+
+		/**
+		 * @var $message \TYPO3\CMS\Core\Mail\MailMessage
+		 */
+		$message = $objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+		$message->setTo($recipient)
+			->setFrom($sender)
+			->setReplyTo($replyTo)
+			->setSubject($subject);
+
+		if ($isHtml) {
+			// HTML Email
+			$message->setBody($emailBody, 'text/html');
+		} else {
+			// Plain text Email
+			$message->setBody($emailBody, 'text/plain');
+		}
+
+		return $message;
 	}
 
 	protected static function getObjectManagerInstance(){

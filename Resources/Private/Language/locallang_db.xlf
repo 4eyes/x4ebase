@@ -12,6 +12,9 @@
 			<trans-unit id="tx_x4ebase_domain_model_emaillog.recipient">
 				<source>Recipient</source>
 			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.replyTo">
+				<source>Recipient</source>
+			</trans-unit>
 			<trans-unit id="tx_x4ebase_domain_model_emaillog.subject">
 				<source>Subject</source>
 			</trans-unit>
@@ -20,6 +23,12 @@
 			</trans-unit>
 			<trans-unit id="tx_x4ebase_domain_model_emaillog.is_sent">
 				<source>Is Sent</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.is_html">
+				<source>Is HTML</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.queued">
+				<source>Email in queue</source>
 			</trans-unit>
 			<trans-unit id="tx_x4ebase_domain_model_emaillog.error">
 				<source>Error</source>
