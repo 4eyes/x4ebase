@@ -138,6 +138,22 @@ $TCA['tx_x4ebase_domain_model_emaillog'] = array(
 				'default' => 0
 			),
 		),
+		'is_html' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog.is_html',
+			'config' => array(
+				'type' => 'check',
+				'default' => 0
+			),
+		),
+		'queued' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog.queued',
+			'config' => array(
+				'type' => 'check',
+				'default' => 0
+			),
+		),
 		'error' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog.error',
