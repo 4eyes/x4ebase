@@ -47,6 +47,11 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
 
     /**
+     * @var array
+     */
+    public $additionalConstraints;
+
+    /**
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
      * @param String $filterMethod
      * @param string $parameterName
@@ -136,5 +141,4 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function addAdditionalConstraints ($query, $filterTemplate, $constraints) {
         return $constraints;
-    }
-}
+}}
