@@ -36,8 +36,20 @@ use X4E\X4ebase\Template\FilterTemplate;
  */
 class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
+    /**
+     * @var array e.g.: array('firstName' => 'like', ... )
+     */
     protected $searchableParameters;
+
+    /**
+     * @var array e.g.: array('firstName' => 'like', ... )
+     */
     protected $filterMethods;
+
+    /**
+     * @var array
+     */
+    public $additionalConstraints;
 
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
@@ -93,7 +105,13 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             if(!empty($constraintMayBeNull))
                 $constraints[] = $constraintMayBeNull;
         }
-
+        if($this->additionalConstraints){
+            foreach ($this->additionalConstraints as $method => $constraint) {
+                foreach($constraint as $property => $value) {
+                    $constraints[] = $query->$method($property, $value);
+                }
+            }
+        }
         if(!empty($constraints))
             return $query->matching(
                 $query->logicalAnd($constraints)
