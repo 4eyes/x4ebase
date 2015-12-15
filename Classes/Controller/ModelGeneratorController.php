@@ -81,7 +81,7 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		$databaseTableFields = array();
 		$databaseTableFieldOptions = array();
 		if (isset($generator['databaseTable']) && in_array($generator['databaseTable'], $databaseTables)) {
-			if (($res = $TYPO3_DB->sql_query('SHOW COLUMNS FROM `' . mysql_real_escape_string($generator['databaseTable']) . '`')) !== FALSE){
+			if (($res = $TYPO3_DB->sql_query('SHOW COLUMNS FROM `' . $generator['databaseTable'] . '`')) !== FALSE){
 				while(($row = $TYPO3_DB->sql_fetch_assoc($res)) !== FALSE){
 					$databaseTableFields[$row['Field']] =  array('name' => $row['Field'], 'type' => $this->getSqlFieldType($row['Type']));
 					$databaseTableFieldOptions[$row['Field']] = $row['Field'];
