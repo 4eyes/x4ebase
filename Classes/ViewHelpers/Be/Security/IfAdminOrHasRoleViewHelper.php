@@ -63,26 +63,42 @@ namespace X4E\X4ebase\ViewHelpers\Be\Security;
 class IfAdminOrHasRoleViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Security\IfHasRoleViewHelper {
 
 	/**
-	 * renders <f:then> child if the current logged in BE user belongs to the specified role (aka usergroup)
-	 * otherwise renders <f:else> child.
-	 *
-	 * @param string $role The usergroup (either the usergroup uid or its title)
-	 * @return string the rendered string
-	 */
-	public function render($role) {
-		if ($this->backendUserIsAdmin() || $this->evaluateCondition(array('role' => $role))) {
-			return $this->renderThenChild();
-		} else {
-			return $this->renderElseChild();
-		}
-	}
-
-	/**
 	 * Determines whether the currently logged in BE user is an admin
 	 *
 	 * @return boolean TRUE if the currently logged in BE user is an admin
 	 */
-	protected function backendUserIsAdmin() {
+	protected static function backendUserIsAdmin() {
 		return $GLOBALS['BE_USER']->isAdmin();
+	}
+
+	/**
+	 * This method decides if the condition is TRUE or FALSE. It can be overriden in extending viewhelpers to adjust functionality.
+	 *
+	 * @param array $arguments ViewHelper arguments to evaluate the condition for this ViewHelper, allows for flexiblity in overriding this method.
+	 * @return bool
+	 */
+	static protected function evaluateCondition($arguments = NULL) {
+		if (self::backendUserIsAdmin()) {
+			return TRUE;
+		}
+
+		$role = $arguments['role'];
+		if (!is_array($GLOBALS['BE_USER']->userGroups)) {
+			return FALSE;
+		}
+		if (is_numeric($role)) {
+			foreach ($GLOBALS['BE_USER']->userGroups as $userGroup) {
+				if ((int)$userGroup['uid'] === (int)$role) {
+					return TRUE;
+				}
+			}
+		} else {
+			foreach ($GLOBALS['BE_USER']->userGroups as $userGroup) {
+				if ($userGroup['title'] === $role) {
+					return TRUE;
+				}
+			}
+		}
+		return FALSE;
 	}
 }
