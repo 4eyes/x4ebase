@@ -31,75 +31,75 @@ namespace X4E\X4ebase\Ajax;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class EidDispatcher {
-	
+
 	/**
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $vendor;
-	
+
 	/**
 	 *
 	 * @var string
 	 */
 	protected $extensionName;
-	
+
 	/**
 	 *
 	 * @var string
 	 */
 	protected $pluginName;
-	
+
 	/**
 	 *
 	 * @var string
 	 */
 	protected $controller;
-	
+
 	/**
 	 *
 	 * @var string
 	 */
 	protected $action;
-	
+
 	/**
 	 *
 	 * @var boolean
 	 */
 	protected $forceVendor = TRUE;
-	
+
 	/**
 	 *
 	 * @var boolean
 	 */
 	protected $forceExtensionName = TRUE;
-	
+
 	/**
 	 *
 	 * @var boolean
 	 */
 	protected $forcePluginName = FALSE;
-	
+
 	/**
 	 *
 	 * @var boolean
 	 */
 	protected $forceController = FALSE;
-	
+
 	/**
 	 *
 	 * @var boolean
 	 */
 	protected $forceAction = FALSE;
-	
+
 	/**
 	 *
-	 * @var string 
+	 * @var string
 	 */
 	protected $requestFormat = 'html';
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $vendor
 	 * @param string $extensionName
 	 * @param string $pluginName
@@ -111,7 +111,7 @@ class EidDispatcher {
 		$this->controller = $controller;
 		$this->action = $action;
 	}
-	
+
 	public function getVendor() {
 		return $this->vendor;
 	}
@@ -120,7 +120,7 @@ class EidDispatcher {
 		$this->vendor = $vendor;
 		return $this;
 	}
-	
+
 	public function getExtensionName() {
 		return $this->extensionName;
 	}
@@ -129,7 +129,7 @@ class EidDispatcher {
 		$this->extensionName = $extensionName;
 		return $this;
 	}
-	
+
 	public function getPluginName() {
 		return $this->pluginName;
 	}
@@ -156,7 +156,7 @@ class EidDispatcher {
 		$this->action = $action;
 		return $this;
 	}
-	
+
 	public function getForceVendor() {
 		return $this->forceVendor;
 	}
@@ -165,7 +165,7 @@ class EidDispatcher {
 		$this->forceVendor = $forceVendor;
 		return $this;
 	}
-	
+
 	public function getForceExtensionName() {
 		return $this->forceExtensionName;
 	}
@@ -212,7 +212,7 @@ class EidDispatcher {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return \TYPO3\CMS\Extbase\Mvc\ResponseInterface
 	 */
 	public function bootstrapAndDispatch() {
@@ -288,7 +288,7 @@ class EidDispatcher {
 			'pluginName' => $ajax['pluginName']
 		);
 
-		$bootstrap = new TYPO3\CMS\Extbase\Core\Bootstrap();
+		$bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
 		$bootstrap->initialize($bootstrapConf);
 		$bootstrap->cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
 
@@ -310,9 +310,9 @@ class EidDispatcher {
 		$dispatcher = $objectManager->get('TYPO3\CMS\Extbase\Mvc\Dispatcher');
 
 		$dispatcher->dispatch($request, $response);
-		
+
 //		echo $response->getContent();
 		return $response;
 	}
-	
+
 }
