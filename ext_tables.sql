@@ -1,4 +1,11 @@
 #
+# Table structure for table 'pages'
+#
+CREATE TABLE pages (
+  redirect_http_status int(11) DEFAULT '0' NOT NULL
+);
+
+#
 # Table structure for table 'be_users'
 #
 CREATE TABLE be_users (

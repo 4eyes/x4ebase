@@ -24,6 +24,9 @@
 			<trans-unit id="tx_x4ebase_domain_model_emaillog.error">
 				<source>Error</source>
 			</trans-unit>
+			<trans-unit id="pages.redirect_http_status">
+				<source>Shortcut Http Status</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
