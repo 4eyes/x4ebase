@@ -1,0 +1,6 @@
+page.includeJSFooter {
+	jquery_x4ebase_filter = typo3conf/ext/x4ebase/Resources/Public/JavaScript/jquery.x4ebase.filter.js
+	jquery_x4ebase_filter {
+		type = text/javascript
+	}
+}
