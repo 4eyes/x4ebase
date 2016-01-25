@@ -75,7 +75,9 @@
          * Literal object of element selectors
          */
         Selectors: {
-            form: 'form'
+            form: 'form',
+            group: '[data-x4ebase-filter-group]',
+            filterClearButton: '[data-x4ebase-filter-clear-btn]'
         },
 
         /**
@@ -89,7 +91,8 @@
          * Literal object of class names
          */
         Classes: {
-            isLoading: 'is-loading'
+            isLoading: 'is-loading',
+            hasFilter: 'has-filter'
         },
 
         /**
@@ -111,6 +114,7 @@
                 console && console.error("A x4ebase filter needs a form element to provide the data to the server.");
             }
             this.$allInputs = this.$form.find(':input').not('input[type="text"]');
+            this.$filterClearButtons = this.$form.find(this.Selectors.filterClearButton);
 
             this.registerAjaxEvents();
         },
@@ -122,12 +126,110 @@
             this.ajaxUrl = this.$form.attr(this.Attributes.ajaxUrl);
             if (this.ajaxUrl !== undefined && this.ajaxUrl !== false) {
                 this.$form.on('submit', $.proxy(this, 'onFormSubmit'));
-                this.$allInputs.on('change', $.proxy(this, 'onFormSubmit'));
+                this.$allInputs.on('change', $.proxy(this, 'onAllInputChange'));
+                this.$filterClearButtons.on('click', $.proxy(this, 'onClickFilterClearButton'));
             }
         },
+        /**
+         * Resets other bound filter forms present on the page
+         */
         resetOtherFilters: function () {
             var $otherFilters = X4E.X4ebase.FilterHandler.Utility.getFiltersByConnectId(this.connectId).not(this.$filterContainer);
             $otherFilters.find('form').trigger('reset');
+        },
+        /**
+         * Checks weather a group has an active filter and sets or removes a class to allow handling
+         *
+         * @param $group
+         */
+        checkIfGroupHasActiveFilter: function ($group) {
+            var hasActiveFilter = false;
+
+            $group.find(this.$allInputs).each(function () {
+                var $input = $(this);
+                var elementType = this.nodeName.toLowerCase();
+
+                switch (elementType) {
+                    case 'input':
+                        var type = $input.attr('type');
+                        switch (type) {
+                            case 'checkbox':
+                            case 'radio':
+                                if ($input.is(':checked')) {
+                                    hasActiveFilter = true;
+                                    return true;
+                                }
+                            break;
+                            default:
+                                if ($input.val() !== '') {
+                                    hasActiveFilter = true;
+                                    return true;
+                                }
+                            break;
+                        }
+                    break;
+                    case 'select':
+                        if ($input.is(':selected')) {
+                            hasActiveFilter = true;
+                            return true;
+                        }
+                    break;
+                    case 'textarea':
+                        if ($input.val() !== '') {
+                            hasActiveFilter = true;
+                            return true;
+                        }
+                    break;
+                    default:
+                        console && console.log('Unsupported form type.');
+                    break;
+                }
+            });
+            if (hasActiveFilter) {
+                $group.addClass(this.Classes.hasFilter);
+            } else {
+                $group.removeClass(this.Classes.hasFilter);
+            }
+        },
+        /**
+         * Clears all filters of a given filter-group
+         *
+         * @param $group
+         */
+        clearFiltersOfGroup: function ($group) {
+            $group.find(this.$allInputs)
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .removeAttr('checked')
+                .removeAttr('selected')
+            /**
+             * Unfortunately the change event is not triggered automatically.
+             * We have to trigger it manually and on the first element only, to prevent multiple ajax requests.
+             */
+                .first().trigger('change')
+            ;
+        },
+        /**
+         * Is called by clicking a filter-clear-button
+         * Clears all filters of its group.
+         *
+         * @param ev: Event
+         */
+        onClickFilterClearButton: function (ev) {
+            var $filterClearButton = $(ev.currentTarget);
+            var $group = $filterClearButton.parents(this.Selectors.group).first();
+            this.clearFiltersOfGroup($group);
+        },
+        /**
+         * Is called after changing any filter form element (except for input[type="text"])
+         *
+         * @param ev: Event
+         */
+        onAllInputChange: function (ev) {
+            var $input = $(ev.currentTarget);
+            var $group = $input.parents(this.Selectors.group).first();
+            this.checkIfGroupHasActiveFilter($group);
+            this.onFormSubmit(ev)
         },
         /**
          * Is called by a submit event listener on the filter form element
@@ -175,7 +277,7 @@
          * @param errorMsg: string error message
          */
         onFormSubmitError: function (xhr, status, errorMsg) {
-            console && console.error(errorMsg);
+            //console && console.error(errorMsg);
         },
         /**
          * This method is called on a request timeout
