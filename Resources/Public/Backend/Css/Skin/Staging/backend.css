@@ -1,0 +1,36 @@
+/**
+ * Light orange
+ **/
+[id="typo3-topbar"],
+.typo3-topbar-site-logo,
+.typo3-topbar-site-logo:hover,
+.typo3-topbar-navigation,
+.typo3-topbar-navigation-search .form-control,
+.typo3-topbar-navigation-items > li > a,
+.typo3-topbar-navigation-items .dropdown-list > li.active .dropdown-list-link {
+    background-color: #d16312;
+    border-color: #d16312;
+}
+.typo3-topbar-navigation-items > li > a,
+.typo3-topbar-navigation-search .form-control {
+    border-color: #d16312;
+}
+
+/**
+ * Dark orange
+ **/
+.typo3-topbar-navigation-items > li > a:hover,
+.typo3-topbar-navigation-items > li > a:focus,
+.typo3-topbar-navigation-items > li > a:active,
+.typo3-topbar-navigation-items > li.open > a,
+.typo3-topbar-navigation-search .form-control:hover,
+.typo3-topbar-navigation-search .form-control:focus,
+.typo3-topbar-navigation-search .form-control:active {
+    background-color: #b1520c;
+    border-color: #b1520c;
+}
+
+.typo3-topbar-navigation-items .dropdown-menu,
+.typo3-topbar-site-logo {
+    box-shadow: none;
+}
