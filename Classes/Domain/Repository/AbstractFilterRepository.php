@@ -141,4 +141,4 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function addAdditionalConstraints ($query, $filterTemplate, $constraints) {
         return $constraints;
     }
-}<
+}
