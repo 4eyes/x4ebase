@@ -1,2 +1,8 @@
   # cat=default; type=int[4-31]; label=Cost factor of the PASSWORD_DEFAULT algorithm
 securePassword.cost = 10
+
+  # cat=Skin; type=boolean; label=Enable TYPO3_CONTEXT specific color skin in Backend.
+contextSkin.be.enable = 1
+
+  # cat=Skin; type=boolean; label=Enable TYPO3_CONTEXT specific colored bar in Frontend.
+contextSkin.fe.enable = 1
