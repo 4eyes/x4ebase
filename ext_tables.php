@@ -109,7 +109,6 @@ $TCA['tx_x4ebase_domain_model_emaillog'] = array(
 
 /**
  * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
- * [begin]
  */
 if (TYPO3_MODE === 'BE' && is_array($extConf) && $extConf['contextSkin.']['be.']['enable']) {
 	$applicationContext = \TYPO3\CMS\Core\Utility\GeneralUtility::getApplicationContext();
@@ -143,7 +142,3 @@ if (TYPO3_MODE === 'BE' && is_array($extConf) && $extConf['contextSkin.']['be.']
 		)
 	);
 }
-/**
- * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
- * [end]
- */
