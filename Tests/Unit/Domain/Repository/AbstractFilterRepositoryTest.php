@@ -188,8 +188,7 @@ class AbstractFilterRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\Reposito
 		$filterTemplate->expects($this->once())->method('setSearchableParameters');
 		$filterTemplate->expects($this->once())->method('setFilterMethods');
 
-		$documents = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, array('toArray'), array(), '', FALSE);
-		$documents->expects($this->once())->method('toArray');
+		$documents = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, array(), array(), '', FALSE);
 
 		$query = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, array('execute'), array(), '', FALSE);
 		$query->expects($this->once())->method('execute')->willReturn($documents);
