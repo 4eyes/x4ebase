@@ -15,7 +15,7 @@
 >
 
     <php>
-        <env name="TYPO3_PATH_WEB" value="../../../.."/>
+       <!-- <env name="TYPO3_PATH_WEB" value="../../../.."/> -->
     </php>
 
 	<filter>
