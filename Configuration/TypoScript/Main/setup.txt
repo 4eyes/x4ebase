@@ -8,4 +8,10 @@ module.tx_x4ebase {
 		partialRootPath = {$module.tx_x4ebase.view.partialRootPath}
 		layoutRootPath = {$module.tx_x4ebase.view.layoutRootPath}
 	}
+
+	settings {
+		emailQueueCommandController {
+			mailsPerRun = 30
+		}
+	}
 }

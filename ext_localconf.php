@@ -44,6 +44,10 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewO
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
 
+if (TYPO3_MODE === 'BE') {
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4E\X4ebase\Controller\EmailQueueCommandController';
+}
+
 
 // We need to set the default implementation for Storage Backend & Query Settings
 // the code below is NO PUBLIC API! It's just to make sure that
