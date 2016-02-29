@@ -14,19 +14,23 @@
 	verbose="false"
 >
 
-    <php>
-       <!-- <env name="TYPO3_PATH_WEB" value="../../../.."/> -->
-    </php>
+	<php>
+		<!--<env name="TYPO3_PATH_WEB" value="../../../.."/>-->
+	</php>
 
 	<filter>
-        <whitelist>
-            <directory suffix=".php">../../</directory>
+		<whitelist processUncoveredFilesFromWhitelist="true" addUncoveredFilesFromWhitelist="false">
+			<directory suffix=".php">../</directory>
 			<exclude>
-				<directory suffix=".php">../../x4ebase/Tests</directory>
-				<directory suffix=".php">../../x4ebase/Configuration/TCA</directory>
-				<file>../../x4ebase/ext_emconf.php</file>
-				<file>../../x4ebase/ext_tables.php</file>
-				<file>../../x4ebase/ext_localconf.php</file>
+				<directory suffix=".php">../Tests</directory>
+				<directory suffix=".php">../Configuration/TCA</directory>
+				<directory suffix=".php">../Classes/Libraries</directory>
+				<directory suffix=".php">../doc</directory>
+				<directory suffix=".php">../Documentation</directory>
+				<directory suffix=".php">../Resources</directory>
+				<file>../ext_emconf.php</file>
+				<file>../ext_tables.php</file>
+				<file>../ext_localconf.php</file>
 			</exclude>
         </whitelist>
     </filter>

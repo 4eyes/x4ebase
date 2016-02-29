@@ -35,15 +35,6 @@ namespace X4E\X4ebase\Controller;
 class TcaInfoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
-	 * Initializes the controller before invoking an action method.
-	 *
-	 * @return void
-	 */
-	protected function initializeAction() {
-
-	}
-
-	/**
 	 * action show
 	 *
 	 * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB

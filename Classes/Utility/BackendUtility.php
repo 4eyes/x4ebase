@@ -131,7 +131,7 @@ class BackendUtility {
 	/**
 	 * @return void
 	 */
-	private static function initTypoScript() {
+	protected static function initTypoScript() {
 		$GLOBALS['TSFE']->getPageAndRootline();
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
