@@ -5,7 +5,7 @@ namespace X4E\X4ebase\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,7 +33,7 @@ namespace X4E\X4ebase\Domain\Repository;
  *
  */
 class PageLanguageOverlayRepository extends AbstractRepository {
-	
+
 	/**
 	 * Initializes the object
 	 *
@@ -47,5 +47,5 @@ class PageLanguageOverlayRepository extends AbstractRepository {
 		//$querySettings->setRespectSysLanguageAlternative(FALSE);
 		$this->setDefaultQuerySettings($querySettings);
 	}
-	
+
 }

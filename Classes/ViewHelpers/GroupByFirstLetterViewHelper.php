@@ -1,6 +1,5 @@
 <?php
 namespace X4E\X4ebase\ViewHelpers;
-use TYPO3\CMS\Core\Utility\DebugUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -25,6 +24,8 @@ use TYPO3\CMS\Core\Utility\DebugUtility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\DebugUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
 class GroupByFirstLetterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
@@ -44,9 +45,13 @@ class GroupByFirstLetterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 		foreach ($element as $item) {
 			if (is_object($item)) {
 				$getter = 'get' . ucfirst($property);
-				try {
+				if($item instanceof LazyLoadingProxy) {
+					/** LazyLoadingProxy $item */
+					$item = $item->_loadRealInstance();
+				}
+				if (method_exists($item, $getter)) {
 					$string = $item->$getter();
-				} catch(\Exception $e){
+				} else {
 					throw new \Exception ('The given property does not exist.');
 				}
 			} else if (is_array($item)) {

@@ -4,6 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);
+$extConf = unserialize($_EXTCONF);
 
 //==============================================================================
 //   Password Hashing Methods
@@ -21,9 +22,6 @@ if(version_compare(TYPO3_branch, '6.2', '<=')) {
 	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = array(
 		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings'
 	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapFactory'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapFactory'
-	);
 	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapper'] = array(
 		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapper'
 	);
@@ -32,6 +30,9 @@ if(version_compare(TYPO3_branch, '6.2', '<=')) {
 	);
 	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Core\\Localization\\Parser\\XliffParser'] = array(
 		'className' => 'X4E\\X4ebase\\XClasses\\Localization\\Parser\\XliffParser'
+	);
+	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController'] = array(
+		'className' => 'X4E\\X4ebase\\XClasses\\Controller\\TypoScriptFrontendController'
 	);
 }
 
@@ -57,3 +58,54 @@ $extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('
 // Singleton
 $extbaseObjectContainer->registerImplementation('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface', 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings');
 unset($extbaseObjectContainer);
+
+
+
+/**
+ * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
+ * [begin]
+ */
+if (TYPO3_MODE === 'FE' && is_array($extConf) && $extConf['contextSkin.']['fe.']['enable']) {
+	$applicationContext = \TYPO3\CMS\Core\Utility\GeneralUtility::getApplicationContext();
+	if ($_SERVER['argc'] > 0) {
+		// find --context=Production from the command line
+		foreach ($_SERVER['argv'] as $argumentValue) {
+			if (substr($argumentValue, 0, 10)  === '--context=') {
+				$contextString = substr($argumentValue, 10);
+				break;
+			}
+		}
+	}
+	if (empty($contextString)) {
+		$contextString = $applicationContext->__toString();
+	}
+
+	if (preg_match("/Development/i", $contextString)) {
+		$context = 'Development';
+		$color = '#2b9947';
+	}
+	else if (preg_match("/Staging/i", $contextString)){
+		$context = 'Staging';
+		$color = '#d16312';
+	}
+	else if (preg_match("/Live/i", $contextString)) {
+		$context = 'Live';
+		$color = '#992e2b';
+	}
+
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
+#This line is included dynamically in EXT:x4ebase/ext_tables.php
+[applicationContext = Production/Live]
+[else]
+page.1 = TEXT
+page.1 {
+	value = <div id="x4ebase-context-bar" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 2; background-color: ' . $color . '; padding: 10px; color: white;"><span style="font-weight: bold;">Context:</span> <span style="font-style: italic;">'. $contextString . '</span></div>
+	insertData = 1
+}
+[global]
+	');
+}
+/**
+ * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
+ * [END]
+ */

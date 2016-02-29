@@ -33,7 +33,7 @@ namespace X4E\X4ebase\Domain\Model;
  *
  */
 class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
-	
+
 	/**
 	 * crdate
 	 *
@@ -182,42 +182,24 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 	protected $shortcutMode;
 
 	/**
-	 * __construct
-	 *
-	 * @return PagesLanguageOverlay
-	 */
-	public function __construct() {
-		$this->initStorageObjects();
-	}
-
-	/**
-	 * Initializes all ObjectStorage properties.
-	 *
-	 * @return void
-	 */
-	protected function initStorageObjects() {
-		//$this->xyz = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-	}
-	
-	/**
 	 * Returns the creation date
 	 *
-	 * @return integer $creationDate
+	 * @return integer $crdate
 	 */
-	public function getCreationDate() {
-		return $this->creationDate;
+	public function getCrdate() {
+		return $this->crdate;
 	}
 
 	/**
 	 * Sets the creation date
 	 *
-	 * @param integer $creationDate
+	 * @param integer $crdate
 	 * @return void
 	 */
-	public function setCreationDate($creationDate) {
-		$this->creationDate = $creationDate;
+	public function setCrdate($crdate) {
+		$this->crdate = $crdate;
 	}
-	
+
 
 	/**
 	 * Returns the cruserId
@@ -409,7 +391,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 	public function removeMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove) {
 		$this->media->detach($mediaToRemove);
 	}
-	
+
 	/**
 	 * Returns the media
 	 *

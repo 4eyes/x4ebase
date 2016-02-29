@@ -35,7 +35,7 @@ namespace X4E\X4ebase\ViewHelpers\Widget;
  *
  */
 class UriViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\UriViewHelper {
-	
+
 	/**
 	 * Initializes the view helper before invoking the render method.
 	 *
@@ -44,7 +44,7 @@ class UriViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\UriViewHelper {
 	public function initializeArguments() {
 		$this->registerArgument('absolute', 'boolean', 'If set, the URI of the rendered link is absolute', FALSE, FALSE);
 	}
-	
+
 	/**
 	 * Get the URI for an AJAX Request.
 	 *
@@ -57,8 +57,8 @@ class UriViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\UriViewHelper {
 			$action = $this->controllerContext->getRequest()->getControllerActionName();
 		}
 		$arguments['fluid-widget-id'] = $this->controllerContext->getRequest()->getWidgetContext()->getAjaxWidgetIdentifier();
-		$arguments['action'] = $action;		
-		
+		$arguments['action'] = $action;
+
 		$uriBuilder = $this->controllerContext->getUriBuilder();
 		$uri = $uriBuilder
 				->reset()
