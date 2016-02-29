@@ -32,8 +32,8 @@
 				<file>../ext_tables.php</file>
 				<file>../ext_localconf.php</file>
 			</exclude>
-		</whitelist>
-	</filter>
+        </whitelist>
+    </filter>
 
 	<testsuites>
 		<testsuite name="x4ebase - Unit Tests">

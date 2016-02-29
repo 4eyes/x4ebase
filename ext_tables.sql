@@ -1,4 +1,11 @@
 #
+# Table structure for table 'pages'
+#
+CREATE TABLE pages (
+  redirect_http_status int(11) DEFAULT '0' NOT NULL
+);
+
+#
 # Table structure for table 'be_users'
 #
 CREATE TABLE be_users (
@@ -23,8 +30,11 @@ CREATE TABLE tx_x4ebase_domain_model_emaillog (
 	sender varchar(255) DEFAULT '' NOT NULL,
 	recipient varchar(255) DEFAULT '' NOT NULL,
 	subject varchar(255) DEFAULT '' NOT NULL,
+	replyTo varchar(255) DEFAULT '' NOT NULL,
 	message text NOT NULL,
 	is_sent tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	is_html tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	queued tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	error text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

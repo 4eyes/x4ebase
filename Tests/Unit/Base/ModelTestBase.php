@@ -276,7 +276,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	protected function objectStorageAddRemoveTest($parameterName, $typeOfModel, $addRemoveAlias=NULL) {
 		$newItem = $this->getMock($typeOfModel, array(), array(), '', FALSE);
-		$storage = $this->getMock(ObjectStorage::class, array('attach', 'detach'), array(), '', FALSE);
+		$storage = $this->getMock('\TYPO3\CMS\Extbase\Persistence\ObjectStorage', array('attach', 'detach'), array(), '', FALSE);
 		$storage->expects($this->atLeastOnce())->method('attach')->with($this->equalTo($newItem));
 		$storage->expects($this->atLeastOnce())->method('detach')->with($this->equalTo($newItem));
 		$this->genericSetter($parameterName, $storage);
@@ -312,7 +312,7 @@ class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	protected function initialValueObjectStorageTest($parameterName) {
 		$this->assertAttributeInstanceOf(
-			ObjectStorage::class,
+			'\TYPO3\CMS\Extbase\Persistence\ObjectStorage',
 			$parameterName,
 			$this->subject
 		);

@@ -48,10 +48,10 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function setUp() {
 		parent::setUp();
-		$this->view = $this->getMock(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface::class);
-		$this->request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class);
+		$this->view = $this->getMock('\TYPO3\CMS\Extbase\Mvc\View\ViewInterface');
+		$this->request = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Request');
 		$this->settings = array('magicNumber' => 10);
-		$this->environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class);
+		$this->environmentService = $this->getMock('\TYPO3\CMS\Extbase\Service\EnvironmentService');
 		$this->mockSubject();
 	}
 
@@ -79,7 +79,7 @@ class ControllerTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 * @param array $arguments The arguments of the request
 	 */
 	protected function setArguments($arguments) {
-		$this->request = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array('dummy'), array(), '', FALSE);
+		$this->request = $this->getAccessibleMock('\TYPO3\CMS\Extbase\Mvc\Request', array('dummy'), array(), '', FALSE);
 		$this->request->_set('arguments', $arguments);
 		$this->subject->_set('request', $this->request);
 	}

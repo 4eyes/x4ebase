@@ -4,6 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);
+$extConf = unserialize($_EXTCONF);
 
 if (TYPO3_MODE === 'BE') {
 
@@ -71,7 +72,8 @@ if (TYPO3_MODE === 'BE') {
 	),
 	1);
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', '4eyes Base');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Main', '4eyes Base');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/FilterAjax', '4eyes Base - Ajax Filters');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_x4ebase_domain_model_emaillog', 'EXT:x4ebase/Resources/Private/Language/locallang_csh_tx_x4ebase_domain_model_emaillog.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_x4ebase_domain_model_emaillog');
@@ -103,3 +105,45 @@ $TCA['tx_x4ebase_domain_model_emaillog'] = array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_x4ebase_domain_model_emaillog.gif'
 	),
 );
+
+
+/**
+ * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
+ * [begin]
+ */
+if (TYPO3_MODE === 'BE' && is_array($extConf) && $extConf['contextSkin.']['be.']['enable']) {
+	$applicationContext = \TYPO3\CMS\Core\Utility\GeneralUtility::getApplicationContext();
+	if ($_SERVER['argc'] > 0) {
+		// find --context=Production from the command line
+		foreach ($_SERVER['argv'] as $argumentValue) {
+			if (substr($argumentValue, 0, 10)  === '--context=') {
+				$contextString = substr($argumentValue, 10);
+				break;
+			}
+		}
+	}
+	if (empty($contextString)) {
+		$contextString = $applicationContext->__toString();
+	}
+
+	if (preg_match("/Development/i", $contextString)) {
+		$context = 'Development';
+	}
+	else if (preg_match("/Staging/i", $contextString)){
+		$context = 'Staging';
+	}
+	else if (preg_match("/Live/i", $contextString)) {
+		$context = 'Live';
+	}
+
+	$TBE_STYLES['skins']['x4ebase'] = array (
+		'name' => 'x4ebase',
+		'stylesheetDirectories' => array (
+			'structure' => 'EXT:x4ebase/Resources/Public/Backend/Css/Skin/' . $context . '/'
+		)
+	);
+}
+/**
+ * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
+ * [end]
+ */
