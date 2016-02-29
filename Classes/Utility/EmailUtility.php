@@ -93,7 +93,7 @@ class EmailUtility {
 		return $success;
 	}
 
-	/**
+			/**
 	 * Sends a mail from the queue
 	 *
 	 * @param \X4E\X4ebase\Domain\Model\EmailLog $emailLog
@@ -182,17 +182,17 @@ class EmailUtility {
 		$objectManager = self::getObjectManagerInstance();
 
 		/**
-		 * @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView
-		 */
-		$emailView = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+			 * @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView
+			 */
+			$emailView = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 
-		$templatePathAndFilename = $templateRootPath . $templateFolder . '/' . $templateName . '.html';
-		$emailView->setLayoutRootPath($layoutRootPath);
-		$emailView->setPartialRootPath($partialRootPath);
-		$emailView->setTemplatePathAndFilename($templatePathAndFilename);
-		$emailView->assignMultiple($variables);
-		$emailView->getRequest()->setControllerExtensionName($extensionName);
-		$emailBody = $emailView->render();
+			$templatePathAndFilename = $templateRootPath . $templateFolder . '/' . $templateName . '.html';
+			$emailView->setLayoutRootPath($layoutRootPath);
+			$emailView->setPartialRootPath($partialRootPath);
+			$emailView->setTemplatePathAndFilename($templatePathAndFilename);
+			$emailView->assignMultiple($variables);
+			$emailView->getRequest()->setControllerExtensionName($extensionName);
+			$emailBody = $emailView->render();
 
 		$message = self::createBasicMailMessage($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo);
 
@@ -206,7 +206,7 @@ class EmailUtility {
 		return $message;
 	}
 
-	/**
+			/**
 	 * Creates a basic MailMessage without attachments
 	 *
 	 * @param array $recipient recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
@@ -222,24 +222,24 @@ class EmailUtility {
 		$objectManager = self::getObjectManagerInstance();
 
 		/**
-		 * @var $message \TYPO3\CMS\Core\Mail\MailMessage
-		 */
-		$message = $objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-		$message->setTo($recipient)
-			->setFrom($sender)
-			->setReplyTo($replyTo)
-			->setSubject($subject);
+			 * @var $message \TYPO3\CMS\Core\Mail\MailMessage
+			 */
+			$message = $objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+			$message->setTo($recipient)
+					->setFrom($sender)
+					->setReplyTo($replyTo)
+					->setSubject($subject);
 
-		if ($isHtml) {
-			// HTML Email
-			$message->setBody($emailBody, 'text/html');
-		} else {
-			// Plain text Email
-			$message->setBody($emailBody, 'text/plain');
-		}
+			if($isHtml){
+				// HTML Email
+				$message->setBody($emailBody, 'text/html');
+			} else {
+				// Plain text Email
+				$message->setBody($emailBody, 'text/plain');
+			}
 
 		return $message;
-	}
+		}
 
 	protected static function getObjectManagerInstance(){
 		if(!self::$objectManager){
