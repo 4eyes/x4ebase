@@ -78,7 +78,7 @@ class EmailUtility {
 			$emailBody = $message->getBody();
 
 				// queue can't handle mails with attachments
-			if ($queued && isEmpty($attachments)) {
+			if ($queued && empty($attachments)) {
 				self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, NULL);
 				$success = true;
 			} else {
