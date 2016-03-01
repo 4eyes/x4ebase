@@ -32,13 +32,8 @@
 				<file>../ext_tables.php</file>
 				<file>../ext_localconf.php</file>
 			</exclude>
-<<<<<<< HEAD
         </whitelist>
     </filter>
-=======
-		</whitelist>
-	</filter>
->>>>>>> 1ba32cbf2b9bd0fd8331cace7047fb5023c0304d
 
 	<testsuites>
 		<testsuite name="x4ebase - Unit Tests">
