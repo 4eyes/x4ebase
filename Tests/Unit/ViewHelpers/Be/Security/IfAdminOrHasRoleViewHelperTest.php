@@ -44,14 +44,18 @@ class IfAdminOrHasRoleViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHe
 	 * @test
 	 */
 	public function testRenderElseChild() {
-		$this->mockSubject('backendUserIsAdmin', 'renderElseChild');
+		$this->mockSubject('backendUserIsAdmin', 'backendUserHasRole', 'renderElseChild');
 
 		$viewHelperNode = $this->getMock(\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode::class, array('evaluateChildNodes'), array(), '', FALSE);
 		$this->subject->setViewHelperNode($viewHelperNode);
 
-		$beUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, array('isAdmin'), array(), '', FALSE);
-		$beUser->expects($this->once())->method('isAdmin')->will($this->returnValue(FALSE));
-		$GLOBALS['BE_USER'] = $beUser;
+		$this->subject->expects($this->once())
+			->method('backendUserIsAdmin')
+			->will($this->returnValue(FALSE));
+
+		$this->subject->expects($this->once())
+			->method('backendUserHasRole')
+			->will($this->returnValue(FALSE));
 
 		$this->subject->expects($this->once())
 			->method('renderElseChild');
@@ -68,9 +72,9 @@ class IfAdminOrHasRoleViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHe
 		$viewHelperNode = $this->getMock(\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode::class, array('evaluateChildNodes'), array(), '', FALSE);
 		$this->subject->setViewHelperNode($viewHelperNode);
 
-		$beUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, array('isAdmin'), array(), '', FALSE);
-		$beUser->expects($this->once())->method('isAdmin')->will($this->returnValue(TRUE));
-		$GLOBALS['BE_USER'] = $beUser;
+		$this->subject->expects($this->once())
+			->method('backendUserIsAdmin')
+			->will($this->returnValue(TRUE));
 
 		$this->subject->expects($this->once())
 			->method('renderThenChild');
