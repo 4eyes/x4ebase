@@ -48,6 +48,11 @@ class EmailQueueCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Comm
 	protected $settings = array();
 
 	/**
+	 * @var int
+	 */
+	protected $mailsPerRun = 30;
+
+	/**
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
 	 * @inject
 	 */
@@ -63,9 +68,15 @@ class EmailQueueCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Comm
 		$this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'x4ebase', 'tx_x4ebase');
 		$mailsInQueue = $this->emailLogRepository->findByQueued(TRUE);
 
+		if($this->settings['emailQueueCommandController']['mailsPerRun']){
+			$mailsPerRun = $this->settings['emailQueueCommandController']['mailsPerRun'];
+		} else {
+			$mailsPerRun = $this->mailsPerRun;
+		}
+
 		$i = 0;
 		foreach($mailsInQueue as $mail) {
-			if ($i >= $this->settings['emailQueueCommandController']['mailsPerRun']) {
+			if ($i >= $mailsPerRun) {
 				break;
 			}
 
