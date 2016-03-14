@@ -73,7 +73,10 @@ class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
 
         /** @var \TYPO3\CMS\Core\Mail\MailMessage $mail */
         $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-        $mail->addTo($this->recipient);
+        $recipients = explode(',', $this->recipient);
+        foreach($recipients as $r) {
+            $mail->addTo($r);
+        }
         $mail->setFrom($this->sender);
         $mail->setSubject($this->subject);
         $mail->setBody(str_replace('<br/>', PHP_EOL, $this->body));
