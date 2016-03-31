@@ -89,14 +89,6 @@ class ZipUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		unlink($testPath . $resultFile);
 	}
 
-	public function testCreate_InNonExistentDirectory_NotCreatesZip() {
-		$testPath = dirname(__FILE__) . '/../../Fixtures/Unit/Utility/ZipUtilityTest/';
-		$testFile = 'test.txt';
-		$resultFile = 'noResult/test.zip';
-		ZipUtility::create($testPath . $testFile, $testPath . $resultFile);
-		$this->assertFileNotExists($testPath . $resultFile);
-	}
-
 	/**
 	 * @test
 	 */
