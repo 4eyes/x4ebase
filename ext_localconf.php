@@ -42,8 +42,7 @@ if(version_compare(TYPO3_branch, '6.2', '<=')) {
 /**
  * xclasses to allow cli-configuration of an extension, see https://jira.4eyes.ch/browse/IMPROVE-409
  */
-$index = array_search('TYPO3\CMS\Extensionmanager\Controller\ExtensionCommandController', $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers']);
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][$index] = 'X4E\X4ebase\Controller\ExtensionCommandController';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4E\X4ebase\Controller\ExtensionCommandController';
 
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController'] = array(
 	'className' => 'X4E\\X4ebase\\XClasses\\Controller\\ConfigurationController'
