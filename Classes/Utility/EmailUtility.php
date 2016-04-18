@@ -78,7 +78,7 @@ class EmailUtility {
 			$emailBody = $message->getBody();
 
 				// queue can't handle mails with attachments
-			if ($queued && isEmpty($attachments)) {
+			if ($queued && empty($attachments)) {
 				self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, NULL);
 				$success = true;
 			} else {
@@ -105,16 +105,17 @@ class EmailUtility {
 		$emailLogRepository = $objectManager->get('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository');
 		$isSent = FALSE;
 
-		$message = self::createBasicMailMessage(
-			unserialize($emailLog->getRecipient()),
-			unserialize($emailLog->getSender()),
-			$emailLog->getSubject(),
-			$emailLog->getMessage(),
-			$emailLog->getIsHtml(),
-			$emailLog->getReplyTo()
+		try {
+			$message = self::createBasicMailMessage(
+				unserialize($emailLog->getRecipient()),
+				unserialize($emailLog->getSender()),
+				$emailLog->getSubject(),
+				$emailLog->getMessage(),
+				$emailLog->getIsHtml(),
+				$emailLog->getReplyTo()
 			);
 
-		try {
+
 			$isSent = $message->send();
 			$emailLog->setIsSent($isSent);
 			$emailLog->setQueued(!$isSent);
@@ -129,8 +130,29 @@ class EmailUtility {
 			$emailLogRepository->update($emailLog);
 			$persistenceManager->persistAll();
 
-			return $isSent;
+			// Write to Log
+			$logManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager');
+			$logger = $logManager->getLogger(__CLASS__);
+			$logger->log(
+				\TYPO3\CMS\Core\Log\LogLevel::ERROR,
+				'[1456846025] Exception while sending email: ' . $e->getMessage(),
+				array(
+					array(
+						'emailData' => array(
+							'sender' => $emailLog->getSender(),
+							'recipient' => $emailLog->getRecipient(),
+							'subject' => $emailLog->getSubject(),
+							'message' => $emailLog->getMessage()
+						)
+					),
+					array(
+						'error' => $e->getTraceAsString()
+					)
+				)
+			);
 		}
+
+		return $isSent;
 	}
 
 	public static function logEmail($recipient, $sender, $subject, $message, $isHtml, $replyTo, $queued, $isSent, $error = NULL) {
