@@ -134,8 +134,13 @@
          * Resets other bound filter forms present on the page
          */
         resetOtherFilters: function () {
+            var self = this;
             var $otherFilters = X4E.X4ebase.FilterHandler.Utility.getFiltersByConnectId(this.connectId).not(this.$filterContainer);
+            var $otherGroups = $otherFilters.find(this.Selectors.group);
             $otherFilters.find('form').trigger('reset');
+            $otherGroups.each(function () {
+                self.checkIfGroupHasActiveFilter($(this));
+            });
         },
         /**
          * Checks weather a group has an active filter and sets or removes a class to allow handling
@@ -264,7 +269,6 @@
                 dataType: 'html',
                 cache: false,
                 data: this.$form.serialize(),
-                timeout: $.proxy(this, 'onFormSubmitTimeout'),
                 error: $.proxy(this, 'onFormSubmitError'),
                 success: $.proxy(this, 'onFormSubmitSuccess')
             }).always($.proxy(this, 'onFormSubmitAlways'));
@@ -272,45 +276,34 @@
         /**
          * This method is called on a request error, or when a request has been canceled/aborted
          *
-         * @param xhr
+         * @param jqXHR
          * @param status: string status
          * @param errorMsg: string error message
          */
-        onFormSubmitError: function (xhr, status, errorMsg) {
+        onFormSubmitError: function (jqXHR, textStatus, errorThrown) {
             //console && console.error(errorMsg);
-        },
-        /**
-         * This method is called on a request timeout
-         *
-         * @param xhr
-         * @param status: string status
-         * @param errorMsg: string error message
-         */
-        onFormSubmitTimeout: function (xhr, status, errorMsg) {
-            console && console.error(errorMsg);
         },
         /**
          * This method is called after a successful request
          *
-         * @param xhr
-         * @param status: string status
-         * @param errorMsg: string error message
+         * @param data
+         * @param textStatus: string status
+         * @param jqXHR: object jqXHR
          */
-        onFormSubmitSuccess: function (xhr, status, errorMsg) {
-            this.$contentContainer.html(xhr);
+        onFormSubmitSuccess: function (data, textStatus, jqXHR) {
+            this.$contentContainer.html(data);
             //This is necessary to provide binding after DOM update
             //this.$contentContainer = X4E.X4ebase.FilterHandler.Utility.getContentContainerByConnectId(this.connectId);
         },
         /**
          * This method is fired AFTER the error/timeout/success - callback
          *
-         * @param xhr
-         * @param status: string status
-         * @param errorMsg: string error message
+         * @param data
+         * @param textStatus: string status
+         * @param jqXHR: object jqXHR
          */
-        onFormSubmitAlways: function (xhr, status, errorMsg) {
+        onFormSubmitAlways: function (data, textStatus, jqXHR) {
             this.$contentContainer.removeClass(this.Classes.isLoading);
-
             /**
              * Use this callback in another context, to trigger peripheral actions before the form is submitted
              * Usage: $(document).on('x4e:x4ebase-filter-before-form-submit', function())
