@@ -55,12 +55,15 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
      * @param String $filterMethod
      * @param string $parameterName
-     * @param array $parameterValues
+     * @param array|string $parameterValues
      * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface
      */
     protected function filterByParameter(&$query, $filterMethod, $parameterName, $parameterValues) {
         if(!empty($parameterValues) && !empty($filterMethod)) {
             $constraints = array();
+            if (!is_array($parameterValues)) {
+                $parameterValues = array($parameterValues);
+            }
             foreach($parameterValues as $parameterValue) {
                 $constraints[] = $query->$filterMethod($parameterName,$parameterValue);
             }

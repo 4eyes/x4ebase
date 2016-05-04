@@ -138,6 +138,7 @@
             var $otherFilters = X4E.X4ebase.FilterHandler.Utility.getFiltersByConnectId(this.connectId).not(this.$filterContainer);
             var $otherGroups = $otherFilters.find(this.Selectors.group);
             $otherFilters.find('form').trigger('reset');
+            $otherFilters.find(':radio, :checkbox').removeAttr('checked');
             $otherGroups.each(function () {
                 self.checkIfGroupHasActiveFilter($(this));
             });
