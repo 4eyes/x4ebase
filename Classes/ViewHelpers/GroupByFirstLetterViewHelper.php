@@ -34,12 +34,13 @@ class GroupByFirstLetterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	 *
 	 * @param mixed $element Either a ObjectStorage object or an array
 	 * @param string $property The $element's property to group by
+	 * @param boolean $sorting The $element's option to sort records
 	 * @return array
 	 *
 	 * @throws \Exception if given params are not supported
 	 * @api
 	 */
-	public function render($element, $property) {
+	public function render($element, $property, $sorting = false) {
 		$groupedArray = array();
 
 		foreach ($element as $item) {
@@ -67,6 +68,11 @@ class GroupByFirstLetterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 			$letter = strtoupper(substr($string, 0, 1));
 			$groupedArray[$letter][] = $item;
 		}
+
+		if ($sorting) {
+			ksort($groupedArray);
+		}
+
 		return $groupedArray;
 	}
 }
