@@ -40,7 +40,7 @@ class GroupByFirstLetterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	 * @throws \Exception if given params are not supported
 	 * @api
 	 */
-	public function render($element, $property, $sorting = null) {
+	public function render($element, $property, $sorting = false) {
 		$groupedArray = array();
 
 		foreach ($element as $item) {
