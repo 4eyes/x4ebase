@@ -34,7 +34,7 @@ class GroupByFirstLetterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	 *
 	 * @param mixed $element Either a ObjectStorage object or an array
 	 * @param string $property The $element's property to group by
-	 * @param integer $sorting The $element's option to sort records
+	 * @param boolean $sorting The $element's option to sort records
 	 * @return array
 	 *
 	 * @throws \Exception if given params are not supported
