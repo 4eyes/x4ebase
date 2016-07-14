@@ -147,3 +147,9 @@ if (TYPO3_MODE === 'BE' && is_array($extConf) && $extConf['contextSkin.']['be.']
  * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
  * [end]
  */
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	$_EXTKEY,
+	'ContentExceptionTest',
+	'Content exception test'
+);

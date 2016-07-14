@@ -118,3 +118,15 @@ page.1 {
  * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
  * [END]
  */
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'X4E.' . $_EXTKEY,
+	'ContentExceptionTest',
+	array(
+		'ContentExceptionTest' => 'content, exception'
+	),
+	// non-cacheable actions
+	array(
+		'ContentExceptionTest' => 'content, exception'
+	)
+);
