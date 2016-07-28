@@ -1,8 +1,23 @@
-  # cat=default; type=int[4-31]; label=Cost factor of the PASSWORD_DEFAULT algorithm
+# cat=default; type=int[4-31]; label=Cost factor of the PASSWORD_DEFAULT algorithm
 securePassword.cost = 10
 
-  # cat=Skin; type=boolean; label=Enable TYPO3_CONTEXT specific color skin in Backend.
+# cat=Optimizations; type=boolean; label=Enable javascript optimizations
+javascriptOptimization = 0
+
+# cat=Optimizations; type=boolean; label=Force realurl. redirect index.php? calls to realurl
+forceRealurl = 0
+
+# cat=FileTimestamp; type=boolean; label=Disable adding of timestamp to file links in frontend
+fileTimestamp.disable_fe = 0
+# cat=FileTimestamp; type=string; label=Filetypes comma separated for adding of timestamp in frontend
+fileTimestamp.filetypes_fe =
+# cat=FileTimestamp; type=boolean; label=Disable adding of timestamp to file links in backend
+fileTimestamp.disable_be = 0
+# cat=FileTimestamp; type=string; label=Filetypes comma separated for adding of timestamp in backend
+fileTimestamp.filetypes_be =
+
+# cat=Skin; type=boolean; label=Enable TYPO3_CONTEXT specific color skin in Backend.
 contextSkin.be.enable = 1
 
-  # cat=Skin; type=boolean; label=Enable TYPO3_CONTEXT specific colored bar in Frontend.
+# cat=Skin; type=boolean; label=Enable TYPO3_CONTEXT specific colored bar in Frontend.
 contextSkin.fe.enable = 1

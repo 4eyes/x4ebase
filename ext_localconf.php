@@ -16,7 +16,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/saltedpasswords']['saltMethods'][
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['EXT:saltedpasswords/locallang.xml'][] = 'EXT:x4ebase/Resources/Private/Language/locallang_securepassword.xlf';
 
 //==============================================================================
-//   XClasses
+// region XClasses
 //==============================================================================
 if(version_compare(TYPO3_branch, '6.2', '<=')) {
 	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = array(
@@ -44,19 +44,45 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = '
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController'] = array(
 	'className' => 'X4E\\X4ebase\\XClasses\\Controller\\ConfigurationController'
 );
+// endregion
 
 //==============================================================================
-//   Hooks
+// region Hooks
 //==============================================================================
 // This hook enables save and preview functionality for articles
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewOnClickClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/SaveAndPreviewHook.php:&X4E\X4ebase\Hooks\SaveAndPreviewHook';
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
+if($extConf['javascriptOptimization']){
+    // do not merge per page added inline JS
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][$_EXTKEY] = \X4E\X4ebase\Hooks\RenderPreProcessHook::class . '->process';
+}
+if($extConf['forceRealurl']){
+    $TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_fe.php']['isOutputting'][$_EXTKEY] = \X4E\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
+
+    // Additional Hook to process check before indexing
+    $TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-all'][$_EXTKEY] = \X4E\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
+}
 
 if (TYPO3_MODE === 'BE') {
 	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4E\X4ebase\Controller\EmailQueueCommandController';
 }
+// endregion
 
+//==============================================================================
+// region Signals / Slots
+//==============================================================================
+if(!$extConf['fileTimestamp.']['disable_fe'] || !$extConf['fileTimestamp.']['disable_be']){
+    /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
+    $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
+    $signalSlotDispatcher->connect(
+        'TYPO3\CMS\Core\Resource\ResourceStorage',
+        TYPO3\CMS\Core\Resource\ResourceStorage::SIGNAL_PreGeneratePublicUrl,
+        \X4E\X4ebase\Signal\PublicFileUri::class,
+        'preGeneratePublicUrl'
+    );
+}
+// endregion
 
 // We need to set the default implementation for Storage Backend & Query Settings
 // the code below is NO PUBLIC API! It's just to make sure that
@@ -69,7 +95,7 @@ $extbaseObjectContainer->registerImplementation('TYPO3\\CMS\\Extbase\\Persistenc
 unset($extbaseObjectContainer);
 
 
-
+// region contextSkin
 /**
  * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
  * [begin]
@@ -118,6 +144,7 @@ page.1 {
  * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
  * [END]
  */
+// endregion
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'X4E.' . $_EXTKEY,
