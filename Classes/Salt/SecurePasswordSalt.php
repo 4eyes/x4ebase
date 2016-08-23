@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Salt;
+namespace X4e\X4ebase\Salt;
 
 /***************************************************************
  *  Copyright notice
@@ -52,7 +52,7 @@ class SecurePasswordSalt implements \TYPO3\CMS\Saltedpasswords\Salt\SaltInterfac
 	 * Requires dependant function implementation
 	 */
 	public function __construct() {
-		$extConf = \X4E\X4ebase\Utility\GeneralUtility::getExtConf('x4ebase');
+		$extConf = \X4e\X4ebase\Utility\GeneralUtility::getExtConf('x4ebase');
 		if (isset($extConf['securePassword.']) && isset($extConf['securePassword.']['cost'])) {
 			$cost = intval($extConf['securePassword.']['cost']);
 			if ($cost > 3 && $cost < 32) {

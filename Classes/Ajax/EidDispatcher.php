@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Ajax;
+namespace X4e\X4ebase\Ajax;
 
 /***************************************************************
  *  Copyright notice

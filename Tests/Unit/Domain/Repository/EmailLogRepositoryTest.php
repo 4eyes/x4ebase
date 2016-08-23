@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4e\X4ebase\Tests\Unit\Domain\Repository;
 
 /* * *************************************************************
  *  Copyright notice
@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\EmailLogRepository
+ * Test case for class \X4e\X4ebase\Domain\Repository\EmailLogRepository
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,7 +36,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class EmailLogRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class EmailLogRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTestBase {
 
 	public function testInitializeObject() {
 		$this->mockSubject('setDefaultQuerySettings');

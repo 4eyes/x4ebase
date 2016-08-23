@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ViewHelpers;
+namespace X4e\X4ebase\ViewHelpers;
 
 /***************************************************************
  *  Copyright notice
@@ -37,7 +37,7 @@ class RelativeDateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 	 * @api
 	 */
 	public function render($date, $as, $referenceDate = NULL) {
-		$infoArray = \X4E\X4ebase\Utility\DateTimeUtility::relativeDate($date, $referenceDate);
+		$infoArray = \X4e\X4ebase\Utility\DateTimeUtility::relativeDate($date, $referenceDate);
 		$infoArray['type'] = $infoArray[0];
 		$infoArray['absoluteType'] = abs($infoArray[0]);
 		$infoArray['value'] = $infoArray[1];

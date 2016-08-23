@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Uri;
+namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Uri;
 
 /* * *************************************************************
  *  Copyright notice
@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Uri;
 use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * Test case for class \X4E\X4ebase\ViewHelpers\Uri\TypolinkViewHelper
+ * Test case for class \X4e\X4ebase\ViewHelpers\Uri\TypolinkViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,9 +36,9 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class TypolinkViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class TypolinkViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\Uri\TypolinkViewHelper */
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Uri\TypolinkViewHelper */
 	protected $subject;
 
 	/**

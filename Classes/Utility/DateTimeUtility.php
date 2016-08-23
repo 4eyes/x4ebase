@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Utility;
+namespace X4e\X4ebase\Utility;
 
 /***************************************************************
  *  Copyright notice

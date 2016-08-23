@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Session;
+namespace X4e\X4ebase\Tests\Unit\Session;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Session;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Session\BackendSessionStorageTest
+ * Test case for class \X4e\X4ebase\Session\BackendSessionStorageTest
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,9 +35,9 @@ namespace X4E\X4ebase\Tests\Unit\Session;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class BackendSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class BackendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
-	/** @var \X4E\X4ebase\Session\BackendSessionStorage|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
+	/** @var \X4e\X4ebase\Session\BackendSessionStorage|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
 	protected $subject;
 
 	public function testGet() {

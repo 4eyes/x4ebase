@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ViewHelpers\Be\Security;
+namespace X4e\X4ebase\ViewHelpers\Be\Security;
 
 /*                                                                        *
  * This script is backported from the TYPO3 Flow package "TYPO3.Fluid".   *

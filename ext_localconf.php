@@ -16,7 +16,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/saltedpasswords']['saltMethods'][
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['EXT:saltedpasswords/locallang.xml'][] = 'EXT:x4ebase/Resources/Private/Language/locallang_securepassword.xlf';
 
 //==============================================================================
-//   XClasses
+// region XClasses
 //==============================================================================
 if(version_compare(TYPO3_branch, '6.2', '<=')) {
 	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = array(
@@ -39,15 +39,15 @@ if(version_compare(TYPO3_branch, '6.2', '<=')) {
 /**
  * xclasses to allow cli-configuration of an extension, see https://jira.4eyes.ch/browse/IMPROVE-409
  */
-//$index = array_search('TYPO3\CMS\Extensionmanager\Controller\ExtensionCommandController', $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers']);
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4E\X4ebase\Controller\ExtensionCommandController';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\ExtensionCommandController';
 
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController'] = array(
 	'className' => 'X4E\\X4ebase\\XClasses\\Controller\\ConfigurationController'
 );
+// endregion
 
 //==============================================================================
-//   Hooks
+// region Hooks
 //==============================================================================
 // This hook enables save and preview functionality for articles
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewOnClickClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/SaveAndPreviewHook.php:&X4E\X4ebase\Hooks\SaveAndPreviewHook';
@@ -55,8 +55,9 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
 
 if (TYPO3_MODE === 'BE') {
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4E\X4ebase\Controller\EmailQueueCommandController';
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\EmailQueueCommandController';
 }
+// endregion
 
 
 // We need to set the default implementation for Storage Backend & Query Settings
@@ -70,7 +71,7 @@ $extbaseObjectContainer->registerImplementation('TYPO3\\CMS\\Extbase\\Persistenc
 unset($extbaseObjectContainer);
 
 
-
+// region contextSkin
 /**
  * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
  * [begin]
@@ -119,3 +120,16 @@ page.1 {
  * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
  * [END]
  */
+// endregion
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'X4E.' . $_EXTKEY,
+	'ContentExceptionTest',
+	array(
+		'ContentExceptionTest' => 'content, exception'
+	),
+	// non-cacheable actions
+	array(
+		'ContentExceptionTest' => 'content, exception'
+	)
+);

@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Ajax;
+namespace X4e\X4ebase\Tests\Unit\Ajax;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Ajax;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Ajax\EidDispatcher
+ * Test case for class \X4e\X4ebase\Ajax\EidDispatcher
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,9 +35,9 @@ namespace X4E\X4ebase\Tests\Unit\Ajax;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class EidDispatcherTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
+class EidDispatcherTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase {
 
-	/** @var \X4E\X4ebase\Ajax\EidDispatcher|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface */
+	/** @var \X4e\X4ebase\Ajax\EidDispatcher|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface */
 	protected $subject;
 
 	/**

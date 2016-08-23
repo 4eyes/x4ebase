@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Controller;
+namespace X4e\X4ebase\Tests\Unit\Controller;
 
 /* * *************************************************************
  *  Copyright notice
@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Tests\Unit\Controller;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * Test case for class \X4E\X4ebase\Controller\PageActionController
+ * Test case for class \X4e\X4ebase\Controller\PageActionController
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,8 +36,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
-	/** @var \X4E\X4ebase\Controller\PageActionController|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
+class PageActionControllerTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
+	/** @var \X4e\X4ebase\Controller\PageActionController|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
 	protected $subject;
 
 	/**
@@ -52,7 +52,7 @@ class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase
 		$GLOBALS['TSFE'] = $this->getMock(TypoScriptFrontendController::class, array(), array(), '', FALSE);
 		$GLOBALS['TSFE']->id = 0;
 
-		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array('findByUid'), array(), '', FALSE);
+		$pageRepository = $this->getMock(\X4e\X4ebase\Domain\Repository\PageRepository::class, array('findByUid'), array(), '', FALSE);
 		$pageRepository->expects($this->once())->method('findByUid');
 
 		$this->subject->_set('pageRepository', $pageRepository);
@@ -72,7 +72,7 @@ class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase
 
 		$GLOBALS['_GET']['id'] = 0;
 
-		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array('findByUid'), array(), '', FALSE);
+		$pageRepository = $this->getMock(\X4e\X4ebase\Domain\Repository\PageRepository::class, array('findByUid'), array(), '', FALSE);
 		$pageRepository->expects($this->once())->method('findByUid');
 
 		$this->subject->_set('pageRepository', $pageRepository);
@@ -85,7 +85,7 @@ class PageActionControllerTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase
 	 */
 	public function testInjectPageRepository() {
 		$this->mockSubject();
-		$pageRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\PageRepository::class, array(), array(), '', FALSE);
+		$pageRepository = $this->getMock(\X4e\X4ebase\Domain\Repository\PageRepository::class, array(), array(), '', FALSE);
 		$this->subject->injectPageRepository($pageRepository);
 		$this->assertSame($pageRepository, $this->subject->_get('pageRepository'));
 	}

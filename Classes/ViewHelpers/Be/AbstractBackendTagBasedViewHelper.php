@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ViewHelpers\Be;
+namespace X4e\X4ebase\ViewHelpers\Be;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 

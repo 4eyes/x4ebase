@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Base;
+namespace X4e\X4ebase\Tests\Unit\Base;
 
 /* * *************************************************************
  *  Copyright notice
@@ -37,7 +37,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ViewHelperTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class ViewHelperTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	/** @var \TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer */
 	protected $viewHelperVariableContainer;

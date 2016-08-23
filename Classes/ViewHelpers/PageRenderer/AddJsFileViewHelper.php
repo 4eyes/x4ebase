@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ViewHelpers\PageRenderer;
+namespace X4e\X4ebase\ViewHelpers\PageRenderer;
 
 /***************************************************************
  *  Copyright notice

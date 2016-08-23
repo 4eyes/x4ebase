@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Domain\Repository;
+namespace X4e\X4ebase\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice

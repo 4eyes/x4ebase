@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ViewHelpers\Link;
+namespace X4e\X4ebase\ViewHelpers\Link;
 
 class PageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\PageViewHelper {
 
@@ -34,7 +34,7 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\PageViewHelper {
 	 * @return string Rendered page URI
 	 */
 	public function render($pageUid = NULL, array $additionalParams = array(), $pageType = 0, $noCache = FALSE, $noCacheHash = FALSE, $section = '', $linkAccessRestrictedPages = FALSE, $absolute = FALSE, $addQueryString = FALSE, array $argumentsToBeExcludedFromQueryString = array(), $uriScheme = NULL) {
-		\X4E\X4ebase\Utility\BackendUtility::initTSFE($pageUid);
+		\X4e\X4ebase\Utility\BackendUtility::initTSFE($pageUid);
 
 		$uriBuilder = $this->controllerContext->getUriBuilder();
 		$uri = $uriBuilder->reset()->setTargetPageUid($pageUid)->setTargetPageType($pageType)->setNoCache($noCache)->setUseCacheHash(!$noCacheHash)->setSection($section)->setLinkAccessRestrictedPages($linkAccessRestrictedPages)->setArguments($additionalParams)->setCreateAbsoluteUri($absolute)->setAddQueryString($addQueryString)->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)->setAbsoluteUriScheme($uriScheme);

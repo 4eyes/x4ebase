@@ -2,7 +2,7 @@ config.tx_extbase {
 	persistence {
 		classes {
 
-			X4E\X4ebase\Domain\Model\Page {
+			X4e\X4ebase\Domain\Model\Page {
 				mapping {
 					tableName = pages
 					columns {
@@ -57,7 +57,7 @@ config.tx_extbase {
 				}
 			}
 			
-			X4E\X4ebase\Domain\Model\PageLanguageOverlay {
+			X4e\X4ebase\Domain\Model\PageLanguageOverlay {
 				mapping {
 					tableName = pages_language_overlay
 					columns {
@@ -87,7 +87,7 @@ config.tx_extbase {
 					}
 				}
 			}
-			X4E\X4ebase\Domain\Model\Content {
+			X4e\X4ebase\Domain\Model\Content {
 				mapping {
 					tableName = tt_content
 					columns {

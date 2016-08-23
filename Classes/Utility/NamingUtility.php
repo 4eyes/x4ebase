@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Utility;
+namespace X4e\X4ebase\Utility;
 
 /***************************************************************
  *  Copyright notice
@@ -34,7 +34,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 /**
  * Utility class to translate between different naming conventions
  *
- * @package X4E\X4ebase\Utility
+ * @package X4e\X4ebase\Utility
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class NamingUtility implements \TYPO3\CMS\Core\SingletonInterface {

@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Hooks;
+namespace X4e\X4ebase\Hooks;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 

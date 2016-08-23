@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Tests\Validation\Validator;
+namespace X4e\X4ebase\Tests\Validation\Validator;
 
 /***************************************************************
  *  Copyright notice
@@ -27,10 +27,10 @@ namespace X4E\X4ebase\Tests\Validation\Validator;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use X4E\X4ebase\Validation\Validator\NotTrimEmptyValidator;
+use X4e\X4ebase\Validation\Validator\NotTrimEmptyValidator;
 
 /**
- * Test case for class \X4E\X4ebase\Validation\Validator\NotTrimEmptyValidator
+ * Test case for class \X4e\X4ebase\Validation\Validator\NotTrimEmptyValidator
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -42,7 +42,7 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 *
-	 * @var \X4E\X4ebase\Validation\Validator\NotTrimEmptyValidator
+	 * @var \X4e\X4ebase\Validation\Validator\NotTrimEmptyValidator
 	 */
 	protected $validator;
 

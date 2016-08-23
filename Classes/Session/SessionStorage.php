@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Session;
+namespace X4e\X4ebase\Session;
 
 /***************************************************************
  *  Copyright notice
@@ -33,7 +33,7 @@ namespace X4E\X4ebase\Session;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class SessionStorage implements \X4E\X4ebase\Session\SessionStorageInterface {
+class SessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface {
 
 	const COOKIE_SESSION_STORAGE = 'ses';
 
@@ -45,7 +45,7 @@ class SessionStorage implements \X4E\X4ebase\Session\SessionStorageInterface {
 	protected $objectManager = NULL;
 
 	/**
-	 * @var \X4E\X4ebase\Session\SessionStorageInterface
+	 * @var \X4e\X4ebase\Session\SessionStorageInterface
 	 */
 	protected $concreteSessionStorage = NULL;
 
@@ -65,11 +65,11 @@ class SessionStorage implements \X4E\X4ebase\Session\SessionStorageInterface {
 		/* @var $environmentService \TYPO3\CMS\Extbase\Service\EnvironmentService */
 		$environmentService = $this->objectManager->get('TYPO3\CMS\Extbase\Service\EnvironmentService');
 		if ($environmentService->isEnvironmentInFrontendMode()) {
-			$this->concreteSessionStorage = $this->objectManager->get('X4E\X4ebase\Session\FrontendSessionStorage');
+			$this->concreteSessionStorage = $this->objectManager->get('X4e\X4ebase\Session\FrontendSessionStorage');
 		} elseif ($environmentService->isEnvironmentInBackendMode()) {
-			$this->concreteSessionStorage = $this->objectManager->get('X4E\X4ebase\Session\BackendSessionStorage');
+			$this->concreteSessionStorage = $this->objectManager->get('X4e\X4ebase\Session\BackendSessionStorage');
 		} else {
-			$this->concreteSessionStorage = $this->objectManager->get('X4E\X4ebase\Session\NullSessionStorage');
+			$this->concreteSessionStorage = $this->objectManager->get('X4e\X4ebase\Session\NullSessionStorage');
 		}
 	}
 
@@ -109,7 +109,7 @@ class SessionStorage implements \X4E\X4ebase\Session\SessionStorageInterface {
 
 	/**
 	 *
-	 * @return \X4E\X4ebase\Session\SessionStorageInterface
+	 * @return \X4e\X4ebase\Session\SessionStorageInterface
 	 */
 	public function getConcreteSessionStorage() {
 		return $this->concreteSessionStorage;

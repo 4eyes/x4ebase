@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Domain\Repository;
+namespace X4e\X4ebase\Domain\Repository;
 
     /***************************************************************
      *
@@ -28,10 +28,11 @@ namespace X4E\X4ebase\Domain\Repository;
      ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use X4e\X4ebase\Template\FilterTemplate;
 
 /**
  * This abstract repository holds the generic filter and search methods.
- * It requires a X4E\X4ebase\Template\FilterTemplate and the query to create the matching
+ * It requires a X4e\X4ebase\Template\FilterTemplate and the query to create the matching
  */
 class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
@@ -45,7 +46,6 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected $filterMethods;
 
-
     /**
      * @var array
      */
@@ -55,12 +55,15 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
      * @param String $filterMethod
      * @param string $parameterName
-     * @param array $parameterValues
+     * @param array|string $parameterValues
      * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface
      */
     protected function filterByParameter(&$query, $filterMethod, $parameterName, $parameterValues) {
         if(!empty($parameterValues) && !empty($filterMethod)) {
             $constraints = array();
+            if (!is_array($parameterValues)) {
+                $parameterValues = array($parameterValues);
+            }
             foreach($parameterValues as $parameterValue) {
                 $constraints[] = $query->$filterMethod($parameterName,$parameterValue);
             }
@@ -89,7 +92,7 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-     * @param \X4E\X4ebase\Template\FilterTemplate $filterTemplate
+     * @param \X4e\X4ebase\Template\FilterTemplate $filterTemplate
      * @return \TYPO3\CMS\Extbase\Persistence\QueryInterface
      */
     public function createMatching(&$query, $filterTemplate) {
@@ -117,7 +120,7 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
-     * @param \X4E\X4ebase\Template\FilterTemplate $filterTemplate
+     * @param \X4e\X4ebase\Template\FilterTemplate $filterTemplate
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function performSearch($filterTemplate) {
@@ -127,7 +130,6 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $query = $this->createMatching($query, $filterTemplate);
         $documents = $query->execute();
-
         return $documents;
     }
 
@@ -135,7 +137,7 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * This method can be used to add additional constraints to the $query object
      *
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-     * @param \X4E\X4ebase\Template\FilterTemplate $filterTemplate
+     * @param \X4e\X4ebase\Template\FilterTemplate $filterTemplate
      * @param array() $constraints
      * @return array()
      */

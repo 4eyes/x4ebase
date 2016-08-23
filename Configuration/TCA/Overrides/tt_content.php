@@ -1,10 +1,8 @@
 <?php
-namespace X4e\X4ebase\Domain\Repository;
-
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Michel Georgy <michel@4eyes.ch>, 4eyes GmbH
+ *  (c) 2016 Michel Georgy <michel@4eyes.ch>, 4eyes GmbH
  *
  *  All rights reserved
  *
@@ -25,20 +23,6 @@ namespace X4e\X4ebase\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- * A TYPO3 page record repository for extbase
- *
- * @package x4ebase
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
-class EmailLogRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
-
-	public function initializeObject() {
-		/* @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-		$querySettings = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
-		$querySettings->setRespectStoragePage(FALSE);
-		$this->setDefaultQuerySettings($querySettings);
-	}
-
-}
+//Removes the "[Translate to:]" - string for tt_content localizations
+//$TCA['tt_content']['columns']['header']['l10n_mode'] = '';
+//$TCA['tt_content']['columns']['bodytext']['l10n_mode'] = '';

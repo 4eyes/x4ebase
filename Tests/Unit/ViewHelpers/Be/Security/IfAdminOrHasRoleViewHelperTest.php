@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Be\Security;
+namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Be\Security;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Be\Security;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\ViewHelpers\Be\Security\IfAdminOrHasRoleViewHelper
+ * Test case for class \X4e\X4ebase\ViewHelpers\Be\Security\IfAdminOrHasRoleViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,9 +35,9 @@ namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Be\Security;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class IfAdminOrHasRoleViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class IfAdminOrHasRoleViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\Be\Security\IfAdminOrHasRoleViewHelper */
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Be\Security\IfAdminOrHasRoleViewHelper */
 	protected $subject;
 
 	/**
