@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\View;
+namespace X4e\X4ebase\Tests\Unit\View;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\View;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\View\TemplateView
+ * Test case for class \X4e\X4ebase\View\TemplateView
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,7 +35,7 @@ namespace X4E\X4ebase\Tests\Unit\View;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class TemplateViewTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class TemplateViewTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	/**
 	 * @test
@@ -43,11 +43,11 @@ class TemplateViewTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testBuildParserConfiguration() {
 		$this->mockSubject();
 		$parserConfiguration = $this->getMock(\TYPO3\CMS\Fluid\Core\Parser\Configuration::class, array('addInterceptor'));
-		$parserConfiguration->expects($this->once())->method('addInterceptor')->with(new \X4E\X4ebase\View\Interceptor\ReplaceTabs());
+		$parserConfiguration->expects($this->once())->method('addInterceptor')->with(new \X4e\X4ebase\View\Interceptor\ReplaceTabs());
 
 		$objectManager = $this->getMock(\TYPO3\CMS\Extbase\Object\ObjectManager::class, array('get'), array(), '', FALSE);
 		$objectManager->expects($this->at(0))->method('get')->willReturn($parserConfiguration);
-		$objectManager->expects($this->at(1))->method('get')->willReturn(new \X4E\X4ebase\View\Interceptor\ReplaceTabs());
+		$objectManager->expects($this->at(1))->method('get')->willReturn(new \X4e\X4ebase\View\Interceptor\ReplaceTabs());
 
 		$request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array('getFormat'));
 		$request->expects($this->once())->method('getFormat')->willReturn('json');

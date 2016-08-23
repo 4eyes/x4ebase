@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Base;
+namespace X4e\X4ebase\Tests\Unit\Base;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -35,7 +35,7 @@ namespace X4E\X4ebase\Tests\Unit\Base;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class RepositoryTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class RepositoryTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	/** @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Persistence\Repository */
 	protected $subject = NULL;

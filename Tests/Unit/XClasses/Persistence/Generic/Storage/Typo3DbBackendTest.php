@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\XClasses\Persistence\Generic\Storage;
+namespace X4e\X4ebase\Tests\Unit\XClasses\Persistence\Generic\Storage;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Persistence\Generic\Storage;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\XClasses\Persistence\Generic\Storage\Typo3DbBackend
+ * Test case for class \X4e\X4ebase\XClasses\Persistence\Generic\Storage\Typo3DbBackend
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,9 +35,9 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Persistence\Generic\Storage;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class Typo3DbBackendTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\XClasses\Persistence\Generic\Storage\Typo3DbBackend */
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\XClasses\Persistence\Generic\Storage\Typo3DbBackend */
 	protected $subject;
 
 	/**
@@ -46,7 +46,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testAddAdditionalWhereClause_QuerySettingsInstanceOfAlternativeQuerySettingsInterface_AND_RespectSysLanguageAlternative_CallsAddAlternativeSysLanguageStatement() {
 		$this->mockSubject('addVisibilityConstraintStatement', 'addSysLanguageStatement', 'addAlternativeSysLanguageStatement', 'addPageIdStatement');
 		$querySettings = $this->getMock(
-			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
+			\X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getRespectSysLanguage', 'getRespectSysLanguageAlternative', 'getRespectStoragePage', 'getStoragePageIds')
 		);
 		$tableName = '';
@@ -68,7 +68,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testAddAdditionalWhereClause_QuerySettingsInstanceOfAlternativeQuerySettingsInterface_ANDNOT_RespectSysLanguageAlternative_NotCallsAddAlternativeSysLanguageStatement() {
 		$this->mockSubject('addVisibilityConstraintStatement', 'addSysLanguageStatement', 'addAlternativeSysLanguageStatement', 'addPageIdStatement');
 		$querySettings = $this->getMock(
-			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
+			\X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getRespectSysLanguage', 'getRespectSysLanguageAlternative', 'getRespectStoragePage', 'getStoragePageIds')
 		);
 		$tableName = '';
@@ -96,7 +96,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			'transOrigPointerField' => '1',
 		);
 		$querySettings = $this->getMock(
-			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
+			\X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getLanguageUid')
 		);
 		$querySettings->expects($this->atLeastOnce())->method('getLanguageUid')->willReturn(1);
@@ -119,7 +119,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			'transOrigPointerField' => '1',
 		);
 		$querySettings = $this->getMock(
-			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
+			\X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getLanguageUid')
 		);
 		$querySettings->expects($this->atLeastOnce())->method('getLanguageUid')->willReturn(1);
@@ -145,7 +145,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			'transOrigPointerField' => '1',
 		);
 		$querySettings = $this->getMock(
-			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
+			\X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getLanguageUid')
 		);
 		$querySettings->expects($this->atLeastOnce())->method('getLanguageUid')->willReturn(0);
@@ -165,7 +165,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$transOrigPointerField = 1;
 		$newRow = FALSE;
 		$querySettings = $this->getMock(
-			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
+			\X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getSysLanguageUid')
 		);
 		$querySettings->expects($this->any())->method('getSysLanguageUid')->willReturn(0);
@@ -201,7 +201,7 @@ class Typo3DbBackendTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 			'language' => 5
 		);
 		$querySettings = $this->getMock(
-			\X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
+			\X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class,
 			array('getSysLanguageUid')
 		);
 		$querySettings->expects($this->any())->method('getSysLanguageUid')->willReturn(0);

@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ViewHelpers\Link;
+namespace X4e\X4ebase\ViewHelpers\Link;
 
 class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelper {
 
@@ -28,7 +28,7 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelpe
                            $section = '', $format = '', $linkAccessRestrictedPages = FALSE, array $additionalParams = array(),
                            $absolute = FALSE, $addQueryString = FALSE, array $argumentsToBeExcludedFromQueryString = array(),
                            $uriScheme = NULL) {
-		\X4E\X4ebase\Utility\BackendUtility::initTSFE($pageUid);
+		\X4e\X4ebase\Utility\BackendUtility::initTSFE($pageUid);
 
 		$uriBuilder = $this->controllerContext->getUriBuilder();
 		$uri = $uriBuilder->reset()

@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Base;
+namespace X4e\X4ebase\Tests\Unit\Base;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Base;
 	 * ************************************************************* */
 
 /**
- * Test class for class \X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings
+ * Test class for class \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors

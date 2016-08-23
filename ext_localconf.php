@@ -39,7 +39,7 @@ if(version_compare(TYPO3_branch, '6.2', '<=')) {
 /**
  * xclasses to allow cli-configuration of an extension, see https://jira.4eyes.ch/browse/IMPROVE-409
  */
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4E\X4ebase\Controller\ExtensionCommandController';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\ExtensionCommandController';
 
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController'] = array(
 	'className' => 'X4E\\X4ebase\\XClasses\\Controller\\ConfigurationController'
@@ -50,22 +50,22 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Con
 // region Hooks
 //==============================================================================
 // This hook enables save and preview functionality for articles
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewOnClickClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/SaveAndPreviewHook.php:&X4E\X4ebase\Hooks\SaveAndPreviewHook';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewOnClickClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/SaveAndPreviewHook.php:&X4e\X4ebase\Hooks\SaveAndPreviewHook';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4e\X4ebase\Hooks\TceMainHook';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4e\X4ebase\Hooks\TceMainHook';
 if($extConf['javascriptOptimization']){
     // do not merge per page added inline JS
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][$_EXTKEY] = \X4E\X4ebase\Hooks\RenderPreProcessHook::class . '->process';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][$_EXTKEY] = \X4e\X4ebase\Hooks\RenderPreProcessHook::class . '->process';
 }
 if($extConf['forceRealurl']){
-    $TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_fe.php']['isOutputting'][$_EXTKEY] = \X4E\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
+    $TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_fe.php']['isOutputting'][$_EXTKEY] = \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
 
     // Additional Hook to process check before indexing
-    $TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-all'][$_EXTKEY] = \X4E\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
+    $TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-all'][$_EXTKEY] = \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
 }
 
 if (TYPO3_MODE === 'BE') {
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4E\X4ebase\Controller\EmailQueueCommandController';
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\EmailQueueCommandController';
 }
 // endregion
 
@@ -78,7 +78,7 @@ if(!$extConf['fileTimestamp.']['disable_fe'] || !$extConf['fileTimestamp.']['dis
     $signalSlotDispatcher->connect(
         'TYPO3\CMS\Core\Resource\ResourceStorage',
         TYPO3\CMS\Core\Resource\ResourceStorage::SIGNAL_PreGeneratePublicUrl,
-        \X4E\X4ebase\Signal\PublicFileUri::class,
+        \X4e\X4ebase\Signal\PublicFileUri::class,
         'preGeneratePublicUrl'
     );
 }

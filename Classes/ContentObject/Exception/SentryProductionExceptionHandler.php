@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ContentObject\Exception;
+namespace X4e\X4ebase\ContentObject\Exception;
 
 /***************************************************************
  *  Copyright notice

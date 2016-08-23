@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Utility;
+namespace X4e\X4ebase\Tests\Unit\Utility;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Utility\NamingUtility
+ * Test case for class \X4e\X4ebase\Utility\NamingUtility
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -39,7 +39,7 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
 class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \X4E\X4ebase\Utility\NamingUtility
+	 * @var \X4e\X4ebase\Utility\NamingUtility
 	 */
 	protected $nameUtility;
 	protected $configurationManager;
@@ -47,7 +47,7 @@ class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	protected $configArray = array();
 
 	public function setUp() {
-		$this->nameUtility = new \X4E\X4ebase\Utility\NamingUtility();
+		$this->nameUtility = new \X4e\X4ebase\Utility\NamingUtility();
 
 		if (function_exists('xdebug_disable')) {
 			xdebug_disable();
@@ -78,36 +78,36 @@ class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	public function testTranslateModelClassNameToTableNameRegular() {
-		$this->configArray['persistence']['classes']['X4E\X4ebase\Utility\NamingUtility']['mapping']['tableName'] = 'test_table_name';
+		$this->configArray['persistence']['classes']['X4e\X4ebase\Utility\NamingUtility']['mapping']['tableName'] = 'test_table_name';
 		$this->initCM();
-		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4E\X4ebase\Utility\NamingUtility');
-		$this->assertEquals($this->configArray['persistence']['classes']['X4E\X4ebase\Utility\NamingUtility']['mapping']['tableName'], $tableName);
+		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4e\X4ebase\Utility\NamingUtility');
+		$this->assertEquals($this->configArray['persistence']['classes']['X4e\X4ebase\Utility\NamingUtility']['mapping']['tableName'], $tableName);
 	}
 
 	public function testTranslateModelClassNameToTableNameNoConfig() {
-		$this->configArray['persistence']['classes']['X4E\X4ebase\Utility\NamingUtilityNoMapping']['somethingelse']['tableName'] = NULL;
+		$this->configArray['persistence']['classes']['X4e\X4ebase\Utility\NamingUtilityNoMapping']['somethingelse']['tableName'] = NULL;
 		$this->initCM();
-		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4E\X4ebase\Utility\NotNamingUtility');
+		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4e\X4ebase\Utility\NotNamingUtility');
 		$this->assertEquals('tx_x4ebase_utility_notnamingutility', $tableName);
 	}
 
 	public function testTranslateModelClassNameToTableNameNoMapping() {
 		$this->initCM();
-		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4E\X4ebase\Utility\NamingUtilityNoMapping');
+		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4e\X4ebase\Utility\NamingUtilityNoMapping');
 		$this->assertEquals('tx_x4ebase_utility_namingutilitynomapping', $tableName);
 	}
 
 	public function testTranslateModelClassNameToTableEmptyMapping() {
-		$this->configArray['persistence']['classes']['X4E\X4ebase\Utility\NamingUtilityEmptyMapping']['mapping']['tableName'] = '';
+		$this->configArray['persistence']['classes']['X4e\X4ebase\Utility\NamingUtilityEmptyMapping']['mapping']['tableName'] = '';
 		$this->initCM();
-		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4E\X4ebase\Utility\NamingUtilityEmptyMapping');
+		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4e\X4ebase\Utility\NamingUtilityEmptyMapping');
 		$this->assertEquals('tx_x4ebase_utility_namingutilityemptymapping', $tableName);
 	}
 
 	public function testTranslateModelClassNameToTableNullMapping() {
-		$this->configArray['persistence']['classes']['X4E\X4ebase\Utility\NamingUtilityNullMapping']['mapping']['tableName'] = NULL;
+		$this->configArray['persistence']['classes']['X4e\X4ebase\Utility\NamingUtilityNullMapping']['mapping']['tableName'] = NULL;
 		$this->initCM();
-		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4E\X4ebase\Utility\NamingUtilityNullMapping');
+		$tableName = $this->nameUtility->translateModelClassNameToTableName('X4e\X4ebase\Utility\NamingUtilityNullMapping');
 		$this->assertEquals('tx_x4ebase_utility_namingutilitynullmapping', $tableName);
 	}
 
@@ -115,7 +115,7 @@ class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function testResolveTableNameRegularExtension() {
-		$tableName = $this->callInaccessibleMethod($this->nameUtility, 'resolveTableName', 'X4E\X4ebase\Utility\NamingUtility');
+		$tableName = $this->callInaccessibleMethod($this->nameUtility, 'resolveTableName', 'X4e\X4ebase\Utility\NamingUtility');
 		$this->assertEquals('tx_x4ebase_utility_namingutility', $tableName);
 	}
 

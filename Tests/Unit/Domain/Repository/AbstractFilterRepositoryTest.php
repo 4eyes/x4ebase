@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4e\X4ebase\Tests\Unit\Domain\Repository;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\AbstractFilterRepository
+ * Test case for class \X4e\X4ebase\Domain\Repository\AbstractFilterRepository
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,7 +35,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class AbstractFilterRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTestBase {
 
 	/**
 	 * @test
@@ -121,8 +121,8 @@ class AbstractFilterRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\Reposito
 	public function testCreateMatching_WithoutConstraints() {
 		$this->mockSubject('filterByParameter', 'searchByParameter');
 
-		/** @var \X4E\X4ebase\Template\FilterTemplate|\PHPUnit_Framework_MockObject_MockObject $filterTemplate */
-		$filterTemplate = $this->getMock(\X4E\X4ebase\Template\FilterTemplate::class, array('getFilterArray', 'getFilterMethodForParameter', 'getSearchStrings', 'getSearchableParameters'));
+		/** @var \X4e\X4ebase\Template\FilterTemplate|\PHPUnit_Framework_MockObject_MockObject $filterTemplate */
+		$filterTemplate = $this->getMock(\X4e\X4ebase\Template\FilterTemplate::class, array('getFilterArray', 'getFilterMethodForParameter', 'getSearchStrings', 'getSearchableParameters'));
 		$filterTemplate->expects($this->once())->method('getFilterArray')->willReturn(array());
 		$filterTemplate->expects($this->never())->method('getFilterMethodForParameter');
 		$filterTemplate->expects($this->once())->method('getSearchStrings')->willReturn(array());
@@ -156,8 +156,8 @@ class AbstractFilterRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\Reposito
 			'amet' => 'like'
 		);
 
-		/** @var \X4E\X4ebase\Template\FilterTemplate|\PHPUnit_Framework_MockObject_MockObject $filterTemplate */
-		$filterTemplate = $this->getMock(\X4E\X4ebase\Template\FilterTemplate::class, array('getFilterArray', 'getFilterMethodForParameter', 'getSearchStrings', 'getSearchableParameters'));
+		/** @var \X4e\X4ebase\Template\FilterTemplate|\PHPUnit_Framework_MockObject_MockObject $filterTemplate */
+		$filterTemplate = $this->getMock(\X4e\X4ebase\Template\FilterTemplate::class, array('getFilterArray', 'getFilterMethodForParameter', 'getSearchStrings', 'getSearchableParameters'));
 		$filterTemplate->expects($this->once())->method('getFilterArray')->willReturn($filterArray);
 		$filterTemplate->expects($this->exactly(2))->method('getFilterMethodForParameter')->willReturn('equals');
 		$filterTemplate->expects($this->once())->method('getSearchStrings')->willReturn($searchStrings);
@@ -184,7 +184,7 @@ class AbstractFilterRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\Reposito
 	public function testPerformSearch() {
 		$this->mockSubject('createQuery', 'createMatching');
 
-		$filterTemplate = $this->getMock(\X4E\X4ebase\Template\FilterTemplate::class, array('setSearchableParameters', 'setFilterMethods'));
+		$filterTemplate = $this->getMock(\X4e\X4ebase\Template\FilterTemplate::class, array('setSearchableParameters', 'setFilterMethods'));
 		$filterTemplate->expects($this->once())->method('setSearchableParameters');
 		$filterTemplate->expects($this->once())->method('setFilterMethods');
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Session;
+namespace X4e\X4ebase\Tests\Unit\Session;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Session;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Session\FrontendSessionStorage
+ * Test case for class \X4e\X4ebase\Session\FrontendSessionStorage
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,16 +35,16 @@ namespace X4E\X4ebase\Tests\Unit\Session;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class FrontendSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class FrontendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
-	/** @var \X4E\X4ebase\Session\FrontendSessionStorage|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
+	/** @var \X4e\X4ebase\Session\FrontendSessionStorage|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
 	protected $subject;
 
 	public function testGet() {
 		$this->mockSubject('getFrontendUser', 'getKey');
 
 		$key = 'lorem';
-		$type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
+		$type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
 
 		$frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, array('getKey'));
 		$frontendUser->expects($this->once())->method('getKey')->with($type, $key);
@@ -60,7 +60,7 @@ class FrontendSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBa
 
 		$key = 'lorem';
 		$data = '';
-		$type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
+		$type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
 
 		$frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, array('setKey'));
 		$frontendUser->expects($this->once())->method('setKey')->with($type, $key, $data);
@@ -75,7 +75,7 @@ class FrontendSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBa
 
 		$key = 'lorem';
 		$data = NULL;
-		$type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
+		$type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
 
 		$this->subject->expects($this->once())->method('has')->with($key, $type)->willReturn(TRUE);
 		$this->subject->expects($this->once())->method('set')->with($key, $data, $type);

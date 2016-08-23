@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Model;
+namespace X4e\X4ebase\Tests\Unit\Domain\Model;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Model;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Model\PageLanguageOverlay
+ * Test case for class \X4e\X4ebase\Domain\Model\PageLanguageOverlay
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,7 +35,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Model;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class PageLanguageOverlayTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
+class PageLanguageOverlayTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase {
 
 	public function testInitialValues() {
 		$this->initialValueTest('crdate', NULL);

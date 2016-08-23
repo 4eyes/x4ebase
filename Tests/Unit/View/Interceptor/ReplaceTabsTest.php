@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\View\Interceptor;
+namespace X4e\X4ebase\Tests\Unit\View\Interceptor;
 
 /* * *************************************************************
  *  Copyright notice
@@ -26,10 +26,10 @@ namespace X4E\X4ebase\Tests\Unit\View\Interceptor;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use X4E\X4ebase\View\Interceptor\ReplaceTabs;
+use X4e\X4ebase\View\Interceptor\ReplaceTabs;
 
 /**
- * Test case for class \X4E\X4ebase\View\Interceptor\ReplaceTabs
+ * Test case for class \X4e\X4ebase\View\Interceptor\ReplaceTabs
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
