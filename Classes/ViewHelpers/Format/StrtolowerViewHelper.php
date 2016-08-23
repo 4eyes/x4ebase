@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ViewHelpers\Format;
+namespace X4e\X4ebase\ViewHelpers\Format;
 
 
 class StrtolowerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {

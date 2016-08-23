@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Session;
+namespace X4e\X4ebase\Session;
 
 /***************************************************************
  *  Copyright notice
@@ -33,7 +33,7 @@ namespace X4E\X4ebase\Session;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class NullSessionStorage implements \X4E\X4ebase\Session\SessionStorageInterface {
+class NullSessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface {
 
 	public function get($key, $type = '') {
 		

@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Controller;
+namespace X4e\X4ebase\Controller;
 
 /**
  * This file is part of the TYPO3 CMS project.

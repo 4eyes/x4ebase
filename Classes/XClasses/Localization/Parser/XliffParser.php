@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\XClasses\Localization\Parser;
+namespace X4e\X4ebase\XClasses\Localization\Parser;
 
 /***************************************************************
  *  Copyright notice

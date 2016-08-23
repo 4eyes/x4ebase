@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Form;
+namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Form;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Form;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\ViewHelpers\Form\CheckboxViewHelper
+ * Test case for class \X4e\X4ebase\ViewHelpers\Form\CheckboxViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,9 +35,9 @@ namespace X4E\X4ebase\Tests\Unit\ViewHelpers\Form;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class CheckboxViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class CheckboxViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\Form\CheckboxViewHelper */
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Form\CheckboxViewHelper */
 	protected $subject;
 
 	public function testInitializeArguments() {

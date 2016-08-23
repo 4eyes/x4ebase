@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Template;
+namespace X4e\X4ebase\Tests\Unit\Template;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Template;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Template\FilterTemplate
+ * Test case for class \X4e\X4ebase\Template\FilterTemplate
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,9 +35,9 @@ namespace X4E\X4ebase\Tests\Unit\Template;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class FilterTemplateTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
+class FilterTemplateTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase {
 
-	/** @var  \X4E\X4ebase\Template\FilterTemplate|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface */
+	/** @var  \X4e\X4ebase\Template\FilterTemplate|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface */
 	protected $subject;
 
 	/**

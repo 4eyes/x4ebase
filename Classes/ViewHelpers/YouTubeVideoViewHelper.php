@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\ViewHelpers;
+namespace X4e\X4ebase\ViewHelpers;
 
 /**
  * This file is part of the TYPO3 CMS project.

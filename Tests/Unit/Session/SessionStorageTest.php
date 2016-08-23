@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Session;
+namespace X4e\X4ebase\Tests\Unit\Session;
 
 /* * *************************************************************
  *  Copyright notice
@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Tests\Unit\Session;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * Test case for class \X4E\X4ebase\Session\SessionStorage
+ * Test case for class \X4e\X4ebase\Session\SessionStorage
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,9 +36,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
-	/** @var \X4E\X4ebase\Session\SessionStorage|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
+	/** @var \X4e\X4ebase\Session\SessionStorage|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\TYPO3\CMS\Extbase\Mvc\Controller\ActionController */
 	protected $subject;
 
 	public function testInjectObjectManager() {
@@ -56,7 +56,7 @@ class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 		$objectManager = $this->getMock(ObjectManager::class, array('get'), array(), '', FALSE);
 		$objectManager->expects($this->at(0))->method('get')->with('TYPO3\CMS\Extbase\Service\EnvironmentService')->willReturn($environmentService);
-		$objectManager->expects($this->at(1))->method('get')->with('X4E\X4ebase\Session\FrontendSessionStorage');
+		$objectManager->expects($this->at(1))->method('get')->with('X4e\X4ebase\Session\FrontendSessionStorage');
 
 		$this->subject->_set('objectManager', $objectManager);
 
@@ -71,7 +71,7 @@ class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 		$objectManager = $this->getMock(ObjectManager::class, array('get'), array(), '', FALSE);
 		$objectManager->expects($this->at(0))->method('get')->with('TYPO3\CMS\Extbase\Service\EnvironmentService')->willReturn($environmentService);
-		$objectManager->expects($this->at(1))->method('get')->with('X4E\X4ebase\Session\BackendSessionStorage');
+		$objectManager->expects($this->at(1))->method('get')->with('X4e\X4ebase\Session\BackendSessionStorage');
 
 		$this->subject->_set('objectManager', $objectManager);
 
@@ -86,7 +86,7 @@ class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 		$objectManager = $this->getMock(ObjectManager::class, array('get'), array(), '', FALSE);
 		$objectManager->expects($this->at(0))->method('get')->with('TYPO3\CMS\Extbase\Service\EnvironmentService')->willReturn($environmentService);
-		$objectManager->expects($this->at(1))->method('get')->with('X4E\X4ebase\Session\NullSessionStorage');
+		$objectManager->expects($this->at(1))->method('get')->with('X4e\X4ebase\Session\NullSessionStorage');
 
 		$this->subject->_set('objectManager', $objectManager);
 
@@ -95,7 +95,7 @@ class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testGet() {
 		$this->mockSubject();
-		$concreteSessionStorage = $this->getMock(\X4E\X4ebase\Session\BackendSessionStorage::class, array('get'));
+		$concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class, array('get'));
 		$concreteSessionStorage->expects($this->once())->method('get')->with('lorem', 'ipsum');
 		$this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
@@ -104,7 +104,7 @@ class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testSet() {
 		$this->mockSubject();
-		$concreteSessionStorage = $this->getMock(\X4E\X4ebase\Session\BackendSessionStorage::class, array('set'));
+		$concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class, array('set'));
 		$concreteSessionStorage->expects($this->once())->method('set')->with('lorem', 'ipsum', 'dolor');
 		$this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
@@ -113,7 +113,7 @@ class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testHas() {
 		$this->mockSubject();
-		$concreteSessionStorage = $this->getMock(\X4E\X4ebase\Session\BackendSessionStorage::class, array('has'));
+		$concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class, array('has'));
 		$concreteSessionStorage->expects($this->once())->method('has')->with('lorem', 'ipsum');
 		$this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
@@ -122,7 +122,7 @@ class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testRemove() {
 		$this->mockSubject();
-		$concreteSessionStorage = $this->getMock(\X4E\X4ebase\Session\BackendSessionStorage::class, array('remove'));
+		$concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class, array('remove'));
 		$concreteSessionStorage->expects($this->once())->method('remove')->with('lorem', 'ipsum');
 		$this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
@@ -131,7 +131,7 @@ class SessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testgetConcreteSessionStorage() {
 		$this->mockSubject();
-		$concreteSessionStorage = $this->getMock(\X4E\X4ebase\Session\BackendSessionStorage::class);
+		$concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class);
 		$this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
 		$this->assertSame($concreteSessionStorage, $this->subject->getConcreteSessionStorage());

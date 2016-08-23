@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Domain\Model;
+namespace X4e\X4ebase\Domain\Model;
 
 /***************************************************************
  *  Copyright notice

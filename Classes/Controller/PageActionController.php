@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Controller;
+namespace X4e\X4ebase\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -42,14 +42,14 @@ class PageActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	/**
 	 * pageRepository
 	 *
-	 * @var \X4E\X4ebase\Domain\Repository\PageRepository
+	 * @var \X4e\X4ebase\Domain\Repository\PageRepository
 	 */
 	protected $pageRepository;
 
 	/**
 	 * Page
 	 * 
-	 * @var \X4E\X4ebase\Domain\Model\Page
+	 * @var \X4e\X4ebase\Domain\Model\Page
 	 */
 	protected $page = NULL;
 	
@@ -57,10 +57,10 @@ class PageActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	/**
 	 * injectPageRepository
 	 *
-	 * @param \X4E\X4ebase\Domain\Repository\PageRepository $pageRepository
+	 * @param \X4e\X4ebase\Domain\Repository\PageRepository $pageRepository
 	 * @return void
 	 */
-	public function injectPageRepository(\X4E\X4ebase\Domain\Repository\PageRepository $pageRepository) {
+	public function injectPageRepository(\X4e\X4ebase\Domain\Repository\PageRepository $pageRepository) {
 		$this->pageRepository = $pageRepository;
 	}
 	

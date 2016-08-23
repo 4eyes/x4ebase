@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Session;
+namespace X4e\X4ebase\Tests\Unit\Session;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Session;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Session\AbstractSessionStorage
+ * Test case for class \X4e\X4ebase\Session\AbstractSessionStorage
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,7 +35,7 @@ namespace X4E\X4ebase\Tests\Unit\Session;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class AbstractSessionStorageTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class AbstractSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	public function testGetKey() {
 		$this->markTestSkipped(

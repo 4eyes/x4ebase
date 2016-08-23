@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\XClasses\Persistence\Generic;
+namespace X4e\X4ebase\XClasses\Persistence\Generic;
 
 /***************************************************************
  *  Copyright notice
@@ -34,7 +34,7 @@ interface AlternativeQuerySettingsInterface extends \TYPO3\CMS\Extbase\Persisten
 	 * Sets the flag if an alternative language overlay should be performed.
 	 *
 	 * @param boolean $respectSysLanguageAlternative TRUE if an alternative language overlay should be performed.
-	 * @return \X4E\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface instance of $this to allow method chaining
+	 * @return \X4e\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface instance of $this to allow method chaining
 	 * @api
 	 */
 	public function setRespectSysLanguageAlternative($respectSysLanguageAlternative);

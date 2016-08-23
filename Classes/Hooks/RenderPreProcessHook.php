@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Hooks;
+namespace X4e\X4ebase\Hooks;
 
 /***************************************************************
  *  Copyright notice
@@ -32,7 +32,7 @@ use TYPO3\CMS\Core\Page\PageRenderer;
  *
  * Class to optimize inline javascripts
  *
- * @package X4E\X4ebase\Hooks
+ * @package X4e\X4ebase\Hooks
  */
 class RenderPreProcessHook {
     /**

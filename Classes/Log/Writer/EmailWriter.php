@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Log\Writer;
+namespace X4e\X4ebase\Log\Writer;
 
 class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
 
@@ -38,7 +38,7 @@ class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
      * Renders the E-Mail
      *
      * @param \TYPO3\CMS\Core\Log\LogRecord $record
-     * @return \X4E\X4ebase\Log\Writer\Email
+     * @return \X4e\X4ebase\Log\Writer\Email
      */
     public function writeLog(\TYPO3\CMS\Core\Log\LogRecord $record) {
         if (empty($this->recipient) || empty($this->sender)) {

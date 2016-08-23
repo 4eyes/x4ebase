@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Base;
+namespace X4e\X4ebase\Tests\Unit\Base;
 
 /* * *************************************************************
  *  Copyright notice
@@ -37,7 +37,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ModelTestBase extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	/** @var \TYPO3\CMS\Extbase\DomainObject\AbstractEntity|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface */
 	protected $subject;
