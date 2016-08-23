@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Tests\Unit\Utility;
+namespace X4e\X4ebase\Tests\Unit\Utility;
 
 	/***************************************************************
 	 *  Copyright notice
@@ -26,7 +26,7 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
 	 ***************************************************************/
 
 /**
- * Test case for class \X4E\X4ebase\Utility\DateTimeUtility.
+ * Test case for class \X4e\X4ebase\Utility\DateTimeUtility.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -39,7 +39,7 @@ class DateTimeUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	protected $dateTimeUtility = NULL;
 
 	public function setUp() {
-		$this->dateTimeUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('X4E\X4ebase\Utility\DateTimeUtility');
+		$this->dateTimeUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('X4e\X4ebase\Utility\DateTimeUtility');
 	}
 
 	public function tearDown() {

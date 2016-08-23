@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Salt;
+namespace X4e\X4ebase\Tests\Unit\Salt;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Salt;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Salt\SecurePasswordSalt
+ * Test case for class \X4e\X4ebase\Salt\SecurePasswordSalt
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,9 +35,9 @@ namespace X4E\X4ebase\Tests\Unit\Salt;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class SecurePasswordSaltTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
+class SecurePasswordSaltTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase {
 
-	/** @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\Salt\SecurePasswordSalt */
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\Salt\SecurePasswordSalt */
 	protected $subject;
 
 	/**

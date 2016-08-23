@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\ViewHelpers\PageRenderer;
+namespace X4e\X4ebase\Tests\Unit\ViewHelpers\PageRenderer;
 
 /* * *************************************************************
  *  Copyright notice
@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Tests\Unit\ViewHelpers\PageRenderer;
 use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * Test case for class \X4E\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper
+ * Test case for class \X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,20 +36,20 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class AbstractPageRendererViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class AbstractPageRendererViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper */
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper */
 	protected $subject;
 
 	public function testInjectPageRenderer() {
-		$this->subject = $this->getAccessibleMockForAbstractClass(\X4E\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper::class);
+		$this->subject = $this->getAccessibleMockForAbstractClass(\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper::class);
 		$pageRenderer = new \TYPO3\CMS\Core\Page\PageRenderer();
 		$this->subject->injectPageRenderer($pageRenderer);
 		$this->assertEquals($pageRenderer, $this->subject->_get('pageRenderer'));
 	}
 
 	public function testInjectConfigurationManager() {
-		$this->subject = $this->getAccessibleMockForAbstractClass(\X4E\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper::class);
+		$this->subject = $this->getAccessibleMockForAbstractClass(\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper::class);
 		$configurationManager = new \TYPO3\CMS\Extbase\Configuration\ConfigurationManager();
 		$this->subject->injectConfigurationManager($configurationManager);
 		$this->assertEquals($configurationManager, $this->subject->_get('configurationManager'));

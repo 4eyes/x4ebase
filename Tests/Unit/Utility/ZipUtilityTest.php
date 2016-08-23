@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Utility;
+namespace X4e\X4ebase\Tests\Unit\Utility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -25,10 +25,10 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use X4E\X4ebase\Utility\ZipUtility;
+use X4e\X4ebase\Utility\ZipUtility;
 
 /**
- * Test case for class \X4E\X4ebase\Utility\ZipUtility
+ * Test case for class \X4e\X4ebase\Utility\ZipUtility
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors

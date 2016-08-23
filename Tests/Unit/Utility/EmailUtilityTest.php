@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Utility;
+namespace X4e\X4ebase\Tests\Unit\Utility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -27,10 +27,10 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
  * ************************************************************* */
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use X4E\X4ebase\Utility\EmailUtility;
+use X4e\X4ebase\Utility\EmailUtility;
 
 /**
- * Test case for class \X4E\X4ebase\Utility\EmailUtility
+ * Test case for class \X4e\X4ebase\Utility\EmailUtility
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -38,7 +38,7 @@ use X4E\X4ebase\Utility\EmailUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 
 	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|EmailUtility */
 	protected $subject;
@@ -82,8 +82,8 @@ class EmailUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
 	 */
 	public function testLogEmail_PersistsEmailLog() {
 		$this->mockSubject();
-		$emailLogRepository = $this->getMock(\X4E\X4ebase\Domain\Repository\EmailLogRepository::class, array('add'), array(), '', FALSE);
-		$emailLog = $this->getMock(\X4E\X4ebase\Domain\Model\EmailLog::class, array('dummy'));
+		$emailLogRepository = $this->getMock(\X4e\X4ebase\Domain\Repository\EmailLogRepository::class, array('add'), array(), '', FALSE);
+		$emailLog = $this->getMock(\X4e\X4ebase\Domain\Model\EmailLog::class, array('dummy'));
 
 		$objectManager = $this->getMock(
 			ObjectManager::class, array('get'), array(), '', FALSE

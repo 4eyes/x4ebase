@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Controller;
+namespace X4e\X4ebase\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -36,7 +36,7 @@ class EmailQueueCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Comm
 	/**
 	 * emailLogRepository
 	 *
-	 * @var \X4E\X4ebase\Domain\Repository\EmailLogRepository
+	 * @var \X4e\X4ebase\Domain\Repository\EmailLogRepository
 	 * @inject
 	 */
 	protected $emailLogRepository;
@@ -80,7 +80,7 @@ class EmailQueueCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Comm
 				break;
 			}
 
-			$sent = \X4E\X4ebase\Utility\EmailUtility::sendQueuedEmail($mail);
+			$sent = \X4e\X4ebase\Utility\EmailUtility::sendQueuedEmail($mail);
 			if ($sent) {
 				$this->addFlashMessage($mail->getRecipient(), 'mail sent');
 			} else {

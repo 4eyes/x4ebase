@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Utility;
+namespace X4e\X4ebase\Utility;
 
 /***************************************************************
  *  Copyright notice
@@ -96,10 +96,10 @@ class EmailUtility {
 			/**
 	 * Sends a mail from the queue
 	 *
-	 * @param \X4E\X4ebase\Domain\Model\EmailLog $emailLog
+	 * @param \X4e\X4ebase\Domain\Model\EmailLog $emailLog
 	 * @return boolean
 	 */
-	public static function sendQueuedEmail(\X4E\X4ebase\Domain\Model\EmailLog $emailLog) {
+	public static function sendQueuedEmail(\X4e\X4ebase\Domain\Model\EmailLog $emailLog) {
 		$objectManager = self::getObjectManagerInstance();
 		$persistenceManager = self::getPersistenceManagerInstance();
 		$emailLogRepository = $objectManager->get('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository');

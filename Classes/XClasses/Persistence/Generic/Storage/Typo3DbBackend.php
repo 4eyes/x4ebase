@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\XClasses\Persistence\Generic\Storage;
+namespace X4e\X4ebase\XClasses\Persistence\Generic\Storage;
 
 /***************************************************************
  *  Copyright notice
@@ -44,7 +44,7 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
 			$this->addSysLanguageStatement($tableName, $sql, $querySettings);
 		}
 		/* NEW @ 4eyes -- start */
-		elseif ($querySettings instanceof \X4E\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface && $querySettings->getRespectSysLanguageAlternative()) {
+		elseif ($querySettings instanceof \X4e\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface && $querySettings->getRespectSysLanguageAlternative()) {
 			$this->addAlternativeSysLanguageStatement($tableName, $sql, $querySettings);
 		}
 		/* NEW @ 4eyes -- end */

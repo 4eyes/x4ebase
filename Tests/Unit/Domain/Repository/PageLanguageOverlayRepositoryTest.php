@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4e\X4ebase\Tests\Unit\Domain\Repository;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\PageLanguageOverlayRepository
+ * Test case for class \X4e\X4ebase\Domain\Repository\PageLanguageOverlayRepository
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,7 +36,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class PageLanguageOverlayRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class PageLanguageOverlayRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTestBase {
 
 	public function testInitializeObject() {
 		$this->mockSubject('setDefaultQuerySettings');
@@ -46,7 +46,7 @@ class PageLanguageOverlayRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\Rep
 		$querySettings->expects($this->once())->method('setRespectSysLanguage');
 
 		$objectManager = $this->getMock(ObjectManager::class, array('get'), array(), '', FALSE);
-		$objectManager->expects($this->once())->method('get')->with('X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
+		$objectManager->expects($this->once())->method('get')->with('X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
 
 		$this->subject->expects($this->once())->method('setDefaultQuerySettings')->with($querySettings);
 		$this->subject->_set('objectManager', $objectManager);

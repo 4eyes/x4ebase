@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
+namespace X4e\X4ebase\Tests\Unit\XClasses\Localization\Parser;
 
 /* * *************************************************************
  *  Copyright notice
@@ -28,7 +28,7 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Localization\Parser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case for class \X4E\X4ebase\XClasses\Localization\Parser\XliffParser
+ * Test case for class \X4e\X4ebase\XClasses\Localization\Parser\XliffParser
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -81,7 +81,7 @@ class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		);
 
-		$xliffParser = new \X4E\X4ebase\XClasses\Localization\Parser\XliffParser();
+		$xliffParser = new \X4e\X4ebase\XClasses\Localization\Parser\XliffParser();
 		$this->assertEquals($expectedResult, $xliffParser->getParsedData($sourcePath, $languageKey));
 	}
 

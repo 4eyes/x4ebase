@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Utility;
+namespace X4e\X4ebase\Tests\Unit\Utility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -25,10 +25,10 @@ namespace X4E\X4ebase\Tests\Unit\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use X4E\X4ebase\Utility\SecurityUtility;
+use X4e\X4ebase\Utility\SecurityUtility;
 
 /**
- * Test case for class X4E\X4ebase\Utility\SecurityUtility
+ * Test case for class X4e\X4ebase\Utility\SecurityUtility
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,7 +36,7 @@ use X4E\X4ebase\Utility\SecurityUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class SecurityUtilityTest extends \X4E\X4ebase\Tests\Unit\Base\TestCaseBase {
+class SecurityUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|SecurityUtility */
 	protected $subject;
 

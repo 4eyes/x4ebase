@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Validation\Validator;
+namespace X4e\X4ebase\Validation\Validator;
 
 /***************************************************************
  *  Copyright notice

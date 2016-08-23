@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\ViewHelpers\PageRenderer;
+namespace X4e\X4ebase\Tests\Unit\ViewHelpers\PageRenderer;
 
 /* * *************************************************************
  *  Copyright notice
@@ -29,7 +29,7 @@ use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Core\Page\PageRenderer;
 
 /**
- * Test case for class \X4E\X4ebase\ViewHelpers\PageRenderer\BackendLayoutViewHelper
+ * Test case for class \X4e\X4ebase\ViewHelpers\PageRenderer\BackendLayoutViewHelper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -37,9 +37,9 @@ use TYPO3\CMS\Core\Page\PageRenderer;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class BackendLayoutViewHelperTest extends \X4E\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class BackendLayoutViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4E\X4ebase\ViewHelpers\PageRenderer\BackendLayoutViewHelper */
+	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\PageRenderer\BackendLayoutViewHelper */
 	protected $subject;
 
 	/**

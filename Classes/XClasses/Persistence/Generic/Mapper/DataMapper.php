@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\XClasses\Persistence\Generic\Mapper;
+namespace X4e\X4ebase\XClasses\Persistence\Generic\Mapper;
 
 /***************************************************************
  *  Copyright notice

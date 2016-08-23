@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\View;
+namespace X4e\X4ebase\View;
 class TemplateView extends \TYPO3\CMS\Fluid\View\TemplateView {
 
 	/**
@@ -7,7 +7,7 @@ class TemplateView extends \TYPO3\CMS\Fluid\View\TemplateView {
 	 */
 	protected function buildParserConfiguration() {
 		$parserConfiguration = parent::buildParserConfiguration();
-		$parserConfiguration->addInterceptor($this->objectManager->get('X4E\X4ebase\View\Interceptor\ReplaceTabs'));
+		$parserConfiguration->addInterceptor($this->objectManager->get('X4e\X4ebase\View\Interceptor\ReplaceTabs'));
 		return $parserConfiguration;
 	}
 }

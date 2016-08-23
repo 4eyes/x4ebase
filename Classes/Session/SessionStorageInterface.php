@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Session;
+namespace X4e\X4ebase\Session;
 
 /***************************************************************
  *  Copyright notice

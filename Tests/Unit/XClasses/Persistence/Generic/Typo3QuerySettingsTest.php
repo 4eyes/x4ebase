@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\XClasses\Persistence\Generic;
+namespace X4e\X4ebase\Tests\Unit\XClasses\Persistence\Generic;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Persistence\Generic;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings
+ * Test case for class \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,7 +35,7 @@ namespace X4E\X4ebase\Tests\Unit\XClasses\Persistence\Generic;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class Typo3QuerySettingsTest extends \X4E\X4ebase\Tests\Unit\Base\ModelTestBase {
+class Typo3QuerySettingsTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase {
 
 	/**
 	 * @test

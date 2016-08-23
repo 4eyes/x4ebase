@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Signal;
+namespace X4e\X4ebase\Signal;
 
 /***************************************************************
  *  Copyright notice

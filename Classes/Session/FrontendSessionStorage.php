@@ -1,5 +1,5 @@
 <?php
-namespace X4E\X4ebase\Session;
+namespace X4e\X4ebase\Session;
 
 /***************************************************************
  *  Copyright notice
@@ -33,7 +33,7 @@ namespace X4E\X4ebase\Session;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class FrontendSessionStorage extends \X4E\X4ebase\Session\AbstractSessionStorage {
+class FrontendSessionStorage extends \X4e\X4ebase\Session\AbstractSessionStorage {
 
 	/**
 	 * Read session data
@@ -42,7 +42,7 @@ class FrontendSessionStorage extends \X4E\X4ebase\Session\AbstractSessionStorage
 	 * @param string $type
 	 * @return mixed
 	 */
-	public function get($key, $type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
+	public function get($key, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
 		return $this->getFrontendUser()->getKey($type, $this->getKey($key));
 	}
 
@@ -54,7 +54,7 @@ class FrontendSessionStorage extends \X4E\X4ebase\Session\AbstractSessionStorage
 	 * @param string $type
 	 * @return void
 	 */
-	public function set($key, $data, $type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
+	public function set($key, $data, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
 		$this->getFrontendUser()->setKey($type, $this->getKey($key), $data);
 		//$this->getFrontendUser()->storeSessionData();
 	}
@@ -66,7 +66,7 @@ class FrontendSessionStorage extends \X4E\X4ebase\Session\AbstractSessionStorage
 	 * @param string $type
 	 * @return void
 	 */
-	public function remove($key, $type = \X4E\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
+	public function remove($key, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
 		if ($this->has($key, $type)) {
 			$this->set($key, NULL, $type);
 		}

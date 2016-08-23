@@ -1,6 +1,6 @@
 <?php
 
-namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
+namespace X4e\X4ebase\Tests\Unit\Domain\Repository;
 
 	/* * *************************************************************
 	 *  Copyright notice
@@ -27,7 +27,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
 	 * ************************************************************* */
 
 /**
- * Test case for class \X4E\X4ebase\Domain\Repository\AbstractRepository
+ * Test case for class \X4e\X4ebase\Domain\Repository\AbstractRepository
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,7 +35,7 @@ namespace X4E\X4ebase\Tests\Unit\Domain\Repository;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class AbstractRepositoryTest extends \X4E\X4ebase\Tests\Unit\Base\RepositoryTestBase {
+class AbstractRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTestBase {
 
 	/**
 	 * @test
