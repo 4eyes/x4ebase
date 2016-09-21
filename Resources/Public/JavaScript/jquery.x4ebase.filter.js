@@ -4,10 +4,10 @@
         return;
     }
 
-    var X4E = (window.X4E || {}),
-        X4ebase = X4E.X4ebase || (X4E.X4ebase = {}),
-        FilterHandler = X4E.X4ebase.FilterHandler || (X4E.X4ebase.FilterHandler = {}),
-        Filter = X4E.X4ebase.Filter || (X4E.X4ebase.Filter = {})
+    var X4e = (window.X4e || {}),
+        X4ebase = X4e.X4ebase || (X4e.X4ebase = {}),
+        FilterHandler = X4e.X4ebase.FilterHandler || (X4e.X4ebase.FilterHandler = {}),
+        Filter = X4e.X4ebase.Filter || (X4e.X4ebase.Filter = {})
     ;
 
     /**
@@ -36,17 +36,17 @@
                 }
 
                 self.instances.push(
-                    new X4E.X4ebase.Filter($(this), $contentContainer, connectId)
+                    new X4e.X4ebase.Filter($(this), $contentContainer, connectId)
                 );
             });
         },
         Utility: {
             getContentContainerByConnectId: function (connectId) {
-                var self = X4E.X4ebase.FilterHandler;
+                var self = X4e.X4ebase.FilterHandler;
                 return $(self.Selectors.contentContainer).filter('[' + self.Attributes.connectId + '="' + connectId + '"]').first();
             },
             getFiltersByConnectId: function (connectId) {
-                var self = X4E.X4ebase.FilterHandler;
+                var self = X4e.X4ebase.FilterHandler;
                 return $(self.Selectors.filterContainer).filter('[' + self.Attributes.connectId + '="' + connectId + '"]');
             }
         }
@@ -60,7 +60,7 @@
      * @param connectId : int
      * @constructor
      */
-    X4E.X4ebase.Filter = function ($filterContainer, $contentContainer, connectId) {
+    X4e.X4ebase.Filter = function ($filterContainer, $contentContainer, connectId) {
         this.$filterContainer = $filterContainer;
         this.$contentContainer = $contentContainer;
         this.connectId = connectId;
@@ -135,7 +135,7 @@
          */
         resetOtherFilters: function () {
             var self = this;
-            var $otherFilters = X4E.X4ebase.FilterHandler.Utility.getFiltersByConnectId(this.connectId).not(this.$filterContainer);
+            var $otherFilters = X4e.X4ebase.FilterHandler.Utility.getFiltersByConnectId(this.connectId).not(this.$filterContainer);
             var $otherGroups = $otherFilters.find(this.Selectors.group);
             $otherFilters.find('form').trigger('reset');
             $otherFilters.find(':radio, :checkbox').removeAttr('checked');
@@ -294,7 +294,7 @@
         onFormSubmitSuccess: function (data, textStatus, jqXHR) {
             this.$contentContainer.html(data);
             //This is necessary to provide binding after DOM update
-            //this.$contentContainer = X4E.X4ebase.FilterHandler.Utility.getContentContainerByConnectId(this.connectId);
+            //this.$contentContainer = X4e.X4ebase.FilterHandler.Utility.getContentContainerByConnectId(this.connectId);
         },
         /**
          * This method is fired AFTER the error/timeout/success - callback
@@ -313,7 +313,7 @@
         }
     });
 
-    //Assign the X4E - literal to the window - object to make it available in the global namespace
-    window.X4E = X4E;
+    //Assign the X4e - literal to the window - object to make it available in the global namespace
+    window.X4e = X4e;
 
 })(window, jQuery);

@@ -102,7 +102,7 @@ class EmailUtility {
 	public static function sendQueuedEmail(\X4e\X4ebase\Domain\Model\EmailLog $emailLog) {
 		$objectManager = self::getObjectManagerInstance();
 		$persistenceManager = self::getPersistenceManagerInstance();
-		$emailLogRepository = $objectManager->get('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository');
+		$emailLogRepository = $objectManager->get('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository');
 		$isSent = FALSE;
 
 		try {
@@ -159,10 +159,10 @@ class EmailUtility {
 		$objectManager = self::getObjectManagerInstance();
 		$persistenceManager = self::getPersistenceManagerInstance();
 
-		$emailLogRepository = $objectManager->get('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository');
+		$emailLogRepository = $objectManager->get('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository');
 
 		if($emailLogRepository){
-			$emailLog = $objectManager->get('X4E\\X4ebase\\Domain\\Model\\EmailLog');
+			$emailLog = $objectManager->get('X4e\\X4ebase\\Domain\\Model\\EmailLog');
 			$emailLog->setRecipient(serialize($recipient))
 					 ->setSender(serialize($sender))
 					 ->setSubject($subject)
