@@ -1,7 +1,7 @@
 <?php
 namespace X4e\X4ebase\XClasses\Controller;
 
-    /**
+/**
      * This file is part of the TYPO3 CMS project.
      *
      * It is free software; you can redistribute it and/or modify it under
@@ -19,10 +19,10 @@ namespace X4e\X4ebase\XClasses\Controller;
  *
  * @author Claus Due <claus@namelesscoder.net>
  */
-class ConfigurationController extends \TYPO3\CMS\Extensionmanager\Controller\ConfigurationController {
-
-    public function saveConfiguration(array $config, $extensionKey) {
+class ConfigurationController extends \TYPO3\CMS\Extensionmanager\Controller\ConfigurationController
+{
+    public function saveConfiguration(array $config, $extensionKey)
+    {
         parent::saveConfiguration($config, $extensionKey);
     }
-
 }

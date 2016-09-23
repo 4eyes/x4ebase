@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Link;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\Link\ActionViewHelper
@@ -36,16 +35,16 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ActionViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class ActionViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Link\ActionViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Link\ActionViewHelper */
+    protected $subject;
 
-	public function testRender() {
-
-		$this->markTestIncomplete(
-			'Untestable - Static method calls'
-		);
-	}
-
+    public function testRender()
+    {
+        $this->markTestIncomplete(
+            'Untestable - Static method calls'
+        );
+    }
 }

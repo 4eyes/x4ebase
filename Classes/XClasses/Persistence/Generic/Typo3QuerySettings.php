@@ -29,34 +29,36 @@ namespace X4e\X4ebase\XClasses\Persistence\Generic;
  * Query settings. This class is NOT part of the FLOW3 API.
  * It reflects the settings unique to TYPO3 4.x.
  */
-class Typo3QuerySettings extends \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings implements AlternativeQuerySettingsInterface {
+class Typo3QuerySettings extends \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings implements AlternativeQuerySettingsInterface
+{
 
-	/**
-	 * Flag if the alternative implementation of sys_language_uid should be respected (default is FALSE).
-	 *
-	 * @var boolean
-	 */
-	protected $respectSysLanguageAlternative = FALSE;
+    /**
+     * Flag if the alternative implementation of sys_language_uid should be respected (default is FALSE).
+     *
+     * @var bool
+     */
+    protected $respectSysLanguageAlternative = false;
 
-	/**
-	 * Returns the state, if an alternative language overlay should be performed.
-	 *
-	 * @return boolean TRUE, if a  and language overlay should be performed; otherwise FALSE.
-	 */
-	public function getRespectSysLanguageAlternative() {
-		return $this->respectSysLanguageAlternative;
-	}
-	
-	/**
-	 * Sets the flag if an alternative language overlay should be performed.
-	 *
-	 * @param boolean $respectSysLanguageAlternative TRUE if a  and language overlay should be performed.
-	 * @return \X4e\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface (fluent interface)
-	 * @api
-	 */
-	public function setRespectSysLanguageAlternative($respectSysLanguageAlternative) {
-		$this->respectSysLanguageAlternative = $respectSysLanguageAlternative;
-		return $this;
-	}
+    /**
+     * Returns the state, if an alternative language overlay should be performed.
+     *
+     * @return bool TRUE, if a  and language overlay should be performed; otherwise FALSE.
+     */
+    public function getRespectSysLanguageAlternative()
+    {
+        return $this->respectSysLanguageAlternative;
+    }
 
+    /**
+     * Sets the flag if an alternative language overlay should be performed.
+     *
+     * @param bool $respectSysLanguageAlternative TRUE if a  and language overlay should be performed.
+     * @return \X4e\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface (fluent interface)
+     * @api
+     */
+    public function setRespectSysLanguageAlternative($respectSysLanguageAlternative)
+    {
+        $this->respectSysLanguageAlternative = $respectSysLanguageAlternative;
+        return $this;
+    }
 }

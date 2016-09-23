@@ -2,7 +2,8 @@
 
 namespace X4e\X4ebase\Log\Writer;
 
-class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
+class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter
+{
 
     /**
      * @var string
@@ -40,7 +41,8 @@ class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
      * @param \TYPO3\CMS\Core\Log\LogRecord $record
      * @return \X4e\X4ebase\Log\Writer\Email
      */
-    public function writeLog(\TYPO3\CMS\Core\Log\LogRecord $record) {
+    public function writeLog(\TYPO3\CMS\Core\Log\LogRecord $record)
+    {
         if (empty($this->recipient) || empty($this->sender)) {
             return $this;
         }
@@ -54,10 +56,10 @@ class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
         $this->subject = \TYPO3\CMS\Core\Utility\GeneralUtility::fixed_lgd_cs($this->subject, $this->cropLength);
 
         $this->body = '';
-        if($this->bodyIntro){
-            $this->body = $this->bodyIntro . "<br/><br/>";
+        if ($this->bodyIntro) {
+            $this->body = $this->bodyIntro . '<br/><br/>';
         }
-        $this->body .= $record->getMessage() . '<br/><br/>' . print_r($record->getData(), TRUE);
+        $this->body .= $record->getMessage() . '<br/><br/>' . print_r($record->getData(), true);
 
         $this->sendMail();
 
@@ -69,12 +71,13 @@ class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
      *
      * @return void
      */
-    protected function sendMail() {
+    protected function sendMail()
+    {
 
         /** @var \TYPO3\CMS\Core\Mail\MailMessage $mail */
         $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $recipients = explode(',', $this->recipient);
-        foreach($recipients as $r) {
+        foreach ($recipients as $r) {
             $mail->addTo($r);
         }
         $mail->setFrom($this->sender);
@@ -94,7 +97,8 @@ class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
      * @param string $sender
      * @return void
      */
-    public function setSender($sender) {
+    public function setSender($sender)
+    {
         $this->sender = $sender;
     }
 
@@ -104,31 +108,32 @@ class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter {
      * @param string $recipient
      * @return void
      */
-    public function setRecipient($recipient) {
+    public function setRecipient($recipient)
+    {
         $this->recipient = $recipient;
     }
 
     /**
      * @param string $subject
      */
-    public function setSubject($subject) {
+    public function setSubject($subject)
+    {
         $this->subject = $subject;
     }
 
     /**
      * @param string $body
      */
-    public function setBody($body) {
+    public function setBody($body)
+    {
         $this->bodyIntro = $body;
     }
 
     /**
      * @param int $cropLength
      */
-    public function setCropLength($cropLength) {
+    public function setCropLength($cropLength)
+    {
         $this->cropLength = $cropLength;
     }
-
 }
-
-?>

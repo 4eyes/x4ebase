@@ -36,47 +36,52 @@ use X4e\X4ebase\Utility\SecurityUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class SecurityUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|SecurityUtility */
-	protected $subject;
+class SecurityUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
+{
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|SecurityUtility */
+    protected $subject;
 
-	public function testSaltPassword() {
-		$this->markTestIncomplete(
-			'Untestable - Static method calls'
-		);
+    public function testSaltPassword()
+    {
+        $this->markTestIncomplete(
+            'Untestable - Static method calls'
+        );
 
-		$testCases = array(
-			array('Lorem', ''),
-			array('ipsum', ''),
-			array('Dolor', ''),
-			array('sit', ''),
-		);
-		foreach ($testCases as $testCase) {
-			$this->assertSame($testCase[1], SecurityUtility::saltPassword($testCase[0]));
-		}
-	}
+        $testCases = [
+            ['Lorem', ''],
+            ['ipsum', ''],
+            ['Dolor', ''],
+            ['sit', ''],
+        ];
+        foreach ($testCases as $testCase) {
+            $this->assertSame($testCase[1], SecurityUtility::saltPassword($testCase[0]));
+        }
+    }
 
-	public function testIsSaltedHash() {
-		$this->markTestIncomplete(
-			'Untestable - Static method calls'
-		);
+    public function testIsSaltedHash()
+    {
+        $this->markTestIncomplete(
+            'Untestable - Static method calls'
+        );
 
-		$testCases = array(
-			array('\$M', TRUE),
-			array('\$C', TRUE),
-			array('', FALSE),
-			array('', TRUE)
-		);
-		foreach ($testCases as $testCase) {
-			$this->assertSame($testCase[1], SecurityUtility::isSaltedHash($testCase[0]));
-		}
-	}
+        $testCases = [
+            ['\$M', true],
+            ['\$C', true],
+            ['', false],
+            ['', true]
+        ];
+        foreach ($testCases as $testCase) {
+            $this->assertSame($testCase[1], SecurityUtility::isSaltedHash($testCase[0]));
+        }
+    }
 
-	public function testIsSaltedHashReturnsBoolean() {
-		$this->assertInternalType('boolean', SecurityUtility::isSaltedHash(''));
-	}
+    public function testIsSaltedHashReturnsBoolean()
+    {
+        $this->assertInternalType('boolean', SecurityUtility::isSaltedHash(''));
+    }
 
-	public function testCheckPasswordReturnsBoolean() {
-		$this->assertInternalType('boolean', SecurityUtility::checkPassword('', ''));
-	}
+    public function testCheckPasswordReturnsBoolean()
+    {
+        $this->assertInternalType('boolean', SecurityUtility::checkPassword('', ''));
+    }
 }

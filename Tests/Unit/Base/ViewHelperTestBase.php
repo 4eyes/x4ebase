@@ -37,123 +37,132 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ViewHelperTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
+class ViewHelperTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
+{
 
-	/** @var \TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer */
-	protected $viewHelperVariableContainer;
-	/** @var \TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer */
-	protected $templateVariableContainer;
-	/** @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder */
-	protected $uriBuilder;
-	/** @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext */
-	protected $controllerContext;
-	/** @var \TYPO3\CMS\Fluid\Core\ViewHelper\TagBuilder */
-	protected $tagBuilder;
-	/** @var \TYPO3\CMS\Fluid\Core\ViewHelper\Arguments */
-	protected $arguments;
-	/** @var \TYPO3\CMS\Extbase\Mvc\Web\Request */
-	protected $request;
-	/** @var \TYPO3\CMS\Fluid\Core\Rendering\RenderingContext */
-	protected $renderingContext;
-	/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfigurationService */
-	protected $mvcPropertyMapperConfigurationService;
+    /** @var \TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer */
+    protected $viewHelperVariableContainer;
+    /** @var \TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer */
+    protected $templateVariableContainer;
+    /** @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder */
+    protected $uriBuilder;
+    /** @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext */
+    protected $controllerContext;
+    /** @var \TYPO3\CMS\Fluid\Core\ViewHelper\TagBuilder */
+    protected $tagBuilder;
+    /** @var \TYPO3\CMS\Fluid\Core\ViewHelper\Arguments */
+    protected $arguments;
+    /** @var \TYPO3\CMS\Extbase\Mvc\Web\Request */
+    protected $request;
+    /** @var \TYPO3\CMS\Fluid\Core\Rendering\RenderingContext */
+    protected $renderingContext;
+    /** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfigurationService */
+    protected $mvcPropertyMapperConfigurationService;
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|AbstractViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|AbstractViewHelper */
+    protected $subject;
 
-	public function setUp() {
-		parent::setUp();
-		$this->setUpDependencies();
-		$this->mockSubject('registerArguments');
-	}
+    public function setUp()
+    {
+        parent::setUp();
+        $this->setUpDependencies();
+        $this->mockSubject('registerArguments');
+    }
 
-	public function tearDown() {
-		unset($this->viewHelperVariableContainer);
-		unset($this->templateVariableContainer);
-		unset($this->uriBuilder);
-		unset($this->controllerContext);
-		unset($this->tagBuilder);
-		unset($this->arguments);
-		unset($this->request);
-		unset($this->renderingContext);
-		unset($this->mvcPropertyMapperConfigurationService);
-		parent::tearDown();
-	}
+    public function tearDown()
+    {
+        unset($this->viewHelperVariableContainer);
+        unset($this->templateVariableContainer);
+        unset($this->uriBuilder);
+        unset($this->controllerContext);
+        unset($this->tagBuilder);
+        unset($this->arguments);
+        unset($this->request);
+        unset($this->renderingContext);
+        unset($this->mvcPropertyMapperConfigurationService);
+        parent::tearDown();
+    }
 
-	protected function setUpDependencies() {
-		$this->viewHelperVariableContainer = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer');
-		$this->templateVariableContainer = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer');
-		$this->uriBuilder = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder');
-		$this->uriBuilder->expects($this->any())->method('reset')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setArguments')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setSection')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setFormat')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setCreateAbsoluteUri')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setAddQueryString')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setArgumentsToBeExcludedFromQueryString')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setLinkAccessRestrictedPages')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setTargetPageUid')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setTargetPageType')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setNoCache')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setUseCacheHash')->willReturn($this->uriBuilder);
-		$this->uriBuilder->expects($this->any())->method('setAddQueryStringMethod')->willReturn($this->uriBuilder);
-		$this->request = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Web\Request');
-		$this->controllerContext = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext', array(), array(), '', FALSE);
-		$this->controllerContext->expects($this->any())->method('getUriBuilder')->willReturn($this->uriBuilder);
-		$this->controllerContext->expects($this->any())->method('getRequest')->willReturn($this->request);
-		$this->tagBuilder = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\TagBuilder');
-		$this->arguments = array();
-		$this->renderingContext = $this->getAccessibleMock('\TYPO3\CMS\Fluid\Core\Rendering\RenderingContext', array('dummy'));
-		$this->renderingContext->injectTemplateVariableContainer($this->templateVariableContainer);
-		$this->renderingContext->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);
-		$this->renderingContext->setControllerContext($this->controllerContext);
-		$this->mvcPropertyMapperConfigurationService = $this->getAccessibleMock('\TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfigurationService', array('dummy'));
-	}
+    protected function setUpDependencies()
+    {
+        $this->viewHelperVariableContainer = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer');
+        $this->templateVariableContainer = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer');
+        $this->uriBuilder = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder');
+        $this->uriBuilder->expects($this->any())->method('reset')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setArguments')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setSection')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setFormat')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setCreateAbsoluteUri')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setAddQueryString')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setArgumentsToBeExcludedFromQueryString')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setLinkAccessRestrictedPages')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setTargetPageUid')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setTargetPageType')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setNoCache')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setUseCacheHash')->willReturn($this->uriBuilder);
+        $this->uriBuilder->expects($this->any())->method('setAddQueryStringMethod')->willReturn($this->uriBuilder);
+        $this->request = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Web\Request');
+        $this->controllerContext = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext', [], [], '', false);
+        $this->controllerContext->expects($this->any())->method('getUriBuilder')->willReturn($this->uriBuilder);
+        $this->controllerContext->expects($this->any())->method('getRequest')->willReturn($this->request);
+        $this->tagBuilder = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\TagBuilder');
+        $this->arguments = [];
+        $this->renderingContext = $this->getAccessibleMock('\TYPO3\CMS\Fluid\Core\Rendering\RenderingContext', ['dummy']);
+        $this->renderingContext->injectTemplateVariableContainer($this->templateVariableContainer);
+        $this->renderingContext->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);
+        $this->renderingContext->setControllerContext($this->controllerContext);
+        $this->mvcPropertyMapperConfigurationService = $this->getAccessibleMock('\TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfigurationService', ['dummy']);
+    }
 
-	/**
-	 * @param \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper $viewHelper
-	 * @return void
-	 */
-	protected function injectDependenciesIntoViewHelper(\TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper $viewHelper) {
-		$viewHelper->setRenderingContext($this->renderingContext);
-		$viewHelper->setArguments($this->arguments);
-		if ($viewHelper instanceof \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper) {
-			$viewHelper->_set('tag', $this->tagBuilder);
-		}
-	}
+    /**
+     * @param \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper $viewHelper
+     * @return void
+     */
+    protected function injectDependenciesIntoViewHelper(\TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper $viewHelper)
+    {
+        $viewHelper->setRenderingContext($this->renderingContext);
+        $viewHelper->setArguments($this->arguments);
+        if ($viewHelper instanceof \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper) {
+            $viewHelper->_set('tag', $this->tagBuilder);
+        }
+    }
 
-	protected function mockSubject() {
-		call_user_func_array('parent::' . __FUNCTION__, func_get_args());
-		$this->injectDependenciesIntoViewHelper($this->subject);
-	}
+    protected function mockSubject()
+    {
+        call_user_func_array('parent::' . __FUNCTION__, func_get_args());
+        $this->injectDependenciesIntoViewHelper($this->subject);
+    }
 
-	protected function initializeArgumentsTest($arguments, $tagAttributes=0, $universalTagAttributes=FALSE) {
-		$this->mockSubject('registerArgument', 'registerTagAttribute', 'registerUniversalTagAttributes');
-		$this->checkIfRegisterArgumentsGotCalledNTimes($arguments);
-		$this->checkIfRegisterTagAttributeGotCalledNTimes($tagAttributes);
-		if($universalTagAttributes) {
-			$this->checkIfRegisterUniversalTagAttributesGetsCalled();
-		}
+    protected function initializeArgumentsTest($arguments, $tagAttributes=0, $universalTagAttributes=false)
+    {
+        $this->mockSubject('registerArgument', 'registerTagAttribute', 'registerUniversalTagAttributes');
+        $this->checkIfRegisterArgumentsGotCalledNTimes($arguments);
+        $this->checkIfRegisterTagAttributeGotCalledNTimes($tagAttributes);
+        if ($universalTagAttributes) {
+            $this->checkIfRegisterUniversalTagAttributesGetsCalled();
+        }
 
-		$this->subject->initializeArguments();
-	}
+        $this->subject->initializeArguments();
+    }
 
-	protected function checkIfRegisterArgumentsGotCalledNTimes($n) {
-		$this->subject
-			->expects($this->exactly($n))
-			->method('registerArgument');
-	}
+    protected function checkIfRegisterArgumentsGotCalledNTimes($n)
+    {
+        $this->subject
+            ->expects($this->exactly($n))
+            ->method('registerArgument');
+    }
 
-	protected function checkIfRegisterTagAttributeGotCalledNTimes($n) {
-		$this->subject
-			->expects($this->exactly($n))
-			->method('registerTagAttribute');
-	}
+    protected function checkIfRegisterTagAttributeGotCalledNTimes($n)
+    {
+        $this->subject
+            ->expects($this->exactly($n))
+            ->method('registerTagAttribute');
+    }
 
-	protected function checkIfRegisterUniversalTagAttributesGetsCalled() {
-		$this->subject
-			->expects($this->once())
-			->method('registerUniversalTagAttributes');
-	}
-
+    protected function checkIfRegisterUniversalTagAttributesGetsCalled()
+    {
+        $this->subject
+            ->expects($this->once())
+            ->method('registerUniversalTagAttributes');
+    }
 }

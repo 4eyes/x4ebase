@@ -37,65 +37,71 @@ use X4e\X4ebase\View\Interceptor\ReplaceTabs;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ReplaceTabsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|ReplaceTabs */
-	protected $replaceTabs;
-	protected $objectManager;
+class ReplaceTabsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|ReplaceTabs */
+    protected $replaceTabs;
+    protected $objectManager;
 
-	public function setUp() {
-		if (function_exists('xdebug_disable')) {
-			xdebug_disable();
-		}
-		$this->replaceTabs = $this->getAccessibleMock(
-			ReplaceTabs::class,
-			array('dummy'),
-			array(),
-			'',
-			FALSE
-		);
-		$this->objectManager = $this->getMock(
-			ObjectManager::class,
-			array('get'),
-			array(),
-			'',
-			FALSE
-		);
-	}
+    public function setUp()
+    {
+        if (function_exists('xdebug_disable')) {
+            xdebug_disable();
+        }
+        $this->replaceTabs = $this->getAccessibleMock(
+            ReplaceTabs::class,
+            ['dummy'],
+            [],
+            '',
+            false
+        );
+        $this->objectManager = $this->getMock(
+            ObjectManager::class,
+            ['get'],
+            [],
+            '',
+            false
+        );
+    }
 
-	public function tearDown() {
-		unset($this->objectManager);
-		unset($this->replaceTabs);
-		if (function_exists('xdebug_enable')) {
-			xdebug_enable();
-		}
-	}
+    public function tearDown()
+    {
+        unset($this->objectManager);
+        unset($this->replaceTabs);
+        if (function_exists('xdebug_enable')) {
+            xdebug_enable();
+        }
+    }
 
-	/**
-	 * @test
-	 */
-	public function testInjectObjectManager() {
-		$this->replaceTabs->injectObjectManager($this->objectManager);
-		$this->assertSame($this->objectManager, $this->replaceTabs->_get('objectManager'));
-	}
+    /**
+     * @test
+     */
+    public function testInjectObjectManager()
+    {
+        $this->replaceTabs->injectObjectManager($this->objectManager);
+        $this->assertSame($this->objectManager, $this->replaceTabs->_get('objectManager'));
+    }
 
-	/**
-	 * @test
-	 */
-	public function testProcess() {
-		$textNode = new \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\TextNode('test');
-		$parsingState = new \TYPO3\CMS\Fluid\Core\Parser\ParsingState();
-		$this->replaceTabs->_set('objectManager', $this->objectManager);
-		$this->replaceTabs->_get('objectManager')
-			->expects($this->once())
-			->method('get')
-			->willReturn($this->isInstanceOf('\\TYPO3\\CMS\\Fluid\\Core\\Parser\\SyntaxTree\\NodeInterface'));
-		$this->replaceTabs->process($textNode, 1, $parsingState);
-	}
+    /**
+     * @test
+     */
+    public function testProcess()
+    {
+        $textNode = new \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\TextNode('test');
+        $parsingState = new \TYPO3\CMS\Fluid\Core\Parser\ParsingState();
+        $this->replaceTabs->_set('objectManager', $this->objectManager);
+        $this->replaceTabs->_get('objectManager')
+            ->expects($this->once())
+            ->method('get')
+            ->willReturn($this->isInstanceOf('\\TYPO3\\CMS\\Fluid\\Core\\Parser\\SyntaxTree\\NodeInterface'));
+        $this->replaceTabs->process($textNode, 1, $parsingState);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGetInterceptionPoints() {
-		$this->assertSame(array(3), $this->replaceTabs->getInterceptionPoints());
-	}
+    /**
+     * @test
+     */
+    public function testGetInterceptionPoints()
+    {
+        $this->assertSame([3], $this->replaceTabs->getInterceptionPoints());
+    }
 }

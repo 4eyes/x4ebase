@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\XmlViewHelper
@@ -36,97 +35,102 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class XmlViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class XmlViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\XmlViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\XmlViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRender_GetsContentFromChildren() {
-		$this->mockSubject('renderChildren', 'formatXmlString');
-		$this->subject->expects($this->once())->method('renderChildren');
-		$this->subject->expects($this->once())->method('formatXmlString');
-		$this->subject->render();
-	}
+    /**
+     * @test
+     */
+    public function testRender_GetsContentFromChildren()
+    {
+        $this->mockSubject('renderChildren', 'formatXmlString');
+        $this->subject->expects($this->once())->method('renderChildren');
+        $this->subject->expects($this->once())->method('formatXmlString');
+        $this->subject->render();
+    }
 
-	/**
-	 * @test
-	 */
-	public function testRender_WithContent() {
-		$this->mockSubject('renderChildren', 'formatXmlString');
-		$this->subject->expects($this->never())->method('renderChildren');
-		$this->subject->expects($this->once())->method('formatXmlString');
-		$this->subject->render('test');
-	}
+    /**
+     * @test
+     */
+    public function testRender_WithContent()
+    {
+        $this->mockSubject('renderChildren', 'formatXmlString');
+        $this->subject->expects($this->never())->method('renderChildren');
+        $this->subject->expects($this->once())->method('formatXmlString');
+        $this->subject->render('test');
+    }
 
-	public function testFormatXmlString() {
-		$this->mockSubject('removeEmptyNodes', 'createNewSimpleXmlElement', 'createDomDocument');
+    public function testFormatXmlString()
+    {
+        $this->mockSubject('removeEmptyNodes', 'createNewSimpleXmlElement', 'createDomDocument');
 
-		$this->markTestIncomplete(
-			"unserialize(): Error at offset 41 of 42 bytes"
-		);
-		$simpleXmlElement = $this->getMock(\SimpleXMLElement::class, array('asXML'), array(), '', FALSE);
-		$simpleXmlElement->expects($this->once())->method('asXML');
+        $this->markTestIncomplete(
+            'unserialize(): Error at offset 41 of 42 bytes'
+        );
+        $simpleXmlElement = $this->getMock(\SimpleXMLElement::class, ['asXML'], [], '', false);
+        $simpleXmlElement->expects($this->once())->method('asXML');
 
-		$domDocument = $this->getMock(\DOMDocument::class, array('loadXML', 'saveXML'), array(1.0));
-		$domDocument->expects($this->once())->method('loadXML');
-		$domDocument->expects($this->once())->method('saveXML');
+        $domDocument = $this->getMock(\DOMDocument::class, ['loadXML', 'saveXML'], [1.0]);
+        $domDocument->expects($this->once())->method('loadXML');
+        $domDocument->expects($this->once())->method('saveXML');
 
-		$this->subject->expects($this->once())->method('createNewSimpleXmlElement')->willReturn($simpleXmlElement);
-		$this->subject->expects($this->once())->method('createDomDocument')->willReturn($domDocument);
-		$this->subject->expects($this->once())->method('removeEmptyNodes');
-		$this->subject->_set('removeEmptyNodes', TRUE);
+        $this->subject->expects($this->once())->method('createNewSimpleXmlElement')->willReturn($simpleXmlElement);
+        $this->subject->expects($this->once())->method('createDomDocument')->willReturn($domDocument);
+        $this->subject->expects($this->once())->method('removeEmptyNodes');
+        $this->subject->_set('removeEmptyNodes', true);
 
-		$this->subject->_call('formatXmlString');
-	}
+        $this->subject->_call('formatXmlString');
+    }
 
-	public function testFormatXmlString_WithoutRemoveEmptyNodes_RemovesNoNodes() {
-		$this->mockSubject('removeEmptyNodes', 'createNewSimpleXmlElement', 'createDomDocument');
+    public function testFormatXmlString_WithoutRemoveEmptyNodes_RemovesNoNodes()
+    {
+        $this->mockSubject('removeEmptyNodes', 'createNewSimpleXmlElement', 'createDomDocument');
 
-		$this->markTestIncomplete(
-			"unserialize(): Error at offset 41 of 42 bytes"
-		);
-		$simpleXmlElement = $this->getMock(\SimpleXMLElement::class, array('asXML'),array(), '', FALSE);
-		$simpleXmlElement->expects($this->once())->method('asXML');
-		$domDocument = $this->getMock(\DOMDocument::class, array('loadXML', 'saveXML'), array(), '', FALSE);
-		$domDocument->expects($this->once())->method('loadXML');
-		$domDocument->expects($this->once())->method('saveXML');
+        $this->markTestIncomplete(
+            'unserialize(): Error at offset 41 of 42 bytes'
+        );
+        $simpleXmlElement = $this->getMock(\SimpleXMLElement::class, ['asXML'], [], '', false);
+        $simpleXmlElement->expects($this->once())->method('asXML');
+        $domDocument = $this->getMock(\DOMDocument::class, ['loadXML', 'saveXML'], [], '', false);
+        $domDocument->expects($this->once())->method('loadXML');
+        $domDocument->expects($this->once())->method('saveXML');
 
-		$this->subject->expects($this->once())->method('createNewSimpleXmlElement')->willReturn($simpleXmlElement);
-		$this->subject->expects($this->once())->method('createDomDocument')->willReturn($domDocument);
-		$this->subject->expects($this->never())->method('removeEmptyNodes');
-		$this->subject->_set('removeEmptyNodes', FALSE);
+        $this->subject->expects($this->once())->method('createNewSimpleXmlElement')->willReturn($simpleXmlElement);
+        $this->subject->expects($this->once())->method('createDomDocument')->willReturn($domDocument);
+        $this->subject->expects($this->never())->method('removeEmptyNodes');
+        $this->subject->_set('removeEmptyNodes', false);
 
-		$this->subject->_call('formatXmlString');
-	}
+        $this->subject->_call('formatXmlString');
+    }
 
-	public function testCreateNewObject_CreatesObject_WithParameters() {
-		$this->mockSubject();
-		$object = $this->subject->_call('createNewObject', \X4e\X4ebase\Tests\Unit\ViewHelpers\XmlViewHelperTestClass::class, 'Hello', 'World');
-		$this->assertInstanceOf(\X4e\X4ebase\Tests\Unit\ViewHelpers\XmlViewHelperTestClass::class, $object);
-		$this->assertEquals('Hello', $object->lorem);
-		$this->assertEquals('World', $object->ipsum);
-	}
+    public function testCreateNewObject_CreatesObject_WithParameters()
+    {
+        $this->mockSubject();
+        $object = $this->subject->_call('createNewObject', \X4e\X4ebase\Tests\Unit\ViewHelpers\XmlViewHelperTestClass::class, 'Hello', 'World');
+        $this->assertInstanceOf(\X4e\X4ebase\Tests\Unit\ViewHelpers\XmlViewHelperTestClass::class, $object);
+        $this->assertEquals('Hello', $object->lorem);
+        $this->assertEquals('World', $object->ipsum);
+    }
 
-	public function testRemoveEmptyNodes() {
-
-
-		$this->markTestIncomplete(
-			'TODO - Not sure how this method really works'
-		);
-	}
+    public function testRemoveEmptyNodes()
+    {
+        $this->markTestIncomplete(
+            'TODO - Not sure how this method really works'
+        );
+    }
 }
 
+class XmlViewHelperTestClass
+{
+    public $lorem = null;
+    public $ipsum = null;
 
-class XmlViewHelperTestClass {
-
-	public $lorem = NULL;
-	public $ipsum = NULL;
-
-	function __construct($lorem, $ipsum = NULL) {
-		$this->lorem = $lorem;
-		$this->ipsum = $ipsum;
-	}
+    public function __construct($lorem, $ipsum = null)
+    {
+        $this->lorem = $lorem;
+        $this->ipsum = $ipsum;
+    }
 }

@@ -25,21 +25,22 @@ namespace X4e\X4ebase\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use \TYPO3\CMS\Core\Exception;
 
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ContentExceptionTestController extends ActionController {
-
-    public function contentAction(){
+class ContentExceptionTestController extends ActionController
+{
+    public function contentAction()
+    {
     }
 
-    public function exceptionAction(){
+    public function exceptionAction()
+    {
         throw new Exception('Test Exception to Test contentExceptionHandler', 1468489285);
     }
 }

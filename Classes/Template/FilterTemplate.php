@@ -26,7 +26,8 @@ namespace X4e\X4ebase\Template;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class FilterTemplate {
+class FilterTemplate
+{
     /** @var array $filterArray All Filter keys and their selected filters in an associative array
      * Might be:
          $filterArray = array(
@@ -35,12 +36,12 @@ class FilterTemplate {
             'tags'         => array(2);
          );
      */
-    protected $filterArray = array();
+    protected $filterArray = [];
     /** @var array $searchStrings The Words a User searches for as an Array-List
      * Might be:
         $searchStrings = array('Hello','World');
      */
-    protected $searchStrings = array();
+    protected $searchStrings = [];
     /** @var array $searchableParameters Associative Array: Key is the Parameter a user should be able to search in with $searchStrings, Value is the kind of search (like, contains, ...)
      * Possible Array:
          protected $searchableParameters = array(
@@ -51,7 +52,7 @@ class FilterTemplate {
              'tags'             => 'contains',
          );
      */
-    protected $searchableParameters = array();
+    protected $searchableParameters = [];
     /** @var array $filterMethods Associative Array: Key is the Parameter of the object, Value is the kind of filter method (equals, contains, ...)
      * Possible Array:
          protected $filterMethods = array(
@@ -63,7 +64,7 @@ class FilterTemplate {
               'tags'        => 'contains',
          );
      */
-    protected $filterMethods = array();
+    protected $filterMethods = [];
 
     /**
      * @return array
@@ -116,24 +117,29 @@ class FilterTemplate {
     /**
      * @param String $searchableParameter A parameter the user can search in
      */
-    public function addSearchableParameter($searchableParameter) {
-        if(!in_array($searchableParameter, $this->searchableParameters))
+    public function addSearchableParameter($searchableParameter)
+    {
+        if (!in_array($searchableParameter, $this->searchableParameters)) {
             $this->searchableParameters[] = $searchableParameter;
+        }
     }
 
     /**
      * @param array $searchableParameters Multiple parameters a User can search in
      */
-    public function addMultipleSearchableParameters($searchableParameters) {
-        foreach($searchableParameters as $searchableParameter)
+    public function addMultipleSearchableParameters($searchableParameters)
+    {
+        foreach ($searchableParameters as $searchableParameter) {
             $this->addSearchableParameter($searchableParameter);
+        }
     }
 
     /**
      * @param String $searchableParameter A parameter the user should not be able to search in anymore
      */
-    public function removeSearchableParameter($searchableParameter) {
-        if(($key = array_search($searchableParameter, $this->searchableParameters)) !== false) {
+    public function removeSearchableParameter($searchableParameter)
+    {
+        if (($key = array_search($searchableParameter, $this->searchableParameters)) !== false) {
             unset($this->searchableParameters[$key]);
             $this->searchableParameters = array_values($this->searchableParameters);
         }
@@ -143,22 +149,26 @@ class FilterTemplate {
      * @param String $parameterName The filter-key
      * @param Array $parameterValue All selected Filters of the filter-key
      */
-    public function addFilterToFilterArray($parameterName, $parameterValue) {
-        if(!empty($parameterValue))
+    public function addFilterToFilterArray($parameterName, $parameterValue)
+    {
+        if (!empty($parameterValue)) {
             $this->filterArray[$parameterName] = $parameterValue;
+        }
     }
 
     /**
      * @param String $filterName The filter-key
      */
-    public function removeFilterFromFilterArray($filterName) {
+    public function removeFilterFromFilterArray($filterName)
+    {
         unset($this->filterArray[$filterName]);
     }
 
     /**
      * @param String $search the Search String (normal Text, spaces are used as separators)
      */
-    public function setSearchStringsFromSpaceSeparatedList($search) {
+    public function setSearchStringsFromSpaceSeparatedList($search)
+    {
         $this->searchStrings = preg_split('/ /', $search, -1, PREG_SPLIT_NO_EMPTY);
     }
 
@@ -166,21 +176,24 @@ class FilterTemplate {
      * @param String $parameter The parameter of the object
      * @return String
      */
-    public function getFilterMethodForParameter($parameter) {
+    public function getFilterMethodForParameter($parameter)
+    {
         return $this->filterMethods[$parameter];
     }
 
     /**
      * @param array $filterMethods Sets the filter methods
      */
-    public function setFilterMethods($filterMethods) {
+    public function setFilterMethods($filterMethods)
+    {
         $this->filterMethods = $filterMethods;
     }
 
     /**
      * @return array Returns the filter methods
      */
-    public function getFilterMethods() {
+    public function getFilterMethods()
+    {
         return $this->filterMethods;
     }
 }

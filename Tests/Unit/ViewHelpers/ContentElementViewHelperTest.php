@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\ContentElementViewHelper
@@ -36,21 +35,23 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ContentElementViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class ContentElementViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\ContentElementViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\ContentElementViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRender_CallsMethodRECORDSonce() {
-		$contentObjectRenderer = $this->getMock(
-			\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class,
-			array('RECORDS')
-		);
-		$contentObjectRenderer->expects($this->once())->method('RECORDS');
-		$this->subject->_set('cObj', $contentObjectRenderer);
-		$this->subject->render(1);
-	}
+    /**
+     * @test
+     */
+    public function testRender_CallsMethodRECORDSonce()
+    {
+        $contentObjectRenderer = $this->getMock(
+            \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class,
+            ['RECORDS']
+        );
+        $contentObjectRenderer->expects($this->once())->method('RECORDS');
+        $this->subject->_set('cObj', $contentObjectRenderer);
+        $this->subject->render(1);
+    }
 }

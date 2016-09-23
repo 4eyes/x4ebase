@@ -28,54 +28,52 @@ namespace X4e\X4ebase\Controller;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class TcaInfoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class TcaInfoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
-	/**
-	 * action show
-	 *
-	 * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-	 *
-	 * @param array $generator Extbase Model Generator
-	 *
-	 * @return void
-	 */
-	public function showAction() {
+    /**
+     * action show
+     *
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
+     *
+     * @param array $generator Extbase Model Generator
+     *
+     * @return void
+     */
+    public function showAction()
+    {
+        if ($this->request->hasArgument('table')) {
+            $table = $this->request->getArgument('table');
+            $this->view->assign('table', $GLOBALS['TCA'][$table]);
+            $this->view->assign('tableName', $table);
+        }
 
-		if ($this->request->hasArgument('table')) {
-			$table = $this->request->getArgument('table');
-			$this->view->assign('table', $GLOBALS['TCA'][$table]);
-			$this->view->assign('tableName', $table);
-		}
+        $this->view->assign('tables', $this->getTableArray());
+    }
 
-		$this->view->assign('tables', $this->getTableArray());
-	}
+    /**
+     * Generates an array of tables
+     *
+     *
+     * @return array
+     */
+    protected function getTableArray()
+    {
+        $tables = [];
+        $tca = $GLOBALS['TCA'];
 
-	/**
-	 * Generates an array of tables
-	 *
-	 *
-	 * @return array
-	 */
-	protected function getTableArray() {
-		$tables = array();
-		$tca = $GLOBALS['TCA'];
+        foreach ($tca as $name => $info) {
+            if (\TYPO3\CMS\Core\Utility\GeneralUtility::inList($GLOBALS['BE_USER']->groupData['tables_select'], $name) || $GLOBALS['BE_USER']->user['admin'] == 1) {
+                $label = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($info['ctrl']['title'], 'x4ebase');
+                $label .= ' (' . $name . ')';
 
-		foreach($tca as $name => $info) {
+                $tables[$name] = $label;
+            }
+        }
 
-			if (\TYPO3\CMS\Core\Utility\GeneralUtility::inList($GLOBALS['BE_USER']->groupData['tables_select'], $name) || $GLOBALS['BE_USER']->user['admin'] == 1) {
-				$label = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($info['ctrl']['title'], 'x4ebase');
-				$label .= ' (' . $name . ')';
-
-				$tables[$name] = $label;
-			}
-		}
-
-		return $tables;
-	}
-
-
+        return $tables;
+    }
 }

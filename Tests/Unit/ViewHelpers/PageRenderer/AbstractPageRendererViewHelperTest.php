@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\PageRenderer;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper
@@ -36,36 +35,40 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class AbstractPageRendererViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class AbstractPageRendererViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper */
+    protected $subject;
 
-	public function testInjectPageRenderer() {
-		$this->subject = $this->getAccessibleMockForAbstractClass(\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper::class);
-		$pageRenderer = new \TYPO3\CMS\Core\Page\PageRenderer();
-		$this->subject->injectPageRenderer($pageRenderer);
-		$this->assertEquals($pageRenderer, $this->subject->_get('pageRenderer'));
-	}
+    public function testInjectPageRenderer()
+    {
+        $this->subject = $this->getAccessibleMockForAbstractClass(\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper::class);
+        $pageRenderer = new \TYPO3\CMS\Core\Page\PageRenderer();
+        $this->subject->injectPageRenderer($pageRenderer);
+        $this->assertEquals($pageRenderer, $this->subject->_get('pageRenderer'));
+    }
 
-	public function testInjectConfigurationManager() {
-		$this->subject = $this->getAccessibleMockForAbstractClass(\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper::class);
-		$configurationManager = new \TYPO3\CMS\Extbase\Configuration\ConfigurationManager();
-		$this->subject->injectConfigurationManager($configurationManager);
-		$this->assertEquals($configurationManager, $this->subject->_get('configurationManager'));
-	}
+    public function testInjectConfigurationManager()
+    {
+        $this->subject = $this->getAccessibleMockForAbstractClass(\X4e\X4ebase\ViewHelpers\PageRenderer\AbstractPageRendererViewHelper::class);
+        $configurationManager = new \TYPO3\CMS\Extbase\Configuration\ConfigurationManager();
+        $this->subject->injectConfigurationManager($configurationManager);
+        $this->assertEquals($configurationManager, $this->subject->_get('configurationManager'));
+    }
 
-	public function testIsCached() {
-		$this->mockSubject();
+    public function testIsCached()
+    {
+        $this->mockSubject();
 
-		$contentObject = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, array('getUserObjectType'), array(), '', FALSE);
-		$contentObject->expects($this->atLeastOnce())->method('getUserObjectType')->willReturn(1);
+        $contentObject = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getUserObjectType'], [], '', false);
+        $contentObject->expects($this->atLeastOnce())->method('getUserObjectType')->willReturn(1);
 
-		$configurationManager = $this->getMock(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class, array('getContentObject'),array(), '', FALSE);
-		$configurationManager->expects($this->atLeastOnce())->method('getContentObject')->willReturn($contentObject);
+        $configurationManager = $this->getMock(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class, ['getContentObject'], [], '', false);
+        $configurationManager->expects($this->atLeastOnce())->method('getContentObject')->willReturn($contentObject);
 
-		$this->subject->_set('configurationManager', $configurationManager);
+        $this->subject->_set('configurationManager', $configurationManager);
 
-		$this->subject->_call('isCached');
-	}
+        $this->subject->_call('isCached');
+    }
 }
