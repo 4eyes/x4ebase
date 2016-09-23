@@ -31,42 +31,43 @@ namespace X4e\X4ebase\ViewHelpers\Form;
  * Xml format a string
  *
  * @author Christoph Dörfel <christoph@4eyes.ch>
- * @package Scorm
- * @subpackage ViewHelpers
  */
-class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\CheckboxViewHelper {
+class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\CheckboxViewHelper
+{
 
-	/**
-	 * Initialize the arguments.
-	 *
-	 * @return void
-	 * @api
-	 */
-	public function initializeArguments() {
-		parent::initializeArguments();
-		$this->registerArgument('defaultHiddenValue', 'string', 'Default value of hidden field, which defines the value of the checkbox when unchecked', FALSE, '');
-	}
+    /**
+     * Initialize the arguments.
+     *
+     * @return void
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('defaultHiddenValue', 'string', 'Default value of hidden field, which defines the value of the checkbox when unchecked', false, '');
+    }
 
-	/**
-	 * Reimplements this method of AbstractViewHelper, to set the hidden field value to a given argument instead of hardcoding it to empty string
-	 *
-	 * @return string the hidden field.
-	 */
-	protected function renderHiddenFieldForEmptyValue() {
-		$hiddenFieldNames = array();
-		if ($this->viewHelperVariableContainer->exists('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields')) {
-			$hiddenFieldNames = $this->viewHelperVariableContainer->get('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields');
-		}
-		$fieldName = $this->getName();
-		if (substr($fieldName, -2) === '[]') {
-			$fieldName = substr($fieldName, 0, -2);
-		}
-		if (!in_array($fieldName, $hiddenFieldNames)) {
-			$hiddenFieldNames[] = $fieldName;
-			$this->viewHelperVariableContainer->addOrUpdate('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields', $hiddenFieldNames);
-			$defaultHiddenValue = isset($this->arguments['defaultHiddenValue']) ? $this->arguments['defaultHiddenValue'] : '';
-			return '<input type="hidden" name="' . htmlspecialchars($fieldName) . '" value="'. $defaultHiddenValue . '" />';
-		}
-		return '';
-	}
+    /**
+     * Reimplements this method of AbstractViewHelper, to set the hidden field value to a given argument instead of hardcoding it to empty string
+     *
+     * @return string the hidden field.
+     */
+    protected function renderHiddenFieldForEmptyValue()
+    {
+        $hiddenFieldNames = [];
+        if ($this->viewHelperVariableContainer->exists('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields')) {
+            $hiddenFieldNames = $this->viewHelperVariableContainer->get('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields');
+        }
+        $fieldName = $this->getName();
+        if (substr($fieldName, -2) === '[]') {
+            $fieldName = substr($fieldName, 0, -2);
+        }
+        if (!in_array($fieldName, $hiddenFieldNames)) {
+            $hiddenFieldNames[] = $fieldName;
+            $this->viewHelperVariableContainer->addOrUpdate('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields', $hiddenFieldNames);
+            $defaultHiddenValue = isset($this->arguments['defaultHiddenValue']) ? $this->arguments['defaultHiddenValue'] : '';
+            return '<input type="hidden" name="' . htmlspecialchars($fieldName) . '" value="' . $defaultHiddenValue . '" />';
+        }
+        return '';
+    }
 }

@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Format;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Extbase\Validation\Exception;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\Format\ExplodeViewHelper
@@ -36,22 +35,24 @@ use TYPO3\CMS\Extbase\Validation\Exception;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ExplodeViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class ExplodeViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\ExplodeViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\ExplodeViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRender() {
-		$testCases = array(
-			array('Hallo Welt', ' ', array('Hallo', 'Welt')),
-			array('My Name+Is+Spock', '+', array('My Name', 'Is', 'Spock')),
-		);
+    /**
+     * @test
+     */
+    public function testRender()
+    {
+        $testCases = [
+            ['Hallo Welt', ' ', ['Hallo', 'Welt']],
+            ['My Name+Is+Spock', '+', ['My Name', 'Is', 'Spock']],
+        ];
 
-		foreach ($testCases as $testCase) {
-			$this->assertSame($testCase[2], $this->subject->render($testCase[0], $testCase[1]));
-		}
-	}
+        foreach ($testCases as $testCase) {
+            $this->assertSame($testCase[2], $this->subject->render($testCase[0], $testCase[1]));
+        }
+    }
 }

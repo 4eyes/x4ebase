@@ -60,29 +60,32 @@ namespace X4e\X4ebase\ViewHelpers\Be\Security;
  *
  * @api
  */
-class IfAdminOrHasRoleViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Security\IfHasRoleViewHelper {
+class IfAdminOrHasRoleViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Security\IfHasRoleViewHelper
+{
 
-	/**
-	 * renders <f:then> child if the current logged in BE user belongs to the specified role (aka usergroup)
-	 * otherwise renders <f:else> child.
-	 *
-	 * @param string $role The usergroup (either the usergroup uid or its title)
-	 * @return string the rendered string
-	 */
-	public function render($role) {
-		if ($this->backendUserIsAdmin() || $this->backendUserHasRole($role)) {
-			return $this->renderThenChild();
-		} else {
-			return $this->renderElseChild();
-		}
-	}
+    /**
+     * renders <f:then> child if the current logged in BE user belongs to the specified role (aka usergroup)
+     * otherwise renders <f:else> child.
+     *
+     * @param string $role The usergroup (either the usergroup uid or its title)
+     * @return string the rendered string
+     */
+    public function render($role)
+    {
+        if ($this->backendUserIsAdmin() || $this->backendUserHasRole($role)) {
+            return $this->renderThenChild();
+        } else {
+            return $this->renderElseChild();
+        }
+    }
 
-	/**
-	 * Determines whether the currently logged in BE user is an admin
-	 *
-	 * @return boolean TRUE if the currently logged in BE user is an admin
-	 */
-	protected function backendUserIsAdmin() {
-		return $GLOBALS['BE_USER']->isAdmin();
-	}
+    /**
+     * Determines whether the currently logged in BE user is an admin
+     *
+     * @return bool TRUE if the currently logged in BE user is an admin
+     */
+    protected function backendUserIsAdmin()
+    {
+        return $GLOBALS['BE_USER']->isAdmin();
+    }
 }

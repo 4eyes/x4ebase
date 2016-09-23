@@ -1,5 +1,6 @@
 <?php
 namespace X4e\X4ebase\ViewHelpers;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -30,71 +31,73 @@ namespace X4e\X4ebase\ViewHelpers;
  * Xml format a string
  *
  * @author Christoph Dörfel <christoph@4eyes.ch>
- * @package Scorm
- * @subpackage ViewHelpers
  */
-class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper {
+class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
+{
+    protected $removeEmptyNodes = false;
+    protected $ignoreWhitespace = true;
+    protected $preserveAttributes = true;
 
-	protected $removeEmptyNodes = FALSE;
-	protected $ignoreWhitespace = TRUE;
-	protected $preserveAttributes = TRUE;
+    /**
+     * Render method
+     *
+     * @param mixed $content String or variable convertible to string which should be formatted
+     * @param bool $removeEmptyNodes Set to TRUE if empty xml nodes should be completely removed from the output
+     * @param bool $ignoreWhitespace Set to FALSE if nodes with only whitespace should not be considered empty
+     * @param bool $preserveAttributes Set to FALSE if empty xml nodes with attributes should also be removed
+     * @return mixed
+     */
+    public function render($content = null, $removeEmptyNodes = false, $ignoreWhitespace = true, $preserveAttributes = true)
+    {
+        $this->removeEmptyNodes = $removeEmptyNodes;
+        $this->ignoreWhitespace = $ignoreWhitespace;
+        $this->preserveAttributes = $preserveAttributes;
+        if (!$content) {
+            $content = $this->renderChildren();
+        }
+        return $this->formatXmlString($content);
+    }
 
-	/**
-	 * Render method
-	 *
-	 * @param mixed $content String or variable convertible to string which should be formatted
-	 * @param boolean $removeEmptyNodes Set to TRUE if empty xml nodes should be completely removed from the output
-	 * @param boolean $ignoreWhitespace Set to FALSE if nodes with only whitespace should not be considered empty
-	 * @param boolean $preserveAttributes Set to FALSE if empty xml nodes with attributes should also be removed
-	 * @return mixed
-	 */
-	public function render($content = NULL, $removeEmptyNodes = FALSE, $ignoreWhitespace = TRUE, $preserveAttributes = TRUE) {
-		$this->removeEmptyNodes = $removeEmptyNodes;
-		$this->ignoreWhitespace = $ignoreWhitespace;
-		$this->preserveAttributes = $preserveAttributes;
-		if (!$content) {
-			$content = $this->renderChildren();
-		}
-		return $this->formatXmlString($content);
-	}
+    /**
+     *
+     * @param string $xml
+     * @param bool $removeEmptyNodes
+     * @param bool $ignoreWhitespace
+     * @param bool $preserveAttributes
+     * @return string
+     */
+    protected function formatXmlString($xml)
+    {
+        $sxe = $this->createNewObject(\SimpleXMLElement::class, trim($xml), LIBXML_NONET);
+        if ($this->removeEmptyNodes) {
+            $this->removeEmptyNodes($sxe);
+        }
+        $dom = $this->createNewObject(\DOMDocument::class, '1.0');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($sxe->asXML());
+        return $dom->saveXML();
+    }
 
-	/**
-	 *
-	 * @param string $xml
-	 * @param boolean $removeEmptyNodes
-	 * @param boolean $ignoreWhitespace
-	 * @param boolean $preserveAttributes
-	 * @return string
-	 */
-	protected function formatXmlString($xml) {
-		$sxe = $this->createNewObject(\SimpleXMLElement::class, trim($xml), LIBXML_NONET);
-		if ($this->removeEmptyNodes) {
-			$this->removeEmptyNodes($sxe);
-		}
-		$dom = $this->createNewObject(\DOMDocument::class, '1.0');
-		$dom->preserveWhiteSpace = FALSE;
-		$dom->formatOutput = TRUE;
-		$dom->loadXML($sxe->asXML());
-		return $dom->saveXML();
-	}
+    /**
+     *
+     * @param \SimpleXMLElement $sxe
+     */
+    protected function removeEmptyNodes(\SimpleXMLElement $sxe)
+    {
+        $expression = '//*[' . ($this->ignoreWhitespace ? 'not(*) and not(normalize-space())' : 'not(text())') . ($this->preserveAttributes ? ' and not(@*)' : '') . ']';
+        while (!!($nodes = $sxe->xpath($expression))) {
+            /* @var $node \SimpleXMLElement */
+            foreach ($nodes as $node) {
+                unset($node[0]);
+            }
+        }
+    }
 
-	/**
-	 *
-	 * @param \SimpleXMLElement $sxe
-	 */
-	protected function removeEmptyNodes(\SimpleXMLElement $sxe){
-		$expression = '//*[' . ($this->ignoreWhitespace ? 'not(*) and not(normalize-space())' : 'not(text())') . ($this->preserveAttributes ? ' and not(@*)' : '') . ']';
-		while (!!($nodes = $sxe->xpath($expression))) {
-			/* @var $node \SimpleXMLElement */
-			foreach($nodes as $node) {
-				unset($node[0]);
-			}
-		}
-	}
-
-	protected function createNewObject($className) {
-		$arguments = func_get_args();
-		$r = new \ReflectionClass(array_shift($arguments));
-		return $r->newInstanceArgs($arguments);
-	}
+    protected function createNewObject($className)
+    {
+        $arguments = func_get_args();
+        $r = new \ReflectionClass(array_shift($arguments));
+        return $r->newInstanceArgs($arguments);
+    }
 }

@@ -37,58 +37,62 @@ use TYPO3\CMS\Core\Page\PageRenderer;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class AddCssFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class AddCssFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Be\PageRenderer\AddCssFileViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Be\PageRenderer\AddCssFileViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testInitializeArguments() {
-		$this->initializeArgumentsTest(8);
-	}
+    /**
+     * @test
+     */
+    public function testInitializeArguments()
+    {
+        $this->initializeArgumentsTest(8);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testRender() {
-		$this->mockSubject('getDocInstance');
-		$file = 'test';
+    /**
+     * @test
+     */
+    public function testRender()
+    {
+        $this->mockSubject('getDocInstance');
+        $file = 'test';
 
-		$doc = $this->getMock(DocumentTemplate::class, array('getPageRenderer'), array(), '', FALSE);
-		$pageRenderer = $this->getMock(PageRenderer::class, array('addCssFile'), array(), '', FALSE);
-		$this->subject
-			->expects($this->once())
-			->method('getDocInstance')
-			->willReturn($doc);
-		$doc->expects($this->once())
-			->method('getPageRenderer')
-			->willReturn($pageRenderer);
-		$pageRenderer->expects($this->once())
-			->method('addCssFile');
+        $doc = $this->getMock(DocumentTemplate::class, ['getPageRenderer'], [], '', false);
+        $pageRenderer = $this->getMock(PageRenderer::class, ['addCssFile'], [], '', false);
+        $this->subject
+            ->expects($this->once())
+            ->method('getDocInstance')
+            ->willReturn($doc);
+        $doc->expects($this->once())
+            ->method('getPageRenderer')
+            ->willReturn($pageRenderer);
+        $pageRenderer->expects($this->once())
+            ->method('addCssFile');
 
-		$this->subject->render($file);
-	}
+        $this->subject->render($file);
+    }
 
-	public function testRender_withArgument() {
-		$this->mockSubject('getDocInstance');
-		$file = 'test';
+    public function testRender_withArgument()
+    {
+        $this->mockSubject('getDocInstance');
+        $file = 'test';
 
-		$this->subject->setArguments(array('external' => TRUE));
+        $this->subject->setArguments(['external' => true]);
 
-		$doc = $this->getMock(DocumentTemplate::class, array('getPageRenderer'), array(), '', FALSE);
-		$pageRenderer = $this->getMock(PageRenderer::class, array('addCssFile'), array(), '', FALSE);
-		$this->subject
-			->expects($this->once())
-			->method('getDocInstance')
-			->willReturn($doc);
-		$doc->expects($this->once())
-			->method('getPageRenderer')
-			->willReturn($pageRenderer);
-		$pageRenderer->expects($this->once())
-			->method('addCssFile');
+        $doc = $this->getMock(DocumentTemplate::class, ['getPageRenderer'], [], '', false);
+        $pageRenderer = $this->getMock(PageRenderer::class, ['addCssFile'], [], '', false);
+        $this->subject
+            ->expects($this->once())
+            ->method('getDocInstance')
+            ->willReturn($doc);
+        $doc->expects($this->once())
+            ->method('getPageRenderer')
+            ->willReturn($pageRenderer);
+        $pageRenderer->expects($this->once())
+            ->method('addCssFile');
 
-		$this->subject->render($file);
-	}
+        $this->subject->render($file);
+    }
 }

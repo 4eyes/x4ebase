@@ -18,20 +18,22 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  *
  * @api
  */
-class ObjectStorageToCommaListViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ObjectStorageToCommaListViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage
-	 * @param string $property
-	 * @return string
-	 */
-	public function render($objectStorage, $property) {
-		$output = array();
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage
+     * @param string $property
+     * @return string
+     */
+    public function render($objectStorage, $property)
+    {
+        $output = [];
 
-		foreach($objectStorage as $res) {
-			$output []= trim($res->_getProperty($property));
-		}
+        foreach ($objectStorage as $res) {
+            $output []= trim($res->_getProperty($property));
+        }
 
-		return implode(',', $output);
-	}
+        return implode(',', $output);
+    }
 }

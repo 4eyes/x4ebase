@@ -16,62 +16,66 @@ namespace X4e\X4ebase\ViewHelpers;
 
 /**
  * Embeds a YouTube Video
- * 
+ *
  * @author Christoph Dörfel <christoph@4eyes.ch>
  */
-class YouTubeVideoViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class YouTubeVideoViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * Helps render video
-	 *
-	 * @param string $value The YouTube video url or video hash
-	 * 
-	 * @param string $videoHash The name of the video hash variable
-	 * @param string $thumbnail The name of the thumbnail image variable
-	 * @param string|integer $thumbnailType The video thumbnail type (one of 0,1,2,3,default,hqdefault,mqdefault,sddefault,maxresdefault)
-	 * @return string Rendered string
-	 */
-	public function render($value, $videoHash = 'videoHash', $thumbnail = 'thumbnail', $thumbnailType = 'sddefault') {
-		$output = '';
-		$hash = $this->retrieveYoutubeHash($value);
-		if ($hash) {
-			$this->templateVariableContainer->add($videoHash, $hash);
-			$this->templateVariableContainer->add($thumbnail, $this->getThumbnail($hash, $thumbnailType));
-			$output = $this->renderChildren();
-			$this->templateVariableContainer->remove($thumbnail);
-			$this->templateVariableContainer->remove($videoHash);
-		}
-		return $output;
-	}
-	
-	/**
-	 * Rendering the cObject, MEDIA
-	 *
-	 * @param $videoHash string The YouTube video hash
-	 * @param $thumbnailType string|integer The video thumbnail type
-	 * @return string Output
-	 */
-	public function getThumbnail($videoHash, $thumbnailType = 0) {
-		$thumbType = 0;
-		if (in_array($thumbnailType, array('0','1','2','3','default','hqdefault','mqdefault','sddefault','maxresdefault'))) {
-			$thumbType = $thumbnailType;
-		}
-		
+    /**
+     * Helps render video
+     *
+     * @param string $value The YouTube video url or video hash
+     *
+     * @param string $videoHash The name of the video hash variable
+     * @param string $thumbnail The name of the thumbnail image variable
+     * @param string|int $thumbnailType The video thumbnail type (one of 0,1,2,3,default,hqdefault,mqdefault,sddefault,maxresdefault)
+     * @return string Rendered string
+     */
+    public function render($value, $videoHash = 'videoHash', $thumbnail = 'thumbnail', $thumbnailType = 'sddefault')
+    {
+        $output = '';
+        $hash = $this->retrieveYoutubeHash($value);
+        if ($hash) {
+            $this->templateVariableContainer->add($videoHash, $hash);
+            $this->templateVariableContainer->add($thumbnail, $this->getThumbnail($hash, $thumbnailType));
+            $output = $this->renderChildren();
+            $this->templateVariableContainer->remove($thumbnail);
+            $this->templateVariableContainer->remove($videoHash);
+        }
+        return $output;
+    }
+
+    /**
+     * Rendering the cObject, MEDIA
+     *
+     * @param $videoHash string The YouTube video hash
+     * @param $thumbnailType string|integer The video thumbnail type
+     * @return string Output
+     */
+    public function getThumbnail($videoHash, $thumbnailType = 0)
+    {
+        $thumbType = 0;
+        if (in_array($thumbnailType, ['0', '1', '2', '3', 'default', 'hqdefault', 'mqdefault', 'sddefault', 'maxresdefault'])) {
+            $thumbType = $thumbnailType;
+        }
+
 //		$thumbnail = 'https://img.youtube.com/vi/' . $videoHash . '/' . $thumbType . '.jpg';
-		$thumbnail = 'https://i3.ytimg.com/vi/' . $videoHash . '/' . $thumbType . '.jpg';
-		
-		return $thumbnail;
-	}
+        $thumbnail = 'https://i3.ytimg.com/vi/' . $videoHash . '/' . $thumbType . '.jpg';
 
-	/**
-	 * Extracts the video hash of a YouTube video URL
-	 *
-	 * @param string $url
-	 * @return string|NULL
-	 */
-	protected function retrieveYoutubeHash($url) {
-		$returnValue = NULL;
-		if (preg_match('~
+        return $thumbnail;
+    }
+
+    /**
+     * Extracts the video hash of a YouTube video URL
+     *
+     * @param string $url
+     * @return string|NULL
+     */
+    protected function retrieveYoutubeHash($url)
+    {
+        $returnValue = null;
+        if (preg_match('~
 			# Match non-linked youtube URL in the wild. (Rev:20111012)
 			(?:https?://)?    # Optional scheme. Either http or https. (edited: $file sometimes has no scheme)
 			(?:[0-9A-Z-]+\.)? # Optional subdomain.
@@ -92,11 +96,10 @@ class YouTubeVideoViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 			)                 # End negative lookahead assertion.
 			[?=&+%\w-]*        # Consume any URL (query) remainder.
 			~ix', $url, $matches) && isset($matches[1])) {
-			$returnValue = $matches[1];
-		} else {
-			$returnValue = $url;
-		}
-		return $returnValue;
-	}
-
+            $returnValue = $matches[1];
+        } else {
+            $returnValue = $url;
+        }
+        return $returnValue;
+    }
 }

@@ -5,7 +5,7 @@ namespace X4e\X4ebase\Controller;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,57 +28,57 @@ namespace X4e\X4ebase\Controller;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PageActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
-	
-	/**
-	 * @var \TYPO3\CMS\Extbase\Service\EnvironmentService
-	 * @inject
-	 */
-	protected $environmentService;
-	
-	/**
-	 * pageRepository
-	 *
-	 * @var \X4e\X4ebase\Domain\Repository\PageRepository
-	 */
-	protected $pageRepository;
+class PageActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
-	/**
-	 * Page
-	 * 
-	 * @var \X4e\X4ebase\Domain\Model\Page
-	 */
-	protected $page = NULL;
-	
-	
-	/**
-	 * injectPageRepository
-	 *
-	 * @param \X4e\X4ebase\Domain\Repository\PageRepository $pageRepository
-	 * @return void
-	 */
-	public function injectPageRepository(\X4e\X4ebase\Domain\Repository\PageRepository $pageRepository) {
-		$this->pageRepository = $pageRepository;
-	}
-	
-	/**
-	 * Initializes the controller before invoking an action method.
-	 *
-	 * @return void
-	 */
-	public function initializeAction() {
-		parent::initializeAction();
-		if ($this->environmentService->isEnvironmentInFrontendMode()) {
-			$pageId = $GLOBALS['TSFE']->id;
-		} elseif ($this->environmentService->isEnvironmentInBackendMode()) {
-			$pageId = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id');
-		}
-		if (isset($pageId)) {
-			$this->page = $this->pageRepository->findByUid($pageId);
-		}
-	}
-	
+    /**
+     * @var \TYPO3\CMS\Extbase\Service\EnvironmentService
+     * @inject
+     */
+    protected $environmentService;
+
+    /**
+     * pageRepository
+     *
+     * @var \X4e\X4ebase\Domain\Repository\PageRepository
+     */
+    protected $pageRepository;
+
+    /**
+     * Page
+     *
+     * @var \X4e\X4ebase\Domain\Model\Page
+     */
+    protected $page = null;
+
+    /**
+     * injectPageRepository
+     *
+     * @param \X4e\X4ebase\Domain\Repository\PageRepository $pageRepository
+     * @return void
+     */
+    public function injectPageRepository(\X4e\X4ebase\Domain\Repository\PageRepository $pageRepository)
+    {
+        $this->pageRepository = $pageRepository;
+    }
+
+    /**
+     * Initializes the controller before invoking an action method.
+     *
+     * @return void
+     */
+    public function initializeAction()
+    {
+        parent::initializeAction();
+        if ($this->environmentService->isEnvironmentInFrontendMode()) {
+            $pageId = $GLOBALS['TSFE']->id;
+        } elseif ($this->environmentService->isEnvironmentInBackendMode()) {
+            $pageId = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id');
+        }
+        if (isset($pageId)) {
+            $this->page = $this->pageRepository->findByUid($pageId);
+        }
+    }
 }

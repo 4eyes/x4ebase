@@ -1,6 +1,6 @@
 <?php
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
 $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);
@@ -18,22 +18,22 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['EXT:saltedpasswords/
 //==============================================================================
 // region XClasses
 //==============================================================================
-if(version_compare(TYPO3_branch, '6.2', '<=')) {
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings'
-	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapper'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapper'
-	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Storage\\Typo3DbBackend'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Storage\\Typo3DbBackend'
-	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Core\\Localization\\Parser\\XliffParser'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Localization\\Parser\\XliffParser'
-	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Controller\\TypoScriptFrontendController'
-	);
+if (version_compare(TYPO3_branch, '6.2', '<=')) {
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = [
+        'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings'
+    ];
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapper'] = [
+        'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapper'
+    ];
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Storage\\Typo3DbBackend'] = [
+        'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Storage\\Typo3DbBackend'
+    ];
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Core\\Localization\\Parser\\XliffParser'] = [
+        'className' => 'X4E\\X4ebase\\XClasses\\Localization\\Parser\\XliffParser'
+    ];
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController'] = [
+        'className' => 'X4E\\X4ebase\\XClasses\\Controller\\TypoScriptFrontendController'
+    ];
 }
 
 /**
@@ -41,9 +41,9 @@ if(version_compare(TYPO3_branch, '6.2', '<=')) {
  */
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\ExtensionCommandController';
 
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController'] = array(
-	'className' => 'X4E\\X4ebase\\XClasses\\Controller\\ConfigurationController'
-);
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController'] = [
+    'className' => 'X4E\\X4ebase\\XClasses\\Controller\\ConfigurationController'
+];
 // endregion
 
 //==============================================================================
@@ -55,10 +55,9 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
 
 if (TYPO3_MODE === 'BE') {
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\EmailQueueCommandController';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\EmailQueueCommandController';
 }
 // endregion
-
 
 // We need to set the default implementation for Storage Backend & Query Settings
 // the code below is NO PUBLIC API! It's just to make sure that
@@ -70,47 +69,44 @@ $extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('
 $extbaseObjectContainer->registerImplementation('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface', 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings');
 unset($extbaseObjectContainer);
 
-
 // region contextSkin
 /**
  * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
  * [begin]
  */
 if (TYPO3_MODE === 'FE' && is_array($extConf) && $extConf['contextSkin.']['fe.']['enable']) {
-	$applicationContext = \TYPO3\CMS\Core\Utility\GeneralUtility::getApplicationContext();
-	if ($_SERVER['argc'] > 0) {
-		// find --context=Production from the command line
-		foreach ($_SERVER['argv'] as $argumentValue) {
-			if (substr($argumentValue, 0, 10)  === '--context=') {
-				$contextString = substr($argumentValue, 10);
-				break;
-			}
-		}
-	}
-	if (empty($contextString)) {
-		$contextString = $applicationContext->__toString();
-	}
+    $applicationContext = \TYPO3\CMS\Core\Utility\GeneralUtility::getApplicationContext();
+    if ($_SERVER['argc'] > 0) {
+        // find --context=Production from the command line
+        foreach ($_SERVER['argv'] as $argumentValue) {
+            if (substr($argumentValue, 0, 10)  === '--context=') {
+                $contextString = substr($argumentValue, 10);
+                break;
+            }
+        }
+    }
+    if (empty($contextString)) {
+        $contextString = $applicationContext->__toString();
+    }
 
-	if (preg_match("/Development/i", $contextString)) {
-		$context = 'Development';
-		$color = '#2b9947';
-	}
-	else if (preg_match("/Staging/i", $contextString)){
-		$context = 'Staging';
-		$color = '#d16312';
-	}
-	else if (preg_match("/Live/i", $contextString)) {
-		$context = 'Live';
-		$color = '#992e2b';
-	}
+    if (preg_match('/Development/i', $contextString)) {
+        $context = 'Development';
+        $color = '#2b9947';
+    } elseif (preg_match('/Staging/i', $contextString)) {
+        $context = 'Staging';
+        $color = '#d16312';
+    } elseif (preg_match('/Live/i', $contextString)) {
+        $context = 'Live';
+        $color = '#992e2b';
+    }
 
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
 #This line is included dynamically in EXT:x4ebase/ext_tables.php
 [applicationContext = Production/Live]
 [else]
 page.1 = TEXT
 page.1 {
-	value = <div id="x4ebase-context-bar" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 2; background-color: ' . $color . '; padding: 10px; color: white;"><span style="font-weight: bold;">Context:</span> <span style="font-style: italic;">'. $contextString . '</span></div>
+	value = <div id="x4ebase-context-bar" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 2; background-color: ' . $color . '; padding: 10px; color: white;"><span style="font-weight: bold;">Context:</span> <span style="font-style: italic;">' . $contextString . '</span></div>
 	insertData = 1
 }
 [global]
@@ -123,13 +119,13 @@ page.1 {
 // endregion
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'X4E.' . $_EXTKEY,
-	'ContentExceptionTest',
-	array(
-		'ContentExceptionTest' => 'content, exception'
-	),
-	// non-cacheable actions
-	array(
-		'ContentExceptionTest' => 'content, exception'
-	)
+    'X4E.' . $_EXTKEY,
+    'ContentExceptionTest',
+    [
+        'ContentExceptionTest' => 'content, exception'
+    ],
+    // non-cacheable actions
+    [
+        'ContentExceptionTest' => 'content, exception'
+    ]
 );
