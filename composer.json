@@ -4,7 +4,7 @@
   "description": "Extbase, Fluid and TYPO3 enhancements by 4eyes GmbH",
   "homepage": "https://www.4eyes.ch",
   "license": ["GPL-2.0+"],
-  "keywords": ["TYPO3 CMS", "toggelr", "foosball"],
+  "keywords": ["TYPO3 CMS"],
   "support": {
     "issues": "https://www.4eyes.ch"
   },
@@ -33,7 +33,8 @@
   },
   "autoload": {
     "psr-4": {
-      "X4e\\X4ebase\\": "Classes/"
+      "X4e\\X4ebase\\": "Classes/",
+      "X4e\\X4ebase\\Tests\\": "Tests/"
     }
   },
   "replace": {
