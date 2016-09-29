@@ -7,65 +7,51 @@ $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY)
 $extConf = unserialize($_EXTCONF);
 
 //==============================================================================
-//   Password Hashing Methods
-//==============================================================================
-// password_hash implementation for PHP < 5.5
-require_once $extPath . 'Resources/Private/Libraries/password_hash.php';
-// Registering all available hashes to factory
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/saltedpasswords']['saltMethods']['X4E\\X4ebase\\Salt\\SecurePasswordSalt'] = 'X4E\\X4ebase\\Salt\\SecurePasswordSalt';
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['EXT:saltedpasswords/locallang.xml'][] = 'EXT:x4ebase/Resources/Private/Language/locallang_securepassword.xlf';
-
-//==============================================================================
 // region XClasses
 //==============================================================================
-if(version_compare(TYPO3_branch, '6.2', '<=')) {
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings'
-	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapper'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapper'
-	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Storage\\Typo3DbBackend'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Storage\\Typo3DbBackend'
-	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Core\\Localization\\Parser\\XliffParser'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Localization\\Parser\\XliffParser'
-	);
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController'] = array(
-		'className' => 'X4E\\X4ebase\\XClasses\\Controller\\TypoScriptFrontendController'
-	);
-}
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class] = array(
+    'className' => \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class
+);
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper::class] = array(
+    'className' => \X4e\X4ebase\XClasses\Persistence\Generic\Mapper\DataMapper::class
+);
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbBackend::class] = array(
+    'className' => \X4e\X4ebase\XClasses\Persistence\Generic\Storage\Typo3DbBackend::class
+);
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Core\Localization\Parser\XliffParser::class] = array(
+    'className' => \X4e\X4ebase\XClasses\Localization\Parser\XliffParser::class
+);
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class] = array(
+    'className' => \X4e\X4ebase\XClasses\Controller\TypoScriptFrontendController::class
+);
+
 
 /**
  * xclasses to allow cli-configuration of an extension, see https://jira.4eyes.ch/browse/IMPROVE-409
  */
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\ExtensionCommandController';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = \X4e\X4ebase\Controller\ExtensionCommandController::class;
 
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController'] = array(
-	'className' => 'X4E\\X4ebase\\XClasses\\Controller\\ConfigurationController'
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extensionmanager\Controller\ConfigurationController::class] = array(
+	'className' => \X4e\X4ebase\XClasses\Controller\ConfigurationController::class
 );
 // endregion
 
 //==============================================================================
 // region Hooks
 //==============================================================================
-// This hook enables save and preview functionality for articles
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewOnClickClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/SaveAndPreviewHook.php:&X4e\X4ebase\Hooks\SaveAndPreviewHook';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4e\X4ebase\Hooks\TceMainHook';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4e\X4ebase\Hooks\TceMainHook';
 if($extConf['javascriptOptimization']){
     // do not merge per page added inline JS
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][$_EXTKEY] = \X4e\X4ebase\Hooks\RenderPreProcessHook::class . '->process';
 }
 if($extConf['forceRealurl']){
-    $TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_fe.php']['isOutputting'][$_EXTKEY] = \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['isOutputting'][$_EXTKEY] = \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
 
     // Additional Hook to process check before indexing
-    $TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-all'][$_EXTKEY] = \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-all'][$_EXTKEY] = \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
 }
 
 if (TYPO3_MODE === 'BE') {
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\EmailQueueCommandController';
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = \X4e\X4ebase\Controller\EmailQueueCommandController::class;
 }
 // endregion
 
@@ -74,9 +60,9 @@ if (TYPO3_MODE === 'BE') {
 //==============================================================================
 if(!$extConf['fileTimestamp.']['disable_fe'] || !$extConf['fileTimestamp.']['disable_be']){
     /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
-    $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
+    $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
     $signalSlotDispatcher->connect(
-        'TYPO3\CMS\Core\Resource\ResourceStorage',
+        \TYPO3\CMS\Core\Resource\ResourceStorage::class,
         TYPO3\CMS\Core\Resource\ResourceStorage::SIGNAL_PreGeneratePublicUrl,
         \X4e\X4ebase\Signal\PublicFileUri::class,
         'preGeneratePublicUrl'
@@ -89,9 +75,9 @@ if(!$extConf['fileTimestamp.']['disable_fe'] || !$extConf['fileTimestamp.']['dis
 // Extbase works correctly in the backend if the page tree is empty or no
 // template is defined.
 /* @var $extbaseObjectContainer \TYPO3\CMS\Extbase\Object\Container\Container */
-$extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
+$extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class);
 // Singleton
-$extbaseObjectContainer->registerImplementation('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface', 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings');
+$extbaseObjectContainer->registerImplementation(\TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface::class, \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class);
 unset($extbaseObjectContainer);
 
 
@@ -147,7 +133,7 @@ page.1 {
 // endregion
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'X4E.' . $_EXTKEY,
+	'X4e.' . $_EXTKEY,
 	'ContentExceptionTest',
 	array(
 		'ContentExceptionTest' => 'content, exception'

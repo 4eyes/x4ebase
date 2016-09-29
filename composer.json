@@ -1,0 +1,44 @@
+{
+  "name": "x4e/x4ebase",
+  "type": "typo3-cms-extension",
+  "description": "Extbase, Fluid and TYPO3 enhancements by 4eyes GmbH",
+  "homepage": "https://www.4eyes.ch",
+  "license": ["GPL-2.0+"],
+  "keywords": ["TYPO3 CMS"],
+  "support": {
+    "issues": "https://www.4eyes.ch"
+  },
+  "authors": [
+    {
+      "name": "Markus Stauffiger",
+      "email": "markus@4eyes.ch",
+      "role": "Developer",
+      "homepage": "http://www.4eyes.ch"
+    },
+    {
+      "name": "Michel Georgy",
+      "email": "michel@4eyes.ch",
+      "role": "Developer",
+      "homepage": "http://www.4eyes.ch"
+    },
+    {
+      "name": "Alessandro Bellafronte",
+      "email": "alessandro@4eyes.ch",
+      "role": "Developer",
+      "homepage": "http://www.4eyes.ch"
+    }
+  ],
+  "require": {
+    "typo3/cms": "^8.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "X4e\\X4ebase\\": "Classes/",
+      "X4e\\X4ebase\\Tests\\": "Tests/"
+    }
+  },
+  "replace": {
+    "x4ebase": "self.version",
+    "typo3-ter/x4ebase": "self.version"
+  }
+}
