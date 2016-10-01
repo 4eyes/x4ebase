@@ -26,7 +26,7 @@ namespace X4e\X4ebase\Tests\Unit\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-use \X4e\X4ebase\Utility\GeneralUtility;
+use X4e\X4ebase\Utility\GeneralUtility;
 
 /**
  * Test case for class \X4e\X4ebase\Utility\GeneralUtilityTest
@@ -37,112 +37,130 @@ use \X4e\X4ebase\Utility\GeneralUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class GeneralUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class GeneralUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
+    public function setUp()
+    {
+        if (function_exists('xdebug_disable')) {
+            xdebug_disable();
+        }
+    }
 
-	public function setUp() {
-		if (function_exists('xdebug_disable')) {
-			xdebug_disable();
-		}
-	}
+    public function tearDown()
+    {
+        if (function_exists('xdebug_enable')) {
+            xdebug_enable();
+        }
+    }
 
-	public function tearDown() {
-		if (function_exists('xdebug_enable')) {
-			xdebug_enable();
-		}
-	}
+    /**
+     * @test
+     */
+    public function testGenerateUniqueIdReturnsInteger()
+    {
+        $this->assertInternalType('integer', GeneralUtility::generateUniqueId());
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGenerateUniqueIdReturnsInteger() {
-		$this->assertInternalType('integer', GeneralUtility::generateUniqueId());
-	}
+    /**
+     * @test
+     */
+    public function testGenerateUniqueStringReturnsString()
+    {
+        $this->assertInternalType('string', GeneralUtility::generateUniqueString());
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGenerateUniqueStringReturnsString() {
-		$this->assertInternalType('string', GeneralUtility::generateUniqueString());
-	}
+    /**
+     * @test
+     */
+    public function testGenerateUidArrayForPropertyWithWrongObjectReturnsEmptyArray()
+    {
+        $this->assertSame([], GeneralUtility::generateUidArrayForProperty(false, 'test'));
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGenerateUidArrayForPropertyWithWrongObjectReturnsEmptyArray() {
-		$this->assertSame(array(), GeneralUtility::generateUidArrayForProperty(FALSE, 'test'));
-	}
+    /**
+     * @test
+     */
+    public function testGenerateUidArrayForPropertyWithWrongPropertyThrowsException()
+    {
+        $this->setExpectedException('\\RuntimeException');
+        GeneralUtility::generateUidArrayForProperty(new \stdClass(), 'test');
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGenerateUidArrayForPropertyWithWrongPropertyThrowsException() {
-		$this->setExpectedException('\\RuntimeException');
-		GeneralUtility::generateUidArrayForProperty(new \stdClass(), 'test');
-	}
+    /**
+     * @test
+     */
+    public function testGenerateUidArrayForPropertyWithObjectReturnsArray()
+    {
+        $this->assertSame([1, 5], GeneralUtility::generateUidArrayForProperty(new TestClass(1), 'objects'));
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGenerateUidArrayForPropertyWithObjectReturnsArray() {
-		$this->assertSame(array(1, 5), GeneralUtility::generateUidArrayForProperty(new TestClass(1), 'objects'));
-	}
+    /**
+     * @test
+     */
+    public function testGenerateUidArrayForPropertyWithArrayReturnsArray()
+    {
+        $this->assertSame([1, 5], GeneralUtility::generateUidArrayForProperty(new TestClass(1), 'array'));
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGenerateUidArrayForPropertyWithArrayReturnsArray() {
-		$this->assertSame(array(1, 5), GeneralUtility::generateUidArrayForProperty(new TestClass(1), 'array'));
-	}
+    /**
+     * @test
+     */
+    public function testGenerateUidListForPropertyReturnsString()
+    {
+        $this->assertInternalType('string', GeneralUtility::generateUidListForProperty('', ''));
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGenerateUidListForPropertyReturnsString() {
-		$this->assertInternalType('string', GeneralUtility::generateUidListForProperty('', ''));
-	}
+    public function testGetExtConfReturnsArrayOrNull()
+    {
+        $this->assertSame(false, GeneralUtility::getExtConf('testExt'));
 
-	public function testGetExtConfReturnsArrayOrNull() {
-		$this->assertSame(false, GeneralUtility::getExtConf('testExt'));
+        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['testExt'] = serialize(['uid' => 1]);
 
-		$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['testExt'] = serialize(array('uid' => 1));
-
-		$this->assertSame(array('uid' => 1), GeneralUtility::getExtConf('testExt'));
-	}
+        $this->assertSame(['uid' => 1], GeneralUtility::getExtConf('testExt'));
+    }
 }
 
-class testClass {
-	public $obj1;
-	public $obj2;
+class testClass
+{
+    public $obj1;
+    public $obj2;
 
-	function __construct() {
-		$this->obj1 = new testSubClass(1);
-		$this->obj2 = new testSubClass(5);
-	}
+    public function __construct()
+    {
+        $this->obj1 = new testSubClass(1);
+        $this->obj2 = new testSubClass(5);
+    }
 
-	public function getObjects() {
-		return new testClass(2);
-	}
+    public function getObjects()
+    {
+        return new testClass(2);
+    }
 
-	public function getArray() {
-		return array(
-			array('uid' => 1),
-			array('uid' => 5),
-		);
-	}
+    public function getArray()
+    {
+        return [
+            ['uid' => 1],
+            ['uid' => 5],
+        ];
+    }
 
-	public function count() {
-		return true;
-	}
+    public function count()
+    {
+        return true;
+    }
 }
 
-class testSubClass {
-	protected $uid;
+class testSubClass
+{
+    protected $uid;
 
-	function __construct($uid) {
-		$this->uid = $uid;
-	}
+    public function __construct($uid)
+    {
+        $this->uid = $uid;
+    }
 
-	public function getUid() {
-		return $this->uid;
-	}
+    public function getUid()
+    {
+        return $this->uid;
+    }
 }

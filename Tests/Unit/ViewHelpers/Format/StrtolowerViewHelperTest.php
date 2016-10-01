@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Format;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Extbase\Validation\Exception;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\Format\StrtolowerViewHelper
@@ -36,33 +35,36 @@ use TYPO3\CMS\Extbase\Validation\Exception;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class StrtolowerViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class StrtolowerViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\StrtolowerViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\StrtolowerViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRender() {
-		//testCase | Result
-		$testCases = array(
-			array('Lorem ipsum Dolor', 'lorem ipsum dolor'),
-			array('Hello_World', 'hello_world')
-		);
+    /**
+     * @test
+     */
+    public function testRender()
+    {
+        //testCase | Result
+        $testCases = [
+            ['Lorem ipsum Dolor', 'lorem ipsum dolor'],
+            ['Hello_World', 'hello_world']
+        ];
 
-		$this->renderFromChildren($testCases);
-	}
+        $this->renderFromChildren($testCases);
+    }
 
-	public function renderFromChildren($testCases) {
-		$this->mockSubject('renderChildren');
+    public function renderFromChildren($testCases)
+    {
+        $this->mockSubject('renderChildren');
 
-		for ($i = 0; $i < count($testCases); $i++) {
-			$this->subject->expects($this->at($i))->method('renderChildren')
-				->willReturn($testCases[$i][0]);
-		}
-		foreach ($testCases as $testCase) {
-			$this->assertSame($testCase[1], $this->subject->render());
-		}
-	}
+        for ($i = 0; $i < count($testCases); $i++) {
+            $this->subject->expects($this->at($i))->method('renderChildren')
+                ->willReturn($testCases[$i][0]);
+        }
+        foreach ($testCases as $testCase) {
+            $this->assertSame($testCase[1], $this->subject->render());
+        }
+    }
 }

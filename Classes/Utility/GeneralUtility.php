@@ -29,70 +29,74 @@ namespace X4e\X4ebase\Utility;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class GeneralUtility {
-	
-	protected static $uniqueId = 5378456;
-	
-	public static function generateUniqueId(){
-		return ++static::$uniqueId;
-	}
-	
-	public static function generateUniqueString(){
-		if (extension_loaded('gmp') && function_exists('gmp_init') && function_exists('gmp_strval')) {
-			return gmp_strval(gmp_init(static::generateUniqueId(), 10), 62);
-		} else {
-			return base_convert(static::generateUniqueId(), 10, 36);
-		}
-	}
-	
-	/**
-	 *
-	 * @param \object $object
-	 * @param string $property
-	 * @return string
-	 */
-	public static function generateUidListForProperty($object, $property){
-		return implode(',',self::generateUidArrayForProperty($object, $property));
-	}
-	/**
-	 *
-	 * @param \object $object
-	 * @param string $property
-	 * @return string
-	 */
-	public static function generateUidArrayForProperty($object, $property){
-		$uidArr = array();
-		if($object){
-			$method = 'get' . ucfirst($property);
-			if(method_exists($object, $method)){
-				$objects = call_user_func(array($object, $method));
-				if(is_object($objects) && $objects->count()){
-					foreach($objects as $obj){
-						$uidArr [] = $obj->getUid();
-					}
-				} else if(is_array($objects) && count($objects)){
-					foreach($objects as $obj){
-						$uidArr [] = $obj['uid'];
-					}
-				}
-			} else {
-				throw new \RuntimeException('Method ' . $method . ' does not exist in given object', 1379414199);
-			}
-		}
-		return $uidArr;
-	}
+class GeneralUtility
+{
+    protected static $uniqueId = 5378456;
 
-	/**
-	 * Returns the extConf of the extension matching the given extKey
-	 *
-	 * @param string $extKey
-	 * @return array
-	 */
-	public static function getExtConf($extKey){
-		return unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey]);
-	}
+    public static function generateUniqueId()
+    {
+        return ++static::$uniqueId;
+    }
+
+    public static function generateUniqueString()
+    {
+        if (extension_loaded('gmp') && function_exists('gmp_init') && function_exists('gmp_strval')) {
+            return gmp_strval(gmp_init(static::generateUniqueId(), 10), 62);
+        } else {
+            return base_convert(static::generateUniqueId(), 10, 36);
+        }
+    }
+
+    /**
+     *
+     * @param \object $object
+     * @param string $property
+     * @return string
+     */
+    public static function generateUidListForProperty($object, $property)
+    {
+        return implode(',', self::generateUidArrayForProperty($object, $property));
+    }
+    /**
+     *
+     * @param \object $object
+     * @param string $property
+     * @return string
+     */
+    public static function generateUidArrayForProperty($object, $property)
+    {
+        $uidArr = [];
+        if ($object) {
+            $method = 'get' . ucfirst($property);
+            if (method_exists($object, $method)) {
+                $objects = call_user_func([$object, $method]);
+                if (is_object($objects) && $objects->count()) {
+                    foreach ($objects as $obj) {
+                        $uidArr [] = $obj->getUid();
+                    }
+                } elseif (is_array($objects) && count($objects)) {
+                    foreach ($objects as $obj) {
+                        $uidArr [] = $obj['uid'];
+                    }
+                }
+            } else {
+                throw new \RuntimeException('Method ' . $method . ' does not exist in given object', 1379414199);
+            }
+        }
+        return $uidArr;
+    }
+
+    /**
+     * Returns the extConf of the extension matching the given extKey
+     *
+     * @param string $extKey
+     * @return array
+     */
+    public static function getExtConf($extKey)
+    {
+        return unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey]);
+    }
 }

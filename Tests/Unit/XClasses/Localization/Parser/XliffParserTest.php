@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\XClasses\Localization\Parser;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class \X4e\X4ebase\XClasses\Localization\Parser\XliffParser
@@ -36,53 +35,53 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class XliffParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
+    public function setUp()
+    {
+        if (function_exists('xdebug_disable')) {
+            xdebug_disable();
+        }
+    }
 
-	public function setUp() {
+    public function tearDown()
+    {
+        if (function_exists('xdebug_enable')) {
+            xdebug_enable();
+        }
+    }
 
-		if (function_exists('xdebug_disable')) {
-			xdebug_disable();
-		}
-	}
+    /**
+     * @test
+     */
+    public function testGetParseData()
+    {
+        $this->markTestSkipped(
+            'What exactly is the purpose of this xclass? Not sure if test or class work incorrectly'
+        );
 
-	public function tearDown() {
+        $sourcePath = dirname(__FILE__) . '/../../../../Fixtures/Unit/XClasses/Localization/Parser/XliffParserTest/locallang.xlf';
+        $languageKey = 'de';
+        //$charset = 'utf8';
+        $expectedResult = [
+            'de' => [
+                'headerComment' => [
+                    0 => [
+                        'source' => 'Foo',
+                        'target' => 'Oof',
+                    ]
+                ],
+                'generator' => [
+                    0 => [
+                        'source' => 'Bar',
+                        'target' => 'Rab',
+                    ]
+                ]
+            ]
 
-		if (function_exists('xdebug_enable')) {
-			xdebug_enable();
-		}
-	}
+        ];
 
-	/**
-	 * @test
-	 */
-	public function testGetParseData() {
-		$this->markTestSkipped(
-			'What exactly is the purpose of this xclass? Not sure if test or class work incorrectly'
-		);
-
-		$sourcePath = dirname(__FILE__) . '/../../../../Fixtures/Unit/XClasses/Localization/Parser/XliffParserTest/locallang.xlf';
-		$languageKey = 'de';
-		//$charset = 'utf8';
-		$expectedResult = array(
-			'de' => array(
-				'headerComment' => array(
-					0 => array(
-						'source' => 'Foo',
-						'target' => 'Oof',
-					)
-				),
-				'generator' => array(
-					0 => array(
-						'source' => 'Bar',
-						'target' => 'Rab',
-					)
-				)
-			)
-
-		);
-
-		$xliffParser = new \X4e\X4ebase\XClasses\Localization\Parser\XliffParser();
-		$this->assertEquals($expectedResult, $xliffParser->getParsedData($sourcePath, $languageKey));
-	}
-
+        $xliffParser = new \X4e\X4ebase\XClasses\Localization\Parser\XliffParser();
+        $this->assertEquals($expectedResult, $xliffParser->getParsedData($sourcePath, $languageKey));
+    }
 }

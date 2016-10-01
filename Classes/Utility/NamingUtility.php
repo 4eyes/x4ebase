@@ -34,68 +34,70 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 /**
  * Utility class to translate between different naming conventions
  *
- * @package X4e\X4ebase\Utility
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class NamingUtility implements \TYPO3\CMS\Core\SingletonInterface {
+class NamingUtility implements \TYPO3\CMS\Core\SingletonInterface
+{
 
-	/**
-	 * @var ConfigurationManagerInterface
-	 */
-	protected $configurationManager;
+    /**
+     * @var ConfigurationManagerInterface
+     */
+    protected $configurationManager;
 
-	/**
-	 * @param ConfigurationManagerInterface $configurationManager
-	 * @return void
-	 */
-	public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager) {
-		$this->configurationManager = $configurationManager;
-	}
+    /**
+     * @param ConfigurationManagerInterface $configurationManager
+     * @return void
+     */
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
+    }
 
-	/**
-	 * Translates a model's class name to the model's table name
-	 *
-	 * Extracted from \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory
-	 *
-	 * @param string $modelClassName
-	 * @return string
-	 */
-	public function translateModelClassNameToTableName($modelClassName) {
-		$tableName = $this->resolveTableName($modelClassName);
-		
-		$frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$classSettings = $frameworkConfiguration['persistence']['classes'][$modelClassName];
-		
-		if ($classSettings !== NULL) {
-			if (isset($classSettings['mapping']['tableName']) && strlen($classSettings['mapping']['tableName']) > 0) {
-				$tableName = $classSettings['mapping']['tableName'];
-			}
-		}
-		
-		return $tableName;
-	}
+    /**
+     * Translates a model's class name to the model's table name
+     *
+     * Extracted from \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory
+     *
+     * @param string $modelClassName
+     * @return string
+     */
+    public function translateModelClassNameToTableName($modelClassName)
+    {
+        $tableName = $this->resolveTableName($modelClassName);
 
-	/**
-	 * Resolve the table name for the given class name
-	 *
-	 * @param string $className
-	 * @return string The table name
-	 */
-	protected function resolveTableName($className) {
-		if (strpos($className, '\\') !== FALSE) {
-			$classNameParts = explode('\\', $className, 6);
-			// Skip vendor and product name for core classes
-			if (strpos($className, 'TYPO3\\CMS\\') === 0) {
-				$classPartsToSkip = 2;
-			} else {
-				$classPartsToSkip = 1;
-			}
-			$tableName = 'tx_' . strtolower(implode('_', array_slice($classNameParts, $classPartsToSkip)));
-		} else {
-			$tableName = strtolower($className);
-		}
-		
-		return $tableName;
-	}
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $classSettings = $frameworkConfiguration['persistence']['classes'][$modelClassName];
 
+        if ($classSettings !== null) {
+            if (isset($classSettings['mapping']['tableName']) && strlen($classSettings['mapping']['tableName']) > 0) {
+                $tableName = $classSettings['mapping']['tableName'];
+            }
+        }
+
+        return $tableName;
+    }
+
+    /**
+     * Resolve the table name for the given class name
+     *
+     * @param string $className
+     * @return string The table name
+     */
+    protected function resolveTableName($className)
+    {
+        if (strpos($className, '\\') !== false) {
+            $classNameParts = explode('\\', $className, 6);
+            // Skip vendor and product name for core classes
+            if (strpos($className, 'TYPO3\\CMS\\') === 0) {
+                $classPartsToSkip = 2;
+            } else {
+                $classPartsToSkip = 1;
+            }
+            $tableName = 'tx_' . strtolower(implode('_', array_slice($classNameParts, $classPartsToSkip)));
+        } else {
+            $tableName = strtolower($className);
+        }
+
+        return $tableName;
+    }
 }

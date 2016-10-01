@@ -28,24 +28,24 @@ namespace X4e\X4ebase\Domain\Repository;
 /**
  * A TYPO3 page record repository for extbase
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class PageLanguageOverlayRepository extends AbstractRepository {
+class PageLanguageOverlayRepository extends AbstractRepository
+{
 
-	/**
-	 * Initializes the object
-	 *
-	 * @return void
-	 */
-	public function initializeObject() {
-		/* @var $querySettings \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings */
-		$querySettings = $this->objectManager->get('X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings');
-		$querySettings->setRespectStoragePage(FALSE);
-		$querySettings->setRespectSysLanguage(FALSE);
-		//$querySettings->setRespectSysLanguageAlternative(FALSE);
-		$this->setDefaultQuerySettings($querySettings);
-	}
-
+    /**
+     * Initializes the object
+     *
+     * @return void
+     */
+    public function initializeObject()
+    {
+        /* @var $querySettings \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings */
+        $querySettings = $this->objectManager->get('X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings');
+        $querySettings->setRespectStoragePage(false);
+        $querySettings->setRespectSysLanguage(false);
+        //$querySettings->setRespectSysLanguageAlternative(FALSE);
+        $this->setDefaultQuerySettings($querySettings);
+    }
 }

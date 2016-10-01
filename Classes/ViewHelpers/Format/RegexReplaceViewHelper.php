@@ -5,7 +5,7 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  *  Copyright notice
  *
  *  (c) 2014 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,28 +26,30 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  ***************************************************************/
 
 /**
- * A view helper for replacing values with preg_replace. Either supply an 
+ * A view helper for replacing values with preg_replace. Either supply an
  * array for the arguments or a single value.
  * @see http://www.php.net/manual/en/function.preg-replace.php
  */
-class RegexReplaceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class RegexReplaceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * Searches for matches to pattern and replaces them with replacement.
-	 *
-	 * @param mixed $pattern The pattern to search for. It can be either a string or an array with strings.
-	 * @param mixed $replacement The string or an array with strings to replace.
-	 * @param integer $limit The maximum possible replacements for each pattern in each subject string. Defaults to -1 (no limit).
-	 * @param string $subject The string to format
-	 * @return string The processed value
-	 * @see http://www.php.net/manual/en/function.preg-replace.php
-	 */
-	public function render($pattern, $replacement = '', $limit = -1, $subject = NULL) {
-		if ($subject === NULL) {
-			$subject = $this->renderChildren();
-		}
-		
-		$out = preg_replace($pattern, $replacement, $subject, $limit);
-		return $out;
-	}
+    /**
+     * Searches for matches to pattern and replaces them with replacement.
+     *
+     * @param mixed $pattern The pattern to search for. It can be either a string or an array with strings.
+     * @param mixed $replacement The string or an array with strings to replace.
+     * @param int $limit The maximum possible replacements for each pattern in each subject string. Defaults to -1 (no limit).
+     * @param string $subject The string to format
+     * @return string The processed value
+     * @see http://www.php.net/manual/en/function.preg-replace.php
+     */
+    public function render($pattern, $replacement = '', $limit = -1, $subject = null)
+    {
+        if ($subject === null) {
+            $subject = $this->renderChildren();
+        }
+
+        $out = preg_replace($pattern, $replacement, $subject, $limit);
+        return $out;
+    }
 }

@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\RelativeDateViewHelper
@@ -36,23 +35,25 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class RelativeDateViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class RelativeDateViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\RelativeDateViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\RelativeDateViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRender() {
-		$this->mockSubject('renderChildren');
-		$this->templateVariableContainer = $this->getMock(
-			\TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer::class,
-			array('add', 'remove'));
-		$this->templateVariableContainer->expects($this->once())->method('add');
-		$this->templateVariableContainer->expects($this->once())->method('remove');
-		$this->subject->_set('templateVariableContainer', $this->templateVariableContainer);
+    /**
+     * @test
+     */
+    public function testRender()
+    {
+        $this->mockSubject('renderChildren');
+        $this->templateVariableContainer = $this->getMock(
+            \TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer::class,
+            ['add', 'remove']);
+        $this->templateVariableContainer->expects($this->once())->method('add');
+        $this->templateVariableContainer->expects($this->once())->method('remove');
+        $this->subject->_set('templateVariableContainer', $this->templateVariableContainer);
 
-		$this->subject->render(new \DateTime(), 'test');
-	}
+        $this->subject->render(new \DateTime(), 'test');
+    }
 }

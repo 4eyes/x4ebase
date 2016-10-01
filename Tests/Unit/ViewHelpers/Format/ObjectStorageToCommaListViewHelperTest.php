@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Format;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Extbase\Validation\Exception;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\Format\ObjectStorageToCommaListViewHelper
@@ -36,35 +35,40 @@ use TYPO3\CMS\Extbase\Validation\Exception;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ObjectStorageToCommaListViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class ObjectStorageToCommaListViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\ObjectStorageToCommaListViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\ObjectStorageToCommaListViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRender() {
-		$objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$expectedResult = array();
-		for ($i = 1; $i < 4; $i++) {
-			$objectStorage->attach(new TestClass($i));
-			$expectedResult[] = $i;
-		}
-		$expectedResult = implode(',', $expectedResult);
+    /**
+     * @test
+     */
+    public function testRender()
+    {
+        $objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $expectedResult = [];
+        for ($i = 1; $i < 4; $i++) {
+            $objectStorage->attach(new TestClass($i));
+            $expectedResult[] = $i;
+        }
+        $expectedResult = implode(',', $expectedResult);
 
-		$this->assertSame($expectedResult, $this->subject->render($objectStorage, 'property'));
-	}
+        $this->assertSame($expectedResult, $this->subject->render($objectStorage, 'property'));
+    }
 }
 
-class TestClass {
-	public $property;
+class TestClass
+{
+    public $property;
 
-	public function _getProperty($property) {
-		return $this->property;
-	}
+    public function _getProperty($property)
+    {
+        return $this->property;
+    }
 
-	function __construct($property) {
-		$this->property = $property;
-	}
+    public function __construct($property)
+    {
+        $this->property = $property;
+    }
 }

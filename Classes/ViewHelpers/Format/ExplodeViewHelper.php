@@ -17,17 +17,19 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  *
  * @api
  */
-class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * Runs the given string through trimExplode of GeneralUtility Class
-	 *
-	 * @param string $value
-	 * @param string $delimiter
-	 * @return string The escaped string
-	 * @api
-	 */
-	public function render($value, $delimiter=",") {
-		return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiter, $value);
-	}
+    /**
+     * Runs the given string through trimExplode of GeneralUtility Class
+     *
+     * @param string $value
+     * @param string $delimiter
+     * @return string The escaped string
+     * @api
+     */
+    public function render($value, $delimiter=',')
+    {
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiter, $value);
+    }
 }

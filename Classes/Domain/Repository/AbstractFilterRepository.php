@@ -1,7 +1,7 @@
 <?php
 namespace X4e\X4ebase\Domain\Repository;
 
-    /***************************************************************
+/***************************************************************
      *
      *  Copyright notice
      *
@@ -26,15 +26,13 @@ namespace X4e\X4ebase\Domain\Repository;
      *
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
-use TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use X4e\X4ebase\Template\FilterTemplate;
 
 /**
  * This abstract repository holds the generic filter and search methods.
  * It requires a X4e\X4ebase\Template\FilterTemplate and the query to create the matching
  */
-class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
     /**
      * @var array e.g.: array('firstName' => 'like', ... )
@@ -58,19 +56,21 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param array|string $parameterValues
      * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface
      */
-    protected function filterByParameter(&$query, $filterMethod, $parameterName, $parameterValues) {
-        if(!empty($parameterValues) && !empty($filterMethod)) {
-            $constraints = array();
+    protected function filterByParameter(&$query, $filterMethod, $parameterName, $parameterValues)
+    {
+        if (!empty($parameterValues) && !empty($filterMethod)) {
+            $constraints = [];
             if (!is_array($parameterValues)) {
-                $parameterValues = array($parameterValues);
+                $parameterValues = [$parameterValues];
             }
-            foreach($parameterValues as $parameterValue) {
-                $constraints[] = $query->$filterMethod($parameterName,$parameterValue);
+            foreach ($parameterValues as $parameterValue) {
+                $constraints[] = $query->$filterMethod($parameterName, $parameterValue);
             }
-            if(!empty($constraints))
+            if (!empty($constraints)) {
                 return $query->logicalOr($constraints);
+            }
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -79,15 +79,17 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param array $searchString The Words a User searches for as an Array-List
      * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface
      */
-    public function searchByParameter(&$query, $searchableParameters, $searchString) {
-        $constraints = array();
-        foreach($searchableParameters as $searchParameter=>$searchMethod) {
-            $constraints[] = $query->$searchMethod($searchParameter,"%".$searchString."%");
+    public function searchByParameter(&$query, $searchableParameters, $searchString)
+    {
+        $constraints = [];
+        foreach ($searchableParameters as $searchParameter=>$searchMethod) {
+            $constraints[] = $query->$searchMethod($searchParameter, '%' . $searchString . '%');
         }
-        if(!empty($constraints))
+        if (!empty($constraints)) {
             return $query->logicalOr($constraints);
-        else
-            return NULL;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -95,35 +97,40 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param \X4e\X4ebase\Template\FilterTemplate $filterTemplate
      * @return \TYPO3\CMS\Extbase\Persistence\QueryInterface
      */
-    public function createMatching(&$query, $filterTemplate) {
-        $constraints = array();
+    public function createMatching(&$query, $filterTemplate)
+    {
+        $constraints = [];
 
-        foreach($filterTemplate->getFilterArray() as $filterKey=>$filterValues) {
+        foreach ($filterTemplate->getFilterArray() as $filterKey=>$filterValues) {
             $constraintMayBeNull = $this->filterByParameter($query, $filterTemplate->getFilterMethodForParameter($filterKey), $filterKey, $filterValues);
-            if(!empty($constraintMayBeNull))
+            if (!empty($constraintMayBeNull)) {
                 $constraints[] = $constraintMayBeNull;
+            }
         }
-        foreach($filterTemplate->getSearchStrings() as $searchString) {
+        foreach ($filterTemplate->getSearchStrings() as $searchString) {
             $constraintMayBeNull = $this->searchByParameter($query, $filterTemplate->getSearchableParameters(), $searchString);
-            if(!empty($constraintMayBeNull))
+            if (!empty($constraintMayBeNull)) {
                 $constraints[] = $constraintMayBeNull;
+            }
         }
 
         $constraints = $this->addAdditionalConstraints($query, $filterTemplate, $constraints);
 
-        if(!empty($constraints))
+        if (!empty($constraints)) {
             return $query->matching(
                 $query->logicalAnd($constraints)
             );
-        else
+        } else {
             return $query;
+        }
     }
 
     /**
      * @param \X4e\X4ebase\Template\FilterTemplate $filterTemplate
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function performSearch($filterTemplate) {
+    public function performSearch($filterTemplate)
+    {
         $filterTemplate->setSearchableParameters($this->searchableParameters);
         $filterTemplate->setFilterMethods($this->filterMethods);
 
@@ -141,7 +148,8 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param array() $constraints
      * @return array()
      */
-    public function addAdditionalConstraints ($query, $filterTemplate, $constraints) {
+    public function addAdditionalConstraints($query, $filterTemplate, $constraints)
+    {
         return $constraints;
     }
 }

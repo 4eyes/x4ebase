@@ -25,7 +25,7 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Link;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use \TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\Link\TypolinkViewHelper
@@ -36,51 +36,56 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class TypolinkViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class TypolinkViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Link\TypolinkViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Link\TypolinkViewHelper */
+    protected $subject;
 
-	public function testInitializeArguments() {
-		$this->initializeArgumentsTest(0, 4, TRUE);
-	}
+    public function testInitializeArguments()
+    {
+        $this->initializeArgumentsTest(0, 4, true);
+    }
 
-	protected function createEmptyLinkHref() {
-		$mock = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, array('getTypoLink_URL'));
-		$mock->expects($this->any())->method('getTypoLink_URL')
-			->willReturn(FALSE);
-		return $mock;
-	}
+    protected function createEmptyLinkHref()
+    {
+        $mock = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getTypoLink_URL']);
+        $mock->expects($this->any())->method('getTypoLink_URL')
+            ->willReturn(false);
+        return $mock;
+    }
 
-	public function createNonEmptyLinkHref() {
-		$mock = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, array('getTypoLink_URL'));
-		$mock->expects($this->any())->method('getTypoLink_URL')
-			->willReturn('Hello');
-		return $mock;
-	}
+    public function createNonEmptyLinkHref()
+    {
+        $mock = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getTypoLink_URL']);
+        $mock->expects($this->any())->method('getTypoLink_URL')
+            ->willReturn('Hello');
+        return $mock;
+    }
 
-	protected function mockObjectManager($mockedContentObjectRenderer) {
-		$mock = $this->getMock(ObjectManager::class, array('get'));
-		$mock->expects($this->any())->method('get')->willReturn($mockedContentObjectRenderer);
-		return $mock;
-	}
+    protected function mockObjectManager($mockedContentObjectRenderer)
+    {
+        $mock = $this->getMock(ObjectManager::class, ['get']);
+        $mock->expects($this->any())->method('get')->willReturn($mockedContentObjectRenderer);
+        return $mock;
+    }
 
-	public function testRender() {
-		//invalid $parameter and $keepContent FALSE
-		$this->mockSubject('renderChildren');
-		$this->subject->expects($this->any())->method('renderChildren')
-			->willReturn('Hello');
-		$this->subject->_set('objectManager', $this->mockObjectManager($this->createEmptyLinkHref()));
-		$this->assertEquals('', $this->subject->render('Hello'));
+    public function testRender()
+    {
+        //invalid $parameter and $keepContent FALSE
+        $this->mockSubject('renderChildren');
+        $this->subject->expects($this->any())->method('renderChildren')
+            ->willReturn('Hello');
+        $this->subject->_set('objectManager', $this->mockObjectManager($this->createEmptyLinkHref()));
+        $this->assertEquals('', $this->subject->render('Hello'));
 
-		//invalid $parameter and $keepContent TRUE
-		$this->assertEquals('Hello', $this->subject->render('Hello', TRUE));
+        //invalid $parameter and $keepContent TRUE
+        $this->assertEquals('Hello', $this->subject->render('Hello', true));
 
-		//valid $parameter
-		$this->subject->_set('objectManager', $this->mockObjectManager($this->createNonEmptyLinkHref()));
+        //valid $parameter
+        $this->subject->_set('objectManager', $this->mockObjectManager($this->createNonEmptyLinkHref()));
 
-		//returns null, because $this->subject->tag is mocked
-		$this->assertEquals(NULL, $this->subject->render('Hello'));
-	}
-
+        //returns null, because $this->subject->tag is mocked
+        $this->assertEquals(null, $this->subject->render('Hello'));
+    }
 }

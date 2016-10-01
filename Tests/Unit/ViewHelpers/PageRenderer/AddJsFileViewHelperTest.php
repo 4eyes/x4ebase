@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\PageRenderer;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Core\Page\PageRenderer;
 
 /**
@@ -37,36 +36,39 @@ use TYPO3\CMS\Core\Page\PageRenderer;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class AddJsFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class AddJsFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\PageRenderer\AddJsFileViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\PageRenderer\AddJsFileViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testInitializeArguments() {
-		$this->initializeArgumentsTest(6);
-	}
+    /**
+     * @test
+     */
+    public function testInitializeArguments()
+    {
+        $this->initializeArgumentsTest(6);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testRender() {
-		$this->mockSubject('isCached');
-		$this->subject->expects($this->at(0))->method('isCached')->willReturn(FALSE);
-		$this->subject->expects($this->at(1))->method('isCached')->willReturn(TRUE);
+    /**
+     * @test
+     */
+    public function testRender()
+    {
+        $this->mockSubject('isCached');
+        $this->subject->expects($this->at(0))->method('isCached')->willReturn(false);
+        $this->subject->expects($this->at(1))->method('isCached')->willReturn(true);
 
-		$file = 'test';
+        $file = 'test';
 
-		$pageRenderer = $this->getMock(PageRenderer::class, array('addJsFile'), array(), '', FALSE);
-		$pageRenderer->expects($this->once())->method('addJsFile');
-		$this->subject->_set('pageRenderer', $pageRenderer);
+        $pageRenderer = $this->getMock(PageRenderer::class, ['addJsFile'], [], '', false);
+        $pageRenderer->expects($this->once())->method('addJsFile');
+        $this->subject->_set('pageRenderer', $pageRenderer);
 
-		//Avoid TSFE-Action
-		$this->subject->setArguments(array('external' => TRUE));
-		for ($i = 0; $i < 2; $i++) {
-			$this->subject->render($file);
-		}
-	}
+        //Avoid TSFE-Action
+        $this->subject->setArguments(['external' => true]);
+        for ($i = 0; $i < 2; $i++) {
+            $this->subject->render($file);
+        }
+    }
 }

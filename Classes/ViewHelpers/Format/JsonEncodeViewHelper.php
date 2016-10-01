@@ -5,7 +5,7 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,27 +29,29 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  * Applies json_encode() escaping to a value
  * @see http://www.php.net/manual/function.json_encode.php
  */
-class JsonEncodeViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Format\AbstractEncodingViewHelper implements \TYPO3\CMS\Core\SingletonInterface {
+class JsonEncodeViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Format\AbstractEncodingViewHelper implements \TYPO3\CMS\Core\SingletonInterface
+{
 
-	/**
-	 * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
-	 * can decode the text's entities.
-	 *
-	 * @var boolean
-	 */
-	protected $escapingInterceptorEnabled = FALSE;
+    /**
+     * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
+     * can decode the text's entities.
+     *
+     * @var bool
+     */
+    protected $escapingInterceptorEnabled = false;
 
-	/**
-	 * Encodes values using PHPs json_encode() function.
-	 *
-	 * @param string $value string to format
-	 * @return string the altered string
-	 * @see http://www.php.net/manual/function.json_encode.php
-	 */
-	public function render($value = NULL) {
-		if ($value === NULL) {
-			$value = $this->renderChildren();
-		}
-		return json_encode($value);
-	}
+    /**
+     * Encodes values using PHPs json_encode() function.
+     *
+     * @param string $value string to format
+     * @return string the altered string
+     * @see http://www.php.net/manual/function.json_encode.php
+     */
+    public function render($value = null)
+    {
+        if ($value === null) {
+            $value = $this->renderChildren();
+        }
+        return json_encode($value);
+    }
 }

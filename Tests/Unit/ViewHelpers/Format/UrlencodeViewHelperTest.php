@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Format;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Extbase\Validation\Exception;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\Format\UrlencodeViewHelper
@@ -36,47 +35,51 @@ use TYPO3\CMS\Extbase\Validation\Exception;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class UrlencodeViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class UrlencodeViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\UrlencodeViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\UrlencodeViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRenderFromArgument() {
-		$testCases = array(
-			'Lorem-IpsumçDolor Sit_amet'
-		);
+    /**
+     * @test
+     */
+    public function testRenderFromArgument()
+    {
+        $testCases = [
+            'Lorem-IpsumçDolor Sit_amet'
+        ];
 
-		foreach ($testCases as $testCase) {
-			$this->assertSame(str_replace('%20', ' ', rawurlencode($testCase)), $this->subject->render(TRUE, $testCase));
-		}
-	}
+        foreach ($testCases as $testCase) {
+            $this->assertSame(str_replace('%20', ' ', rawurlencode($testCase)), $this->subject->render(true, $testCase));
+        }
+    }
 
-	/**
-	 * @test
-	 */
-	public function testRenderFromChildren() {
-		$this->mockSubject('renderChildren');
+    /**
+     * @test
+     */
+    public function testRenderFromChildren()
+    {
+        $this->mockSubject('renderChildren');
 
-		$testCases = array(
-			'Lorem-IpsumçDolor Sit_amet'
-		);
+        $testCases = [
+            'Lorem-IpsumçDolor Sit_amet'
+        ];
 
-		for ($i = 0; $i < count($testCases); $i++) {
-			$this->subject->expects($this->at($i))->method('renderChildren')
-				->willReturn($testCases[$i]);
-		}
-		foreach ($testCases as $testCase) {
-			$this->assertSame(str_replace('%20', ' ', rawurlencode($testCase)), $this->subject->render());
-		}
-	}
+        for ($i = 0; $i < count($testCases); $i++) {
+            $this->subject->expects($this->at($i))->method('renderChildren')
+                ->willReturn($testCases[$i]);
+        }
+        foreach ($testCases as $testCase) {
+            $this->assertSame(str_replace('%20', ' ', rawurlencode($testCase)), $this->subject->render());
+        }
+    }
 
-	/**
-	 * @test
-	 */
-	public function testRenderWithInvalidValue() {
-		$this->assertEquals(5, $this->subject->render(TRUE,5));
-	}
+    /**
+     * @test
+     */
+    public function testRenderWithInvalidValue()
+    {
+        $this->assertEquals(5, $this->subject->render(true, 5));
+    }
 }
