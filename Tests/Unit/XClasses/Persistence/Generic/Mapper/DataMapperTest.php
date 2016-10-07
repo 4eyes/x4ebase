@@ -53,15 +53,14 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 		$expectedResult = $row['uid'] . '_' . $row['_PAGES_OVERLAY_UID'];
 
-		$identityMap = null;
-		$identityMap = $this->getMock(
-			\TYPO3\CMS\Extbase\Persistence\Generic\IdentityMap::class,
+		$persistenceSession = $this->getMock(
+            \TYPO3\CMS\Extbase\Persistence\Generic\Session::class,
 			array('hasIdentifier', 'getObjectByIdentifier')
 		);
-		$identityMap->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->willReturn(TRUE);
-		$identityMap->expects($this->once())->method('getObjectByIdentifier')->willReturn(TRUE);
+        $persistenceSession->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->willReturn(TRUE);
+        $persistenceSession->expects($this->once())->method('getObjectByIdentifier')->willReturn(TRUE);
 
-		$this->subject->_set('identityMap', $identityMap);
+		$this->subject->_set('persistenceSession', $persistenceSession);
 
 		$this->subject->_callRef('mapSingleRow', $className, $row);
 	}
@@ -77,18 +76,17 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 		);
 		$expectedResult = $row['uid'];
 
-		$identityMap = null;
-		$identityMap = $this->getMock(
-			\TYPO3\CMS\Extbase\Persistence\Generic\IdentityMap::class,
+        $persistenceSession = $this->getMock(
+            \TYPO3\CMS\Extbase\Persistence\Generic\Session::class,
 			array('hasIdentifier', 'getObjectByIdentifier'),
 			array(),
 			'',
 			FALSE
 		);
-		$identityMap->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->willReturn(TRUE);
-		$identityMap->expects($this->once())->method('getObjectByIdentifier')->willReturn(TRUE);
+        $persistenceSession->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->willReturn(TRUE);
+        $persistenceSession->expects($this->once())->method('getObjectByIdentifier')->willReturn(TRUE);
 
-		$this->subject->_set('identityMap', $identityMap);
+		$this->subject->_set('persistenceSession', $persistenceSession);
 
 		$this->subject->_callRef('mapSingleRow', $className, $row);
 	}
@@ -99,7 +97,23 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 	public function testThawProperties() {
 		$this->mockSubject('getDataMap');
 
-		$dataMap = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap::class, array('getLanguageIdColumnName'), array(), '', FALSE);
+        $reflectionService = $this->getMock(
+            \TYPO3\CMS\Extbase\Reflection\ReflectionService::class,
+            array(
+                'getClassSchema'
+            )
+        );
+        $this->subject->_set('reflectionService', $reflectionService);
+
+		$dataMap = $this->getMock(
+		    \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap::class,
+            array(
+                'getLanguageIdColumnName'
+            ),
+            array(),
+            '',
+            FALSE
+        );
 		$dataMap->expects($this->once())->method('getLanguageIdColumnName')->willReturn(NULL);
 		$this->subject->expects($this->once())->method('getDataMap')->willReturn($dataMap);
 		$row = array(
@@ -108,9 +122,15 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 			'_PAGES_OVERLAY_UID' => 1
 		);
 
-		$object = $this->getMock(\TYPO3\CMS\Belog\Domain\Model\LogEntry::class, array('_setProperty', '_getProperties'));
+		$object = $this->getMock(
+		    \TYPO3\CMS\Belog\Domain\Model\LogEntry::class,
+            array(
+                '_setProperty',
+                '_getProperties'
+            )
+        );
 		$object->expects($this->once())->method('_getProperties')->willReturn(array());
-		$object->expects($this->exactly(4))->method('_setProperty');
+		$object->expects($this->exactly(5))->method('_setProperty');
 
 		$this->subject->_callRef('thawProperties', $object, $row);
 	}
