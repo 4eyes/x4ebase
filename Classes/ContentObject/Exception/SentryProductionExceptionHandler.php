@@ -25,26 +25,25 @@ namespace X4e\X4ebase\ContentObject\Exception;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Frontend\ContentObject\Exception\ProductionExceptionHandler;
-use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \Lemming\SentryClient\Client;
+use Lemming\SentryClient\Client;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\Exception\ProductionExceptionHandler;
 
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SentryProductionExceptionHandler extends ProductionExceptionHandler{
-    protected function logException(\Exception $exception, $errorMessage, $code) {
+class SentryProductionExceptionHandler extends ProductionExceptionHandler
+{
+    protected function logException(\Exception $exception, $errorMessage, $code)
+    {
         parent::logException($exception, $errorMessage, $code);
 
         if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sentry_client'])) {
             $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sentry_client']);
             if (isset($configuration['dsn']) && $configuration['dsn'] != '') {
-
-                if (isset($configuration['productionOnly']) && (bool)$configuration['productionOnly'] === TRUE) {
+                if (isset($configuration['productionOnly']) && (bool)$configuration['productionOnly'] === true) {
                     if (GeneralUtility::getApplicationContext()->isProduction()) {
                         $this->handleSentryException($exception);
                     }
@@ -58,9 +57,10 @@ class SentryProductionExceptionHandler extends ProductionExceptionHandler{
     /**
      * @param \Exception $exception
      */
-    function handleSentryException($exception) {
+    public function handleSentryException($exception)
+    {
         $client = new Client();
-        $errorHandler = new \Raven_ErrorHandler($client, TRUE);
+        $errorHandler = new \Raven_ErrorHandler($client, true);
         $errorHandler->handleException($exception);
     }
 }

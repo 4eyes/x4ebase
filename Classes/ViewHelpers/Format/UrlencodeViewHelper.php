@@ -15,38 +15,40 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  */
 
 /**
- * Encodes the given string according to http://www.faqs.org/rfcs/rfc3986.html 
+ * Encodes the given string according to http://www.faqs.org/rfcs/rfc3986.html
  * (applying PHPs rawurlencode() function)
  * @see http://www.php.net/manual/function.rawurlencode.php
- * 
+ *
  * @author Christoph Dörfel <christoph@4eyes.ch>
  */
-class UrlencodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class UrlencodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
-	 * can decode the text's entities.
-	 *
-	 * @var boolean
-	 */
-	protected $escapingInterceptorEnabled = FALSE;
+    /**
+     * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
+     * can decode the text's entities.
+     *
+     * @var bool
+     */
+    protected $escapingInterceptorEnabled = false;
 
-	/**
-	 * Escapes special characters using PHPs urlencode() function.
-	 *
-	 * @param string $insertSpaces Whether to replace %20 with an actual space
-	 * @param string $value string to format
-	 * @return mixed
-	 * @see http://www.php.net/manual/function.rawurlencode.php
-	 */
-	public function render($insertSpaces = TRUE, $value = NULL) {
-		if ($value === NULL) {
-			$value = $this->renderChildren();
-		}
-		if (!is_string($value)) {
-			return $value;
-		}
-		$encodedString = rawurlencode($value);
-		return str_replace('%20', ' ', $encodedString);
-	}
+    /**
+     * Escapes special characters using PHPs urlencode() function.
+     *
+     * @param string $insertSpaces Whether to replace %20 with an actual space
+     * @param string $value string to format
+     * @return mixed
+     * @see http://www.php.net/manual/function.rawurlencode.php
+     */
+    public function render($insertSpaces = true, $value = null)
+    {
+        if ($value === null) {
+            $value = $this->renderChildren();
+        }
+        if (!is_string($value)) {
+            return $value;
+        }
+        $encodedString = rawurlencode($value);
+        return str_replace('%20', ' ', $encodedString);
+    }
 }

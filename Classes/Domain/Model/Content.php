@@ -1,7 +1,7 @@
 <?php
 namespace X4e\X4ebase\Domain\Model;
 
-    /***************************************************************
+/***************************************************************
      *  Copyright notice
      *
      *  (c) 2015 Alessandro Bellafronte <alessandro@4eyes.ch>, 4eyes GmbH
@@ -28,11 +28,11 @@ namespace X4e\X4ebase\Domain\Model;
 /**
  * A TYPO3 tt_content record model for extbase
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
     /**
      * ctype
@@ -72,14 +72,14 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * imagewidth
      *
-     * @var integer
+     * @var int
      */
     protected $imagewidth;
 
     /**
      * imageorient
      *
-     * @var integer
+     * @var int
      */
     protected $imageorient;
 
@@ -93,14 +93,14 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * imagecols
      *
-     * @var integer
+     * @var int
      */
     protected $imagecols;
 
     /**
      * imageborder
      *
-     * @var integer
+     * @var int
      */
     protected $imageborder;
 
@@ -114,14 +114,14 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * layout
      *
-     * @var integer
+     * @var int
      */
     protected $layout;
 
     /**
      * cols
      *
-     * @var integer
+     * @var int
      */
     protected $cols;
 
@@ -142,7 +142,7 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * colpos
      *
-     * @var integer
+     * @var int
      */
     protected $colpos;
 
@@ -198,28 +198,28 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * imageZoom
      *
-     * @var integer
+     * @var int
      */
     protected $imageZoom;
 
     /**
      * imageNorows
      *
-     * @var integer
+     * @var int
      */
     protected $imageNorows;
 
     /**
      * imageEffects
      *
-     * @var integer
+     * @var int
      */
     protected $imageEffects;
 
     /**
      * imageCompression
      *
-     * @var integer
+     * @var int
      */
     protected $imageCompression;
 
@@ -268,28 +268,28 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * tableBorder
      *
-     * @var integer
+     * @var int
      */
     protected $tableBorder;
 
     /**
      * tableCellspacing
      *
-     * @var integer
+     * @var int
      */
     protected $tableCellspacing;
 
     /**
      * tableCellpadding
      *
-     * @var integer
+     * @var int
      */
     protected $tableCellpadding;
 
     /**
      * tableBgcolor
      *
-     * @var integer
+     * @var int
      */
     protected $tableBgcolor;
 
@@ -303,35 +303,35 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * sectionindex
      *
-     * @var integer
+     * @var int
      */
     protected $sectionindex;
 
     /**
      * linktotop
      *
-     * @var integer
+     * @var int
      */
     protected $linktotop;
 
     /**
      * filelinkSize
      *
-     * @var integer
+     * @var int
      */
     protected $filelinkSize;
 
     /**
      * sectionFrame
      *
-     * @var integer
+     * @var int
      */
     protected $sectionFrame;
 
     /**
      * date
      *
-     * @var integer
+     * @var int
      */
     protected $date;
 
@@ -345,28 +345,28 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * imageFrames
      *
-     * @var integer
+     * @var int
      */
     protected $imageFrames;
 
     /**
      * recursive
      *
-     * @var integer
+     * @var int
      */
     protected $recursive;
 
     /**
      * imageheight
      *
-     * @var integer
+     * @var int
      */
     protected $imageheight;
 
     /**
      * rteEnabled
      *
-     * @var integer
+     * @var int
      */
     protected $rteEnabled;
 
@@ -408,7 +408,7 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * accessibilityBypass
      *
-     * @var integer
+     * @var int
      */
     protected $accessibilityBypass;
 
@@ -436,7 +436,7 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * categories
      *
-     * @var integer
+     * @var int
      */
     protected $categories;
 
@@ -445,7 +445,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return TtContent
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->initStorageObjects();
     }
 
@@ -454,7 +455,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return void
      */
-    protected function initStorageObjects() {
+    protected function initStorageObjects()
+    {
         //$this->xyz = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
@@ -463,7 +465,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $ctype
      */
-    public function getCtype() {
+    public function getCtype()
+    {
         return $this->ctype;
     }
 
@@ -473,7 +476,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $ctype
      * @return void
      */
-    public function setCtype($ctype) {
+    public function setCtype($ctype)
+    {
         $this->ctype = $ctype;
     }
 
@@ -482,7 +486,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $header
      */
-    public function getHeader() {
+    public function getHeader()
+    {
         return $this->header;
     }
 
@@ -492,7 +497,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $header
      * @return void
      */
-    public function setHeader($header) {
+    public function setHeader($header)
+    {
         $this->header = $header;
     }
 
@@ -501,7 +507,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $headerPosition
      */
-    public function getHeaderPosition() {
+    public function getHeaderPosition()
+    {
         return $this->headerPosition;
     }
 
@@ -511,7 +518,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $headerPosition
      * @return void
      */
-    public function setHeaderPosition($headerPosition) {
+    public function setHeaderPosition($headerPosition)
+    {
         $this->headerPosition = $headerPosition;
     }
 
@@ -520,7 +528,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $bodytext
      */
-    public function getBodytext() {
+    public function getBodytext()
+    {
         return $this->bodytext;
     }
 
@@ -530,7 +539,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $bodytext
      * @return void
      */
-    public function setBodytext($bodytext) {
+    public function setBodytext($bodytext)
+    {
         $this->bodytext = $bodytext;
     }
 
@@ -539,7 +549,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $image
      */
-    public function getImage() {
+    public function getImage()
+    {
         return $this->image;
     }
 
@@ -549,45 +560,50 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $image
      * @return void
      */
-    public function setImage($image) {
+    public function setImage($image)
+    {
         $this->image = $image;
     }
 
     /**
      * Returns the imagewidth
      *
-     * @return integer $imagewidth
+     * @return int $imagewidth
      */
-    public function getImagewidth() {
+    public function getImagewidth()
+    {
         return $this->imagewidth;
     }
 
     /**
      * Sets the imagewidth
      *
-     * @param integer $imagewidth
+     * @param int $imagewidth
      * @return void
      */
-    public function setImagewidth($imagewidth) {
+    public function setImagewidth($imagewidth)
+    {
         $this->imagewidth = $imagewidth;
     }
 
     /**
      * Returns the imageorient
      *
-     * @return integer $imageorient
+     * @return int $imageorient
      */
-    public function getImageorient() {
+    public function getImageorient()
+    {
         return $this->imageorient;
     }
 
     /**
      * Sets the imageorient
      *
-     * @param integer $imageorient
+     * @param int $imageorient
      * @return void
      */
-    public function setImageorient($imageorient) {
+    public function setImageorient($imageorient)
+    {
         $this->imageorient = $imageorient;
     }
 
@@ -596,7 +612,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $imagecaption
      */
-    public function getImagecaption() {
+    public function getImagecaption()
+    {
         return $this->imagecaption;
     }
 
@@ -606,45 +623,50 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $imagecaption
      * @return void
      */
-    public function setImagecaption($imagecaption) {
+    public function setImagecaption($imagecaption)
+    {
         $this->imagecaption = $imagecaption;
     }
 
     /**
      * Returns the imagecols
      *
-     * @return integer $imagecols
+     * @return int $imagecols
      */
-    public function getImagecols() {
+    public function getImagecols()
+    {
         return $this->imagecols;
     }
 
     /**
      * Sets the imagecols
      *
-     * @param integer $imagecols
+     * @param int $imagecols
      * @return void
      */
-    public function setImagecols($imagecols) {
+    public function setImagecols($imagecols)
+    {
         $this->imagecols = $imagecols;
     }
 
     /**
      * Returns the imageborder
      *
-     * @return integer $imageborder
+     * @return int $imageborder
      */
-    public function getImageborder() {
+    public function getImageborder()
+    {
         return $this->imageborder;
     }
 
     /**
      * Sets the imageborder
      *
-     * @param integer $imageborder
+     * @param int $imageborder
      * @return void
      */
-    public function setImageborder($imageborder) {
+    public function setImageborder($imageborder)
+    {
         $this->imageborder = $imageborder;
     }
 
@@ -653,7 +675,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $media
      */
-    public function getMedia() {
+    public function getMedia()
+    {
         return $this->media;
     }
 
@@ -663,45 +686,50 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $media
      * @return void
      */
-    public function setMedia($media) {
+    public function setMedia($media)
+    {
         $this->media = $media;
     }
 
     /**
      * Returns the layout
      *
-     * @return integer $layout
+     * @return int $layout
      */
-    public function getLayout() {
+    public function getLayout()
+    {
         return $this->layout;
     }
 
     /**
      * Sets the layout
      *
-     * @param integer $layout
+     * @param int $layout
      * @return void
      */
-    public function setLayout($layout) {
+    public function setLayout($layout)
+    {
         $this->layout = $layout;
     }
 
     /**
      * Returns the cols
      *
-     * @return integer $cols
+     * @return int $cols
      */
-    public function getCols() {
+    public function getCols()
+    {
         return $this->cols;
     }
 
     /**
      * Sets the cols
      *
-     * @param integer $cols
+     * @param int $cols
      * @return void
      */
-    public function setCols($cols) {
+    public function setCols($cols)
+    {
         $this->cols = $cols;
     }
 
@@ -710,7 +738,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $records
      */
-    public function getRecords() {
+    public function getRecords()
+    {
         return $this->records;
     }
 
@@ -720,7 +749,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $records
      * @return void
      */
-    public function setRecords($records) {
+    public function setRecords($records)
+    {
         $this->records = $records;
     }
 
@@ -729,7 +759,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $pages
      */
-    public function getPages() {
+    public function getPages()
+    {
         return $this->pages;
     }
 
@@ -739,26 +770,29 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $pages
      * @return void
      */
-    public function setPages($pages) {
+    public function setPages($pages)
+    {
         $this->pages = $pages;
     }
 
     /**
      * Returns the colpos
      *
-     * @return integer $colpos
+     * @return int $colpos
      */
-    public function getColpos() {
+    public function getColpos()
+    {
         return $this->colpos;
     }
 
     /**
      * Sets the colpos
      *
-     * @param integer $colpos
+     * @param int $colpos
      * @return void
      */
-    public function setColpos($colpos) {
+    public function setColpos($colpos)
+    {
         $this->colpos = $colpos;
     }
 
@@ -767,7 +801,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $subheader
      */
-    public function getSubheader() {
+    public function getSubheader()
+    {
         return $this->subheader;
     }
 
@@ -777,7 +812,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $subheader
      * @return void
      */
-    public function setSubheader($subheader) {
+    public function setSubheader($subheader)
+    {
         $this->subheader = $subheader;
     }
 
@@ -786,7 +822,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $spacebefore
      */
-    public function getSpacebefore() {
+    public function getSpacebefore()
+    {
         return $this->spacebefore;
     }
 
@@ -796,7 +833,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $spacebefore
      * @return void
      */
-    public function setSpacebefore($spacebefore) {
+    public function setSpacebefore($spacebefore)
+    {
         $this->spacebefore = $spacebefore;
     }
 
@@ -805,7 +843,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $spaceafter
      */
-    public function getSpaceafter() {
+    public function getSpaceafter()
+    {
         return $this->spaceafter;
     }
 
@@ -815,7 +854,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $spaceafter
      * @return void
      */
-    public function setSpaceafter($spaceafter) {
+    public function setSpaceafter($spaceafter)
+    {
         $this->spaceafter = $spaceafter;
     }
 
@@ -824,7 +864,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $feGroup
      */
-    public function getFeGroup() {
+    public function getFeGroup()
+    {
         return $this->feGroup;
     }
 
@@ -834,7 +875,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $feGroup
      * @return void
      */
-    public function setFeGroup($feGroup) {
+    public function setFeGroup($feGroup)
+    {
         $this->feGroup = $feGroup;
     }
 
@@ -843,7 +885,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $headerLink
      */
-    public function getHeaderLink() {
+    public function getHeaderLink()
+    {
         return $this->headerLink;
     }
 
@@ -853,7 +896,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $headerLink
      * @return void
      */
-    public function setHeaderLink($headerLink) {
+    public function setHeaderLink($headerLink)
+    {
         $this->headerLink = $headerLink;
     }
 
@@ -862,7 +906,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $imagecaptionPosition
      */
-    public function getImagecaptionPosition() {
+    public function getImagecaptionPosition()
+    {
         return $this->imagecaptionPosition;
     }
 
@@ -872,7 +917,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $imagecaptionPosition
      * @return void
      */
-    public function setImagecaptionPosition($imagecaptionPosition) {
+    public function setImagecaptionPosition($imagecaptionPosition)
+    {
         $this->imagecaptionPosition = $imagecaptionPosition;
     }
 
@@ -881,7 +927,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $imageLink
      */
-    public function getImageLink() {
+    public function getImageLink()
+    {
         return $this->imageLink;
     }
 
@@ -891,83 +938,92 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $imageLink
      * @return void
      */
-    public function setImageLink($imageLink) {
+    public function setImageLink($imageLink)
+    {
         $this->imageLink = $imageLink;
     }
 
     /**
      * Returns the imageZoom
      *
-     * @return integer $imageZoom
+     * @return int $imageZoom
      */
-    public function getImageZoom() {
+    public function getImageZoom()
+    {
         return $this->imageZoom;
     }
 
     /**
      * Sets the imageZoom
      *
-     * @param integer $imageZoom
+     * @param int $imageZoom
      * @return void
      */
-    public function setImageZoom($imageZoom) {
+    public function setImageZoom($imageZoom)
+    {
         $this->imageZoom = $imageZoom;
     }
 
     /**
      * Returns the imageNorows
      *
-     * @return integer $imageNorows
+     * @return int $imageNorows
      */
-    public function getImageNorows() {
+    public function getImageNorows()
+    {
         return $this->imageNorows;
     }
 
     /**
      * Sets the imageNorows
      *
-     * @param integer $imageNorows
+     * @param int $imageNorows
      * @return void
      */
-    public function setImageNorows($imageNorows) {
+    public function setImageNorows($imageNorows)
+    {
         $this->imageNorows = $imageNorows;
     }
 
     /**
      * Returns the imageEffects
      *
-     * @return integer $imageEffects
+     * @return int $imageEffects
      */
-    public function getImageEffects() {
+    public function getImageEffects()
+    {
         return $this->imageEffects;
     }
 
     /**
      * Sets the imageEffects
      *
-     * @param integer $imageEffects
+     * @param int $imageEffects
      * @return void
      */
-    public function setImageEffects($imageEffects) {
+    public function setImageEffects($imageEffects)
+    {
         $this->imageEffects = $imageEffects;
     }
 
     /**
      * Returns the imageCompression
      *
-     * @return integer $imageCompression
+     * @return int $imageCompression
      */
-    public function getImageCompression() {
+    public function getImageCompression()
+    {
         return $this->imageCompression;
     }
 
     /**
      * Sets the imageCompression
      *
-     * @param integer $imageCompression
+     * @param int $imageCompression
      * @return void
      */
-    public function setImageCompression($imageCompression) {
+    public function setImageCompression($imageCompression)
+    {
         $this->imageCompression = $imageCompression;
     }
 
@@ -976,7 +1032,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $alttext
      */
-    public function getAlttext() {
+    public function getAlttext()
+    {
         return $this->alttext;
     }
 
@@ -986,7 +1043,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $alttext
      * @return void
      */
-    public function setAlttext($alttext) {
+    public function setAlttext($alttext)
+    {
         $this->alttext = $alttext;
     }
 
@@ -995,7 +1053,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $titletext
      */
-    public function getTitletext() {
+    public function getTitletext()
+    {
         return $this->titletext;
     }
 
@@ -1005,7 +1064,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $titletext
      * @return void
      */
-    public function setTitletext($titletext) {
+    public function setTitletext($titletext)
+    {
         $this->titletext = $titletext;
     }
 
@@ -1014,7 +1074,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $longdescurl
      */
-    public function getLongdescurl() {
+    public function getLongdescurl()
+    {
         return $this->longdescurl;
     }
 
@@ -1024,7 +1085,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $longdescurl
      * @return void
      */
-    public function setLongdescurl($longdescurl) {
+    public function setLongdescurl($longdescurl)
+    {
         $this->longdescurl = $longdescurl;
     }
 
@@ -1033,7 +1095,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $headerLayout
      */
-    public function getHeaderLayout() {
+    public function getHeaderLayout()
+    {
         return $this->headerLayout;
     }
 
@@ -1043,7 +1106,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $headerLayout
      * @return void
      */
-    public function setHeaderLayout($headerLayout) {
+    public function setHeaderLayout($headerLayout)
+    {
         $this->headerLayout = $headerLayout;
     }
 
@@ -1052,7 +1116,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $menuType
      */
-    public function getMenuType() {
+    public function getMenuType()
+    {
         return $this->menuType;
     }
 
@@ -1062,7 +1127,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $menuType
      * @return void
      */
-    public function setMenuType($menuType) {
+    public function setMenuType($menuType)
+    {
         $this->menuType = $menuType;
     }
 
@@ -1071,7 +1137,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $listType
      */
-    public function getListType() {
+    public function getListType()
+    {
         return $this->listType;
     }
 
@@ -1081,83 +1148,92 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $listType
      * @return void
      */
-    public function setListType($listType) {
+    public function setListType($listType)
+    {
         $this->listType = $listType;
     }
 
     /**
      * Returns the tableBorder
      *
-     * @return integer $tableBorder
+     * @return int $tableBorder
      */
-    public function getTableBorder() {
+    public function getTableBorder()
+    {
         return $this->tableBorder;
     }
 
     /**
      * Sets the tableBorder
      *
-     * @param integer $tableBorder
+     * @param int $tableBorder
      * @return void
      */
-    public function setTableBorder($tableBorder) {
+    public function setTableBorder($tableBorder)
+    {
         $this->tableBorder = $tableBorder;
     }
 
     /**
      * Returns the tableCellspacing
      *
-     * @return integer $tableCellspacing
+     * @return int $tableCellspacing
      */
-    public function getTableCellspacing() {
+    public function getTableCellspacing()
+    {
         return $this->tableCellspacing;
     }
 
     /**
      * Sets the tableCellspacing
      *
-     * @param integer $tableCellspacing
+     * @param int $tableCellspacing
      * @return void
      */
-    public function setTableCellspacing($tableCellspacing) {
+    public function setTableCellspacing($tableCellspacing)
+    {
         $this->tableCellspacing = $tableCellspacing;
     }
 
     /**
      * Returns the tableCellpadding
      *
-     * @return integer $tableCellpadding
+     * @return int $tableCellpadding
      */
-    public function getTableCellpadding() {
+    public function getTableCellpadding()
+    {
         return $this->tableCellpadding;
     }
 
     /**
      * Sets the tableCellpadding
      *
-     * @param integer $tableCellpadding
+     * @param int $tableCellpadding
      * @return void
      */
-    public function setTableCellpadding($tableCellpadding) {
+    public function setTableCellpadding($tableCellpadding)
+    {
         $this->tableCellpadding = $tableCellpadding;
     }
 
     /**
      * Returns the tableBgcolor
      *
-     * @return integer $tableBgcolor
+     * @return int $tableBgcolor
      */
-    public function getTableBgcolor() {
+    public function getTableBgcolor()
+    {
         return $this->tableBgcolor;
     }
 
     /**
      * Sets the tableBgcolor
      *
-     * @param integer $tableBgcolor
+     * @param int $tableBgcolor
      * @return void
      */
-    public function setTableBgcolor($tableBgcolor) {
+    public function setTableBgcolor($tableBgcolor)
+    {
         $this->tableBgcolor = $tableBgcolor;
     }
 
@@ -1166,7 +1242,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $selectKey
      */
-    public function getSelectKey() {
+    public function getSelectKey()
+    {
         return $this->selectKey;
     }
 
@@ -1176,102 +1253,113 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $selectKey
      * @return void
      */
-    public function setSelectKey($selectKey) {
+    public function setSelectKey($selectKey)
+    {
         $this->selectKey = $selectKey;
     }
 
     /**
      * Returns the sectionindex
      *
-     * @return integer $sectionindex
+     * @return int $sectionindex
      */
-    public function getSectionindex() {
+    public function getSectionindex()
+    {
         return $this->sectionindex;
     }
 
     /**
      * Sets the sectionindex
      *
-     * @param integer $sectionindex
+     * @param int $sectionindex
      * @return void
      */
-    public function setSectionindex($sectionindex) {
+    public function setSectionindex($sectionindex)
+    {
         $this->sectionindex = $sectionindex;
     }
 
     /**
      * Returns the linktotop
      *
-     * @return integer $linktotop
+     * @return int $linktotop
      */
-    public function getLinktotop() {
+    public function getLinktotop()
+    {
         return $this->linktotop;
     }
 
     /**
      * Sets the linktotop
      *
-     * @param integer $linktotop
+     * @param int $linktotop
      * @return void
      */
-    public function setLinktotop($linktotop) {
+    public function setLinktotop($linktotop)
+    {
         $this->linktotop = $linktotop;
     }
 
     /**
      * Returns the filelinkSize
      *
-     * @return integer $filelinkSize
+     * @return int $filelinkSize
      */
-    public function getFilelinkSize() {
+    public function getFilelinkSize()
+    {
         return $this->filelinkSize;
     }
 
     /**
      * Sets the filelinkSize
      *
-     * @param integer $filelinkSize
+     * @param int $filelinkSize
      * @return void
      */
-    public function setFilelinkSize($filelinkSize) {
+    public function setFilelinkSize($filelinkSize)
+    {
         $this->filelinkSize = $filelinkSize;
     }
 
     /**
      * Returns the sectionFrame
      *
-     * @return integer $sectionFrame
+     * @return int $sectionFrame
      */
-    public function getSectionFrame() {
+    public function getSectionFrame()
+    {
         return $this->sectionFrame;
     }
 
     /**
      * Sets the sectionFrame
      *
-     * @param integer $sectionFrame
+     * @param int $sectionFrame
      * @return void
      */
-    public function setSectionFrame($sectionFrame) {
+    public function setSectionFrame($sectionFrame)
+    {
         $this->sectionFrame = $sectionFrame;
     }
 
     /**
      * Returns the date
      *
-     * @return integer $date
+     * @return int $date
      */
-    public function getDate() {
+    public function getDate()
+    {
         return $this->date;
     }
 
     /**
      * Sets the date
      *
-     * @param integer $date
+     * @param int $date
      * @return void
      */
-    public function setDate($date) {
+    public function setDate($date)
+    {
         $this->date = $date;
     }
 
@@ -1280,7 +1368,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $multimedia
      */
-    public function getMultimedia() {
+    public function getMultimedia()
+    {
         return $this->multimedia;
     }
 
@@ -1290,83 +1379,92 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $multimedia
      * @return void
      */
-    public function setMultimedia($multimedia) {
+    public function setMultimedia($multimedia)
+    {
         $this->multimedia = $multimedia;
     }
 
     /**
      * Returns the imageFrames
      *
-     * @return integer $imageFrames
+     * @return int $imageFrames
      */
-    public function getImageFrames() {
+    public function getImageFrames()
+    {
         return $this->imageFrames;
     }
 
     /**
      * Sets the imageFrames
      *
-     * @param integer $imageFrames
+     * @param int $imageFrames
      * @return void
      */
-    public function setImageFrames($imageFrames) {
+    public function setImageFrames($imageFrames)
+    {
         $this->imageFrames = $imageFrames;
     }
 
     /**
      * Returns the recursive
      *
-     * @return integer $recursive
+     * @return int $recursive
      */
-    public function getRecursive() {
+    public function getRecursive()
+    {
         return $this->recursive;
     }
 
     /**
      * Sets the recursive
      *
-     * @param integer $recursive
+     * @param int $recursive
      * @return void
      */
-    public function setRecursive($recursive) {
+    public function setRecursive($recursive)
+    {
         $this->recursive = $recursive;
     }
 
     /**
      * Returns the imageheight
      *
-     * @return integer $imageheight
+     * @return int $imageheight
      */
-    public function getImageheight() {
+    public function getImageheight()
+    {
         return $this->imageheight;
     }
 
     /**
      * Sets the imageheight
      *
-     * @param integer $imageheight
+     * @param int $imageheight
      * @return void
      */
-    public function setImageheight($imageheight) {
+    public function setImageheight($imageheight)
+    {
         $this->imageheight = $imageheight;
     }
 
     /**
      * Returns the rteEnabled
      *
-     * @return integer $rteEnabled
+     * @return int $rteEnabled
      */
-    public function getRteEnabled() {
+    public function getRteEnabled()
+    {
         return $this->rteEnabled;
     }
 
     /**
      * Sets the rteEnabled
      *
-     * @param integer $rteEnabled
+     * @param int $rteEnabled
      * @return void
      */
-    public function setRteEnabled($rteEnabled) {
+    public function setRteEnabled($rteEnabled)
+    {
         $this->rteEnabled = $rteEnabled;
     }
 
@@ -1375,7 +1473,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $piFlexform
      */
-    public function getPiFlexform() {
+    public function getPiFlexform()
+    {
         return $this->piFlexform;
     }
 
@@ -1385,7 +1484,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $piFlexform
      * @return void
      */
-    public function setPiFlexform($piFlexform) {
+    public function setPiFlexform($piFlexform)
+    {
         $this->piFlexform = $piFlexform;
     }
 
@@ -1394,7 +1494,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $fileCollections
      */
-    public function getFileCollections() {
+    public function getFileCollections()
+    {
         return $this->fileCollections;
     }
 
@@ -1404,7 +1505,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $fileCollections
      * @return void
      */
-    public function setFileCollections($fileCollections) {
+    public function setFileCollections($fileCollections)
+    {
         $this->fileCollections = $fileCollections;
     }
 
@@ -1413,7 +1515,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $filelinkSorting
      */
-    public function getFilelinkSorting() {
+    public function getFilelinkSorting()
+    {
         return $this->filelinkSorting;
     }
 
@@ -1423,7 +1526,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $filelinkSorting
      * @return void
      */
-    public function setFilelinkSorting($filelinkSorting) {
+    public function setFilelinkSorting($filelinkSorting)
+    {
         $this->filelinkSorting = $filelinkSorting;
     }
 
@@ -1432,7 +1536,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $target
      */
-    public function getTarget() {
+    public function getTarget()
+    {
         return $this->target;
     }
 
@@ -1442,7 +1547,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $target
      * @return void
      */
-    public function setTarget($target) {
+    public function setTarget($target)
+    {
         $this->target = $target;
     }
 
@@ -1451,7 +1557,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $accessibilityTitle
      */
-    public function getAccessibilityTitle() {
+    public function getAccessibilityTitle()
+    {
         return $this->accessibilityTitle;
     }
 
@@ -1461,26 +1568,29 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $accessibilityTitle
      * @return void
      */
-    public function setAccessibilityTitle($accessibilityTitle) {
+    public function setAccessibilityTitle($accessibilityTitle)
+    {
         $this->accessibilityTitle = $accessibilityTitle;
     }
 
     /**
      * Returns the accessibilityBypass
      *
-     * @return integer $accessibilityBypass
+     * @return int $accessibilityBypass
      */
-    public function getAccessibilityBypass() {
+    public function getAccessibilityBypass()
+    {
         return $this->accessibilityBypass;
     }
 
     /**
      * Sets the accessibilityBypass
      *
-     * @param integer $accessibilityBypass
+     * @param int $accessibilityBypass
      * @return void
      */
-    public function setAccessibilityBypass($accessibilityBypass) {
+    public function setAccessibilityBypass($accessibilityBypass)
+    {
         $this->accessibilityBypass = $accessibilityBypass;
     }
 
@@ -1489,7 +1599,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $accessibilityBypassText
      */
-    public function getAccessibilityBypassText() {
+    public function getAccessibilityBypassText()
+    {
         return $this->accessibilityBypassText;
     }
 
@@ -1499,7 +1610,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $accessibilityBypassText
      * @return void
      */
-    public function setAccessibilityBypassText($accessibilityBypassText) {
+    public function setAccessibilityBypassText($accessibilityBypassText)
+    {
         $this->accessibilityBypassText = $accessibilityBypassText;
     }
 
@@ -1508,7 +1620,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $selectedCategories
      */
-    public function getSelectedCategories() {
+    public function getSelectedCategories()
+    {
         return $this->selectedCategories;
     }
 
@@ -1518,7 +1631,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $selectedCategories
      * @return void
      */
-    public function setSelectedCategories($selectedCategories) {
+    public function setSelectedCategories($selectedCategories)
+    {
         $this->selectedCategories = $selectedCategories;
     }
 
@@ -1527,7 +1641,8 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string $categoryField
      */
-    public function getCategoryField() {
+    public function getCategoryField()
+    {
         return $this->categoryField;
     }
 
@@ -1537,26 +1652,29 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $categoryField
      * @return void
      */
-    public function setCategoryField($categoryField) {
+    public function setCategoryField($categoryField)
+    {
         $this->categoryField = $categoryField;
     }
 
     /**
      * Returns the categories
      *
-     * @return integer $categories
+     * @return int $categories
      */
-    public function getCategories() {
+    public function getCategories()
+    {
         return $this->categories;
     }
 
     /**
      * Sets the categories
      *
-     * @param integer $categories
+     * @param int $categories
      * @return void
      */
-    public function setCategories($categories) {
+    public function setCategories($categories)
+    {
         $this->categories = $categories;
     }
 }

@@ -38,142 +38,150 @@ use X4e\X4ebase\Utility\EmailUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
+class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|EmailUtility */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|EmailUtility */
+    protected $subject;
 
-	public function testLogEmail_SendsEmail_AND_LogsEmail() {
-		$this->markTestIncomplete(
-			'Untestable - Static method calls'
-		);
-		$this->mockSubject('logEmail');
+    public function testLogEmail_SendsEmail_AND_LogsEmail()
+    {
+        $this->markTestIncomplete(
+            'Untestable - Static method calls'
+        );
+        $this->mockSubject('logEmail');
 
-		$request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, array(), array(), '', FALSE);
+        $request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, [], [], '', false);
 
-		$emailView = $this->getMock(\TYPO3\CMS\Fluid\View\StandaloneView::class, array('render', 'assignMultiple', 'getRequest'), array(), '', FALSE);
-		$emailView->expects($this->once())->method('render')->willReturn('Hello');
-		$emailView->expects($this->once())->method('getRequest')->willReturn($request);
-		$message = $this->getMock(\TYPO3\CMS\Core\Mail\MailMessage::class, array('send', 'isSent', 'setTo', 'setFrom', 'setReplyTo', 'setSubject', 'attach', 'setBody'), array(), '', FALSE);
-		$message->expects($this->once())->method('send');
-		$message->expects($this->once())->method('isSent')->willReturn(TRUE);
-		$message->expects($this->once())->method('setTo')->willReturn($message);
-		$message->expects($this->once())->method('setFrom')->willReturn($message);
-		$message->expects($this->once())->method('setReplyTo')->willReturn($message);
-		$message->expects($this->once())->method('setSubject')->willReturn($message);
-		$message->expects($this->once())->method('attach')->willReturn($message);
-		$message->expects($this->once())->method('setBody')->willReturn($message);
+        $emailView = $this->getMock(\TYPO3\CMS\Fluid\View\StandaloneView::class, ['render', 'assignMultiple', 'getRequest'], [], '', false);
+        $emailView->expects($this->once())->method('render')->willReturn('Hello');
+        $emailView->expects($this->once())->method('getRequest')->willReturn($request);
+        $message = $this->getMock(\TYPO3\CMS\Core\Mail\MailMessage::class, ['send', 'isSent', 'setTo', 'setFrom', 'setReplyTo', 'setSubject', 'attach', 'setBody'], [], '', false);
+        $message->expects($this->once())->method('send');
+        $message->expects($this->once())->method('isSent')->willReturn(true);
+        $message->expects($this->once())->method('setTo')->willReturn($message);
+        $message->expects($this->once())->method('setFrom')->willReturn($message);
+        $message->expects($this->once())->method('setReplyTo')->willReturn($message);
+        $message->expects($this->once())->method('setSubject')->willReturn($message);
+        $message->expects($this->once())->method('attach')->willReturn($message);
+        $message->expects($this->once())->method('setBody')->willReturn($message);
 
-		$objectManager = $this->getMock(
-			ObjectManager::class, array('get'), array(), '', FALSE
-		);
-		$objectManager->expects($this->at(0))->method('get')->willReturn($emailView);
-		$objectManager->expects($this->at(1))->method('get')->willReturn($message);
+        $objectManager = $this->getMock(
+            ObjectManager::class, ['get'], [], '', false
+        );
+        $objectManager->expects($this->at(0))->method('get')->willReturn($emailView);
+        $objectManager->expects($this->at(1))->method('get')->willReturn($message);
 
-		$subject = $this->subject;
+        $subject = $this->subject;
 
-		$this->subject->_setStatic('objectManager', $objectManager);
+        $this->subject->_setStatic('objectManager', $objectManager);
 
-		$this->subject->sendTemplateEmail(array('test@example.org'), array(''), '', '', '', '', '', array(), 'x4ebase', 'Email', true, array(1));
-	}
+        $this->subject->sendTemplateEmail(['test@example.org'], [''], '', '', '', '', '', [], 'x4ebase', 'Email', true, [1]);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testLogEmail_PersistsEmailLog() {
-		$this->mockSubject();
-		$emailLogRepository = $this->getMock(\X4e\X4ebase\Domain\Repository\EmailLogRepository::class, array('add'), array(), '', FALSE);
-		$emailLog = $this->getMock(\X4e\X4ebase\Domain\Model\EmailLog::class, array('dummy'));
+    /**
+     * @test
+     */
+    public function testLogEmail_PersistsEmailLog()
+    {
+        $this->mockSubject();
+        $emailLogRepository = $this->getMock(\X4e\X4ebase\Domain\Repository\EmailLogRepository::class, ['add'], [], '', false);
+        $emailLog = $this->getMock(\X4e\X4ebase\Domain\Model\EmailLog::class, ['dummy']);
 
-		$objectManager = $this->getMock(
-			ObjectManager::class, array('get'), array(), '', FALSE
-		);
-		$objectManager->expects($this->at(0))->method('get')
-			->with('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository')
-			->willReturn($emailLogRepository);
+        $objectManager = $this->getMock(
+            ObjectManager::class, ['get'], [], '', false
+        );
+        $objectManager->expects($this->at(0))->method('get')
+            ->with('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository')
+            ->willReturn($emailLogRepository);
 
-		$objectManager->expects($this->at(1))->method('get')
-			->with('X4e\\X4ebase\\Domain\\Model\\EmailLog')
-			->willReturn($emailLog);
+        $objectManager->expects($this->at(1))->method('get')
+            ->with('X4e\\X4ebase\\Domain\\Model\\EmailLog')
+            ->willReturn($emailLog);
 
-		$persistenceManager = $this->getMock(PersistenceManager::class, array('persistAll'), array(), '', FALSE);
-		$persistenceManager->expects($this->once())->method('persistAll');
+        $persistenceManager = $this->getMock(PersistenceManager::class, ['persistAll'], [], '', false);
+        $persistenceManager->expects($this->once())->method('persistAll');
 
-		//$this->setExpectedException('TYPO3\\CMS\\Extbase\\Persistence\\Exception');
+        //$this->setExpectedException('TYPO3\\CMS\\Extbase\\Persistence\\Exception');
 
-		$this->subject->_setStatic('objectManager', $objectManager);
-		$this->subject->_setStatic('persistenceManager', $persistenceManager);
+        $this->subject->_setStatic('objectManager', $objectManager);
+        $this->subject->_setStatic('persistenceManager', $persistenceManager);
 
-		$this->subject->logEmail(array('test@example.org'), array(''), '', '', TRUE, array('test@example.org'), FALSE, TRUE);
-	}
+        $this->subject->logEmail(['test@example.org'], [''], '', '', true, ['test@example.org'], false, true);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testLogEmail_ThrowsException() {
-		$this->mockSubject();
+    /**
+     * @test
+     */
+    public function testLogEmail_ThrowsException()
+    {
+        $this->mockSubject();
 
-		$objectManager = $this->getMock(
-			ObjectManager::class, array('get'), array(), '', FALSE
-		);
-		$objectManager->expects($this->at(0))->method('get')
-			->with('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository')
-			->willReturn(FALSE);
+        $objectManager = $this->getMock(
+            ObjectManager::class, ['get'], [], '', false
+        );
+        $objectManager->expects($this->at(0))->method('get')
+            ->with('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository')
+            ->willReturn(false);
 
-		$persistenceManager = $this->getMock(PersistenceManager::class, array('persistAll'), array(), '', FALSE);
+        $persistenceManager = $this->getMock(PersistenceManager::class, ['persistAll'], [], '', false);
 
-		$this->setExpectedException('TYPO3\\CMS\\Extbase\\Persistence\\Exception');
+        $this->setExpectedException('TYPO3\\CMS\\Extbase\\Persistence\\Exception');
 
-		$this->subject->_setStatic('objectManager', $objectManager);
-		$this->subject->_setStatic('persistenceManager', $persistenceManager);
+        $this->subject->_setStatic('objectManager', $objectManager);
+        $this->subject->_setStatic('persistenceManager', $persistenceManager);
 
-		$this->subject->logEmail(array('test@example.org'), array(''), '', '', TRUE, array('test@example.org'), FALSE, TRUE);
-	}
+        $this->subject->logEmail(['test@example.org'], [''], '', '', true, ['test@example.org'], false, true);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGetObjectManagerInstance_ReturnsObjectManager() {
-		$this->mockSubject();
-		$objectManager = $this->getMock(
-			ObjectManager::class, array('get'), array(), '', FALSE
-		);
-		$this->subject->_setStatic('objectManager', $objectManager);
+    /**
+     * @test
+     */
+    public function testGetObjectManagerInstance_ReturnsObjectManager()
+    {
+        $this->mockSubject();
+        $objectManager = $this->getMock(
+            ObjectManager::class, ['get'], [], '', false
+        );
+        $this->subject->_setStatic('objectManager', $objectManager);
 
-		$this->assertSame($objectManager, $this->subject->_call('getObjectManagerInstance'));
-	}
+        $this->assertSame($objectManager, $this->subject->_call('getObjectManagerInstance'));
+    }
 
-	public function testGetObjectManagerInstance_CreatesObjectManager() {
-		$this->markTestIncomplete(
-			'Untestable - Static method calls'
-		);
-	}
+    public function testGetObjectManagerInstance_CreatesObjectManager()
+    {
+        $this->markTestIncomplete(
+            'Untestable - Static method calls'
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGetPersistenceManagerInstance_ReturnsPersistenceManager() {
-		$this->mockSubject();
-		$persistenceManager = $this->getMock(PersistenceManager::class, array(), array(), '', FALSE);
-		$this->subject->_setStatic('persistenceManager', $persistenceManager);
+    /**
+     * @test
+     */
+    public function testGetPersistenceManagerInstance_ReturnsPersistenceManager()
+    {
+        $this->mockSubject();
+        $persistenceManager = $this->getMock(PersistenceManager::class, [], [], '', false);
+        $this->subject->_setStatic('persistenceManager', $persistenceManager);
 
-		$this->assertSame($persistenceManager, $this->subject->_call('getPersistenceManagerInstance'));
-	}
+        $this->assertSame($persistenceManager, $this->subject->_call('getPersistenceManagerInstance'));
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGetPersistenceManagerInstance_CreatesPersistenceManager() {
-		$this->mockSubject();
-		$persistenceManager = $this->getMock(PersistenceManager::class, array(), array(), '', FALSE);
-		$objectManager = $this->getMock(
-			ObjectManager::class, array('get'), array(), '', FALSE
-		);
-		$objectManager->expects($this->once())->method('get')
-			->willReturn($persistenceManager);
-		$this->subject->_setStatic('objectManager', $objectManager);
-		$this->subject->_setStatic('persistenceManager', FALSE);
+    /**
+     * @test
+     */
+    public function testGetPersistenceManagerInstance_CreatesPersistenceManager()
+    {
+        $this->mockSubject();
+        $persistenceManager = $this->getMock(PersistenceManager::class, [], [], '', false);
+        $objectManager = $this->getMock(
+            ObjectManager::class, ['get'], [], '', false
+        );
+        $objectManager->expects($this->once())->method('get')
+            ->willReturn($persistenceManager);
+        $this->subject->_setStatic('objectManager', $objectManager);
+        $this->subject->_setStatic('persistenceManager', false);
 
-		$this->assertEquals($persistenceManager, $this->subject->_call('getPersistenceManagerInstance'));
-	}
+        $this->assertEquals($persistenceManager, $this->subject->_call('getPersistenceManagerInstance'));
+    }
 }

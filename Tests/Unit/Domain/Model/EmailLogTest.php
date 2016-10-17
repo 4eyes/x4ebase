@@ -2,29 +2,29 @@
 
 namespace X4e\X4ebase\Tests\Unit\Domain\Model;
 
-	/* * *************************************************************
-	 *  Copyright notice
-	 *
-	 *  (c) 2015 Philipp Seßner <philipp@4eyes.ch>, 4eyes GmbH
-	 *
-	 *  All rights reserved
-	 *
-	 *  This script is part of the TYPO3 project. The TYPO3 project is
-	 *  free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  The GNU General Public License can be found at
-	 *  http://www.gnu.org/copyleft/gpl.html.
-	 *
-	 *  This script is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU General Public License for more details.
-	 *
-	 *  This copyright notice MUST APPEAR in all copies of the script!
-	 * ************************************************************* */
+/* * *************************************************************
+     *  Copyright notice
+     *
+     *  (c) 2015 Philipp Seßner <philipp@4eyes.ch>, 4eyes GmbH
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 2 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     * ************************************************************* */
 
 /**
  * Test case for class \X4e\X4ebase\Domain\Model\EmailLogTest
@@ -35,33 +35,37 @@ namespace X4e\X4ebase\Tests\Unit\Domain\Model;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class EmailLogTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase {
+class EmailLogTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase
+{
 
-	/**
-	 * @test
-	 */
-	public function testInitialValues() {
-		$this->initialValueTest('sender', NULL);
-		$this->initialValueTest('recipient', NULL);
-		$this->initialValueTest('subject', NULL);
-		$this->initialValueTest('message', NULL);
-		$this->initialValueTest('isSent', FALSE);
-		$this->initialValueTest('error', NULL);
-	}
+    /**
+     * @test
+     */
+    public function testInitialValues()
+    {
+        $this->initialValueTest('sender', null);
+        $this->initialValueTest('recipient', null);
+        $this->initialValueTest('subject', null);
+        $this->initialValueTest('message', null);
+        $this->initialValueTest('isSent', false);
+        $this->initialValueTest('error', null);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testGettersSetters() {
-		$this->stringGetterSetterTest('sender');
-		$this->stringGetterSetterTest('recipient');
-		$this->stringGetterSetterTest('subject');
-		$this->stringGetterSetterTest('message');
-		$this->booleanGetterSetterTest('is_sent');
-		$this->stringGetterSetterTest('error');
-	}
+    /**
+     * @test
+     */
+    public function testGettersSetters()
+    {
+        $this->stringGetterSetterTest('sender');
+        $this->stringGetterSetterTest('recipient');
+        $this->stringGetterSetterTest('subject');
+        $this->stringGetterSetterTest('message');
+        $this->booleanGetterSetterTest('is_sent');
+        $this->stringGetterSetterTest('error');
+    }
 
-	public function testIs() {
-		$this->isTest('is_sent');
-	}
+    public function testIs()
+    {
+        $this->isTest('is_sent');
+    }
 }

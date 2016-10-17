@@ -35,7 +35,8 @@ namespace X4e\X4ebase\Tests\Unit\XClasses\Persistence\Generic\Mapper;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
+class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
+{
 
 	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\XClasses\Persistence\Generic\Mapper\DataMapper */
 	protected $subject;
@@ -43,14 +44,15 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 	/**
 	 * @test
 	 */
-	public function testMapSingleRow_HasIdentifierCalledWithNewValue() {
+    public function testMapSingleRow_HasIdentifierCalledWithNewValue()
+    {
 		$this->mockSubject();
 		$className = 'Lorem';
-		$row = array(
+        $row = [
 			'_PAGES_OVERLAY' => 1,
 			'uid' => 1,
 			'_PAGES_OVERLAY_UID' => 2
-		);
+        ];
 		$expectedResult = $row['uid'] . '_' . $row['_PAGES_OVERLAY_UID'];
 
 		$persistenceSession = $this->getMock(
@@ -68,12 +70,13 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 	/**
 	 * @test
 	 */
-	public function testMapSingleRow_HasIdentifierCalledWithOldValue() {
+    public function testMapSingleRow_HasIdentifierCalledWithOldValue()
+    {
 		$this->mockSubject();
 		$className = 'Lorem';
-		$row = array(
+        $row = [
 			'uid' => 1
-		);
+        ];
 		$expectedResult = $row['uid'];
 
         $persistenceSession = $this->getMock(
@@ -81,7 +84,7 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 			array('hasIdentifier', 'getObjectByIdentifier'),
 			array(),
 			'',
-			FALSE
+            false
 		);
         $persistenceSession->expects($this->once())->method('hasIdentifier')->with($expectedResult, $className)->willReturn(TRUE);
         $persistenceSession->expects($this->once())->method('getObjectByIdentifier')->willReturn(TRUE);
@@ -94,7 +97,8 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 	/**
 	 * @test
 	 */
-	public function testThawProperties() {
+    public function testThawProperties()
+    {
 		$this->mockSubject('getDataMap');
 
         $reflectionService = $this->getMock(
@@ -116,11 +120,11 @@ class DataMapperTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
         );
 		$dataMap->expects($this->once())->method('getLanguageIdColumnName')->willReturn(NULL);
 		$this->subject->expects($this->once())->method('getDataMap')->willReturn($dataMap);
-		$row = array(
+        $row = [
 			'_PAGES_OVERLAY' => 1,
 			'_PAGES_OVERLAY_LANGUAGE' => 1,
 			'_PAGES_OVERLAY_UID' => 1
-		);
+        ];
 
 		$object = $this->getMock(
 		    \TYPO3\CMS\Belog\Domain\Model\LogEntry::class,

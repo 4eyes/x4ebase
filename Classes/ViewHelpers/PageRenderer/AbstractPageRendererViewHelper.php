@@ -5,7 +5,7 @@ namespace X4e\X4ebase\ViewHelpers\PageRenderer;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,45 +28,48 @@ namespace X4e\X4ebase\ViewHelpers\PageRenderer;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-abstract class AbstractPageRendererViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+abstract class AbstractPageRendererViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * @var \TYPO3\CMS\Core\Page\PageRenderer
-	 */
-	protected $pageRenderer;
-	
-	/**
-	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-	 */
-	protected $configurationManager;
+    /**
+     * @var \TYPO3\CMS\Core\Page\PageRenderer
+     */
+    protected $pageRenderer;
 
-	/**
-	 * @param \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer
-	 */
-	public function injectPageRenderer(\TYPO3\CMS\Core\Page\PageRenderer $pageRenderer) {
-		$this->pageRenderer = $pageRenderer;
-	}
-	
-	/**
-	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
-	 * @return void
-	 */
-	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
-		$this->configurationManager = $configurationManager;
-	}
-	
-	/**
-	 * Returns TRUE if the output may be cached
-	 *
-	 * @return boolean
-	 */
-	protected function isCached() {
-		$this->configurationManager->getContentObject()->getUserObjectType();
-		$userObjType = $this->configurationManager->getContentObject()->getUserObjectType();
-		return ($userObjType !== \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::OBJECTTYPE_USER_INT);
-	}
+    /**
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     */
+    protected $configurationManager;
+
+    /**
+     * @param \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer
+     */
+    public function injectPageRenderer(\TYPO3\CMS\Core\Page\PageRenderer $pageRenderer)
+    {
+        $this->pageRenderer = $pageRenderer;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     * @return void
+     */
+    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
+     * Returns TRUE if the output may be cached
+     *
+     * @return bool
+     */
+    protected function isCached()
+    {
+        $this->configurationManager->getContentObject()->getUserObjectType();
+        $userObjType = $this->configurationManager->getContentObject()->getUserObjectType();
+        return ($userObjType !== \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::OBJECTTYPE_USER_INT);
+    }
 }

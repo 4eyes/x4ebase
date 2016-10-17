@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\GroupByFirstLetterViewHelper
@@ -36,77 +35,88 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class GroupByFirstLetterViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class GroupByFirstLetterViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\GroupByFirstLetterViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\GroupByFirstLetterViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRender_WithIncompatibleType_ThrowsException() {
-		$this->setExpectedException('\\Exception', 'Unsupported element type.');
-		$this->subject->render(array(''), '');
-	}
+    /**
+     * @test
+     */
+    public function testRender_WithIncompatibleType_ThrowsException()
+    {
+        $this->setExpectedException('\\Exception', 'Unsupported element type.');
+        $this->subject->render([''], '');
+    }
 
-	public function testRender_WithArray_NotIssetProperty_ThrowsException() {
-		$this->setExpectedException('\\Exception', 'The given property does not exist.');
-		$this->subject->render(array(array('test' => 'one')), 'lorem');
-	}
+    public function testRender_WithArray_NotIssetProperty_ThrowsException()
+    {
+        $this->setExpectedException('\\Exception', 'The given property does not exist.');
+        $this->subject->render([['test' => 'one']], 'lorem');
+    }
 
-	public function testRender_WithArray_ReturnsGroupedArray() {
-		$testCase = array(
-			array('test' => 'lorem'),
-			array('test' => 'ipsum'),
-			array('test' => 'lorem'),
-		);
-		$expectedResult = array(
-			'L' => array(array('test' => 'lorem'), array('test' => 'lorem')),
-			'I' => array(array('test' => 'ipsum'))
-		);
-		$this->assertEquals($expectedResult, $this->subject->render($testCase, 'test'));
-	}
+    public function testRender_WithArray_ReturnsGroupedArray()
+    {
+        $testCase = [
+            ['test' => 'lorem'],
+            ['test' => 'ipsum'],
+            ['test' => 'lorem'],
+        ];
+        $expectedResult = [
+            'L' => [['test' => 'lorem'], ['test' => 'lorem']],
+            'I' => [['test' => 'ipsum']]
+        ];
+        $this->assertEquals($expectedResult, $this->subject->render($testCase, 'test'));
+    }
 
-	public function testRender_WithObject_NotIssetProperty_ThrowsException() {
-		$this->setExpectedException('\\Exception', 'The given property does not exist.');
-		$this->subject->render(new testClass(), 'lorem');
-	}
+    public function testRender_WithObject_NotIssetProperty_ThrowsException()
+    {
+        $this->setExpectedException('\\Exception', 'The given property does not exist.');
+        $this->subject->render(new testClass(), 'lorem');
+    }
 
-	public function testRender_WithObject_ReturnsGroupedArray() {
-		$expectedResult = array(
-			'L' => array(new InnerTestClass('lorem'), new InnerTestClass('lorem')),
-			'I' => array(new InnerTestClass('ipsum'))
-		);
-		$this->assertEquals($expectedResult, $this->subject->render(new testClass(), 'test'));
-	}
+    public function testRender_WithObject_ReturnsGroupedArray()
+    {
+        $expectedResult = [
+            'L' => [new InnerTestClass('lorem'), new InnerTestClass('lorem')],
+            'I' => [new InnerTestClass('ipsum')]
+        ];
+        $this->assertEquals($expectedResult, $this->subject->render(new testClass(), 'test'));
+    }
 
-	public function testRender_WithObjectInstanceOfLazy_ResolvesLazy() {
-		//@todo: write test for lazy objects
-		$this->markTestIncomplete('Need test for lazy objects');
-	}
-
+    public function testRender_WithObjectInstanceOfLazy_ResolvesLazy()
+    {
+        //@todo: write test for lazy objects
+        $this->markTestIncomplete('Need test for lazy objects');
+    }
 }
 
-class testClass {
-	public $obj1;
-	public $obj2;
-	public $obj3;
+class testClass
+{
+    public $obj1;
+    public $obj2;
+    public $obj3;
 
-	function __construct() {
-		$this->obj1 = new innerTestClass('lorem');
-		$this->obj2 = new innerTestClass('ipsum');
-		$this->obj3 = new innerTestClass('lorem');
-	}
+    public function __construct()
+    {
+        $this->obj1 = new innerTestClass('lorem');
+        $this->obj2 = new innerTestClass('ipsum');
+        $this->obj3 = new innerTestClass('lorem');
+    }
 }
 
-class innerTestClass {
-	protected $test;
+class innerTestClass
+{
+    protected $test;
 
-	function __construct($test) {
-		$this->test = $test;
-	}
+    public function __construct($test)
+    {
+        $this->test = $test;
+    }
 
-	public function getTest() {
-		return $this->test;
-	}
+    public function getTest()
+    {
+        return $this->test;
+    }
 }

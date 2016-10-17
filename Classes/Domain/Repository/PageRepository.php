@@ -5,7 +5,7 @@ namespace X4e\X4ebase\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,22 +28,21 @@ namespace X4e\X4ebase\Domain\Repository;
 /**
  * A TYPO3 page record repository for extbase
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class PageRepository extends AbstractRepository {
-	
-	protected $defaultOrderings = array(
-		'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-	);
-	
-	public function initializeObject() {
-		/* @var $querySettings \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings */
-		$querySettings = $this->objectManager->get('X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings');
-		$querySettings->setRespectStoragePage(FALSE);
-		//$querySettings->setRespectSysLanguage(FALSE);
-		$this->setDefaultQuerySettings($querySettings);
-	}
-	
+class PageRepository extends AbstractRepository
+{
+    protected $defaultOrderings = [
+        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+    ];
+
+    public function initializeObject()
+    {
+        /* @var $querySettings \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings */
+        $querySettings = $this->objectManager->get('X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings');
+        $querySettings->setRespectStoragePage(false);
+        //$querySettings->setRespectSysLanguage(FALSE);
+        $this->setDefaultQuerySettings($querySettings);
+    }
 }

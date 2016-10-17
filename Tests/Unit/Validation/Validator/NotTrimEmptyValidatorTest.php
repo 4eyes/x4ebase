@@ -38,46 +38,49 @@ use X4e\X4ebase\Validation\Validator\NotTrimEmptyValidator;
  *
  * @author Alessandro Bellafronte <alessandro@4eyes.ch>
  */
-class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
 
-	/**
-	 *
-	 * @var \X4e\X4ebase\Validation\Validator\NotTrimEmptyValidator
-	 */
-	protected $validator;
+    /**
+     *
+     * @var \X4e\X4ebase\Validation\Validator\NotTrimEmptyValidator
+     */
+    protected $validator;
 
-	/**
-	 * @var array
-	 */
-	protected $settings = array();
+    /**
+     * @var array
+     */
+    protected $settings = [];
 
-	public function setUp() {
-		$this->validator = new NotTrimEmptyValidator();
+    public function setUp()
+    {
+        $this->validator = new NotTrimEmptyValidator();
 
-		if (function_exists('xdebug_disable')) {
-			xdebug_disable();
-		}
-	}
+        if (function_exists('xdebug_disable')) {
+            xdebug_disable();
+        }
+    }
 
-	public function tearDown() {
-		unset($this->validator);
-		if (function_exists('xdebug_enable')) {
-			xdebug_enable();
-		}
-	}
+    public function tearDown()
+    {
+        unset($this->validator);
+        if (function_exists('xdebug_enable')) {
+            xdebug_enable();
+        }
+    }
 
+    //////////////////////////////////////
+    // Tests
+    //////////////////////////////////////
 
-	//////////////////////////////////////
-	// Tests
-	//////////////////////////////////////
-
-	/**
-	 * @test
-	 */
-	public function testIsValidIsString() {
-		$this->markTestIncomplete(
-			'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
-		);
+    /**
+     * @test
+     */
+    public function testIsValidIsString()
+    {
+        $this->markTestIncomplete(
+            'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
+        );
 //		// Test NULL value
 //		$this->validator->isValid(NULL);
 //		$this->assertEquals(array(), $this->validator->getErrors(), 'NULL');
@@ -89,15 +92,16 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 //		// Test int value
 //		$this->validator->isValid(123);
 //		$this->assertEquals(array(), $this->validator->getErrors(), 'Integer');
-	}
+    }
 
-	/**
-	 * @test
-	 */
-	public function testIsValidDefaultChars() {
-		$this->markTestIncomplete(
-			'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
-		);
+    /**
+     * @test
+     */
+    public function testIsValidDefaultChars()
+    {
+        $this->markTestIncomplete(
+            'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
+        );
 
 //		// Test the default chars
 //		$stringsToTest = array(
@@ -112,15 +116,16 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 //			$this->validator->isValid($string);
 //			$this->assertEquals(array(), $this->validator->getErrors(), $title);
 //		}
-	}
+    }
 
-	/**
-	 * @test
-	 */
-	public function testIsValidDefaultCharsHasErrors() {
-		$this->markTestIncomplete(
-			'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
-		);
+    /**
+     * @test
+     */
+    public function testIsValidDefaultCharsHasErrors()
+    {
+        $this->markTestIncomplete(
+            'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
+        );
 
 //		// Test the default chars
 //		$stringsToTest = array(
@@ -140,15 +145,16 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 //			$this->assertEquals(1, count($this->validator->getErrors()));
 //			$this->tearDown();
 //		}
-	}
+    }
 
-	/**
-	 * @test
-	 */
-	public function testIsValidCustomChars() {
-		$this->markTestIncomplete(
-			'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
-		);
+    /**
+     * @test
+     */
+    public function testIsValidCustomChars()
+    {
+        $this->markTestIncomplete(
+            'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
+        );
 
 //		// custom chars to trim
 //		$charList = 'aä@bB';
@@ -171,15 +177,16 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 //			$this->assertEquals(array(), $this->validator->getErrors());
 //			$this->tearDown();
 //		}
-	}
+    }
 
-	/**
-	 * @test
-	 */
-	public function testIsValidCustomCharsHasErrors() {
-		$this->markTestIncomplete(
-			'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
-		);
+    /**
+     * @test
+     */
+    public function testIsValidCustomCharsHasErrors()
+    {
+        $this->markTestIncomplete(
+            'This test throws errors in new Typo3 Versions due to validator->getErrors was moved to validator->result->getErrors.'
+        );
 
 //		// custom chars to trim
 //		$charList = 'aä@bB';
@@ -202,7 +209,5 @@ class NotTrimEmptyValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 //			$this->assertEquals(1, count($this->validator->getErrors()));
 //			$this->tearDown();
 //		}
-	}
+    }
 }
-
-?>

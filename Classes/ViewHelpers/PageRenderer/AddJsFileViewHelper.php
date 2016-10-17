@@ -5,7 +5,7 @@ namespace X4e\X4ebase\ViewHelpers\PageRenderer;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,47 +28,49 @@ namespace X4e\X4ebase\ViewHelpers\PageRenderer;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class AddJsFileViewHelper extends AbstractPageRendererViewHelper {
+class AddJsFileViewHelper extends AbstractPageRendererViewHelper
+{
 
-	/**
-	 * Initialize all arguments.
-	 *
-	 * @return void
-	 */
-	public function initializeArguments() {
-		parent::initializeArguments();
-		$this->registerArgument('type', 'string', 'Type argument - see PageRenderer documentation', FALSE, 'text/javascript');
-		$this->registerArgument('compress', 'boolean', 'Compress argument - see PageRenderer documentation', FALSE, TRUE);
-		$this->registerArgument('forceOnTop', 'boolean', 'ForceOnTop argument - see PageRenderer documentation', FALSE, FALSE);
-		$this->registerArgument('allWrap', 'string', 'AllWrap argument - see PageRenderer documentation', FALSE, '');
-		$this->registerArgument('excludeFromConcatenation', 'string', 'ExcludeFromConcatenation argument - see PageRenderer documentation', FALSE, FALSE);
-		$this->registerArgument('external', 'boolean', 'If set, there is no file existence check. Useful for inclusion of external files.', FALSE, FALSE);
-	}
+    /**
+     * Initialize all arguments.
+     *
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('type', 'string', 'Type argument - see PageRenderer documentation', false, 'text/javascript');
+        $this->registerArgument('compress', 'boolean', 'Compress argument - see PageRenderer documentation', false, true);
+        $this->registerArgument('forceOnTop', 'boolean', 'ForceOnTop argument - see PageRenderer documentation', false, false);
+        $this->registerArgument('allWrap', 'string', 'AllWrap argument - see PageRenderer documentation', false, '');
+        $this->registerArgument('excludeFromConcatenation', 'string', 'ExcludeFromConcatenation argument - see PageRenderer documentation', false, false);
+        $this->registerArgument('external', 'boolean', 'If set, there is no file existence check. Useful for inclusion of external files.', false, false);
+    }
 
-	/**
-	 * Renders a JavaScript file in the page header.
-	 *
-	 * @global \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $TSFE
-	 * @param string $file
-	 */
-	public function render($file) {
-		global $TSFE;
-		$fullPath = $this->arguments['external'] ? $file : $TSFE->tmpl->getFileName($file);
-		if ($this->isCached()) {
-			$this->pageRenderer->addJsFile(
-				$fullPath,
-				$this->arguments['type'],
-				$this->arguments['compress'],
-				$this->arguments['forceOnTop'],
-				$this->arguments['allWrap'],
-				$this->arguments['excludeFromConcatenation']
-			);
-		} else {
-			$TSFE->additionalHeaderData[\md5($fullPath)] = '<script type="text/javascript" src="' . \htmlspecialchars($fullPath) . '"></script>';
-		}
-	}
+    /**
+     * Renders a JavaScript file in the page header.
+     *
+     * @global \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $TSFE
+     * @param string $file
+     */
+    public function render($file)
+    {
+        global $TSFE;
+        $fullPath = $this->arguments['external'] ? $file : $TSFE->tmpl->getFileName($file);
+        if ($this->isCached()) {
+            $this->pageRenderer->addJsFile(
+                $fullPath,
+                $this->arguments['type'],
+                $this->arguments['compress'],
+                $this->arguments['forceOnTop'],
+                $this->arguments['allWrap'],
+                $this->arguments['excludeFromConcatenation']
+            );
+        } else {
+            $TSFE->additionalHeaderData[\md5($fullPath)] = '<script type="text/javascript" src="' . \htmlspecialchars($fullPath) . '"></script>';
+        }
+    }
 }

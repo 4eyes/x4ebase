@@ -6,7 +6,7 @@ namespace X4e\X4ebase\Session;
  *
  *  (c) 2014 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
  *           Michel Georgy <michel@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,42 +29,40 @@ namespace X4e\X4ebase\Session;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class NullSessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface {
+class NullSessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface
+{
+    public function get($key, $type = '')
+    {
+    }
 
-	public function get($key, $type = '') {
-		
-	}
+    public function getObject($key, $type = '')
+    {
+    }
 
-	public function getObject($key, $type = '') {
-		
-	}
+    public function getUser()
+    {
+    }
 
-	public function getUser() {
-		
-	}
+    public function has($key, $type = '')
+    {
+    }
 
-	public function has($key, $type = '') {
-		
-	}
+    public function isSerializable($data)
+    {
+    }
 
-	public function isSerializable($data) {
-		
-	}
+    public function remove($key, $type = '')
+    {
+    }
 
-	public function remove($key, $type = '') {
-		
-	}
+    public function set($key, $data, $type = '')
+    {
+    }
 
-	public function set($key, $data, $type = '') {
-		
-	}
-
-	public function storeObject($object, $key = NULL, $type = '') {
-		
-	}
-
+    public function storeObject($object, $key = null, $type = '')
+    {
+    }
 }

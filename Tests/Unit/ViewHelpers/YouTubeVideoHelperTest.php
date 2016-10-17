@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use \TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\YouTubeVideoViewHelper
@@ -36,56 +35,61 @@ use \TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class YouTubeVideoViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class YouTubeVideoHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\YouTubeVideoViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\YouTubeVideoViewHelper */
+    protected $subject;
 
-	public function testRetrieveYoutubeHash() {
-		$testCases = array(
-			array('https://www.youtube.com/watch?v=4BXpi7056RM', '4BXpi7056RM'),
-			array('4BXpi7056RM', '4BXpi7056RM')
-		);
+    public function testRetrieveYoutubeHash()
+    {
+        $testCases = [
+            ['https://www.youtube.com/watch?v=4BXpi7056RM', '4BXpi7056RM'],
+            ['4BXpi7056RM', '4BXpi7056RM']
+        ];
 
-		foreach ($testCases as $testCase) {
-			$this->assertEquals($testCase[1], $this->subject->_callRef('retrieveYoutubeHash', $testCase[0]));
-		}
-	}
+        foreach ($testCases as $testCase) {
+            $this->assertEquals($testCase[1], $this->subject->_callRef('retrieveYoutubeHash', $testCase[0]));
+        }
+    }
 
-	public function testGetThumbnail() {
-		$videoHash = null;
-		$thumbType = null;
+    public function testGetThumbnail()
+    {
+        $videoHash = null;
+        $thumbType = null;
 
-		$testCases = array(
-			array(
-				'videoHash' => '4BXpi7056RM',
-				'thumbType' => '',
-				'expectedResult' => 'https://i3.ytimg.com/vi/4BXpi7056RM/0.jpg'
-			),
-		);
+        $testCases = [
+            [
+                'videoHash' => '4BXpi7056RM',
+                'thumbType' => '',
+                'expectedResult' => 'https://i3.ytimg.com/vi/4BXpi7056RM/0.jpg'
+            ],
+        ];
 
-		foreach ($testCases as $testCase) {
-			$this->assertEquals($testCase['expectedResult'], $this->subject->getThumbnail($testCase['videoHash'], $testCase['thumbType']));
-		}
-	}
+        foreach ($testCases as $testCase) {
+            $this->assertEquals($testCase['expectedResult'], $this->subject->getThumbnail($testCase['videoHash'], $testCase['thumbType']));
+        }
+    }
 
-	public function testGetThumbnail_WithThumbnailType() {
-		$testCases = array('0','1','2','3','default','hqdefault','mqdefault','sddefault','maxresdefault');
+    public function testGetThumbnail_WithThumbnailType()
+    {
+        $testCases = ['0','1','2','3','default','hqdefault','mqdefault','sddefault','maxresdefault'];
 
-		foreach ($testCases as $testCase) {
-			$this->assertNotFalse(strpos($this->subject->getThumbnail("Hello",$testCase),'/' . $testCase . '.jpg'));
-		}
-	}
+        foreach ($testCases as $testCase) {
+            $this->assertNotFalse(strpos($this->subject->getThumbnail('Hello', $testCase), '/' . $testCase . '.jpg'));
+        }
+    }
 
-	public function testRender() {
-		$this->mockSubject('retrieveYoutubeHash', 'renderChildren', 'getThumbnail');
-		$this->templateVariableContainer->expects($this->exactly(2))->method('add');
-		$this->templateVariableContainer->expects($this->exactly(2))->method('remove');
-		$this->subject->_set('templateVariableContainer', $this->templateVariableContainer);
-		$this->subject->expects($this->once())->method('retrieveYoutubeHash')->willReturn('4BXpi7056RM');
-		$this->subject->expects($this->once())->method('renderChildren');
-		$this->subject->expects($this->once())->method('getThumbnail')->willReturn('https://i3.ytimg.com/vi/4BXpi7056RM/0.jpg');
+    public function testRender()
+    {
+        $this->mockSubject('retrieveYoutubeHash', 'renderChildren', 'getThumbnail');
+        $this->templateVariableContainer->expects($this->exactly(2))->method('add');
+        $this->templateVariableContainer->expects($this->exactly(2))->method('remove');
+        $this->subject->_set('templateVariableContainer', $this->templateVariableContainer);
+        $this->subject->expects($this->once())->method('retrieveYoutubeHash')->willReturn('4BXpi7056RM');
+        $this->subject->expects($this->once())->method('renderChildren');
+        $this->subject->expects($this->once())->method('getThumbnail')->willReturn('https://i3.ytimg.com/vi/4BXpi7056RM/0.jpg');
 
-		$this->subject->render('https://www.youtube.com/watch?v=4BXpi7056RM');
-	}
+        $this->subject->render('https://www.youtube.com/watch?v=4BXpi7056RM');
+    }
 }

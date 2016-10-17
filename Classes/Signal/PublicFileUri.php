@@ -30,7 +30,8 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 /**
  * hooks the public file uri function
  */
-class PublicFileUri {
+class PublicFileUri
+{
     /**
      * extension key
      *
@@ -52,12 +53,13 @@ class PublicFileUri {
      * @param \TYPO3\CMS\Core\Resource\ResourceStorage $t
      * @param \TYPO3\CMS\Core\Resource\Driver\LocalDriver $driver
      * @param object $resourceObject e.g. \TYPO3\CMS\Core\Resource\File, \TYPO3\CMS\Core\Resource\Folder, \TYPO3\CMS\Core\Resource\ProcessedFile
-     * @param boolean $relativeToCurrentScript
+     * @param bool $relativeToCurrentScript
      * @param array $urlData
      *
      * @return void
      */
-    public function preGeneratePublicUrl($t, $driver, $resourceObject, $relativeToCurrentScript, $urlData) {
+    public function preGeneratePublicUrl($t, $driver, $resourceObject, $relativeToCurrentScript, $urlData)
+    {
         $this->emSettings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
         $this->emSettings = $this->emSettings['fileTimestamp.'];
 
@@ -75,7 +77,6 @@ class PublicFileUri {
                     if (!empty($this->emSettings['filetypes_fe'])) {
                         $filetypes = explode(',', $this->emSettings['filetypes_fe']);
                         if (in_array($fileData['extension'], $filetypes)) {
-
                         } else {
                             $enable = false;
                         }
@@ -96,7 +97,6 @@ class PublicFileUri {
                     if (!empty($this->emSettings['filetypes_be'])) {
                         $filetypes = explode(',', $this->emSettings['filetypes_be']);
                         if (in_array($fileData['extension'], $filetypes)) {
-
                         } else {
                             $enable = false;
                         }
@@ -122,12 +122,13 @@ class PublicFileUri {
      *
      * @return array
      */
-    protected function getFileData($resourceObject) {
-        $fileData = array(
+    protected function getFileData($resourceObject)
+    {
+        $fileData = [
             'identifier' => $resourceObject->getIdentifier(),
             'modDate' => $resourceObject->_getPropertyRaw('modification_date'),
             'extension' => $resourceObject->getExtension(),
-        );
+        ];
         return $fileData;
     }
 }

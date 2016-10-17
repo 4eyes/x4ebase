@@ -5,7 +5,7 @@ namespace X4e\X4ebase\Validation\Validator;
  *  Copyright notice
  *
  *  (c) 2013 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,38 +28,38 @@ namespace X4e\X4ebase\Validation\Validator;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class NotTrimEmptyValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
+class NotTrimEmptyValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+{
 
-	/**
-	 * Specifies whether this validator accepts empty values.
-	 *
-	 * If this is TRUE, the validators isValid() method is not called in case of an empty value
-	 * Note: A value is considered empty if it is NULL or an empty string!
-	 * By default all validators except for NotEmpty and the Composite Validators accept empty values
-	 *
-	 * @var boolean
-	 */
-	protected $acceptsEmptyValues = FALSE;
+    /**
+     * Specifies whether this validator accepts empty values.
+     *
+     * If this is TRUE, the validators isValid() method is not called in case of an empty value
+     * Note: A value is considered empty if it is NULL or an empty string!
+     * By default all validators except for NotEmpty and the Composite Validators accept empty values
+     *
+     * @var bool
+     */
+    protected $acceptsEmptyValues = false;
 
-	/**
-	 * Check if $value is valid. If it is not valid, needs to add an error
-	 * to Result.
-	 *
-	 * @param mixed $value The value that should be validated
-	 * @return void
-	 */
-	public function isValid($value) {
-		if (is_string($value)) {
-			$charlist = $this->options['charlist'] ?: " \t\n\r\0\x0B";
-			if (trim($value, $charlist) === '') {
-					// Why "437350901"? 4eyes + 0 + (Custom Error Range 900) + Error 2
-					// @todo Make a list of error codes and validators
-				$this->addError('The given subject was empty after trim.', 437350902);
-			}
-		}
-	}
-
+    /**
+     * Check if $value is valid. If it is not valid, needs to add an error
+     * to Result.
+     *
+     * @param mixed $value The value that should be validated
+     * @return void
+     */
+    public function isValid($value)
+    {
+        if (is_string($value)) {
+            $charlist = $this->options['charlist'] ?: " \t\n\r\0\x0B";
+            if (trim($value, $charlist) === '') {
+                // Why "437350901"? 4eyes + 0 + (Custom Error Range 900) + Error 2
+                    // @todo Make a list of error codes and validators
+                $this->addError('The given subject was empty after trim.', 437350902);
+            }
+        }
+    }
 }

@@ -31,26 +31,30 @@ namespace X4e\X4ebase\Utility;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class UserAgentUtility {
-	/**
-	 * @var StdClass
-	 */
-	public $ua;
+class UserAgentUtility
+{
+    /**
+     * @var StdClass
+     */
+    public $ua;
 
-	public function __construct() {
-		$ua = NULL;
-		require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('x4ebase') . "Classes/Libraries/Detector/Detector.php");
-		$this->ua = $ua;
-	}
+    public function __construct()
+    {
+        $ua = null;
+        require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('x4ebase') . 'Classes/Libraries/Detector/Detector.php');
+        $this->ua = $ua;
+    }
 
-	public function __get($name) {
-		if (property_exists($this->ua, $name)) {
-			return $ua->{$name};
-		}
-		return NULL;
-	}
+    public function __get($name)
+    {
+        if (property_exists($this->ua, $name)) {
+            return $ua->{$name};
+        }
+        return null;
+    }
 
-	public function __toString() {
-		return print_r($ua, TRUE);
-	}
+    public function __toString()
+    {
+        return print_r($ua, true);
+    }
 }
