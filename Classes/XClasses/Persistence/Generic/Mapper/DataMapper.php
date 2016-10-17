@@ -30,101 +30,42 @@ namespace X4e\X4ebase\XClasses\Persistence\Generic\Mapper;
  */
 class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper
 {
-
-    /**
-     * Maps a single row on an object of the given class
-     *
-     * @param string $className The name of the target class
-     * @param array $row A single array with field_name => value pairs
-     * @return object An object of the given class
-     */
-    protected function mapSingleRow($className, array $row)
-    {
-        // 4eyes start -->
-        $identifier = (!empty($row['_PAGES_OVERLAY']) ? $row['uid'] . '_' . $row['_PAGES_OVERLAY_UID'] : $row['uid']);
-        if ($this->identityMap->hasIdentifier($identifier, $className)) {
-            // 4eyes end <--
-            $object = $this->identityMap->getObjectByIdentifier($identifier, $className);
+	
+	/**
+	 * Maps a single row on an object of the given class
+	 *
+	 * @param string $className The name of the target class
+	 * @param array $row A single array with field_name => value pairs
+	 * @return object An object of the given class
+	 */
+	protected function mapSingleRow($className, array $row) {
+        $identifier = (!empty($row['_PAGES_OVERLAY']) ? $row['uid'] . '_' . $row['_PAGES_OVERLAY_UID'] : $row['uid'] );
+        if ($this->persistenceSession->hasIdentifier($identifier, $className)) {
+            $object = $this->persistenceSession->getObjectByIdentifier($identifier, $className);
         } else {
             $object = $this->createEmptyObject($className);
-            $this->identityMap->registerObject($object, $identifier);
+            $this->persistenceSession->registerObject($object, $identifier);
             $this->thawProperties($object, $row);
+            $this->emitAfterMappingSingleRow($object);
+
             $object->_memorizeCleanState();
             $this->persistenceSession->registerReconstitutedEntity($object);
         }
         return $object;
     }
-
-    /**
-     * Sets the given properties on the object.
-     *
-     * @param \TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $object The object to set properties on
-     * @param array $row
-     * @return void
-     */
-    protected function thawProperties(\TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $object, array $row)
+	
+	/**
+	 * Sets the given properties on the object.
+	 *
+	 * @param \TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $object The object to set properties on
+	 * @param array $row
+	 * @return void
+	 */
+	protected function thawProperties(\TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $object, array $row)
     {
-        $className = get_class($object);
-        $dataMap = $this->getDataMap($className);
-        $object->_setProperty('uid', intval($row['uid']));
-        $object->_setProperty('pid', intval($row['pid']));
-        $object->_setProperty('_localizedUid', intval($row['uid']));
-        if ($dataMap->getLanguageIdColumnName() !== null) {
-            $object->_setProperty('_languageUid', intval($row[$dataMap->getLanguageIdColumnName()]));
-            if (isset($row['_LOCALIZED_UID'])) {
-                $object->_setProperty('_localizedUid', intval($row['_LOCALIZED_UID']));
-            }
-        /* NEW @ 4eyes -- start */
-        } elseif (!empty($row['_PAGES_OVERLAY']) && isset($row['_PAGES_OVERLAY_LANGUAGE'])) {
+        if(!empty($row['_PAGES_OVERLAY']) && isset($row['_PAGES_OVERLAY_LANGUAGE'])) {
             $object->_setProperty('_languageUid', intval($row['_PAGES_OVERLAY_LANGUAGE']));
-            if (isset($row['_PAGES_OVERLAY_UID'])) {
-                //$object->_setProperty('_localizedUid', intval($row['_PAGES_OVERLAY_UID']));
-            }
         }
-        /* NEW @ 4eyes -- end */
-        $properties = $object->_getProperties();
-        foreach ($properties as $propertyName => $propertyValue) {
-            if (!$dataMap->isPersistableProperty($propertyName)) {
-                continue;
-            }
-            $columnMap = $dataMap->getColumnMap($propertyName);
-            $columnName = $columnMap->getColumnName();
-            $propertyData = $this->reflectionService->getClassSchema($className)->getProperty($propertyName);
-            $propertyValue = null;
-            if ($row[$columnName] !== null) {
-                switch ($propertyData['type']) {
-                    case 'integer':
-                        $propertyValue = (integer) $row[$columnName];
-                        break;
-                    case 'float':
-                        $propertyValue = (double) $row[$columnName];
-                        break;
-                    case 'boolean':
-                        $propertyValue = (boolean) $row[$columnName];
-                        break;
-                    case 'string':
-                        $propertyValue = (string) $row[$columnName];
-                        break;
-                    case 'array':
-                        // $propertyValue = $this->mapArray($row[$columnName]); // Not supported, yet!
-                        break;
-                    case 'SplObjectStorage':
-                    case 'Tx_Extbase_Persistence_ObjectStorage':
-                    case 'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage':
-                        $propertyValue = $this->mapResultToPropertyValue($object, $propertyName, $this->fetchRelated($object, $propertyName, $row[$columnName]));
-                        break;
-                    default:
-                        if ($propertyData['type'] === 'DateTime' || in_array('DateTime', class_parents($propertyData['type']))) {
-                            $propertyValue = $this->mapDateTime($row[$columnName], $columnMap->getDateTimeStorageFormat());
-                        } else {
-                            $propertyValue = $this->mapResultToPropertyValue($object, $propertyName, $this->fetchRelated($object, $propertyName, $row[$columnName]));
-                        }
-                        break;
-                }
-            }
-            if ($propertyValue !== null) {
-                $object->_setProperty($propertyName, $propertyValue);
-            }
-        }
-    }
+		parent::thawProperties($object, $row);
+	}
 }

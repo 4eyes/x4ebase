@@ -37,6 +37,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
+
 class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
 {
 
@@ -45,6 +46,8 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
 
     public function setUp()
     {
+        date_default_timezone_set('Europe/Zurich');
+        
         parent::setUp();
         $this->mockSubject();
     }
