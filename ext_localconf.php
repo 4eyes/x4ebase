@@ -15,9 +15,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Persistence\Gen
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper::class] = [
     'className' => \X4e\X4ebase\XClasses\Persistence\Generic\Mapper\DataMapper::class
 ];
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbBackend::class] = [
-    'className' => \X4e\X4ebase\XClasses\Persistence\Generic\Storage\Typo3DbBackend::class
-];
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Core\Localization\Parser\XliffParser::class] = [
     'className' => \X4e\X4ebase\XClasses\Localization\Parser\XliffParser::class
 ];
