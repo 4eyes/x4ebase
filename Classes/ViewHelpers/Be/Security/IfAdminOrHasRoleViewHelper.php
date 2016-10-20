@@ -60,45 +60,48 @@ namespace X4e\X4ebase\ViewHelpers\Be\Security;
  *
  * @api
  */
-class IfAdminOrHasRoleViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Security\IfHasRoleViewHelper {
+class IfAdminOrHasRoleViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Security\IfHasRoleViewHelper
+{
 
-	/**
-	 * Determines whether the currently logged in BE user is an admin
-	 *
-	 * @return boolean TRUE if the currently logged in BE user is an admin
-	 */
-	protected static function backendUserIsAdmin() {
-		return $GLOBALS['BE_USER']->isAdmin();
-	}
+    /**
+     * Determines whether the currently logged in BE user is an admin
+     *
+     * @return bool TRUE if the currently logged in BE user is an admin
+     */
+    protected static function backendUserIsAdmin()
+    {
+        return $GLOBALS['BE_USER']->isAdmin();
+    }
 
-	/**
-	 * This method decides if the condition is TRUE or FALSE. It can be overriden in extending viewhelpers to adjust functionality.
-	 *
-	 * @param array $arguments ViewHelper arguments to evaluate the condition for this ViewHelper, allows for flexiblity in overriding this method.
-	 * @return bool
-	 */
-	static protected function evaluateCondition($arguments = NULL) {
-		if (self::backendUserIsAdmin()) {
-			return TRUE;
-		}
+    /**
+     * This method decides if the condition is TRUE or FALSE. It can be overriden in extending viewhelpers to adjust functionality.
+     *
+     * @param array $arguments ViewHelper arguments to evaluate the condition for this ViewHelper, allows for flexiblity in overriding this method.
+     * @return bool
+     */
+    protected static function evaluateCondition($arguments = null)
+    {
+        if (self::backendUserIsAdmin()) {
+            return true;
+        }
 
-		$role = $arguments['role'];
-		if (!is_array($GLOBALS['BE_USER']->userGroups)) {
-			return FALSE;
-		}
-		if (is_numeric($role)) {
-			foreach ($GLOBALS['BE_USER']->userGroups as $userGroup) {
-				if ((int)$userGroup['uid'] === (int)$role) {
-					return TRUE;
-				}
-			}
-		} else {
-			foreach ($GLOBALS['BE_USER']->userGroups as $userGroup) {
-				if ($userGroup['title'] === $role) {
-					return TRUE;
-				}
-			}
-		}
-		return FALSE;
-	}
+        $role = $arguments['role'];
+        if (!is_array($GLOBALS['BE_USER']->userGroups)) {
+            return false;
+        }
+        if (is_numeric($role)) {
+            foreach ($GLOBALS['BE_USER']->userGroups as $userGroup) {
+                if ((int)$userGroup['uid'] === (int)$role) {
+                    return true;
+                }
+            }
+        } else {
+            foreach ($GLOBALS['BE_USER']->userGroups as $userGroup) {
+                if ($userGroup['title'] === $role) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

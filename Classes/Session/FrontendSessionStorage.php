@@ -29,63 +29,68 @@ namespace X4e\X4ebase\Session;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class FrontendSessionStorage extends \X4e\X4ebase\Session\AbstractSessionStorage {
+class FrontendSessionStorage extends \X4e\X4ebase\Session\AbstractSessionStorage
+{
 
-	/**
-	 * Read session data
-	 *
-	 * @param string $key
-	 * @param string $type
-	 * @return mixed
-	 */
-	public function get($key, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
-		return $this->getFrontendUser()->getKey($type, $this->getKey($key));
-	}
+    /**
+     * Read session data
+     *
+     * @param string $key
+     * @param string $type
+     * @return mixed
+     */
+    public function get($key, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE)
+    {
+        return $this->getFrontendUser()->getKey($type, $this->getKey($key));
+    }
 
-	/**
-	 * Write data to the session
-	 *
-	 * @param string $key
-	 * @param mixed $data
-	 * @param string $type
-	 * @return void
-	 */
-	public function set($key, $data, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
-		$this->getFrontendUser()->setKey($type, $this->getKey($key), $data);
-		//$this->getFrontendUser()->storeSessionData();
-	}
+    /**
+     * Write data to the session
+     *
+     * @param string $key
+     * @param mixed $data
+     * @param string $type
+     * @return void
+     */
+    public function set($key, $data, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE)
+    {
+        $this->getFrontendUser()->setKey($type, $this->getKey($key), $data);
+        //$this->getFrontendUser()->storeSessionData();
+    }
 
-	/**
-	 * Remove data from the session
-	 *
-	 * @param string $key
-	 * @param string $type
-	 * @return void
-	 */
-	public function remove($key, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE) {
-		if ($this->has($key, $type)) {
-			$this->set($key, NULL, $type);
-		}
-	}
+    /**
+     * Remove data from the session
+     *
+     * @param string $key
+     * @param string $type
+     * @return void
+     */
+    public function remove($key, $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE)
+    {
+        if ($this->has($key, $type)) {
+            $this->set($key, null, $type);
+        }
+    }
 
-	/**
-	 * Returns the whole sesData array
-	 *
-	 * @return array
-	 */
-	public function getAll(){
-		return $this->getFrontendUser()->sesData;
-	}
+    /**
+     * Returns the whole sesData array
+     *
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->getFrontendUser()->sesData;
+    }
 
-	/**
-	 *
-	 * @return \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
-	 */
-	protected function getFrontendUser() {
-		return $GLOBALS['TSFE']->fe_user;
-	}
+    /**
+     *
+     * @return \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
+     */
+    protected function getFrontendUser()
+    {
+        return $GLOBALS['TSFE']->fe_user;
+    }
 }

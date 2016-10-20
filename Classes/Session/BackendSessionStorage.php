@@ -6,7 +6,7 @@ namespace X4e\X4ebase\Session;
  *
  *  (c) 2014 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
  *           Michel Georgy <michel@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,64 +29,67 @@ namespace X4e\X4ebase\Session;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class BackendSessionStorage extends \X4e\X4ebase\Session\AbstractSessionStorage {
+class BackendSessionStorage extends \X4e\X4ebase\Session\AbstractSessionStorage
+{
 
-	/**
-	 * Read session data
-	 * 
-	 * @param string $key
-	 * @param string $type
-	 * @return mixed
-	 */
-	public function get($key, $type = '') {
-		return $this->getBackendUser()->getSessionData($this->getKey($key));
-	}
+    /**
+     * Read session data
+     *
+     * @param string $key
+     * @param string $type
+     * @return mixed
+     */
+    public function get($key, $type = '')
+    {
+        return $this->getBackendUser()->getSessionData($this->getKey($key));
+    }
 
-	/**
-	 * Write data to the session
-	 * 
-	 * @param string $key
-	 * @param mixed $data
-	 * @param string $type
-	 * @return void
-	 */
-	public function set($key, $data, $type = '') {
-		$this->getBackendUser()->setAndSaveSessionData($this->getKey($key), $data);
-	}
-	
-	/**
-	 * Remove data from the session
-	 * 
-	 * @param string $key
-	 * @param string $type
-	 * @return void
-	 */
-	public function remove($key, $type = '') {
-		if ($this->has($key)) {
-			$sesDat = unserialize($this->getBackendUser()->user['ses_data']);
-			unset($sesDat[$this->getKey($key)]);
-			$this->getBackendUser()->user['ses_data'] = (!empty($sesDat) ? serialize($sesDat) : '');
-			if ($this->getBackendUser()->writeDevLog) {
-				\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('setAndSaveSessionData: ses_id = ' . $this->getBackendUser()->user['ses_id'], 'TYPO3\CMS\Core\Authentication\AbstractUserAuthentication');
-			}
-			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-					$this->getBackendUser()->session_table, 
-					'ses_id=' . $GLOBALS['TYPO3_DB']->fullQuoteStr($this->getBackendUser()->user['ses_id'], $this->getBackendUser()->session_table), 
-					array('ses_data' => $this->getBackendUser()->user['ses_data'])
-				);
-		}
-	}
+    /**
+     * Write data to the session
+     *
+     * @param string $key
+     * @param mixed $data
+     * @param string $type
+     * @return void
+     */
+    public function set($key, $data, $type = '')
+    {
+        $this->getBackendUser()->setAndSaveSessionData($this->getKey($key), $data);
+    }
 
-	/**
-	 *
-	 * @param \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
-	 */
-	protected function getBackendUser() {
-		return $GLOBALS['BE_USER'];
-	}
+    /**
+     * Remove data from the session
+     *
+     * @param string $key
+     * @param string $type
+     * @return void
+     */
+    public function remove($key, $type = '')
+    {
+        if ($this->has($key)) {
+            $sesDat = unserialize($this->getBackendUser()->user['ses_data']);
+            unset($sesDat[$this->getKey($key)]);
+            $this->getBackendUser()->user['ses_data'] = (!empty($sesDat) ? serialize($sesDat) : '');
+            if ($this->getBackendUser()->writeDevLog) {
+                \TYPO3\CMS\Core\Utility\GeneralUtility::devLog('setAndSaveSessionData: ses_id = ' . $this->getBackendUser()->user['ses_id'], 'TYPO3\CMS\Core\Authentication\AbstractUserAuthentication');
+            }
+            $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+                    $this->getBackendUser()->session_table,
+                    'ses_id=' . $GLOBALS['TYPO3_DB']->fullQuoteStr($this->getBackendUser()->user['ses_id'], $this->getBackendUser()->session_table),
+                    ['ses_data' => $this->getBackendUser()->user['ses_data']]
+                );
+        }
+    }
 
+    /**
+     *
+     * @param \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     */
+    protected function getBackendUser()
+    {
+        return $GLOBALS['BE_USER'];
+    }
 }

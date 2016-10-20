@@ -6,7 +6,7 @@ namespace X4e\X4ebase\Session;
  *
  *  (c) 2014 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
  *           Michel Georgy <michel@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,35 +29,36 @@ namespace X4e\X4ebase\Session;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-abstract class AbstractSessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface {
+abstract class AbstractSessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface
+{
 
-	/**
-	 * @var string
-	 */
-	protected $keyPrefix = 'x4ebase';
+    /**
+     * @var string
+     */
+    protected $keyPrefix = 'x4ebase';
 
-	/**
-	 *
-	 * @param string $key
-	 */
-	protected function getKey($key) {
-		return $this->sessionNamespace . $key;
-	}
-	
-	/**
-	 * Returns TRUE if $key exists in the session, otherwise FALSE
-	 * 
-	 * @param string $key
-	 * @param string $type
-	 * @return boolean
-	 */
-	public function has($key, $type = '') {
-		$sessionData = $this->get($key, $type);
-		return isset($sessionData);
-	}
+    /**
+     *
+     * @param string $key
+     */
+    protected function getKey($key)
+    {
+        return $this->sessionNamespace . $key;
+    }
 
+    /**
+     * Returns TRUE if $key exists in the session, otherwise FALSE
+     *
+     * @param string $key
+     * @param string $type
+     * @return bool
+     */
+    public function has($key, $type = '')
+    {
+        $sessionData = $this->get($key, $type);
+        return isset($sessionData);
+    }
 }

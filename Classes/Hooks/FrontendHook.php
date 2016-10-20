@@ -32,16 +32,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * Hook to forward index.php urls to realurl pendant
  *
- * @package X4e\X4ebase\Hooks
  */
-class FrontendHook {
+class FrontendHook
+{
     /**
      * Source: https://bitbucket.org/edirect24ug/forcerealurl2
      *
      * @param array $params
      * @param \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $pObj
      */
-    function checkForRealurl($params, $pObj) {
+    public function checkForRealurl($params, $pObj)
+    {
         if ($pObj->siteScript && $pObj->config['config']['tx_realurl_enable'] && (
                 substr($pObj->siteScript, 0, 9) == 'index.php' ||
                 substr($pObj->siteScript, 0, 1) == '?'

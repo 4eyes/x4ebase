@@ -25,7 +25,6 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Format;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Extbase\Validation\Exception;
 
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\Format\RegexReplaceViewHelper
@@ -36,40 +35,44 @@ use TYPO3\CMS\Extbase\Validation\Exception;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class RegexReplaceViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class RegexReplaceViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\RegexReplaceViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Format\RegexReplaceViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testRender() {
-		//subject | pattern | replacement | result
-		$testCases = array(
-			array('15. April 2003', '/(\d+)\. (\w+) (\d+)/i', '${2}1,$3', 'April1,2003'),
-			array('Der schnelle braune Fuchs sprang über den faulen Hund.', array('/schnelle/', '/braune/', '/Fuchs/'), array('Bär', 'schwarze', 'langsame'), 'Der Bär schwarze langsame sprang über den faulen Hund.')
-		);
+    /**
+     * @test
+     */
+    public function testRender()
+    {
+        //subject | pattern | replacement | result
+        $testCases = [
+            ['15. April 2003', '/(\d+)\. (\w+) (\d+)/i', '${2}1,$3', 'April1,2003'],
+            ['Der schnelle braune Fuchs sprang über den faulen Hund.', ['/schnelle/', '/braune/', '/Fuchs/'], ['Bär', 'schwarze', 'langsame'], 'Der Bär schwarze langsame sprang über den faulen Hund.']
+        ];
 
-		$this->renderFromArgument($testCases);
-		$this->renderFromChildren($testCases);
-	}
+        $this->renderFromArgument($testCases);
+        $this->renderFromChildren($testCases);
+    }
 
-	public function renderFromArgument($testCases) {
-		foreach ($testCases as $testCase) {
-			$this->assertSame($testCase[3], $this->subject->render($testCase[1], $testCase[2], -1, $testCase[0]));
-		}
-	}
+    public function renderFromArgument($testCases)
+    {
+        foreach ($testCases as $testCase) {
+            $this->assertSame($testCase[3], $this->subject->render($testCase[1], $testCase[2], -1, $testCase[0]));
+        }
+    }
 
-	public function renderFromChildren($testCases) {
-		$this->mockSubject('renderChildren');
+    public function renderFromChildren($testCases)
+    {
+        $this->mockSubject('renderChildren');
 
-		for ($i = 0; $i < count($testCases); $i++) {
-			$this->subject->expects($this->at($i))->method('renderChildren')
-				->willReturn($testCases[$i][0]);
-		}
-		foreach ($testCases as $testCase) {
-			$this->assertSame($testCase[3], $this->subject->render($testCase[1], $testCase[2]));
-		}
-	}
+        for ($i = 0; $i < count($testCases); $i++) {
+            $this->subject->expects($this->at($i))->method('renderChildren')
+                ->willReturn($testCases[$i][0]);
+        }
+        foreach ($testCases as $testCase) {
+            $this->assertSame($testCase[3], $this->subject->render($testCase[1], $testCase[2]));
+        }
+    }
 }

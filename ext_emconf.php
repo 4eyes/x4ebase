@@ -10,34 +10,34 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
-	'title' => '4eyes Base',
-	'description' => 'Basic extbase and fluid functionality, models and viewhelpers',
-	'category' => 'misc',
-	'author' => 'Alessandro Bellafronte, Christoph Dörfel, Michel Georgy',
-	'author_email' => 'alessandro@4eyes.ch, christoph@4eyes.ch, michel@4eyes.ch',
-	'author_company' => '4eyes GmbH, 4eyes GmbH, 4eyes GmbH',
-	'shy' => '',
-	'priority' => '',
-	'module' => '',
-	'state' => 'stable',
-	'internal' => '',
-	'uploadfolder' => '0',
-	'createDirs' => '',
-	'modify_tables' => '',
-	'clearCacheOnLoad' => 0,
-	'lockType' => '',
-	'version' => '8.1.2',
+$EM_CONF[$_EXTKEY] = [
+    'title' => '4eyes Base',
+    'description' => 'Basic extbase and fluid functionality, models and viewhelpers',
+    'category' => 'misc',
+    'author' => 'Alessandro Bellafronte, Christoph Dörfel, Michel Georgy',
+    'author_email' => 'alessandro@4eyes.ch, christoph@4eyes.ch, michel@4eyes.ch',
+    'author_company' => '4eyes GmbH, 4eyes GmbH, 4eyes GmbH',
+    'shy' => '',
+    'priority' => '',
+    'module' => '',
+    'state' => 'stable',
+    'internal' => '',
+    'uploadfolder' => '0',
+    'createDirs' => '',
+    'modify_tables' => '',
+    'clearCacheOnLoad' => 0,
+    'lockType' => '',
+	'version' => '8.1.4',
 	'constraints' => array(
 		'depends' => array(
 			'extbase' => '8.0',
 			'fluid' => '8.0',
 			'typo3' => '8.0',
-			'php' => '5.3.5-0.0.0'
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-);
+            'php' => '5.3.5-0.0.0'
+        ],
+        'conflicts' => [
+        ],
+        'suggests' => [
+        ],
+    ],
+];

@@ -37,62 +37,65 @@ use TYPO3\CMS\Core\Page\PageRenderer;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class AddJsFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase {
+class AddJsFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+{
 
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Be\PageRenderer\AddJsFileViewHelper */
-	protected $subject;
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Be\PageRenderer\AddJsFileViewHelper */
+    protected $subject;
 
-	/**
-	 * @test
-	 */
-	public function testInitializeArguments() {
-		$this->initializeArgumentsTest(6);
-	}
+    /**
+     * @test
+     */
+    public function testInitializeArguments()
+    {
+        $this->initializeArgumentsTest(6);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testRender() {
-		$this->mockSubject('getDocInstance');
-		$file = 'test';
+    /**
+     * @test
+     */
+    public function testRender()
+    {
+        $this->mockSubject('getDocInstance');
+        $file = 'test';
 
-		$doc = $this->getMock(DocumentTemplate::class, array('getPageRenderer'), array(), '', FALSE);
-		$pageRenderer = $this->getMock(PageRenderer::class, array('addJsFile'), array(), '', FALSE);
-		$this->subject
-			->expects($this->once())
-			->method('getDocInstance')
-			->willReturn($doc);
-		$doc->expects($this->once())
-			->method('getPageRenderer')
-			->willReturn($pageRenderer);
-		$pageRenderer->expects($this->once())
-			->method('addJsFile');
+        $doc = $this->getMock(DocumentTemplate::class, ['getPageRenderer'], [], '', false);
+        $pageRenderer = $this->getMock(PageRenderer::class, ['addJsFile'], [], '', false);
+        $this->subject
+            ->expects($this->once())
+            ->method('getDocInstance')
+            ->willReturn($doc);
+        $doc->expects($this->once())
+            ->method('getPageRenderer')
+            ->willReturn($pageRenderer);
+        $pageRenderer->expects($this->once())
+            ->method('addJsFile');
 
-		$this->subject->render($file);
-	}
+        $this->subject->render($file);
+    }
 
-	/**
-	 * @test
-	 */
-	public function testRender_withArgument() {
-		$this->mockSubject('getDocInstance');
-		$file = 'test';
+    /**
+     * @test
+     */
+    public function testRender_withArgument()
+    {
+        $this->mockSubject('getDocInstance');
+        $file = 'test';
 
-		$this->subject->setArguments(array('external' => TRUE));
+        $this->subject->setArguments(['external' => true]);
 
-		$doc = $this->getMock(DocumentTemplate::class, array('getPageRenderer'), array(), '', FALSE);
-		$pageRenderer = $this->getMock(PageRenderer::class, array('addJsFile'), array(), '', FALSE);
-		$this->subject
-			->expects($this->once())
-			->method('getDocInstance')
-			->willReturn($doc);
-		$doc->expects($this->once())
-			->method('getPageRenderer')
-			->willReturn($pageRenderer);
-		$pageRenderer->expects($this->once())
-			->method('addJsFile');
+        $doc = $this->getMock(DocumentTemplate::class, ['getPageRenderer'], [], '', false);
+        $pageRenderer = $this->getMock(PageRenderer::class, ['addJsFile'], [], '', false);
+        $this->subject
+            ->expects($this->once())
+            ->method('getDocInstance')
+            ->willReturn($doc);
+        $doc->expects($this->once())
+            ->method('getPageRenderer')
+            ->willReturn($pageRenderer);
+        $pageRenderer->expects($this->once())
+            ->method('addJsFile');
 
-		$this->subject->render($file);
-	}
-
+        $this->subject->render($file);
+    }
 }

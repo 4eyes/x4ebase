@@ -28,262 +28,280 @@ namespace X4e\X4ebase\Domain\Model;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
-	/**
-	 * sender
-	 *
-	 * @var string
-	 */
-	protected $sender;
+    /**
+     * sender
+     *
+     * @var string
+     */
+    protected $sender;
 
-	/**
-	 * recipient
-	 *
-	 * @var string
-	 */
-	protected $recipient;
+    /**
+     * recipient
+     *
+     * @var string
+     */
+    protected $recipient;
 
-	/**
-	 * replyTo
-	 *
-	 * @var string
-	 */
-	protected $replyTo;
+    /**
+     * replyTo
+     *
+     * @var string
+     */
+    protected $replyTo;
 
-	/**
-	 * subject
-	 *
-	 * @var string
-	 */
-	protected $subject;
+    /**
+     * subject
+     *
+     * @var string
+     */
+    protected $subject;
 
-	/**
-	 * message
-	 *
-	 * @var string
-	 */
-	protected $message;
+    /**
+     * message
+     *
+     * @var string
+     */
+    protected $message;
 
-	/**
-	 * isSent
-	 *
-	 * @var boolean
-	 */
-	protected $isSent = FALSE;
+    /**
+     * isSent
+     *
+     * @var bool
+     */
+    protected $isSent = false;
 
-	/**
-	 * queued
-	 *
-	 * @var boolean
-	 */
-	protected $queued = FALSE;
+    /**
+     * queued
+     *
+     * @var bool
+     */
+    protected $queued = false;
 
-	/**
-	 * isHTML
-	 *
-	 * @var boolean
-	 */
-	protected $isHtml = TRUE;
+    /**
+     * isHTML
+     *
+     * @var bool
+     */
+    protected $isHtml = true;
 
-	/**
-	 * error
-	 *
-	 * @var string
-	 */
-	protected $error;
+    /**
+     * error
+     *
+     * @var string
+     */
+    protected $error;
 
-	/**
-	 * Returns the sender
-	 *
-	 * @return string $sender
-	 */
-	public function getSender() {
-		return $this->sender;
-	}
+    /**
+     * Returns the sender
+     *
+     * @return string $sender
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
 
-	/**
-	 * Sets the sender
-	 *
-	 * @param string $sender
-	 * @return \X4e\X4ebase\Domain\Model\EmailLog
-	 */
-	public function setSender($sender) {
-		$this->sender = $sender;
-		return $this;
-	}
+    /**
+     * Sets the sender
+     *
+     * @param string $sender
+     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     */
+    public function setSender($sender)
+    {
+        $this->sender = $sender;
+        return $this;
+    }
 
-	/**
-	 * Returns the recipient
-	 *
-	 * @return string $recipient
-	 */
-	public function getRecipient() {
-		return $this->recipient;
-	}
+    /**
+     * Returns the recipient
+     *
+     * @return string $recipient
+     */
+    public function getRecipient()
+    {
+        return $this->recipient;
+    }
 
-	/**
-	 * Sets the recipient
-	 *
-	 * @param string $recipient
-	 * @return \X4e\X4ebase\Domain\Model\EmailLog
-	 */
-	public function setRecipient($recipient) {
-		$this->recipient = $recipient;
-		return $this;
-	}
+    /**
+     * Sets the recipient
+     *
+     * @param string $recipient
+     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     */
+    public function setRecipient($recipient)
+    {
+        $this->recipient = $recipient;
+        return $this;
+    }
 
-	/**
-	 * Returns the replyto
-	 *
-	 * @return string $replyTo
-	 */
-	public function getReplyTo() {
-		return $this->getReplyTo;
-	}
+    /**
+     * Returns the replyto
+     *
+     * @return string $replyTo
+     */
+    public function getReplyTo()
+    {
+        return $this->getReplyTo;
+    }
 
-	/**
-	 * Sets the replyTo
-	 *
-	 * @param string $replyTo
-	 * @return void
-	 */
-	public function setReplyTo($replyTo) {
-		$this->replyTo = $replyTo;
-		return $this;
-	}
+    /**
+     * Sets the replyTo
+     *
+     * @param string $replyTo
+     * @return void
+     */
+    public function setReplyTo($replyTo)
+    {
+        $this->replyTo = $replyTo;
+        return $this;
+    }
 
-	/**
-	 * Returns the subject
-	 *
-	 * @return string $subject
-	 */
-	public function getSubject() {
-		return $this->subject;
-	}
+    /**
+     * Returns the subject
+     *
+     * @return string $subject
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
 
-	/**
-	 * Sets the subject
-	 *
-	 * @param string $subject
-	 * @return \X4e\X4ebase\Domain\Model\EmailLog
-	 */
-	public function setSubject($subject) {
-		$this->subject = $subject;
-		return $this;
-	}
+    /**
+     * Sets the subject
+     *
+     * @param string $subject
+     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+        return $this;
+    }
 
-	/**
-	 * Returns the message
-	 *
-	 * @return string $message
-	 */
-	public function getMessage() {
-		return $this->message;
-	}
+    /**
+     * Returns the message
+     *
+     * @return string $message
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
-	/**
-	 * Sets the message
-	 *
-	 * @param string $message
-	 * @return \X4e\X4ebase\Domain\Model\EmailLog
-	 */
-	public function setMessage($message) {
-		$this->message = $message;
-		return $this;
-	}
+    /**
+     * Sets the message
+     *
+     * @param string $message
+     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+        return $this;
+    }
 
-	/**
-	 * Returns the isSent
-	 *
-	 * @return boolean $isSent
-	 */
-	public function getIsSent() {
-		return $this->isSent;
-	}
+    /**
+     * Returns the isSent
+     *
+     * @return bool $isSent
+     */
+    public function getIsSent()
+    {
+        return $this->isSent;
+    }
 
-	/**
-	 * Sets the isHtml
-	 *
-	 * @param boolean $isHtml
-	 * @return void
-	 */
-	public function setIsHtml($isHtml) {
-		$this->isHtml = $isHtml;
-		return $this;
-	}
+    /**
+     * Sets the isHtml
+     *
+     * @param bool $isHtml
+     * @return void
+     */
+    public function setIsHtml($isHtml)
+    {
+        $this->isHtml = $isHtml;
+        return $this;
+    }
 
-	/**
-	 * Returns the isHtml
-	 *
-	 * @return boolean $isHtml
-	 */
-	public function getIsHtml() {
-		return $this->isHtml;
-	}
+    /**
+     * Returns the isHtml
+     *
+     * @return bool $isHtml
+     */
+    public function getIsHtml()
+    {
+        return $this->isHtml;
+    }
 
-	/**
-	 * Sets the isSent
-	 *
-	 * @param boolean $isSent
-	 * @return \X4e\X4ebase\Domain\Model\EmailLog
-	 */
-	public function setIsSent($isSent) {
-		$this->isSent = $isSent;
-		return $this;
-	}
+    /**
+     * Sets the isSent
+     *
+     * @param bool $isSent
+     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     */
+    public function setIsSent($isSent)
+    {
+        $this->isSent = $isSent;
+        return $this;
+    }
 
-	/**
-	 * Returns the inQueue
-	 *
-	 * @return boolean $inQueue
-	 */
-	public function getQueued() {
-		return $this->queued();
-	}
+    /**
+     * Returns the inQueue
+     *
+     * @return bool $inQueue
+     */
+    public function getQueued()
+    {
+        return $this->queued();
+    }
 
-	/**
-	 * Sets the inQueue
-	 *
-	 * @param boolean $queued
-	 * @return void
-	 */
-	public function setQueued($queued) {
-		$this->queued = $queued;
-		return $this;
-	}
+    /**
+     * Sets the inQueue
+     *
+     * @param bool $queued
+     * @return void
+     */
+    public function setQueued($queued)
+    {
+        $this->queued = $queued;
+        return $this;
+    }
 
-	/**
-	 * Returns the boolean state of isSent
-	 *
-	 * @return boolean
-	 */
-	public function isIsSent() {
-		return $this->getIsSent();
-	}
+    /**
+     * Returns the boolean state of isSent
+     *
+     * @return bool
+     */
+    public function isIsSent()
+    {
+        return $this->getIsSent();
+    }
 
-	/**
-	 * Returns the error
-	 *
-	 * @return string $error
-	 */
-	public function getError() {
-		return $this->error;
-	}
+    /**
+     * Returns the error
+     *
+     * @return string $error
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
 
-	/**
-	 * Sets the error
-	 *
-	 * @param string $error
-	 * @return \X4e\X4ebase\Domain\Model\EmailLog
-	 */
-	public function setError($error) {
-		$this->error = $error;
-		return $this;
-	}
-
+    /**
+     * Sets the error
+     *
+     * @param string $error
+     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     */
+    public function setError($error)
+    {
+        $this->error = $error;
+        return $this;
+    }
 }

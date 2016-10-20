@@ -34,45 +34,48 @@ namespace X4e\X4ebase\ViewHelpers\Widget;
  * </output>
  *
  */
-class UriViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\UriViewHelper {
+class UriViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\UriViewHelper
+{
 
-	/**
-	 * Initializes the view helper before invoking the render method.
-	 *
-	 * @return void
-	 */
-	public function initializeArguments() {
-		$this->registerArgument('absolute', 'boolean', 'If set, the URI of the rendered link is absolute', FALSE, FALSE);
-	}
+    /**
+     * Initializes the view helper before invoking the render method.
+     *
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('absolute', 'boolean', 'If set, the URI of the rendered link is absolute', false, false);
+    }
 
-	/**
-	 * Get the URI for an AJAX Request.
-	 *
-	 * @return string the AJAX URI
-	 */
-	protected function getAjaxUri() {
-		$action = $this->arguments['action'];
-		$arguments = $this->arguments['arguments'];
-		if ($action === NULL) {
-			$action = $this->controllerContext->getRequest()->getControllerActionName();
-		}
-		$arguments['fluid-widget-id'] = $this->controllerContext->getRequest()->getWidgetContext()->getAjaxWidgetIdentifier();
-		$arguments['action'] = $action;
+    /**
+     * Get the URI for an AJAX Request.
+     *
+     * @return string the AJAX URI
+     */
+    protected function getAjaxUri()
+    {
+        $action = $this->arguments['action'];
+        $arguments = $this->arguments['arguments'];
+        if ($action === null) {
+            $action = $this->controllerContext->getRequest()->getControllerActionName();
+        }
+        $arguments['fluid-widget-id'] = $this->controllerContext->getRequest()->getWidgetContext()->getAjaxWidgetIdentifier();
+        $arguments['action'] = $action;
 
-		$uriBuilder = $this->controllerContext->getUriBuilder();
-		$uri = $uriBuilder
-				->reset()
-				->setTargetPageUid($GLOBALS['TSFE']->id)
-				->setTargetPageType(7076)
-				->setNoCache(FALSE)
-				->setUseCacheHash(FALSE)
-				->setSection('')
-				->setLinkAccessRestrictedPages(TRUE)
-				->setArguments($arguments)
-				->setCreateAbsoluteUri((boolean)$this->arguments['absolute'])
-				->setAddQueryString(FALSE)
-				->setArgumentsToBeExcludedFromQueryString(array())
-				->build();
-		return $uri;
-	}
+        $uriBuilder = $this->controllerContext->getUriBuilder();
+        $uri = $uriBuilder
+                ->reset()
+                ->setTargetPageUid($GLOBALS['TSFE']->id)
+                ->setTargetPageType(7076)
+                ->setNoCache(false)
+                ->setUseCacheHash(false)
+                ->setSection('')
+                ->setLinkAccessRestrictedPages(true)
+                ->setArguments($arguments)
+                ->setCreateAbsoluteUri((boolean)$this->arguments['absolute'])
+                ->setAddQueryString(false)
+                ->setArgumentsToBeExcludedFromQueryString([])
+                ->build();
+        return $uri;
+    }
 }

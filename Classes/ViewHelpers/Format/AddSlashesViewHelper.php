@@ -17,16 +17,18 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  *
  * @api
  */
-class AddSlashesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class AddSlashesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * Runs the given string through php-function 'addslashes'
-	 *
-	 * @return string The escaped string
-	 * @api
-	 */
-	public function render() {
-		$stringToFormat = $this->renderChildren();
-		return addslashes($stringToFormat);
-	}
+    /**
+     * Runs the given string through php-function 'addslashes'
+     *
+     * @return string The escaped string
+     * @api
+     */
+    public function render()
+    {
+        $stringToFormat = $this->renderChildren();
+        return addslashes($stringToFormat);
+    }
 }

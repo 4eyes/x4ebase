@@ -6,7 +6,7 @@ namespace X4e\X4ebase\Session;
  *
  *  (c) 2014 Christoph Dörfel <christoph@4eyes.ch>, 4eyes GmbH
  *           Michel Georgy <michel@4eyes.ch>, 4eyes GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,47 +29,46 @@ namespace X4e\X4ebase\Session;
 /**
  *
  *
- * @package x4ebase
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-interface SessionStorageInterface extends \TYPO3\CMS\Core\SingletonInterface {
+interface SessionStorageInterface extends \TYPO3\CMS\Core\SingletonInterface
+{
 
-	/**
-	 * Read session data
-	 * 
-	 * @param string $key
-	 * @param string $type
-	 * @return mixed
-	 */
-	public function get($key, $type = '');
+    /**
+     * Read session data
+     *
+     * @param string $key
+     * @param string $type
+     * @return mixed
+     */
+    public function get($key, $type = '');
 
-	/**
-	 * Write data to the session
-	 * 
-	 * @param string $key
-	 * @param mixed $data
-	 * @param string $type
-	 * @return void
-	 */
-	public function set($key, $data, $type = '');
+    /**
+     * Write data to the session
+     *
+     * @param string $key
+     * @param mixed $data
+     * @param string $type
+     * @return void
+     */
+    public function set($key, $data, $type = '');
 
-	/**
-	 * Returns TRUE if $key exists in the session, otherwise FALSE
-	 * 
-	 * @param string $key
-	 * @param string $type
-	 * @return boolean
-	 */
-	public function has($key, $type = '');
+    /**
+     * Returns TRUE if $key exists in the session, otherwise FALSE
+     *
+     * @param string $key
+     * @param string $type
+     * @return bool
+     */
+    public function has($key, $type = '');
 
-	/**
-	 * Remove data from the session
-	 * 
-	 * @param string $key
-	 * @param string $type
-	 * @return void
-	 */
-	public function remove($key, $type = '');
-
+    /**
+     * Remove data from the session
+     *
+     * @param string $key
+     * @param string $type
+     * @return void
+     */
+    public function remove($key, $type = '');
 }

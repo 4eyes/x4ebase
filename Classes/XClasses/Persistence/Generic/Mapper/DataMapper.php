@@ -28,7 +28,8 @@ namespace X4e\X4ebase\XClasses\Persistence\Generic\Mapper;
 /**
  * A mapper to map database tables configured in $TCA on domain objects.
  */
-class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper {
+class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper
+{
 	
 	/**
 	 * Maps a single row on an object of the given class
@@ -46,11 +47,12 @@ class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMappe
             $this->persistenceSession->registerObject($object, $identifier);
             $this->thawProperties($object, $row);
             $this->emitAfterMappingSingleRow($object);
+
             $object->_memorizeCleanState();
             $this->persistenceSession->registerReconstitutedEntity($object);
         }
         return $object;
-	}
+    }
 	
 	/**
 	 * Sets the given properties on the object.
@@ -59,11 +61,11 @@ class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMappe
 	 * @param array $row
 	 * @return void
 	 */
-	protected function thawProperties(\TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $object, array $row) {
+	protected function thawProperties(\TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface $object, array $row)
+    {
         if(!empty($row['_PAGES_OVERLAY']) && isset($row['_PAGES_OVERLAY_LANGUAGE'])) {
             $object->_setProperty('_languageUid', intval($row['_PAGES_OVERLAY_LANGUAGE']));
         }
 		parent::thawProperties($object, $row);
 	}
-	
 }

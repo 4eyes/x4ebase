@@ -3,7 +3,8 @@ namespace X4e\X4ebase\XClasses\Controller;
 
 use TYPO3\CMS\Core\Utility\HttpUtility;
 
-class TypoScriptFrontendController extends \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController {
+class TypoScriptFrontendController extends \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+{
 
     /**
      * Builds a typolink to the current page, appends the type paremeter if required
@@ -11,9 +12,10 @@ class TypoScriptFrontendController extends \TYPO3\CMS\Frontend\Controller\TypoSc
      *
      * @return void
      */
-    protected function redirectToCurrentPage() {
+    protected function redirectToCurrentPage()
+    {
         $redirectHttpCode = ($this->originalShortcutPage['redirect_http_status']) ? $this->originalShortcutPage['redirect_http_status'] : 0;
-        if($this->originalShortcutPage['redirect_http_status'] === 0){
+        if ($this->originalShortcutPage['redirect_http_status'] === 0) {
             parent::redirectToCurrentPage();
         }
 
@@ -26,7 +28,7 @@ class TypoScriptFrontendController extends \TYPO3\CMS\Frontend\Controller\TypoSc
         if ($type) {
             $parameter .= ',' . $type;
         }
-        $redirectUrl = $cObj->typoLink_URL(array('parameter' => $parameter));
+        $redirectUrl = $cObj->typoLink_URL(['parameter' => $parameter]);
 
         switch ((int)$redirectHttpCode) {
             case 301:

@@ -36,14 +36,15 @@ use X4e\X4ebase\Utility\UserAgentUtility;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class UserAgentUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
-	/** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|UserAgentUtility */
-	protected $subject;
+class UserAgentUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
+{
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|UserAgentUtility */
+    protected $subject;
 
-	public function testAll() {
-		$this->markTestIncomplete(
-			'How Shall this be testable?'
-		);
-	}
-
+    public function testAll()
+    {
+        $this->markTestIncomplete(
+            'How Shall this be testable?'
+        );
+    }
 }

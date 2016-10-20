@@ -15,7 +15,6 @@ echo '<pre><a href="spyc.yaml">spyc.yaml</a> loaded into PHP:<br/>';
 print_r($array);
 echo '</pre>';
 
-
 echo '<pre>YAML Data dumped back:<br/>';
 echo Spyc::YAMLDump($array);
 echo '</pre>';

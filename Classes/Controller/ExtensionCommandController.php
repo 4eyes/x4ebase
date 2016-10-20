@@ -19,7 +19,8 @@ namespace X4e\X4ebase\Controller;
  *
  * @author Markus Stauffiger <markus@4eyes.ch>
  */
-class ExtensionCommandController extends \TYPO3\CMS\Extensionmanager\Command\ExtensionCommandController {
+class ExtensionCommandController extends \TYPO3\CMS\Extensionmanager\Command\ExtensionCommandController
+{
 
     /**
      * Command to configure a extension
@@ -27,11 +28,11 @@ class ExtensionCommandController extends \TYPO3\CMS\Extensionmanager\Command\Ext
      * @param string $config
      * @param string $extensionKey
      */
-    public function configureCommand($config, $extensionKey) {
+    public function configureCommand($config, $extensionKey)
+    {
         parse_str($config, $configArr);
         /** @var $service \TYPO3\CMS\Extensionmanager\Controller\ConfigurationController */
         $service = $this->objectManager->get('TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController');
         $service->saveConfiguration($configArr, $extensionKey);
     }
-
 }
