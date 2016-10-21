@@ -12,7 +12,7 @@ if (TYPO3_MODE === 'BE') {
      * Registers a Backend Module
      */
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        'X4E.' . $_EXTKEY,
+        'X4e.' . $_EXTKEY,
         'tools',                // Make module a submodule of 'tools'
         'modelgenerator',        // Submodule key
         '',                        // Position
@@ -30,7 +30,7 @@ if (TYPO3_MODE === 'BE') {
      * Registers a Backend Module
      */
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        'X4E.' . $_EXTKEY,
+        'X4e.' . $_EXTKEY,
         'web',                // Make module a submodule of 'web'
         'tcainfo',        // Submodule key
         '',                        // Position

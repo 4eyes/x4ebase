@@ -12,7 +12,7 @@ $extConf = unserialize($_EXTCONF);
 // password_hash implementation for PHP < 5.5
 require_once $extPath . 'Resources/Private/Libraries/password_hash.php';
 // Registering all available hashes to factory
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/saltedpasswords']['saltMethods']['X4E\\X4ebase\\Salt\\SecurePasswordSalt'] = 'X4E\\X4ebase\\Salt\\SecurePasswordSalt';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/saltedpasswords']['saltMethods']['X4e\\X4ebase\\Salt\\SecurePasswordSalt'] = 'X4e\\X4ebase\\Salt\\SecurePasswordSalt';
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['EXT:saltedpasswords/locallang.xml'][] = 'EXT:x4ebase/Resources/Private/Language/locallang_securepassword.xlf';
 
 //==============================================================================
@@ -20,19 +20,19 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['EXT:saltedpasswords/
 //==============================================================================
 if (version_compare(TYPO3_branch, '6.2', '<=')) {
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings'] = [
-        'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings'
+        'className' => 'X4e\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings'
     ];
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapper'] = [
-        'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapper'
+        'className' => 'X4e\\X4ebase\\XClasses\\Persistence\\Generic\\Mapper\\DataMapper'
     ];
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Storage\\Typo3DbBackend'] = [
-        'className' => 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Storage\\Typo3DbBackend'
+        'className' => 'X4e\\X4ebase\\XClasses\\Persistence\\Generic\\Storage\\Typo3DbBackend'
     ];
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Core\\Localization\\Parser\\XliffParser'] = [
-        'className' => 'X4E\\X4ebase\\XClasses\\Localization\\Parser\\XliffParser'
+        'className' => 'X4e\\X4ebase\\XClasses\\Localization\\Parser\\XliffParser'
     ];
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController'] = [
-        'className' => 'X4E\\X4ebase\\XClasses\\Controller\\TypoScriptFrontendController'
+        'className' => 'X4e\\X4ebase\\XClasses\\Controller\\TypoScriptFrontendController'
     ];
 }
 
@@ -42,7 +42,7 @@ if (version_compare(TYPO3_branch, '6.2', '<=')) {
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\ExtensionCommandController';
 
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Controller\\ConfigurationController'] = [
-    'className' => 'X4E\\X4ebase\\XClasses\\Controller\\ConfigurationController'
+    'className' => 'X4e\\X4ebase\\XClasses\\Controller\\ConfigurationController'
 ];
 // endregion
 
@@ -50,9 +50,9 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Extensionmanager\\Con
 // region Hooks
 //==============================================================================
 // This hook enables save and preview functionality for articles
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewOnClickClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/SaveAndPreviewHook.php:&X4E\X4ebase\Hooks\SaveAndPreviewHook';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4E\X4ebase\Hooks\TceMainHook';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['viewOnClickClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/SaveAndPreviewHook.php:&X4e\X4ebase\Hooks\SaveAndPreviewHook';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4e\X4ebase\Hooks\TceMainHook';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:x4ebase/Classes/Hooks/TceMainHook.php:&X4e\X4ebase\Hooks\TceMainHook';
 
 if (TYPO3_MODE === 'BE') {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'X4e\X4ebase\Controller\EmailQueueCommandController';
@@ -66,7 +66,7 @@ if (TYPO3_MODE === 'BE') {
 /* @var $extbaseObjectContainer \TYPO3\CMS\Extbase\Object\Container\Container */
 $extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
 // Singleton
-$extbaseObjectContainer->registerImplementation('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface', 'X4E\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings');
+$extbaseObjectContainer->registerImplementation('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface', 'X4e\\X4ebase\\XClasses\\Persistence\\Generic\\Typo3QuerySettings');
 unset($extbaseObjectContainer);
 
 // region contextSkin
@@ -119,7 +119,7 @@ page.1 {
 // endregion
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'X4E.' . $_EXTKEY,
+    'X4e.' . $_EXTKEY,
     'ContentExceptionTest',
     [
         'ContentExceptionTest' => 'content, exception'

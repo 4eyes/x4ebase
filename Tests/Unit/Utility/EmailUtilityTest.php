@@ -92,11 +92,11 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
             ObjectManager::class, ['get'], [], '', false
         );
         $objectManager->expects($this->at(0))->method('get')
-            ->with('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository')
+            ->with('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository')
             ->willReturn($emailLogRepository);
 
         $objectManager->expects($this->at(1))->method('get')
-            ->with('X4E\\X4ebase\\Domain\\Model\\EmailLog')
+            ->with('X4e\\X4ebase\\Domain\\Model\\EmailLog')
             ->willReturn($emailLog);
 
         $persistenceManager = $this->getMock(PersistenceManager::class, ['persistAll'], [], '', false);
@@ -121,7 +121,7 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
             ObjectManager::class, ['get'], [], '', false
         );
         $objectManager->expects($this->at(0))->method('get')
-            ->with('X4E\\X4ebase\\Domain\\Repository\\EmailLogRepository')
+            ->with('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository')
             ->willReturn(false);
 
         $persistenceManager = $this->getMock(PersistenceManager::class, ['persistAll'], [], '', false);

@@ -124,87 +124,103 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
         }
     }
 
-    /**
-     * Performs workspace and language overlay on the given row array. The language and workspace id is automatically
-     * detected (depending on FE or BE context). You can also explicitly set the language/workspace id.
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface $source The source (selector od join)
-     * @param array $rows
-     * @param \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface $querySettings The TYPO3 CMS specific query settings
-     * @param null|int $workspaceUid
-     * @return array
-     */
-    protected function doLanguageAndWorkspaceOverlay(\TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface $source, array $rows, $querySettings, $workspaceUid = null)
-    {
-        if ($source instanceof \TYPO3\CMS\Extbase\Persistence\Generic\Qom\SelectorInterface) {
-            $tableName = $source->getSelectorName();
-        } elseif ($source instanceof \TYPO3\CMS\Extbase\Persistence\Generic\Qom\JoinInterface) {
-            $tableName = $source->getRight()->getSelectorName();
+	/**
+	 * Performs workspace and language overlay on the given row array. The language and workspace id is automatically
+	 * detected (depending on FE or BE context). You can also explicitly set the language/workspace id.
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface $source The source (selector od join)
+	 * @param array $rows
+	 * @param \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface $querySettings The TYPO3 CMS specific query settings
+	 * @param null|integer $workspaceUid
+	 * @return array
+	 */
+	protected function doLanguageAndWorkspaceOverlay(\TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface $source, array $rows, \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface $querySettings, $workspaceUid = NULL) {
+		if ($source instanceof \TYPO3\CMS\Extbase\Persistence\Generic\Qom\SelectorInterface) {
+			$tableName = $source->getSelectorName();
+		} elseif ($source instanceof \TYPO3\CMS\Extbase\Persistence\Generic\Qom\JoinInterface) {
+			$tableName = $source->getRight()->getSelectorName();
+		} else {
+            // No proper source, so we do not have a table name here
+            // we cannot do an overlay and return the original rows instead.
+            return $rows;
         }
-        // If we do not have a table name here, we cannot do an overlay and return the original rows instead.
-        if (isset($tableName)) {
-            $pageRepository = $this->getPageRepository();
-            if (is_object($GLOBALS['TSFE'])) {
-                $languageMode = $GLOBALS['TSFE']->sys_language_mode;
-                if ($workspaceUid !== null) {
-                    $pageRepository->versioningWorkspaceId = $workspaceUid;
-                }
-            } else {
-                $languageMode = '';
-                if ($workspaceUid === null) {
-                    $workspaceUid = $GLOBALS['BE_USER']->workspace;
-                }
+
+        $pageRepository = $this->getPageRepository();
+        if (is_object($GLOBALS['TSFE'])) {
+            if ($workspaceUid !== NULL) {
                 $pageRepository->versioningWorkspaceId = $workspaceUid;
             }
+        } else {
+            if ($workspaceUid === NULL) {
+                $workspaceUid = $GLOBALS['BE_USER']->workspace;
+            }
+            $pageRepository->versioningWorkspaceId = $workspaceUid;
+        }
 
-            $overlayedRows = [];
-            foreach ($rows as $row) {
-                // If current row is a translation select its parent
-                if (isset($tableName) && isset($GLOBALS['TCA'][$tableName])
-                    && isset($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])
-                    && isset($GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'])
+        // Fetches the move-placeholder in case it is supported
+        // by the table and if there's only one row in the result set
+        // (applying this to all rows does not work, since the sorting
+        // order would be destroyed and possible limits not met anymore)
+        if (!empty($pageRepository->versioningWorkspaceId)
+            && !empty($GLOBALS['TCA'][$tableName]['ctrl']['versioningWS'])
+            && (int)$GLOBALS['TCA'][$tableName]['ctrl']['versioningWS'] >= 2
+            && count($rows) === 1
+        ) {
+            $movePlaceholder = $this->databaseHandle->exec_SELECTgetSingleRow(
+                $tableName . '.*',
+                $tableName,
+                't3ver_state=3 AND t3ver_wsid=' . $pageRepository->versioningWorkspaceId
+                . ' AND t3ver_move_id=' . $rows[0]['uid']
+            );
+            if (!empty($movePlaceholder)) {
+                $rows = array($movePlaceholder);
+            }
+        }
+
+        $overlaidRows = array();
+        foreach ($rows as $row) {
+            // If current row is a translation select its parent
+            if (isset($tableName) && isset($GLOBALS['TCA'][$tableName])
+                && isset($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])
+                && isset($GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField'])
+                && !isset($GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerTable'])
+            ) {
+                if (isset($row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']])
+                    && $row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']] > 0
                 ) {
-                    if (isset($row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']])
-                        && $row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']] > 0
-                    ) {
-                        $newRow = $this->databaseHandle->exec_SELECTgetSingleRow(
-                            $tableName . '.*',
-                            $tableName,
-                            $tableName . '.uid=' . (integer) $row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']] .
-                                ' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=0'
-                        );
-                        /* NEW @ 4eyes -- start */
-                        if (!$newRow) {
-                            $overlayedRows[] = $row;
-                            continue;
-                        } else {
-                            $row = $newRow;
-                        }
-                        /* NEW @ 4eyes -- end */
-                        unset($newRow);
+                    $newRow = $this->databaseHandle->exec_SELECTgetSingleRow(
+                        $tableName . '.*',
+                        $tableName,
+                        $tableName . '.uid=' . (integer) $row[$GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerField']] .
+                            ' AND ' . $tableName . '.' . $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] . '=0'
+                    );
+                    /* NEW @ 4eyes -- start */
+                    if (!$newRow) {
+                        $overlayedRows[] = $row;
+                        continue;
+                    } else {
+                        $row = $newRow;
                     }
-                }
-                $pageRepository->versionOL($tableName, $row, true);
-                if ($pageRepository->versioningPreview && isset($row['_ORIG_uid'])) {
-                    $row['uid'] = $row['_ORIG_uid'];
-                }
-                if ($tableName == 'pages') {
-                    $row = $pageRepository->getPageOverlay($row, $querySettings->getLanguageUid());
-                } elseif (isset($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])
-                    && $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] !== ''
-                ) {
-                    if (in_array($row[$GLOBALS['TCA'][$tableName]['ctrl']['languageField']], [-1, 0])) {
-                        $overlayMode = $languageMode === 'strict' ? 'hideNonTranslated' : '';
-                        $row = $pageRepository->getRecordOverlay($tableName, $row, $querySettings->getLanguageUid(), $overlayMode);
-                    }
-                }
-                if ($row !== null && is_array($row)) {
-                    $overlayedRows[] = $row;
+                    /* NEW @ 4eyes -- end */
+                    unset($newRow);
                 }
             }
-        } else {
-            $overlayedRows = $rows;
+            $pageRepository->versionOL($tableName, $row, TRUE);
+            if ($tableName == 'pages') {
+                $row = $pageRepository->getPageOverlay($row, $querySettings->getLanguageUid());
+            } elseif (isset($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])
+                && $GLOBALS['TCA'][$tableName]['ctrl']['languageField'] !== ''
+                && !isset($GLOBALS['TCA'][$tableName]['ctrl']['transOrigPointerTable'])
+            ) {
+                if (in_array($row[$GLOBALS['TCA'][$tableName]['ctrl']['languageField']], array(-1, 0))) {
+                    $overlayMode = $querySettings->getLanguageMode() === 'strict' ? 'hideNonTranslated' : '';
+                    $row = $pageRepository->getRecordOverlay($tableName, $row, $querySettings->getLanguageUid(), $overlayMode);
+                }
+            }
+            if ($row !== NULL && is_array($row)) {
+                $overlaidRows[] = $row;
+            }
         }
-        return $overlayedRows;
-    }
+        return $overlaidRows;
+	}
 }
