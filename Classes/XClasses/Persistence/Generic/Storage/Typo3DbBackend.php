@@ -196,16 +196,19 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
                     );
                     /* NEW @ 4eyes -- start */
                     if (!$newRow) {
-                        $overlayedRows[] = $row;
+                        $overlaidRows[] = $row;
                         continue;
                     } else {
                         $row = $newRow;
                     }
                     /* NEW @ 4eyes -- end */
-                    unset($newRow);
+
                 }
             }
             $pageRepository->versionOL($tableName, $row, TRUE);
+            if ($pageRepository->versioningPreview && isset($row['_ORIG_uid'])) {
+                $row['uid'] = $row['_ORIG_uid'];
+            }
             if ($tableName == 'pages') {
                 $row = $pageRepository->getPageOverlay($row, $querySettings->getLanguageUid());
             } elseif (isset($GLOBALS['TCA'][$tableName]['ctrl']['languageField'])
@@ -221,6 +224,7 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
                 $overlaidRows[] = $row;
             }
         }
+
         return $overlaidRows;
 	}
 }

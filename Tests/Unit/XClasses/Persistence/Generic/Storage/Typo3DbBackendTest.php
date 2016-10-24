@@ -192,8 +192,8 @@ class Typo3DbBackendTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
         $this->subject->expects($this->once())->method('getPageRepository')->willReturn($pageRepository);
 
         $rows = [['1' => 1]];
-
-        $this->assertTrue(in_array($rows[0], $this->subject->_callRef('doLanguageAndWorkspaceOverlay', $source, $rows, $querySettings)));
+        $newRows = $this->subject->_callRef('doLanguageAndWorkspaceOverlay', $source, $rows, $querySettings);
+        $this->assertTrue(in_array($rows[0], $newRows));
     }
 
     /**
