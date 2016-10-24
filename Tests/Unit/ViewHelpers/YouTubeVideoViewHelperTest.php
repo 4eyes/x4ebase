@@ -35,7 +35,7 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class YouTubeVideoHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
+class YouTubeVideoViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
 {
 
     /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\YouTubeVideoViewHelper */

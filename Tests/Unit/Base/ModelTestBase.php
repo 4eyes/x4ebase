@@ -45,6 +45,8 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
 
     public function setUp()
     {
+        date_default_timezone_set('Europe/Zurich');
+
         parent::setUp();
         $this->mockSubject();
     }
