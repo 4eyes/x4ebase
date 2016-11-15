@@ -21,11 +21,15 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Core\Localization\Parse
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class] = [
     'className' => \X4e\X4ebase\XClasses\Controller\TypoScriptFrontendController::class
 ];
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Core\DataHandling\DataHandler::class] = [
+    'className' => \X4e\X4ebase\XClasses\DataHandling\DataHandler::class
+];
 
 /**
  * xclasses to allow cli-configuration of an extension, see https://jira.4eyes.ch/browse/IMPROVE-409
  */
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = \X4e\X4ebase\Controller\ExtensionCommandController::class;
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] =
+    \X4e\X4ebase\Controller\ExtensionCommandController::class;
 
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extensionmanager\Controller\ConfigurationController::class] = [
     'className' => \X4e\X4ebase\XClasses\Controller\ConfigurationController::class
@@ -37,17 +41,21 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extensionmanager\Contro
 //==============================================================================
 if ($extConf['javascriptOptimization']) {
     // do not merge per page added inline JS
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][$_EXTKEY] = \X4e\X4ebase\Hooks\RenderPreProcessHook::class . '->process';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][$_EXTKEY] =
+        \X4e\X4ebase\Hooks\RenderPreProcessHook::class . '->process';
 }
 if ($extConf['forceRealurl']) {
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['isOutputting'][$_EXTKEY] = \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['isOutputting'][$_EXTKEY] =
+        \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
 
     // Additional Hook to process check before indexing
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-all'][$_EXTKEY] = \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-all'][$_EXTKEY] =
+        \X4e\X4ebase\Hooks\FrontendHook::class . '->checkForRealurl';
 }
 
 if (TYPO3_MODE === 'BE') {
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = \X4e\X4ebase\Controller\EmailQueueCommandController::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] =
+        \X4e\X4ebase\Controller\EmailQueueCommandController::class;
 }
 // endregion
 
@@ -56,7 +64,9 @@ if (TYPO3_MODE === 'BE') {
 //==============================================================================
 if (!$extConf['fileTimestamp.']['disable_fe'] || !$extConf['fileTimestamp.']['disable_be']) {
     /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
-    $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
+    $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
+    );
     $signalSlotDispatcher->connect(
         \TYPO3\CMS\Core\Resource\ResourceStorage::class,
         TYPO3\CMS\Core\Resource\ResourceStorage::SIGNAL_PreGeneratePublicUrl,
@@ -71,14 +81,20 @@ if (!$extConf['fileTimestamp.']['disable_fe'] || !$extConf['fileTimestamp.']['di
 // Extbase works correctly in the backend if the page tree is empty or no
 // template is defined.
 /* @var $extbaseObjectContainer \TYPO3\CMS\Extbase\Object\Container\Container */
-$extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class);
+$extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \TYPO3\CMS\Extbase\Object\Container\Container::class
+);
 // Singleton
-$extbaseObjectContainer->registerImplementation(\TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface::class, \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class);
+$extbaseObjectContainer->registerImplementation(
+    \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface::class,
+    \X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings::class
+);
 unset($extbaseObjectContainer);
 
 // region contextSkin
 /**
- * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
+ * Include colored bar in frontend rendering depending on current ApplicationContext
+ * (Can be enabled/Disabled in Extension Manager)
  * [begin]
  */
 if (TYPO3_MODE === 'FE' && is_array($extConf) && $extConf['contextSkin.']['fe.']['enable']) {
@@ -86,7 +102,7 @@ if (TYPO3_MODE === 'FE' && is_array($extConf) && $extConf['contextSkin.']['fe.']
     if ($_SERVER['argc'] > 0) {
         // find --context=Production from the command line
         foreach ($_SERVER['argv'] as $argumentValue) {
-            if (substr($argumentValue, 0, 10)  === '--context=') {
+            if (substr($argumentValue, 0, 10) === '--context=') {
                 $contextString = substr($argumentValue, 10);
                 break;
             }
@@ -113,14 +129,37 @@ if (TYPO3_MODE === 'FE' && is_array($extConf) && $extConf['contextSkin.']['fe.']
 [else]
 page.1 = TEXT
 page.1 {
-	value = <div id="x4ebase-context-bar" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 2; background-color: ' . $color . '; padding: 10px; color: white;"><span style="font-weight: bold;">Context:</span> <span style="font-style: italic;">' . $contextString . '</span></div>
+	value (
+<div
+    id="x4ebase-context-bar"
+    style="
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 2;
+        background-color: ' . $color . ';
+        padding: 10px;
+        color: white;
+    "
+><span
+    style="
+        font-weight: bold;
+    "
+>Context:</span>
+<span
+    style="
+        font-style: italic;
+    "
+>' . $contextString . '</span>
+</div>
+    )
 	insertData = 1
 }
 [global]
 	');
 }
 /**
- * Include colored bar in frontend rendering depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
+ * Include colored bar in frontend rendering depending on current ApplicationContext
+ * (Can be enabled/Disabled in Extension Manager)
  * [END]
  */
 // endregion
