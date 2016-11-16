@@ -25,8 +25,6 @@ namespace X4e\X4ebase\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /**
  * Class FrontendHook
  *
@@ -47,8 +45,10 @@ class FrontendHook
                 substr($pObj->siteScript, 0, 9) == 'index.php' ||
                 substr($pObj->siteScript, 0, 1) == '?'
             )
-            && strpos($pObj->siteScript, '&noforce=1') === false // A way to skip redirect. Thanks goes to Reindl Bernd.
-            && strpos($pObj->siteScript, '&jumpurl=') === false // Skip redirect if URL is for jumpurl. Thanks goes to Reindl Bernd.
+            // A way to skip redirect. Thanks goes to Reindl Bernd.
+            && strpos($pObj->siteScript, '&noforce=1') === false
+            // Skip redirect if URL is for jumpurl. Thanks goes to Reindl Bernd.
+            && strpos($pObj->siteScript, '&jumpurl=') === false
             && !$pObj->isBackendUserLoggedIn() // Skip redirect if we are in BE Logged in
         ) {
             $baseURL = $pObj->config['config']['baseURL'];
@@ -58,10 +58,12 @@ class FrontendHook
                 $pObj->no_cache,
                 '',
                 '',
-                GeneralUtility::getIndpEnv('QUERY_STRING')
+                \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('QUERY_STRING')
             );
 
-            if (strtolower($LD['totalURL']) != strtolower($pObj->siteScript) && strtolower($LD['totalURL']) != '/' . strtolower($pObj->siteScript)) {
+            if (strtolower($LD['totalURL']) != strtolower($pObj->siteScript)
+                && strtolower($LD['totalURL']) != '/' . strtolower($pObj->siteScript)
+            ) {
                 $url = rtrim($baseURL, '/') . '/' . ltrim($LD['totalURL'], '/');
 
                 header('HTTP/1.1 301 Moved Permanently');

@@ -25,7 +25,8 @@ namespace X4e\X4ebase\Tests\Unit\Base;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Tests\AccessibleObjectInterface;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -37,17 +38,16 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-
 class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
 {
 
-    /** @var \TYPO3\CMS\Extbase\DomainObject\AbstractEntity|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface */
+    /** @var AbstractEntity|\PHPUnit_Framework_MockObject_MockObject|AccessibleObjectInterface */
     protected $subject;
 
     public function setUp()
     {
         date_default_timezone_set('Europe/Zurich');
-        
+
         parent::setUp();
         $this->mockSubject();
     }
@@ -79,7 +79,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
      */
     protected function genericSetter($parameterName, $parameterValue)
     {
-        $parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
+        $parameterName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($parameterName);
         call_user_func_array([$this->subject, 'set' . $parameterName], [$parameterValue]);
     }
 
@@ -91,7 +91,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
      */
     protected function genericGetter($parameterName)
     {
-        $parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
+        $parameterName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($parameterName);
         return call_user_func([$this->subject, 'get' . $parameterName]);
     }
 
@@ -156,7 +156,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
      */
     protected function isTest($parameterName)
     {
-        $parameterName = GeneralUtility::underscoredToUpperCamelCase($parameterName);
+        $parameterName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($parameterName);
         $this->genericSetter($parameterName, true);
         $this->assertTrue($this->subject->{'is' . $parameterName}());
     }
@@ -284,14 +284,15 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
      *                                    *
      *************************************/
 
-     /**
-      * Test Add and Remove methods
-      *
+    /**
+     * Test Add and Remove methods
+     *
      * @param String $parameterName The name of the model parameter
      * @param String $typeOfModel The object class inside the object storage
-     * @param null|String $addRemoveAlias The alias for add/remove-Class (addObject for parameterName='objects' (note the s) will be adapted automatically)
+     * @param null|String $addRemoveAlias The alias for add/remove-Class
+     *        (addObject for parameterName='objects' (note the s) will be adapted automatically)
      */
-    protected function objectStorageAddRemoveTest($parameterName, $typeOfModel, $addRemoveAlias=null)
+    protected function objectStorageAddRemoveTest($parameterName, $typeOfModel, $addRemoveAlias = null)
     {
         $newItem = $this->getMock($typeOfModel, [], [], '', false);
         $storage = $this->getMock('\TYPO3\CMS\Extbase\Persistence\ObjectStorage', ['attach', 'detach'], [], '', false);

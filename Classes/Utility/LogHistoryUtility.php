@@ -30,8 +30,6 @@ namespace X4e\X4ebase\Utility;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 class LogHistoryUtility
 {
     public static function writeHistoryEntry(
@@ -45,7 +43,9 @@ class LogHistoryUtility
         /**
          * @var \TYPO3\CMS\Core\DataHandling\DataHandler
          */
-        $dataHandler = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\DataHandler::class);
+        $dataHandler = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\DataHandling\DataHandler::class
+        );
 
         self::fillMmHistoryRecords($dataHandler, $tablename, $fieldArray, $recuid);
 
@@ -144,8 +144,8 @@ class LogHistoryUtility
             'workspace' => $workspace
         ];
 
-        if (GeneralUtility::getIndpEnv('REMOTE_ADDR')) {
-            $fields_values['IP'] = GeneralUtility::getIndpEnv('REMOTE_ADDR');
+        if (\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REMOTE_ADDR')) {
+            $fields_values['IP'] = \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REMOTE_ADDR');
         }
 
         $GLOBALS['TYPO3_DB']->exec_INSERTquery('sys_log', $fields_values);

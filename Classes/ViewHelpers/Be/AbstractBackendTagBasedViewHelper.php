@@ -1,8 +1,6 @@
 <?php
 namespace X4e\X4ebase\ViewHelpers\Be;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /*                                                                        *
  * This script is backported from the TYPO3 Flow package "TYPO3.Fluid".   *
  *                                                                        *
@@ -63,7 +61,8 @@ abstract class AbstractBackendTagBasedViewHelper extends \TYPO3\CMS\Fluid\Core\V
     /**
      * Other extensions may rely on the fact that $GLOBALS['SOBE'] exists and holds
      * the DocumentTemplate instance. We should really get rid of this, but for now, let's be backwards compatible.
-     * Relying on $GLOBALS['SOBE'] is @deprecated since 6.0 and will be removed in 6.2 Instead ->getDocInstance() should be used.
+     * Relying on $GLOBALS['SOBE'] is @deprecated since 6.0 and will be removed in 6.2 Instead ->getDocInstance()
+     * should be used.
      *
      * If $GLOBALS['SOBE']->doc holds an instance of \TYPO3\CMS\Backend\Template\DocumentTemplate we reuse it,
      * if not we create a new one.
@@ -75,16 +74,20 @@ abstract class AbstractBackendTagBasedViewHelper extends \TYPO3\CMS\Fluid\Core\V
      */
     protected function createDocInstance()
     {
-        if (
-            isset($GLOBALS['SOBE']) &&
+        if (isset($GLOBALS['SOBE']) &&
             is_object($GLOBALS['SOBE']) &&
             isset($GLOBALS['SOBE']->doc) &&
             $GLOBALS['SOBE']->doc instanceof \TYPO3\CMS\Backend\Template\DocumentTemplate
         ) {
-            GeneralUtility::deprecationLog('Usage of $GLOBALS[\'SOBE\'] is deprecated since 6.0 and will be removed in 6.2 ->getDocInstance() should be used instead');
+            \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(
+                'Usage of $GLOBALS[\'SOBE\'] is deprecated since 6.0 and will be removed in 6.2 ->getDocInstance()
+                should be used instead'
+            );
             $doc = $GLOBALS['SOBE']->doc;
         } else {
-            $doc = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Template\\DocumentTemplate');
+            $doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                \TYPO3\CMS\Backend\Template\DocumentTemplate::class
+            );
             if (!isset($GLOBALS['SOBE'])) {
                 $GLOBALS['SOBE'] = new \stdClass();
             }
