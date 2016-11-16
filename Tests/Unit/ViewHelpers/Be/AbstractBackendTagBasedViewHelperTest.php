@@ -26,6 +26,9 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Be;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
+use TYPO3\CMS\Core\Tests\AccessibleObjectInterface;
+use X4e\X4ebase\ViewHelpers\Be\AbstractBackendTagBasedViewHelper;
+
 /**
  * Test case for class \X4e\X4ebase\ViewHelpers\Be\AbstractBackendTagBasedViewHelper
  *
@@ -38,10 +41,10 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers\Be;
 class AbstractBackendTagBasedViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
 {
 
-    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\Be\AbstractBackendTagBasedViewHelper */
+    /** @var  \PHPUnit_Framework_MockObject_MockObject|AccessibleObjectInterface|AbstractBackendTagBasedViewHelper */
     protected $subject;
 
-    public function testGetDocInstance_DocEcists()
+    public function testGetDocInstanceDocExists()
     {
         $this->subject = $this->getAccessibleMockForAbstractClass(
             $this->getSubjectClassName(),
@@ -60,7 +63,7 @@ class AbstractBackendTagBasedViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base
         $this->subject->getDocInstance();
     }
 
-    public function testGetDocInstance_DocDoesNotExist_CallsCreateDocInstance()
+    public function testGetDocInstanceDocDoesNotExistCallsCreateDocInstance()
     {
         $doc = $this->getMock(\TYPO3\CMS\Backend\Template\DocumentTemplate::class, [], [], '', false);
 

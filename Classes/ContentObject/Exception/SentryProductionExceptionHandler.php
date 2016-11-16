@@ -26,7 +26,6 @@ namespace X4e\X4ebase\ContentObject\Exception;
  ***************************************************************/
 
 use Lemming\SentryClient\Client;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\Exception\ProductionExceptionHandler;
 
 /**
@@ -44,7 +43,7 @@ class SentryProductionExceptionHandler extends ProductionExceptionHandler
             $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sentry_client']);
             if (isset($configuration['dsn']) && $configuration['dsn'] != '') {
                 if (isset($configuration['productionOnly']) && (bool)$configuration['productionOnly'] === true) {
-                    if (GeneralUtility::getApplicationContext()->isProduction()) {
+                    if (\TYPO3\CMS\Core\Utility\GeneralUtility::getApplicationContext()->isProduction()) {
                         $this->handleSentryException($exception);
                     }
                 } else {
