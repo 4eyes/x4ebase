@@ -24,6 +24,9 @@ namespace X4e\X4ebase\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
 
 /**
  *
@@ -66,7 +69,11 @@ class EmailQueueCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Comm
      */
     public function processEmailQueueCommand()
     {
-        $this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'x4ebase', 'tx_x4ebase');
+        $this->settings = $this->configurationManager->getConfiguration(
+            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'x4ebase',
+            'tx_x4ebase'
+        );
         $mailsInQueue = $this->emailLogRepository->findByQueued(true);
 
         if ($this->settings['emailQueueCommandController']['mailsPerRun']) {
@@ -83,9 +90,16 @@ class EmailQueueCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Comm
 
             $sent = \X4e\X4ebase\Utility\EmailUtility::sendQueuedEmail($mail);
             if ($sent) {
-                $this->addFlashMessage($mail->getRecipient(), 'mail sent');
+                $this->addFlashMessage(
+                    $mail->getRecipient(),
+                    'mail sent'
+                );
             } else {
-                $this->addFlashMessage('Mail to ' . $mail->getRecipient() . ' not send. Trying in the next run', 'mail not sent', \TYPO3\CMS\Core\Messaging\FlashMessage::INFO);
+                $this->addFlashMessage(
+                    'Mail to ' . $mail->getRecipient() . ' not send. Trying in the next run',
+                    'mail not sent',
+                    FlashMessage::INFO
+                );
             }
             $i++;
         }
@@ -100,11 +114,19 @@ class EmailQueueCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Comm
      * @param string $title
      * @param int $status
      */
-    public function addFlashMessage($message, $title, $status = \TYPO3\CMS\Core\Messaging\FlashMessage::OK)
+    public function addFlashMessage($message, $title, $status = FlashMessage::OK)
     {
+        /** @var $flashMessage FlashMessage */
         $flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                        't3lib_FlashMessage', $message, $title, $status
+            FlashMessage::class,
+            $message,
+            $title,
+            $status
         );
-        \TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($flashMessage);
+        /** @var FlashMessageService $flashMessageService */
+        $flashMessageService = $this->objectManager->get(FlashMessageService::class);
+        /** @var FlashMessageQueue $defaultFlashMessageQueue */
+        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+        $defaultFlashMessageQueue->enqueue($flashMessage);
     }
 }
