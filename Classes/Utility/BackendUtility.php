@@ -25,6 +25,10 @@ namespace X4e\X4ebase\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+
 /**
  *
  *
@@ -99,45 +103,39 @@ class BackendUtility
 
     /**
      * Initialize Frontend
+     *
      * @param int $pageUid
+     * @param int $typeNum
      */
-    public static function initTSFE($pid)
+    public static function initTSFE($pid, $typeNum = 0)
     {
         global $TYPO3_CONF_VARS;
         if ($pid == 0) {
-            throw new Exception('No pageId defined!');
+            throw new \Exception('No pageId defined!');
         } else {
             if (!isset($GLOBALS['TSFE'])) {
-                // TODO: refactor as compatibility layer is removed with 6.2
-                //require_once(PATH_tslib . 'class.tslib_content.php');
+                if (!is_object($GLOBALS['TT'])) {
+                    $GLOBALS['TT'] = new NullTimeTracker;
+                    $GLOBALS['TT']->start();
+                }
 
-                \TYPO3\CMS\Frontend\Utility\EidUtility::connectDB(); //Connect to database
-                \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser(); //Initializes FeUser
+                $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
+                    TypoScriptFrontendController::class,
+                    $GLOBALS['TYPO3_CONF_VARS'],
+                    $pid,
+                    $typeNum
+                );
 
-                /* @var $GLOBALS['TT'] \TYPO3\CMS\Core\TimeTracker\TimeTracker */
-                $GLOBALS['TT'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker');
-                $GLOBALS['TT']->start();
-
-                $GLOBALS['TSFE'] = new \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController($TYPO3_CONF_VARS, $pid, 0, true);
                 $GLOBALS['TSFE']->connectToDB();
                 $GLOBALS['TSFE']->initFEuser();
                 $GLOBALS['TSFE']->determineId();
-                $GLOBALS['TSFE']->getCompressedTCarray();
-                $GLOBALS['TSFE']->newCObj();
-                $GLOBALS['TSFE']->renderCharset = 'utf-8';
-                self::initTypoScript();
+                $GLOBALS['TSFE']->getPageAndRootline();
+                $GLOBALS['TSFE']->initTemplate();
+                $GLOBALS['TSFE']->getConfigArray();
+
                 $GLOBALS['TSFE']->absRefPrefix = $GLOBALS['TSFE']->config['config']['absRefPrefix'];
+                $GLOBALS['TSFE']->renderCharset = 'utf-8';
             }
         }
-    }
-
-    /**
-     * @return void
-     */
-    protected static function initTypoScript()
-    {
-        $GLOBALS['TSFE']->getPageAndRootline();
-        $GLOBALS['TSFE']->initTemplate();
-        $GLOBALS['TSFE']->getConfigArray();
     }
 }
