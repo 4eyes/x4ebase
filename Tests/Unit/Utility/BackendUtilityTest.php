@@ -41,17 +41,6 @@ class BackendUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\Utility\BackendUtility */
     protected $subject;
 
-    public function testInitTypoScript()
-    {
-        $this->mockSubject();
-        $tsfeObject = $this->getMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, ['getPageAndRootline', 'initTemplate', 'getConfigArray'], [], '', false);
-        $tsfeObject->expects($this->once())->method('getPageAndRootline');
-        $tsfeObject->expects($this->once())->method('initTemplate');
-        $tsfeObject->expects($this->once())->method('getConfigArray');
-        $GLOBALS['TSFE'] = $tsfeObject;
-        $this->subject->_call('initTypoScript');
-    }
-
     public function testInitTSFE()
     {
         $this->markTestIncomplete(
