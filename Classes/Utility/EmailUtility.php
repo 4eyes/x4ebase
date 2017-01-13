@@ -88,6 +88,9 @@ class EmailUtility
                 self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, null);
             }
         } catch (\Exception $e) {
+            // dont queue logged email with error. otherwise the mail is sent with empty body
+            $queued = false;
+
             self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, $e->getMessage());
         }
         return $success;
