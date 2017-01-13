@@ -42,11 +42,12 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelpe
         $addQueryString = false,
         array $argumentsToBeExcludedFromQueryString = [],
         $uriScheme = null
-    ) {
+    )
+    {
         \X4e\X4ebase\Utility\BackendUtility::initTSFE($pageUid);
 
         $uriBuilder = $this->controllerContext->getUriBuilder();
-        $uri = $uriBuilder->reset()
+        $uriBuilder->reset()
             ->setTargetPageUid($pageUid)
             ->setTargetPageType($pageType)
             ->setNoCache($noCache)
@@ -58,13 +59,19 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelpe
             ->setCreateAbsoluteUri($absolute)
             ->setAddQueryString($addQueryString)
             ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)
-            ->setAbsoluteUriScheme($uriScheme)
-            ->uriFor($action, $arguments, $controller, $extensionName, $pluginName);
+            ->setAbsoluteUriScheme($uriScheme);
+
+        try {
+            $uriBuilder->uriFor($action, $arguments, $controller, $extensionName, $pluginName);
+        } catch (\Exception $e){
+            // do nothing as we build the url again
+        }
 
         $uri = $uriBuilder->buildFrontendUri();
         $this->tag->addAttribute('href', $uri);
         $this->tag->setContent($this->renderChildren());
         $this->tag->forceClosingTag(true);
+
         return $this->tag->render();
     }
 }

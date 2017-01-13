@@ -133,8 +133,10 @@ class BackendUtility
                 $GLOBALS['TSFE']->initTemplate();
                 $GLOBALS['TSFE']->getConfigArray();
 
+                // Set linkVars, absRefPrefix, etc
+                \TYPO3\CMS\Frontend\Page\PageGenerator::pagegenInit();
+
                 $GLOBALS['TSFE']->config['config']['typolinkCheckRootline'] = 1;
-                $GLOBALS['TSFE']->absRefPrefix = $GLOBALS['TSFE']->config['config']['absRefPrefix'];
                 $GLOBALS['TSFE']->renderCharset = 'utf-8';
             }
         }
