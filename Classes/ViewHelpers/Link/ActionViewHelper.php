@@ -24,12 +24,25 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelpe
      * @param string $uriScheme
      * @return string Rendered link
      */
-    public function render($action = null, array $arguments = [], $controller = null, $extensionName = null,
-                           $pluginName = null, $pageUid = null, $pageType = 0, $noCache = false, $noCacheHash = false,
-                           $section = '', $format = '', $linkAccessRestrictedPages = false, array $additionalParams = [],
-                           $absolute = false, $addQueryString = false, array $argumentsToBeExcludedFromQueryString = [],
-                           $uriScheme = null)
-    {
+    public function render(
+        $action = null,
+        array $arguments = [],
+        $controller = null,
+        $extensionName = null,
+        $pluginName = null,
+        $pageUid = null,
+        $pageType = 0,
+        $noCache = false,
+        $noCacheHash = false,
+        $section = '',
+        $format = '',
+        $linkAccessRestrictedPages = false,
+        array $additionalParams = [],
+        $absolute = false,
+        $addQueryString = false,
+        array $argumentsToBeExcludedFromQueryString = [],
+        $uriScheme = null
+    ) {
         \X4e\X4ebase\Utility\BackendUtility::initTSFE($pageUid);
 
         $uriBuilder = $this->controllerContext->getUriBuilder();
@@ -47,6 +60,7 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelpe
             ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)
             ->setAbsoluteUriScheme($uriScheme)
             ->uriFor($action, $arguments, $controller, $extensionName, $pluginName);
+
         $uri = $uriBuilder->buildFrontendUri();
         $this->tag->addAttribute('href', $uri);
         $this->tag->setContent($this->renderChildren());

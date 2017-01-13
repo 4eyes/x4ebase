@@ -40,9 +40,9 @@ class BackendUtility
     /**
      * Returns the page uid of the selected storage folder from the context of the given page uid.
      *
-     * @param	int		$pageUid					Context page uid
-     * @param	string		$modTSConfigStorageRef		An object string which determines the path of the TSconfig to return
-     * @return	int		PID of the storage folder
+     * @param   int $pageUid    Context page uid
+     * @param   string  $modTSConfigStorageRef  An object string which determines the path of the TSconfig to return
+     * @return  int PID of the storage folder
      */
     public static function getStorageFolderPid($pageUid, $modTSConfigStorageRef = null)
     {
@@ -133,6 +133,7 @@ class BackendUtility
                 $GLOBALS['TSFE']->initTemplate();
                 $GLOBALS['TSFE']->getConfigArray();
 
+                $GLOBALS['TSFE']->config['config']['typolinkCheckRootline'] = 1;
                 $GLOBALS['TSFE']->absRefPrefix = $GLOBALS['TSFE']->config['config']['absRefPrefix'];
                 $GLOBALS['TSFE']->renderCharset = 'utf-8';
             }
