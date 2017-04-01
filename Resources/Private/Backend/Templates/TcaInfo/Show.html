@@ -101,7 +101,16 @@
 					<f:for each="{table.columns}" as="col" key="colname">
 						<tr>
 							<td>{colname}</td>
-							<td><f:translate key="{col.label}" /></td>
+							<td>
+								<f:if condition="{col.label}">
+									<f:then>
+										<f:translate key="{col.label}" />
+									</f:then>
+									<f:else>
+										{colname}
+									</f:else>
+								</f:if>
+							</td>
 							<td>
 								{col.config.type}
 								<f:if condition="{col.config.eval}">
