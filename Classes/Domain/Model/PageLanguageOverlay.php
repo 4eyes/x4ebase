@@ -184,7 +184,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the creation date
      *
-     * @return int $crdate
+     * @return int
      */
     public function getCrdate()
     {
@@ -205,7 +205,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the cruserId
      *
-     * @return int $cruserId
+     * @return int
      */
     public function getBackendUser()
     {
@@ -215,7 +215,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the cruserId
      *
-     * @param int $cruserId
+     * @param $backendUser
      * @return void
      */
     public function setBackendUser($backendUser)
@@ -226,7 +226,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the sysLanguageUid
      *
-     * @return int $sysLanguageUid
+     * @return int
      */
     public function getSysLanguageUid()
     {
@@ -247,7 +247,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the title
      *
-     * @return string $title
+     * @return string
      */
     public function getTitle()
     {
@@ -268,7 +268,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the hidden
      *
-     * @return int $hidden
+     * @return int
      */
     public function getHidden()
     {
@@ -289,7 +289,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the starttime
      *
-     * @return int $starttime
+     * @return int
      */
     public function getStarttime()
     {
@@ -310,7 +310,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the endtime
      *
-     * @return int $endtime
+     * @return int
      */
     public function getEndtime()
     {
@@ -331,7 +331,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the deleted
      *
-     * @return int $deleted
+     * @return int
      */
     public function getDeleted()
     {
@@ -352,7 +352,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the subtitle
      *
-     * @return string $subtitle
+     * @return string
      */
     public function getSubtitle()
     {
@@ -373,7 +373,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the navTitle
      *
-     * @return string $navTitle
+     * @return string
      */
     public function getNavTitle()
     {
@@ -405,7 +405,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a FileReference
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove The FileReference to be removed
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove
      * @return void
      */
     public function removeMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove)
@@ -437,7 +437,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the keywords
      *
-     * @return string $keywords
+     * @return string
      */
     public function getKeywords()
     {
@@ -458,7 +458,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the description
      *
-     * @return string $description
+     * @return string
      */
     public function getDescription()
     {
@@ -479,7 +479,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the abstract
      *
-     * @return string $abstract
+     * @return string
      */
     public function getAbstract()
     {
@@ -500,7 +500,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the author
      *
-     * @return string $author
+     * @return string
      */
     public function getAuthor()
     {
@@ -521,7 +521,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the authorEmail
      *
-     * @return string $authorEmail
+     * @return string
      */
     public function getAuthorEmail()
     {
@@ -542,7 +542,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the doktype
      *
-     * @return int $doktype
+     * @return int
      */
     public function getDoktype()
     {
@@ -563,7 +563,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the url
      *
-     * @return string $url
+     * @return string
      */
     public function getUrl()
     {
@@ -584,7 +584,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the urltype
      *
-     * @return int $urltype
+     * @return int
      */
     public function getUrltype()
     {
@@ -605,7 +605,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the shortcut
      *
-     * @return int $shortcut
+     * @return int
      */
     public function getShortcut()
     {
@@ -626,7 +626,7 @@ class PageLanguageOverlay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the shortcutMode
      *
-     * @return int $shortcutMode
+     * @return int
      */
     public function getShortcutMode()
     {

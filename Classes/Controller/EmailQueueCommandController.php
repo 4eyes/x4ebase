@@ -65,7 +65,7 @@ class EmailQueueCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Comm
     /**
      * Command which replicates DB
      *
-     * @return void
+     * @return bool
      */
     public function processEmailQueueCommand()
     {

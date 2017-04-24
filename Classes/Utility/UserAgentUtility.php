@@ -34,7 +34,7 @@ namespace X4e\X4ebase\Utility;
 class UserAgentUtility
 {
     /**
-     * @var StdClass
+     * @var \StdClass
      */
     public $ua;
 
@@ -45,6 +45,10 @@ class UserAgentUtility
         $this->ua = $ua;
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function __get($name)
     {
         if (property_exists($this->ua, $name)) {
@@ -53,6 +57,9 @@ class UserAgentUtility
         return null;
     }
 
+    /**
+     * @return mixed
+     */
     public function __toString()
     {
         return print_r($ua, true);

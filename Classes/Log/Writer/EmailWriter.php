@@ -39,7 +39,7 @@ class EmailWriter extends \TYPO3\CMS\Core\Log\Writer\AbstractWriter
      * Renders the E-Mail
      *
      * @param \TYPO3\CMS\Core\Log\LogRecord $record
-     * @return \X4e\X4ebase\Log\Writer\Email
+     * @return $this
      */
     public function writeLog(\TYPO3\CMS\Core\Log\LogRecord $record)
     {

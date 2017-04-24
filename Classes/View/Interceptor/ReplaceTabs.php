@@ -10,7 +10,7 @@ class ReplaceTabs implements \TYPO3\CMS\Fluid\Core\Parser\InterceptorInterface
     protected $interceptorEnabled = true;
 
     /**
-     * @var Tx_Extbase_Object_ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
@@ -27,7 +27,7 @@ class ReplaceTabs implements \TYPO3\CMS\Fluid\Core\Parser\InterceptorInterface
      * @param \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\NodeInterface $node
      * @param int $interceptorPosition One of the INTERCEPT_* constants for the current interception point
      * @param \TYPO3\CMS\Fluid\Core\Parser\ParsingState $parsingState the current parsing state. Not needed in this interceptor.
-     * @return \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\NodeInterface
+     * @return object|\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\NodeInterface
      */
     public function process(\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\NodeInterface $node, $interceptorPosition, \TYPO3\CMS\Fluid\Core\Parser\ParsingState $parsingState)
     {
@@ -37,7 +37,7 @@ class ReplaceTabs implements \TYPO3\CMS\Fluid\Core\Parser\InterceptorInterface
     }
 
     /**
-     * @return array Array of INTERCEPT_* constants
+     * @return array
      */
     public function getInterceptionPoints()
     {

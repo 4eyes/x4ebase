@@ -28,21 +28,30 @@ namespace X4e\X4ebase\Template;
 
 class FilterTemplate
 {
-    /** @var array $filterArray All Filter keys and their selected filters in an associative array
+    /**
+     * All Filter keys and their selected filters in an associative array
      * Might be:
          $filterArray = array(
             'type'         => array(1,3);
             'languages'    => array(4,5,6);
             'tags'         => array(2);
          );
+     *
+     * @var array
      */
     protected $filterArray = [];
-    /** @var array $searchStrings The Words a User searches for as an Array-List
+
+    /**
+     * The Words a User searches for as an Array-List
      * Might be:
         $searchStrings = array('Hello','World');
+     *
+     * @var array
      */
     protected $searchStrings = [];
-    /** @var array $searchableParameters Associative Array: Key is the Parameter a user should be able to search in with $searchStrings, Value is the kind of search (like, contains, ...)
+
+    /**
+     * Associative Array: Key is the Parameter a user should be able to search in with $searchStrings, Value is the kind of search (like, contains, ...)
      * Possible Array:
          protected $searchableParameters = array(
              'name'             => 'like',
@@ -51,9 +60,13 @@ class FilterTemplate
              'languages.name'   => 'like',
              'tags'             => 'contains',
          );
+     *
+     * @var array
      */
     protected $searchableParameters = [];
-    /** @var array $filterMethods Associative Array: Key is the Parameter of the object, Value is the kind of filter method (equals, contains, ...)
+
+    /**
+     * Associative Array: Key is the Parameter of the object, Value is the kind of filter method (equals, contains, ...)
      * Possible Array:
          protected $filterMethods = array(
               'name'        => 'equals',
@@ -63,6 +76,8 @@ class FilterTemplate
               'authors'     => 'contains',
               'tags'        => 'contains',
          );
+     *
+     * @var array
      */
     protected $filterMethods = [];
 
@@ -115,7 +130,7 @@ class FilterTemplate
     }
 
     /**
-     * @param String $searchableParameter A parameter the user can search in
+     * @param string $searchableParameter A parameter the user can search in
      */
     public function addSearchableParameter($searchableParameter)
     {
@@ -135,7 +150,7 @@ class FilterTemplate
     }
 
     /**
-     * @param String $searchableParameter A parameter the user should not be able to search in anymore
+     * @param string $searchableParameter A parameter the user should not be able to search in anymore
      */
     public function removeSearchableParameter($searchableParameter)
     {
@@ -146,8 +161,8 @@ class FilterTemplate
     }
 
     /**
-     * @param String $parameterName The filter-key
-     * @param Array $parameterValue All selected Filters of the filter-key
+     * @param $parameterName
+     * @param $parameterValue
      */
     public function addFilterToFilterArray($parameterName, $parameterValue)
     {
@@ -157,7 +172,7 @@ class FilterTemplate
     }
 
     /**
-     * @param String $filterName The filter-key
+     * @param string $filterName The filter-key
      */
     public function removeFilterFromFilterArray($filterName)
     {
@@ -165,7 +180,7 @@ class FilterTemplate
     }
 
     /**
-     * @param String $search the Search String (normal Text, spaces are used as separators)
+     * @param string $search the Search String (normal Text, spaces are used as separators)
      */
     public function setSearchStringsFromSpaceSeparatedList($search)
     {
@@ -173,8 +188,8 @@ class FilterTemplate
     }
 
     /**
-     * @param String $parameter The parameter of the object
-     * @return String
+     * @param string $parameter The parameter of the object
+     * @return string
      */
     public function getFilterMethodForParameter($parameter)
     {
@@ -190,7 +205,7 @@ class FilterTemplate
     }
 
     /**
-     * @return array Returns the filter methods
+     * @return array
      */
     public function getFilterMethods()
     {

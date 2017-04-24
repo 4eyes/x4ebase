@@ -31,7 +31,7 @@ abstract class AbstractBackendTagBasedViewHelper extends \TYPO3\CMS\Fluid\Core\V
      * Gets instance of template if exists or create a new one.
      * Saves instance in viewHelperVariableContainer
      *
-     * @return \TYPO3\CMS\Backend\Template\DocumentTemplate $doc
+     * @return \TYPO3\CMS\Backend\Template\DocumentTemplate
      */
     public function getDocInstance()
     {
@@ -70,7 +70,7 @@ abstract class AbstractBackendTagBasedViewHelper extends \TYPO3\CMS\Fluid\Core\V
      * Relying on $GLOBALS['SOBE'] is
      * @deprecated since 6.0 and will be removed in 6.2 ->getDocInstance() should be used instead.
      *
-     * @return \TYPO3\CMS\Backend\Template\DocumentTemplate
+     * @return object|\TYPO3\CMS\Backend\Template\DocumentTemplate
      */
     protected function createDocInstance()
     {

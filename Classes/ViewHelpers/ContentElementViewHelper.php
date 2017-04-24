@@ -43,7 +43,7 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
     /**
      * Parse a content element
      *
-     * @param	int			UID of any content element
+     * @param	int			$uid of any content element
      * @return 	string		Parsed Content Element
      */
     public function render($uid)

@@ -100,7 +100,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the sender
      *
-     * @return string $sender
+     * @return string
      */
     public function getSender()
     {
@@ -111,7 +111,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the sender
      *
      * @param string $sender
-     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     * @return $this
      */
     public function setSender($sender)
     {
@@ -122,7 +122,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the recipient
      *
-     * @return string $recipient
+     * @return string
      */
     public function getRecipient()
     {
@@ -133,7 +133,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the recipient
      *
      * @param string $recipient
-     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     * @return $this
      */
     public function setRecipient($recipient)
     {
@@ -144,18 +144,18 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the replyto
      *
-     * @return string $replyTo
+     * @return string
      */
     public function getReplyTo()
     {
-        return $this->getReplyTo;
+        return $this->replyTo;
     }
 
     /**
      * Sets the replyTo
      *
      * @param string $replyTo
-     * @return void
+     * @return $this
      */
     public function setReplyTo($replyTo)
     {
@@ -166,7 +166,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the subject
      *
-     * @return string $subject
+     * @return string
      */
     public function getSubject()
     {
@@ -177,7 +177,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the subject
      *
      * @param string $subject
-     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     * @return $this
      */
     public function setSubject($subject)
     {
@@ -199,7 +199,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the message
      *
      * @param string $message
-     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     * @return $this
      */
     public function setMessage($message)
     {
@@ -210,7 +210,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the isSent
      *
-     * @return bool $isSent
+     * @return bool
      */
     public function getIsSent()
     {
@@ -221,7 +221,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the isHtml
      *
      * @param bool $isHtml
-     * @return void
+     * @return $this
      */
     public function setIsHtml($isHtml)
     {
@@ -232,7 +232,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the isHtml
      *
-     * @return bool $isHtml
+     * @return bool
      */
     public function getIsHtml()
     {
@@ -243,7 +243,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the isSent
      *
      * @param bool $isSent
-     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     * @return $this
      */
     public function setIsSent($isSent)
     {
@@ -254,18 +254,18 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the inQueue
      *
-     * @return bool $inQueue
+     * @return bool
      */
     public function getQueued()
     {
-        return $this->queued();
+        return $this->queued;
     }
 
     /**
      * Sets the inQueue
      *
      * @param bool $queued
-     * @return void
+     * @return $this
      */
     public function setQueued($queued)
     {
@@ -286,7 +286,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the error
      *
-     * @return string $error
+     * @return string
      */
     public function getError()
     {
@@ -297,7 +297,7 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the error
      *
      * @param string $error
-     * @return \X4e\X4ebase\Domain\Model\EmailLog
+     * @return $this
      */
     public function setError($error)
     {

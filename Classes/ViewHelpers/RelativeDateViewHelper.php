@@ -34,7 +34,7 @@ class RelativeDateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
      * @param mixed $date Either a DateTime object or a string that is accepted by the DateTime constructor
      * @param string $as The name of the info array
      * @param mixed $referenceDate Either a DateTime object or a string that is accepted by the DateTime constructor
-     * @return string Rendered string
+     * @return string
      * @api
      */
     public function render($date, $as, $referenceDate = null)

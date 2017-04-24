@@ -36,7 +36,7 @@ class DataMapper extends \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMappe
 	 *
 	 * @param string $className The name of the target class
 	 * @param array $row A single array with field_name => value pairs
-	 * @return object An object of the given class
+	 * @return object
 	 */
 	protected function mapSingleRow($className, array $row) {
         $identifier = (!empty($row['_PAGES_OVERLAY']) ? $row['uid'] . '_' . $row['_PAGES_OVERLAY_UID'] : $row['uid'] );

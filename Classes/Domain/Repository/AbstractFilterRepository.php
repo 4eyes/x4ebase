@@ -35,12 +35,16 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
     /**
-     * @var array e.g.: array('firstName' => 'like', ... )
+     * e.g.: array('firstName' => 'like', ... )
+     *
+     * @var array
      */
     protected $searchableParameters;
 
     /**
-     * @var array e.g.: array('firstName' => 'like', ... )
+     * e.g.: array('firstName' => 'like', ... )
+     *
+     * @var array
      */
     protected $filterMethods;
 
@@ -145,8 +149,8 @@ class AbstractFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
      * @param \X4e\X4ebase\Template\FilterTemplate $filterTemplate
-     * @param array() $constraints
-     * @return array()
+     * @param array $constraints
+     * @return array
      */
     public function addAdditionalConstraints($query, $filterTemplate, $constraints)
     {

@@ -33,7 +33,7 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\PageViewHelper
      * @param bool $addQueryString If set, the current query parameters will be kept in the URI
      * @param array $argumentsToBeExcludedFromQueryString arguments to be removed from the URI. Only active if $addQueryString = TRUE
      * @param string $uriScheme
-     * @return string Rendered page URI
+     * @return string
      */
     public function render($pageUid = null, array $additionalParams = [], $pageType = 0, $noCache = false, $noCacheHash = false, $section = '', $linkAccessRestrictedPages = false, $absolute = false, $addQueryString = false, array $argumentsToBeExcludedFromQueryString = [], $uriScheme = null)
     {

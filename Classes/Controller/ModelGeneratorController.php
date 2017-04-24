@@ -110,6 +110,10 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
         $this->view->assign('TSMappings', $TSMappings);
     }
 
+    /**
+     * @param $sqlType
+     * @return string
+     */
     protected function getSqlFieldType($sqlType)
     {
         $switchType = strtolower(preg_replace('/^(\w+).*/', '$1', $sqlType));
@@ -138,6 +142,11 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
         return $type;
     }
 
+    /**
+     * @param $table
+     * @param $fieldsArray
+     * @return string
+     */
     protected function getExtbaseClassFromFields($table, $fieldsArray)
     {
         $definitions = '';
@@ -207,6 +216,11 @@ class ModelGeneratorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
         return $extbaseClass;
     }
 
+    /**
+     * @param $table
+     * @param $fieldsArray
+     * @return string
+     */
     protected function getTSMappingsFromFields($table, $fieldsArray)
     {
         $mappings = '';

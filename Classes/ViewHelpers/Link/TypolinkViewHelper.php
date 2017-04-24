@@ -26,7 +26,7 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBas
     /**
      * @param string $parameter The typolink parameter to be turned into a link.
      * @param bool $keepContent Set TRUE to render the tag content even if no typolink parameter was given or the link generation failed.
-     * @return string Rendered email link
+     * @return string
      */
     public function render($parameter, $keepContent = false)
     {

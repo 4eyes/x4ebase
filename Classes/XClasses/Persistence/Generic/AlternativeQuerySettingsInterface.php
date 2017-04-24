@@ -35,7 +35,7 @@ interface AlternativeQuerySettingsInterface extends \TYPO3\CMS\Extbase\Persisten
      * Sets the flag if an alternative language overlay should be performed.
      *
      * @param bool $respectSysLanguageAlternative TRUE if an alternative language overlay should be performed.
-     * @return \X4e\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface instance of $this to allow method chaining
+     * @return \X4e\X4ebase\XClasses\Persistence\Generic\AlternativeQuerySettingsInterface
      * @api
      */
     public function setRespectSysLanguageAlternative($respectSysLanguageAlternative);
@@ -43,7 +43,7 @@ interface AlternativeQuerySettingsInterface extends \TYPO3\CMS\Extbase\Persisten
     /**
      * Returns the state, if an alternatvive language overlay should be performed.
      *
-     * @return bool TRUE, if a  and language overlay should be performed; otherwise FALSE.
+     * @return bool
      */
     public function getRespectSysLanguageAlternative();
 }

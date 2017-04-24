@@ -47,12 +47,13 @@ class DateTimeUtility
      * 10/-10:	Last month / Next month
      * 11/-11:	More than a month ago / In more than a month
      *
-     * @param int|string|DateTime $date
-     * @param int|string|DateTime $referenceDate
-     * @return array Returns an array with 3 elements.
      * Index 0 is one of the Relative_Time constants indicating the type of the offset.
      * Index 1 is an integer indicating the difference in values of the type given in index 0 (days, weeks, months).
      * Index 2 is the difference between $date and $referenceDate as an integer value
+     *
+     * @param int|string|\DateTime $date
+     * @param int|string|\DateTime $referenceDate
+     * @return array Returns an array with 3 elements.
      */
     public static function relativeDate($date, $referenceDate = null)
     {
@@ -169,7 +170,7 @@ class DateTimeUtility
     /**
      * Converts a given whatever into a timestamp
      *
-     * @param int|string|DateTime $date
+     * @param int|string|\DateTime $date
      * @return int|NULL
      */
     protected static function getTimestampFromDate($date = null)

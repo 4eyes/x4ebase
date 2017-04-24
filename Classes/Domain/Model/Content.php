@@ -441,9 +441,7 @@ class Content extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $categories;
 
     /**
-     * __construct
-     *
-     * @return TtContent
+     * Content constructor.
      */
     public function __construct()
     {

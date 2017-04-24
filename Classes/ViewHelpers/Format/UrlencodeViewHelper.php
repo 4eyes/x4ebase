@@ -35,9 +35,9 @@ class UrlencodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
     /**
      * Escapes special characters using PHPs urlencode() function.
      *
-     * @param string $insertSpaces Whether to replace %20 with an actual space
-     * @param string $value string to format
-     * @return mixed
+     * @param bool $insertSpaces
+     * @param null $value
+     * @return mixed|null
      * @see http://www.php.net/manual/function.rawurlencode.php
      */
     public function render($insertSpaces = true, $value = null)

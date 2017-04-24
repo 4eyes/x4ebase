@@ -99,10 +99,12 @@ class EidDispatcher
     protected $requestFormat = 'html';
 
     /**
-     *
-     * @param string $vendor
-     * @param string $extensionName
-     * @param string $pluginName
+     * EidDispatcher constructor.
+     * @param null $vendor
+     * @param null $extensionName
+     * @param null $pluginName
+     * @param null $controller
+     * @param null $action
      */
     public function __construct($vendor = null, $extensionName = null, $pluginName = null, $controller = null, $action = null)
     {
@@ -113,121 +115,198 @@ class EidDispatcher
         $this->action = $action;
     }
 
+    /**
+     * @return null|string
+     */
     public function getVendor()
     {
         return $this->vendor;
     }
 
+    /**
+     * @param $vendor
+     * @return $this
+     */
     public function setVendor($vendor)
     {
         $this->vendor = $vendor;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getExtensionName()
     {
         return $this->extensionName;
     }
 
+    /**
+     * @param $extensionName
+     * @return $this
+     */
     public function setExtensionName($extensionName)
     {
         $this->extensionName = $extensionName;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getPluginName()
     {
         return $this->pluginName;
     }
 
+    /**
+     * @param $pluginName
+     * @return $this
+     */
     public function setPluginName($pluginName)
     {
         $this->pluginName = $pluginName;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getController()
     {
         return $this->controller;
     }
 
+    /**
+     * @param $controller
+     * @return $this
+     */
     public function setController($controller)
     {
         $this->controller = $controller;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getAction()
     {
         return $this->action;
     }
 
+    /**
+     * @param $action
+     * @return $this
+     */
     public function setAction($action)
     {
         $this->action = $action;
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function getForceVendor()
     {
         return $this->forceVendor;
     }
 
+    /**
+     * @param $forceVendor
+     * @return $this
+     */
     public function setForceVendor($forceVendor)
     {
         $this->forceVendor = $forceVendor;
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function getForceExtensionName()
     {
         return $this->forceExtensionName;
     }
 
+    /**
+     * @param $forceExtensionName
+     * @return $this
+     */
     public function setForceExtensionName($forceExtensionName)
     {
         $this->forceExtensionName = $forceExtensionName;
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function getForcePluginName()
     {
         return $this->forcePluginName;
     }
 
+    /**
+     * @param $forcePluginName
+     * @return $this
+     */
     public function setForcePluginName($forcePluginName)
     {
         $this->forcePluginName = $forcePluginName;
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function getForceController()
     {
         return $this->forceController;
     }
 
+    /**
+     * @param $forceController
+     * @return $this
+     */
     public function setForceController($forceController)
     {
         $this->forceController = $forceController;
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function getForceAction()
     {
         return $this->forceAction;
     }
 
+    /**
+     * @param $forceAction
+     * @return $this
+     */
     public function setForceAction($forceAction)
     {
         $this->forceAction = $forceAction;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getRequestFormat()
     {
         return $this->requestFormat;
     }
 
+    /**
+     * @param $requestFormat
+     * @return $this
+     */
     public function setRequestFormat($requestFormat)
     {
         $this->requestFormat = $requestFormat;
