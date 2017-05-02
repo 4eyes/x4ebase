@@ -100,11 +100,11 @@ class EidDispatcher
 
     /**
      * EidDispatcher constructor.
-     * @param null $vendor
-     * @param null $extensionName
-     * @param null $pluginName
-     * @param null $controller
-     * @param null $action
+     * @param string|null $vendor
+     * @param string|null $extensionName
+     * @param string|null $pluginName
+     * @param string|null $controller
+     * @param string|null $action
      */
     public function __construct($vendor = null, $extensionName = null, $pluginName = null, $controller = null, $action = null)
     {
@@ -125,7 +125,7 @@ class EidDispatcher
 
     /**
      * @param $vendor
-     * @return $this
+     * @return EidDispatcher
      */
     public function setVendor($vendor)
     {
@@ -143,7 +143,7 @@ class EidDispatcher
 
     /**
      * @param $extensionName
-     * @return $this
+     * @return EidDispatcher
      */
     public function setExtensionName($extensionName)
     {
@@ -161,7 +161,7 @@ class EidDispatcher
 
     /**
      * @param $pluginName
-     * @return $this
+     * @return EidDispatcher
      */
     public function setPluginName($pluginName)
     {
@@ -179,7 +179,7 @@ class EidDispatcher
 
     /**
      * @param $controller
-     * @return $this
+     * @return EidDispatcher
      */
     public function setController($controller)
     {
@@ -197,7 +197,7 @@ class EidDispatcher
 
     /**
      * @param $action
-     * @return $this
+     * @return EidDispatcher
      */
     public function setAction($action)
     {
@@ -215,7 +215,7 @@ class EidDispatcher
 
     /**
      * @param $forceVendor
-     * @return $this
+     * @return EidDispatcher
      */
     public function setForceVendor($forceVendor)
     {
@@ -233,7 +233,7 @@ class EidDispatcher
 
     /**
      * @param $forceExtensionName
-     * @return $this
+     * @return EidDispatcher
      */
     public function setForceExtensionName($forceExtensionName)
     {
@@ -251,7 +251,7 @@ class EidDispatcher
 
     /**
      * @param $forcePluginName
-     * @return $this
+     * @return EidDispatcher
      */
     public function setForcePluginName($forcePluginName)
     {
@@ -269,7 +269,7 @@ class EidDispatcher
 
     /**
      * @param $forceController
-     * @return $this
+     * @return EidDispatcher
      */
     public function setForceController($forceController)
     {
@@ -287,7 +287,7 @@ class EidDispatcher
 
     /**
      * @param $forceAction
-     * @return $this
+     * @return EidDispatcher
      */
     public function setForceAction($forceAction)
     {
@@ -305,7 +305,7 @@ class EidDispatcher
 
     /**
      * @param $requestFormat
-     * @return $this
+     * @return EidDispatcher
      */
     public function setRequestFormat($requestFormat)
     {

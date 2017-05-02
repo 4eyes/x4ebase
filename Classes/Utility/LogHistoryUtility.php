@@ -32,6 +32,15 @@ namespace X4e\X4ebase\Utility;
  */
 class LogHistoryUtility
 {
+
+    /**
+     * @param string $tablename
+     * @param int $recuid
+     * @param array $fieldArray
+     * @param int $recpid
+     * @param int $userId
+     * @param int $workspaceId
+     */
     public static function writeHistoryEntry(
         $tablename,
         $recuid,
@@ -110,6 +119,7 @@ class LogHistoryUtility
      *          Special field used by tce_main.php. NEWid string of newly created records.
      * @param int $userId
      *          Alternative Backend User ID (used for logging login actions where this is not yet known).
+     * @param int $workspace
      * @return int Log entry ID.
      * @todo Define visibility
      */
