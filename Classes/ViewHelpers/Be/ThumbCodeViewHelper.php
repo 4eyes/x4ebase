@@ -36,7 +36,7 @@ class ThumbCodeViewHelper extends AbstractViewHelper
      * @param mixed[] $row Record array
      * @param string $table Table (record is from)
      * @param string $field Field name for which thumbnail are to be rendered.
-     * @return string HTML for thumbnails, if any.
+     * @return string
      */
     public function render($row, $table, $field)
     {

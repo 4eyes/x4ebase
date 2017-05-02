@@ -50,7 +50,7 @@ class UriViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\UriViewHelper
     /**
      * Get the URI for an AJAX Request.
      *
-     * @return string the AJAX URI
+     * @return string
      */
     protected function getAjaxUri()
     {

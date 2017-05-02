@@ -23,7 +23,7 @@ class AddSlashesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
     /**
      * Runs the given string through php-function 'addslashes'
      *
-     * @return string The escaped string
+     * @return string
      * @api
      */
     public function render()

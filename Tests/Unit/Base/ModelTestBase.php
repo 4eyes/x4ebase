@@ -110,8 +110,8 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Generic function to test if removing $testValue from $parameterName works
      *
-     * @param $parameterName
-     * @param $testValue
+     * @param string $removeAlias
+     * @param mixed $testValue
      */
     protected function genericRemove($removeAlias, $testValue)
     {
@@ -119,7 +119,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     }
 
     /**
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      * @param mixed $parameterValue The value the model parameter should be tested with
      */
     protected function genericGetterSetterTest($parameterName, $parameterValue)
@@ -152,7 +152,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Generic function that prepares the $parameterName and tests the isParameterName method
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      */
     protected function isTest($parameterName)
     {
@@ -170,7 +170,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Getter and Setter methods for string attributes
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      */
     protected function stringGetterSetterTest($parameterName)
     {
@@ -183,7 +183,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Getter and Setter methods for integer attributes
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      */
     protected function integerGetterSetterTest($parameterName)
     {
@@ -196,7 +196,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Getter and Setter methods for float attributes
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      */
     protected function floatGetterSetterTest($parameterName)
     {
@@ -209,7 +209,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Getter and Setter methods for boolean attributes
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      */
     protected function booleanGetterSetterTest($parameterName)
     {
@@ -222,7 +222,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Getter and Setter methods for \DateTime attributes
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      */
     protected function dateTimeGetterSetterTest($parameterName)
     {
@@ -235,8 +235,8 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Getter and Setter methods for custom object-class attributes
      *
-     * @param String $parameterName The name of the model parameter
-     * @param String $class The object class to get and set
+     * @param string $parameterName The name of the model parameter
+     * @param string $class The object class to get and set
      */
     protected function objectGetterSetterTest($parameterName, $class)
     {
@@ -249,7 +249,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Getter and Setter methods for array attributes
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      */
     protected function arrayGetterSetterTest($parameterName)
     {
@@ -266,8 +266,8 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Getter and Setter methods for \TYPO3\CMS\Extbase\Persistence\ObjectStorage attributes
      *
-     * @param String $parameterName The name of the model parameter
-     * @param String $typeOfModel The object class inside the object storage
+     * @param string $parameterName The name of the model parameter
+     * @param string $typeOfModel The object class inside the object storage
      */
     protected function objectStorageGetterSetterTest($parameterName, $typeOfModel)
     {
@@ -287,8 +287,8 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test Add and Remove methods
      *
-     * @param String $parameterName The name of the model parameter
-     * @param String $typeOfModel The object class inside the object storage
+     * @param string $parameterName The name of the model parameter
+     * @param string $typeOfModel The object class inside the object storage
      * @param null|String $addRemoveAlias The alias for add/remove-Class
      *        (addObject for parameterName='objects' (note the s) will be adapted automatically)
      */
@@ -312,7 +312,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test the initial value
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      * @param mixed $expectedInitialValue The expected initial value
      */
     protected function initialValueTest($parameterName, $expectedInitialValue)
@@ -327,7 +327,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     /**
      * Test the initial value for attributes being of type \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      *
-     * @param String $parameterName The name of the model parameter
+     * @param string $parameterName The name of the model parameter
      */
     protected function initialValueObjectStorageTest($parameterName)
     {

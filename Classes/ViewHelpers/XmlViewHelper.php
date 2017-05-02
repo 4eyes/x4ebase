@@ -61,9 +61,7 @@ class XmlViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedVie
     /**
      *
      * @param string $xml
-     * @param bool $removeEmptyNodes
-     * @param bool $ignoreWhitespace
-     * @param bool $preserveAttributes
+     *
      * @return string
      */
     protected function formatXmlString($xml)

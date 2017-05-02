@@ -102,10 +102,9 @@ class BackendUtility
     }
 
     /**
-     * Initialize Frontend
-     *
-     * @param int $pageUid
+     * @param $pid
      * @param int $typeNum
+     * @throws \Exception
      */
     public static function initTSFE($pid, $typeNum = 0)
     {

@@ -33,6 +33,9 @@ namespace X4e\X4ebase\Domain\Repository;
  */
 class PageRepository extends AbstractRepository
 {
+    /**
+     * @var array
+     */
     protected $defaultOrderings = [
         'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     ];

@@ -39,8 +39,6 @@ class TcaInfoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      *
-     * @param array $generator Extbase Model Generator
-     *
      * @return void
      */
     public function showAction()

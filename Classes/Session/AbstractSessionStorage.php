@@ -41,8 +41,8 @@ abstract class AbstractSessionStorage implements \X4e\X4ebase\Session\SessionSto
     protected $keyPrefix = 'x4ebase';
 
     /**
-     *
-     * @param string $key
+     * @param $key
+     * @return string
      */
     protected function getKey($key)
     {

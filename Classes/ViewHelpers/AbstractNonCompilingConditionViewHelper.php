@@ -37,7 +37,7 @@ abstract class AbstractNonCompilingConditionViewHelper extends \TYPO3\CMS\Fluid\
     /**
      * An array containing child nodes
      *
-     * @var array<\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\AbstractNode>
+     * @var array
      */
     private $childNodes = [];
 
@@ -66,7 +66,7 @@ abstract class AbstractNonCompilingConditionViewHelper extends \TYPO3\CMS\Fluid\
      * If then attribute is not set, iterates through child nodes and renders ThenViewHelper.
      * If then attribute is not set and no ThenViewHelper and no ElseViewHelper is found, all child nodes are rendered
      *
-     * @return string rendered ThenViewHelper or contents of <f:if> if no ThenViewHelper was found
+     * @return string
      * @api
      */
     protected function renderThenChild()
@@ -106,7 +106,7 @@ abstract class AbstractNonCompilingConditionViewHelper extends \TYPO3\CMS\Fluid\
      * If else attribute is not set, iterates through child nodes and renders ElseViewHelper.
      * If else attribute is not set and no ElseViewHelper is found, an empty string will be returned.
      *
-     * @return string rendered ElseViewHelper or an empty string if no ThenViewHelper was found
+     * @return string
      * @api
      */
     protected function renderElseChild()

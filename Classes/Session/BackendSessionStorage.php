@@ -85,8 +85,7 @@ class BackendSessionStorage extends \X4e\X4ebase\Session\AbstractSessionStorage
     }
 
     /**
-     *
-     * @param \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     * @return mixed
      */
     protected function getBackendUser()
     {

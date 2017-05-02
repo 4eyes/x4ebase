@@ -75,8 +75,9 @@ class SessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface
     }
 
     /**
-     *
      * @param string $key
+     * @param string $type
+     * @return mixed
      */
     public function get($key, $type = self::COOKIE_SESSION_STORAGE)
     {
@@ -84,9 +85,9 @@ class SessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface
     }
 
     /**
-     * Write data to session
      * @param string $key
      * @param mixed $data
+     * @param string $type
      */
     public function set($key, $data, $type = self::COOKIE_SESSION_STORAGE)
     {
@@ -94,8 +95,8 @@ class SessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface
     }
 
     /**
-     *
      * @param string $key
+     * @param string $type
      * @return bool
      */
     public function has($key, $type = self::COOKIE_SESSION_STORAGE)
@@ -104,8 +105,8 @@ class SessionStorage implements \X4e\X4ebase\Session\SessionStorageInterface
     }
 
     /**
-     *
      * @param string $key
+     * @param string $type
      */
     public function remove($key, $type = self::COOKIE_SESSION_STORAGE)
     {

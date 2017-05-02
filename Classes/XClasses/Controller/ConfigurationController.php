@@ -21,6 +21,10 @@ namespace X4e\X4ebase\XClasses\Controller;
  */
 class ConfigurationController extends \TYPO3\CMS\Extensionmanager\Controller\ConfigurationController
 {
+    /**
+     * @param array $config
+     * @param $extensionKey
+     */
     public function saveConfiguration(array $config, $extensionKey)
     {
         parent::saveConfiguration($config, $extensionKey);

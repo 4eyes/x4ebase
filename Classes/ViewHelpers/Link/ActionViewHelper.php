@@ -22,7 +22,7 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\ActionViewHelpe
      * @param bool $addQueryString If set, the current query parameters will be kept in the URI
      * @param array $argumentsToBeExcludedFromQueryString arguments to be removed from the URI. Only active if $addQueryString = TRUE
      * @param string $uriScheme
-     * @return string Rendered link
+     * @return string
      */
     public function render(
         $action = null,

@@ -61,7 +61,7 @@ class EditLinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBas
 
     /**
      * Returns the language service
-     * @return LanguageService
+     * @return \TYPO3\CMS\Lang\LanguageService
      */
     protected function getLanguageService()
     {

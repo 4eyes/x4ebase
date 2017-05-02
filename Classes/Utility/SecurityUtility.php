@@ -39,7 +39,7 @@ class SecurityUtility
      *
      * @param string $password
      * @param string $mode ('FE' or 'BE')
-     * @return string salted password
+     * @return string
      */
     public static function saltPassword($password, $mode='FE')
     {
@@ -70,7 +70,7 @@ class SecurityUtility
      * If a password does not start with M or C determine if a password is already a usual salted hash.
      *
      * @param string $password Password
-     * @return bool TRUE if password is a salted hash
+     * @return bool
      */
     public static function isSaltedHash($password)
     {
@@ -91,7 +91,7 @@ class SecurityUtility
      *
      * @param string $password Password
      * @param string $hash The hash stored in the DB
-     * @return bool TRUE if password is matching the hash
+     * @return bool
      */
     public static function checkPassword($password, $hash)
     {
