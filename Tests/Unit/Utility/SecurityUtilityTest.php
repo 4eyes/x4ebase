@@ -76,7 +76,11 @@ class SecurityUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase {
 		$this->assertInternalType('boolean', SecurityUtility::isSaltedHash(''));
 	}
 
-	public function testCheckPasswordReturnsBoolean() {
-		$this->assertInternalType('boolean', SecurityUtility::checkPassword('', ''));
-	}
+    public function testCheckPasswordReturnsBoolean()
+    {
+        $password = 'faiVueveeM8SheiVo8iex0chohch0oobee';
+        $saltedPassword = crypt($password);
+
+        $this->assertInternalType('boolean', SecurityUtility::checkPassword($password, $saltedPassword));
+    }
 }
