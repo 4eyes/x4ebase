@@ -77,7 +77,6 @@ class PageLanguageOverlayTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase
         $this->integerGetterSetterTest('deleted');
         $this->stringGetterSetterTest('subtitle');
         $this->stringGetterSetterTest('navTitle');
-        $this->objectStorageGetterSetterTest('media', \TYPO3\CMS\Extbase\Domain\Model\FileReference::class);
         $this->stringGetterSetterTest('keywords');
         $this->stringGetterSetterTest('description');
         $this->stringGetterSetterTest('abstract');
@@ -88,13 +87,5 @@ class PageLanguageOverlayTest extends \X4e\X4ebase\Tests\Unit\Base\ModelTestBase
         $this->integerGetterSetterTest('urltype');
         $this->integerGetterSetterTest('shortcut');
         $this->integerGetterSetterTest('shortcutMode');
-    }
-
-    /**
-     * @test
-     */
-    public function testAddingRemoving()
-    {
-        $this->objectStorageAddRemoveTest('media', \TYPO3\CMS\Extbase\Domain\Model\FileReference::class);
     }
 }
