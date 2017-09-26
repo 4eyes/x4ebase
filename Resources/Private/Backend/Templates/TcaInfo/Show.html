@@ -29,7 +29,7 @@
 
 	<f:if condition="{table}">
 		<f:then>
-			<h2><f:translate key="{table.ctrl.title}" /> ({tableName})</h2>
+			<h2><f:translate key="table.ctrl.title" /> ({tableName})</h2>
 
 			<table>
 				<thead>
@@ -101,7 +101,7 @@
 					<f:for each="{table.columns}" as="col" key="colname">
 						<tr>
 							<td>{colname}</td>
-							<td><f:translate key="{col.label}" /></td>
+							<td><f:translate key="col.label" /></td>
 							<td>
 								{col.config.type}
 								<f:if condition="{col.config.eval}">
@@ -134,7 +134,7 @@
 										<ul>
 											<f:for each="{col.config.items}" as="item">
 												<f:if condition="{item.0}">
-													<li>{item.1}: <f:translate key="{item.0}" default="{item.0}" /></li>
+													<li>{item.1}: <f:translate key="item.0" default="item.0" /></li>
 												</f:if>
 											</f:for>
 										</ul>
