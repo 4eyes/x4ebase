@@ -48,7 +48,7 @@ class FrontendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBa
         $key = 'lorem';
         $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
 
-        $frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, ['getKey']);
+        $frontendUser = $this->createPartialMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, ['getKey']);
         $frontendUser->expects($this->once())->method('getKey')->with($type, $key);
 
         $this->subject->expects($this->once())->method('getFrontendUser')->willReturn($frontendUser);
@@ -65,7 +65,7 @@ class FrontendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBa
         $data = '';
         $type = \X4e\X4ebase\Session\SessionStorage::COOKIE_SESSION_STORAGE;
 
-        $frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, ['setKey']);
+        $frontendUser = $this->createPartialMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, ['setKey']);
         $frontendUser->expects($this->once())->method('setKey')->with($type, $key, $data);
         $this->subject->expects($this->once())->method('getFrontendUser')->willReturn($frontendUser);
         $this->subject->expects($this->once())->method('getKey')->with($key)->willReturn($key);
@@ -99,7 +99,7 @@ class FrontendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBa
     public function testGetAll()
     {
         $this->mockSubject('getFrontendUser');
-        $frontendUser = $this->getMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, ['setKey']);
+        $frontendUser = $this->createPartialMock(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, ['setKey']);
         $frontendUser->sesData = 'HelloWorld';
         $this->subject->expects($this->once())->method('getFrontendUser')->willReturn($frontendUser);
 
@@ -109,7 +109,7 @@ class FrontendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBa
     public function testGetFrontendUser()
     {
         $this->mockSubject();
-        $tsfe = $this->getMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, [], [], '', false);
+        $tsfe = $this->getAccessibleMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, [], [], '', false);
         $tsfe->fe_user = 'test';
         $GLOBALS['TSFE'] = $tsfe;
         $this->assertSame('test', $this->subject->_call('getFrontendUser'));

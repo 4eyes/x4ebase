@@ -85,9 +85,9 @@ class ViewHelperTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
 
     protected function setUpDependencies()
     {
-        $this->viewHelperVariableContainer = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer');
-        $this->templateVariableContainer = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer');
-        $this->uriBuilder = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder');
+        $this->viewHelperVariableContainer = $this->createMock('\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer');
+        $this->templateVariableContainer = $this->createMock('\TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer');
+        $this->uriBuilder = $this->createMock('\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder');
         $this->uriBuilder->expects($this->any())->method('reset')->willReturn($this->uriBuilder);
         $this->uriBuilder->expects($this->any())->method('setArguments')->willReturn($this->uriBuilder);
         $this->uriBuilder->expects($this->any())->method('setSection')->willReturn($this->uriBuilder);
@@ -101,15 +101,14 @@ class ViewHelperTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
         $this->uriBuilder->expects($this->any())->method('setNoCache')->willReturn($this->uriBuilder);
         $this->uriBuilder->expects($this->any())->method('setUseCacheHash')->willReturn($this->uriBuilder);
         $this->uriBuilder->expects($this->any())->method('setAddQueryStringMethod')->willReturn($this->uriBuilder);
-        $this->request = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Web\Request');
-        $this->controllerContext = $this->getMock('\TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext', [], [], '', false);
+        $this->request = $this->createMock('\TYPO3\CMS\Extbase\Mvc\Web\Request');
+        $this->controllerContext = $this->getAccessibleMock('\TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext', [], [], '', false);
         $this->controllerContext->expects($this->any())->method('getUriBuilder')->willReturn($this->uriBuilder);
         $this->controllerContext->expects($this->any())->method('getRequest')->willReturn($this->request);
-        $this->tagBuilder = $this->getMock('\TYPO3\CMS\Fluid\Core\ViewHelper\TagBuilder');
+        $this->tagBuilder = $this->createMock('\TYPO3\CMS\Fluid\Core\ViewHelper\TagBuilder');
         $this->arguments = [];
-        $this->renderingContext = $this->getAccessibleMock('\TYPO3\CMS\Fluid\Core\Rendering\RenderingContext', ['dummy']);
-        $this->renderingContext->injectTemplateVariableContainer($this->templateVariableContainer);
-        $this->renderingContext->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);
+        $this->renderingContext = $this->createPartialMock('\TYPO3\CMS\Fluid\Core\Rendering\RenderingContext', ['dummy']);
+        $this->renderingContext->setViewHelperVariableContainer($this->viewHelperVariableContainer);
         $this->renderingContext->setControllerContext($this->controllerContext);
         $this->mvcPropertyMapperConfigurationService = $this->getAccessibleMock('\TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfigurationService', ['dummy']);
     }
@@ -118,7 +117,7 @@ class ViewHelperTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
      * @param \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper $viewHelper
      * @return void
      */
-    protected function injectDependenciesIntoViewHelper(\TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper $viewHelper)
+    protected function injectDependenciesIntoViewHelper($viewHelper)
     {
         $viewHelper->setRenderingContext($this->renderingContext);
         $viewHelper->setArguments($this->arguments);

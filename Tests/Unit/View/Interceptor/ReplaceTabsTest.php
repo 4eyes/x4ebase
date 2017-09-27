@@ -37,7 +37,7 @@ use X4e\X4ebase\View\Interceptor\ReplaceTabs;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class ReplaceTabsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class ReplaceTabsTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
     /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|ReplaceTabs */
     protected $replaceTabs;
@@ -55,7 +55,7 @@ class ReplaceTabsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             '',
             false
         );
-        $this->objectManager = $this->getMock(
+        $this->objectManager = $this->getAccessibleMock(
             ObjectManager::class,
             ['get'],
             [],
@@ -87,8 +87,8 @@ class ReplaceTabsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function testProcess()
     {
-        $textNode = new \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\TextNode('test');
-        $parsingState = new \TYPO3\CMS\Fluid\Core\Parser\ParsingState();
+        $textNode = new \TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\TextNode('test');
+        $parsingState = new \TYPO3Fluid\Fluid\Core\Parser\ParsingState();
         $this->replaceTabs->_set('objectManager', $this->objectManager);
         $this->replaceTabs->_get('objectManager')
             ->expects($this->once())

@@ -60,17 +60,17 @@ class FalUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     {
         $this->mockSubject();
 
-        $subSubFolder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFolder', 'createFolder', 'getSubfolder'], [], '', false);
+        $subSubFolder = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFolder', 'createFolder', 'getSubfolder'], [], '', false);
 
-        $subFolder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFolder', 'createFolder', 'getSubfolder'], [], '', false);
+        $subFolder = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFolder', 'createFolder', 'getSubfolder'], [], '', false);
         $subFolder->expects($this->once())->method('hasFolder')->willReturn(false);
         $subFolder->expects($this->once())->method('createFolder')->willReturn($subSubFolder);
 
-        $folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFolder', 'createFolder', 'getSubfolder'], [], '', false);
+        $folder = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFolder', 'createFolder', 'getSubfolder'], [], '', false);
         $folder->expects($this->once())->method('hasFolder')->willReturn(true);
         $folder->expects($this->once())->method('getSubfolder')->willReturn($subFolder);
 
-        $storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['getDefaultFolder'], [], '', false);
+        $storage = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['getDefaultFolder'], [], '', false);
         $storage->expects($this->once())->method('getDefaultFolder')->willReturn($folder);
 
         $folderName = 'lorem/ipsum';
@@ -82,9 +82,9 @@ class FalUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     {
         $this->mockSubject();
 
-        $folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, [], [], '', false);
+        $folder = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\Folder::class, [], [], '', false);
 
-        $storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['getDefaultFolder'], [], '', false);
+        $storage = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['getDefaultFolder'], [], '', false);
         $storage->expects($this->once())->method('getDefaultFolder')->willReturn($folder);
 
         $this->assertSame($folder, $this->subject->getFolderObject($storage));
@@ -94,11 +94,11 @@ class FalUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     {
         $this->mockSubject();
 
-        $fileObject = $this->getMock(\TYPO3\CMS\Core\Resource\FileReference::class, [], [], '', false);
+        $fileObject = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\FileReference::class, [], [], '', false);
 
-        $storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['getFile', 'addUploadedFile'], [], '', false);
+        $storage = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['getFile', 'addUploadedFile'], [], '', false);
         $storage->expects($this->once())->method('getFile')->willReturn($fileObject);
-        $folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFile', 'getIdentifier'], [], '', false);
+        $folder = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFile', 'getIdentifier'], [], '', false);
         $folder->expects($this->once())->method('hasFile')->willReturn(true);
         $folder->expects($this->once())->method('getIdentifier');
 
@@ -113,11 +113,11 @@ class FalUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     {
         $this->mockSubject();
 
-        $fileObject = $this->getMock(\TYPO3\CMS\Core\Resource\FileReference::class, [], [], '', false);
+        $fileObject = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\FileReference::class, [], [], '', false);
 
-        $storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['addUploadedFile'], [], '', false);
+        $storage = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['addUploadedFile'], [], '', false);
         $storage->expects($this->once())->method('addUploadedFile')->willReturn($fileObject);
-        $folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFile', 'getIdentifier'], [], '', false);
+        $folder = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFile', 'getIdentifier'], [], '', false);
         $folder->expects($this->once())->method('hasFile')->willReturn(false);
 
         $fileInfo = [
@@ -131,9 +131,9 @@ class FalUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     {
         $this->mockSubject();
 
-        $storage = $this->getMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['addUploadedFile'], [], '', false);
+        $storage = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\ResourceStorage::class, ['addUploadedFile'], [], '', false);
         $storage->expects($this->once())->method('addUploadedFile')->will($this->throwException(new \TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException));
-        $folder = $this->getMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFile', 'getIdentifier'], [], '', false);
+        $folder = $this->getAccessibleMock(\TYPO3\CMS\Core\Resource\Folder::class, ['hasFile', 'getIdentifier'], [], '', false);
         $folder->expects($this->once())->method('hasFile')->willReturn(false);
 
         $fileInfo = [
@@ -154,7 +154,7 @@ class FalUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
         $pid = 3;
         $tableLocal = 'sys_file';
 
-        $databaseConnection = $this->getMock(
+        $databaseConnection = $this->getAccessibleMock(
             \TYPO3\CMS\Core\Database\DatabaseConnection::class,
             [
                 'exec_INSERTquery',
@@ -178,7 +178,7 @@ class FalUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
 
         $uid = 1;
 
-        $databaseConnection = $this->getMock(
+        $databaseConnection = $this->getAccessibleMock(
             \TYPO3\CMS\Core\Database\DatabaseConnection::class,
             [
                 'exec_INSERTquery',

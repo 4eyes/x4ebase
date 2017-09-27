@@ -46,13 +46,13 @@ class GroupByFirstLetterViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\View
      */
     public function testRender_WithIncompatibleType_ThrowsException()
     {
-        $this->setExpectedException('\\Exception', 'Unsupported element type.');
+        $this->expectException(\Exception::class);
         $this->subject->render([''], '');
     }
 
     public function testRender_WithArray_NotIssetProperty_ThrowsException()
     {
-        $this->setExpectedException('\\Exception', 'The given property does not exist.');
+        $this->expectException(\Exception::class);
         $this->subject->render([['test' => 'one']], 'lorem');
     }
 
@@ -72,7 +72,7 @@ class GroupByFirstLetterViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\View
 
     public function testRender_WithObject_NotIssetProperty_ThrowsException()
     {
-        $this->setExpectedException('\\Exception', 'The given property does not exist.');
+        $this->expectException(\Exception::class);
         $this->subject->render(new testClass(), 'lorem');
     }
 

@@ -35,10 +35,10 @@ namespace X4e\X4ebase\Tests\Unit\Base;
  *
  * @author Philipp Seßner <philipp@4eyes.ch>
  */
-class TestCaseBase extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class TestCaseBase extends \TYPO3\TestingFramework\Core\BaseTestCase
 {
 
-    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface */
+    /** @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface */
     protected $subject;
 
     public function setUp()

@@ -51,7 +51,7 @@ class AbstractBackendTagBasedViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base
             ['createDocInstance']
         );
 
-        $this->viewHelperVariableContainer = $this->getMock(
+        $this->viewHelperVariableContainer = $this->createPartialMock(
             \TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class,
             ['exists', 'get']
         );
@@ -65,7 +65,7 @@ class AbstractBackendTagBasedViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base
 
     public function testGetDocInstanceDocDoesNotExistCallsCreateDocInstance()
     {
-        $doc = $this->getMock(\TYPO3\CMS\Backend\Template\DocumentTemplate::class, [], [], '', false);
+        $doc = $this->getAccessibleMock(\TYPO3\CMS\Backend\Template\DocumentTemplate::class, [], [], '', false);
 
         $this->subject = $this->getMockBuilder($this->getSubjectClassName())
             ->setMethods(['createDocInstance'])
@@ -79,7 +79,7 @@ class AbstractBackendTagBasedViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base
         );
         //$this->subject->expects($this->once())->method('createDocInstance')->willReturn($doc);
 
-        $this->viewHelperVariableContainer = $this->getMock(
+        $this->viewHelperVariableContainer = $this->createPartialMock(
             \TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class,
             ['exists', 'add']
         );

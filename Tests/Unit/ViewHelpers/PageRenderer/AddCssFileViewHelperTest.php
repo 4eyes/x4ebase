@@ -61,7 +61,7 @@ class AddCssFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTe
 
         $file = 'test';
 
-        $pageRenderer = $this->getMock(PageRenderer::class, ['addCssFile'], [], '', false);
+        $pageRenderer = $this->getAccessibleMock(PageRenderer::class, ['addCssFile'], [], '', false);
         $pageRenderer->expects($this->once())->method('addCssFile');
         $this->subject->_set('pageRenderer', $pageRenderer);
 

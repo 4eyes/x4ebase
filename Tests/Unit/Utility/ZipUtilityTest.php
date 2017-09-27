@@ -25,6 +25,7 @@ namespace X4e\X4ebase\Tests\Unit\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
+use PHPUnit\Exception;
 use X4e\X4ebase\Utility\ZipUtility;
 
 /**
@@ -65,7 +66,7 @@ class ZipUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function testCreate_ThrowsFileNotExistException()
     {
-        $this->setExpectedException('Exception');
+        $this->expectException(\Exception::class);
         ZipUtility::create(dirname(__FILE__) . '/HelloWorld', 'test');
     }
 
@@ -100,7 +101,7 @@ class ZipUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function testExtract_ThrowsException()
     {
-        $this->setExpectedException('Exception');
+        $this->expectException(\Exception::class);
         ZipUtility::extract();
     }
 }

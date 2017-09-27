@@ -42,10 +42,10 @@ class EmailLogRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTest
     {
         $this->mockSubject('setDefaultQuerySettings');
 
-        $querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, ['setRespectStoragePage'], [], '', false);
+        $querySettings = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, ['setRespectStoragePage'], [], '', false);
         $querySettings->expects($this->once())->method('setRespectStoragePage');
 
-        $objectManager = $this->getMock(ObjectManager::class, ['get'], [], '', false);
+        $objectManager = $this->getAccessibleMock(ObjectManager::class, ['get'], [], '', false);
         $objectManager->expects($this->once())->method('get')->with('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
 
         $this->subject->expects($this->once())->method('setDefaultQuerySettings')->with($querySettings);

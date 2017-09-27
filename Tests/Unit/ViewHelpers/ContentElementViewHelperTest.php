@@ -46,7 +46,7 @@ class ContentElementViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelp
      */
     public function testRender_CallsMethodRECORDSonce()
     {
-        $contentObjectRenderer = $this->getMock(
+        $contentObjectRenderer = $this->createPartialMock(
             \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class,
             ['RECORDS']
         );

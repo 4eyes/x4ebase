@@ -70,10 +70,10 @@ class XmlViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
         $this->markTestIncomplete(
             'unserialize(): Error at offset 41 of 42 bytes'
         );
-        $simpleXmlElement = $this->getMock(\SimpleXMLElement::class, ['asXML'], [], '', false);
+        $simpleXmlElement = $this->getAccessibleMock(\SimpleXMLElement::class, ['asXML'], [], '', false);
         $simpleXmlElement->expects($this->once())->method('asXML');
 
-        $domDocument = $this->getMock(\DOMDocument::class, ['loadXML', 'saveXML'], [1.0]);
+        $domDocument = $this->getAccessibleMock(\DOMDocument::class, ['loadXML', 'saveXML'], [1.0]);
         $domDocument->expects($this->once())->method('loadXML');
         $domDocument->expects($this->once())->method('saveXML');
 
@@ -92,9 +92,9 @@ class XmlViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
         $this->markTestIncomplete(
             'unserialize(): Error at offset 41 of 42 bytes'
         );
-        $simpleXmlElement = $this->getMock(\SimpleXMLElement::class, ['asXML'], [], '', false);
+        $simpleXmlElement = $this->getAccessibleMock(\SimpleXMLElement::class, ['asXML'], [], '', false);
         $simpleXmlElement->expects($this->once())->method('asXML');
-        $domDocument = $this->getMock(\DOMDocument::class, ['loadXML', 'saveXML'], [], '', false);
+        $domDocument = $this->getAccessibleMock(\DOMDocument::class, ['loadXML', 'saveXML'], [], '', false);
         $domDocument->expects($this->once())->method('loadXML');
         $domDocument->expects($this->once())->method('saveXML');
 

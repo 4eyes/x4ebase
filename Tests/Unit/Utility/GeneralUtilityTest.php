@@ -82,7 +82,7 @@ class GeneralUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function testGenerateUidArrayForPropertyWithWrongPropertyThrowsException()
     {
-        $this->setExpectedException('\\RuntimeException');
+        $this->expectException(\RuntimeException::class);
         GeneralUtility::generateUidArrayForProperty(new \stdClass(), 'test');
     }
 

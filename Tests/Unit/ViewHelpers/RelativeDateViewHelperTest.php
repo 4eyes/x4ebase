@@ -47,7 +47,7 @@ class RelativeDateViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelper
     public function testRender()
     {
         $this->mockSubject('renderChildren');
-        $this->templateVariableContainer = $this->getMock(
+        $this->templateVariableContainer = $this->createPartialMock(
             \TYPO3\CMS\Fluid\Core\ViewHelper\TemplateVariableContainer::class,
             ['add', 'remove']);
         $this->templateVariableContainer->expects($this->once())->method('add');

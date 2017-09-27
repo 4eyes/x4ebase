@@ -44,7 +44,7 @@ class BackendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBas
     public function testGet()
     {
         $this->mockSubject('getKey', 'getBackendUser');
-        $backendUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['getSessionData']);
+        $backendUser = $this->createPartialMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['getSessionData']);
         $backendUser->expects($this->once())->method('getSessionData');
 
         $this->subject->expects($this->once())->method('getBackendUser')->willReturn($backendUser);
@@ -55,7 +55,7 @@ class BackendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBas
     public function testSet()
     {
         $this->mockSubject('getKey', 'getBackendUser');
-        $backendUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['setAndSaveSessionData']);
+        $backendUser = $this->createPartialMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['setAndSaveSessionData']);
         $backendUser->expects($this->once())->method('setAndSaveSessionData')->with('lorem', 'ipsum');
 
         $this->subject->expects($this->once())->method('getBackendUser')->willReturn($backendUser);
@@ -67,7 +67,7 @@ class BackendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBas
     {
         $this->mockSubject('has');
         $this->subject->expects($this->once())->method('has')->willReturn(false);
-        $databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, ['exec_UPDATEquery']);
+        $databaseConnection = $this->createPartialMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, ['exec_UPDATEquery']);
         $databaseConnection->expects($this->never())->method('exec_UPDATEquery');
         $GLOBALS['TYPO3_DB'] = $databaseConnection;
 
@@ -85,11 +85,11 @@ class BackendSessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBas
             'writeDevLog' => false
         ];
         $session_table = 'be_sessions';
-        $backendUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class);
+        $backendUser = $this->createMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class);
         $backendUser->user = $user;
         $backendUser->session_table = $session_table;
 
-        $databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, ['exec_UPDATEquery', 'fullQuoteStr']);
+        $databaseConnection = $this->createPartialMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, ['exec_UPDATEquery', 'fullQuoteStr']);
         $databaseConnection->expects($this->once())->method('fullQuoteStr')->with(1, 'be_sessions')->willReturn('HelloWorld');
         $databaseConnection->expects($this->once())->method('exec_UPDATEquery')->with(
             $session_table, 'ses_id=HelloWorld', ['ses_data' => '']

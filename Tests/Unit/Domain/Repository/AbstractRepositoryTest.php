@@ -45,7 +45,7 @@ class AbstractRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTest
     {
         $this->mockSubject('getSystemLanguages', 'createQuery');
 
-        $record = $this->getMock(\TYPO3\CMS\Documentation\Domain\Model\Document::class, ['getPid'], [], '', false);
+        $record = $this->getAccessibleMock(\TYPO3\CMS\Documentation\Domain\Model\Document::class, ['getPid'], [], '', false);
         $record->expects($this->once())->method('getPid')->willReturn(1);
         $languageIconTitles = [
             '0' => 1
@@ -53,15 +53,15 @@ class AbstractRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTest
 
         $this->subject->expects($this->once())->method('getSystemLanguages')->willReturn($languageIconTitles);
 
-        $mockQueryResult = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, ['getFirst'], [], '', false);
+        $mockQueryResult = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, ['getFirst'], [], '', false);
         $mockQueryResult->expects($this->once())->method('getFirst');
 
-        $mockQuerySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, ['setRespectSysLanguage', 'setRespectSysLanguageAlternative', 'setSysLanguageUid'], [], '', false);
+        $mockQuerySettings = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, ['setRespectSysLanguage', 'setRespectSysLanguageAlternative', 'setSysLanguageUid'], [], '', false);
         $mockQuerySettings->expects($this->once())->method('setRespectSysLanguage')->with(false);
         $mockQuerySettings->expects($this->once())->method('setRespectSysLanguageAlternative')->with(true);
         $mockQuerySettings->expects($this->once())->method('setSysLanguageUid');
 
-        $mockQuery = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['createQuery', 'getQuerySettings', 'matching', 'equals', 'execute'], [], '', false);
+        $mockQuery = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['createQuery', 'getQuerySettings', 'matching', 'equals', 'execute'], [], '', false);
         $this->subject->expects($this->once())->method('createQuery')->willReturn($mockQuery);
         $mockQuery->expects($this->exactly(3))->method('getQuerySettings')->willReturn($mockQuerySettings);
         $mockQuery->expects($this->once())->method('matching')->willReturn($mockQuery);
@@ -76,7 +76,7 @@ class AbstractRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTest
         $languageIconTitles = [];
         $this->subject->expects($this->once())->method('getSystemLanguages')->willReturn($languageIconTitles);
 
-        $record = $this->getMock(\TYPO3\CMS\Documentation\Domain\Model\Document::class, ['getPid'], [], '', false);
+        $record = $this->getAccessibleMock(\TYPO3\CMS\Documentation\Domain\Model\Document::class, ['getPid'], [], '', false);
         $record->expects($this->once())->method('getPid')->willReturn(1);
         $this->assertFalse($this->subject->getTranslation($record, 1));
     }
@@ -87,7 +87,7 @@ class AbstractRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTest
     public function testGetTranslateTools_ReturnsTranslateTools()
     {
         $this->mockSubject();
-        $translateTools = $this->getMock(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider::class, [], [], '', false);
+        $translateTools = $this->getAccessibleMock(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider::class, [], [], '', false);
         $this->subject->_set('translateTools', $translateTools);
         $this->assertSame($translateTools, $this->subject->_call('getTranslateTools'));
     }
@@ -112,7 +112,7 @@ class AbstractRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\RepositoryTest
             '0' => 'test'
         ];
 
-        $translateTools = $this->getMock(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider::class, ['getSystemLanguages'], [], '', false);
+        $translateTools = $this->getAccessibleMock(\TYPO3\CMS\Backend\Configuration\TranslationConfigurationProvider::class, ['getSystemLanguages'], [], '', false);
         $translateTools->expects($this->once())->method('getSystemLanguages')->willReturn($cachedLanguageIconTitles['0']);
         $this->subject->expects($this->once())->method('getTranslateTools')->willReturn($translateTools);
 

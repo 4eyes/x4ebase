@@ -51,12 +51,12 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
         );
         $this->mockSubject('logEmail');
 
-        $request = $this->getMock(\TYPO3\CMS\Extbase\Mvc\Request::class, [], [], '', false);
+        $request = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Mvc\Request::class, [], [], '', false);
 
-        $emailView = $this->getMock(\TYPO3\CMS\Fluid\View\StandaloneView::class, ['render', 'assignMultiple', 'getRequest'], [], '', false);
+        $emailView = $this->getAccessibleMock(\TYPO3\CMS\Fluid\View\StandaloneView::class, ['render', 'assignMultiple', 'getRequest'], [], '', false);
         $emailView->expects($this->once())->method('render')->willReturn('Hello');
         $emailView->expects($this->once())->method('getRequest')->willReturn($request);
-        $message = $this->getMock(\TYPO3\CMS\Core\Mail\MailMessage::class, ['send', 'isSent', 'setTo', 'setFrom', 'setReplyTo', 'setSubject', 'attach', 'setBody'], [], '', false);
+        $message = $this->getAccessibleMock(\TYPO3\CMS\Core\Mail\MailMessage::class, ['send', 'isSent', 'setTo', 'setFrom', 'setReplyTo', 'setSubject', 'attach', 'setBody'], [], '', false);
         $message->expects($this->once())->method('send');
         $message->expects($this->once())->method('isSent')->willReturn(true);
         $message->expects($this->once())->method('setTo')->willReturn($message);
@@ -66,7 +66,7 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
         $message->expects($this->once())->method('attach')->willReturn($message);
         $message->expects($this->once())->method('setBody')->willReturn($message);
 
-        $objectManager = $this->getMock(
+        $objectManager = $this->getAccessibleMock(
             ObjectManager::class, ['get'], [], '', false
         );
         $objectManager->expects($this->at(0))->method('get')->willReturn($emailView);
@@ -85,10 +85,10 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testLogEmail_PersistsEmailLog()
     {
         $this->mockSubject();
-        $emailLogRepository = $this->getMock(\X4e\X4ebase\Domain\Repository\EmailLogRepository::class, ['add'], [], '', false);
-        $emailLog = $this->getMock(\X4e\X4ebase\Domain\Model\EmailLog::class, ['dummy']);
+        $emailLogRepository = $this->getAccessibleMock(\X4e\X4ebase\Domain\Repository\EmailLogRepository::class, ['add'], [], '', false);
+        $emailLog = $this->createPartialMock(\X4e\X4ebase\Domain\Model\EmailLog::class, ['dummy']);
 
-        $objectManager = $this->getMock(
+        $objectManager = $this->getAccessibleMock(
             ObjectManager::class, ['get'], [], '', false
         );
         $objectManager->expects($this->at(0))->method('get')
@@ -99,7 +99,7 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
             ->with('X4e\\X4ebase\\Domain\\Model\\EmailLog')
             ->willReturn($emailLog);
 
-        $persistenceManager = $this->getMock(PersistenceManager::class, ['persistAll'], [], '', false);
+        $persistenceManager = $this->getAccessibleMock(PersistenceManager::class, ['persistAll'], [], '', false);
         $persistenceManager->expects($this->once())->method('persistAll');
 
         //$this->setExpectedException('TYPO3\\CMS\\Extbase\\Persistence\\Exception');
@@ -117,16 +117,16 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     {
         $this->mockSubject();
 
-        $objectManager = $this->getMock(
+        $objectManager = $this->getAccessibleMock(
             ObjectManager::class, ['get'], [], '', false
         );
         $objectManager->expects($this->at(0))->method('get')
             ->with('X4e\\X4ebase\\Domain\\Repository\\EmailLogRepository')
             ->willReturn(false);
 
-        $persistenceManager = $this->getMock(PersistenceManager::class, ['persistAll'], [], '', false);
+        $persistenceManager = $this->getAccessibleMock(PersistenceManager::class, ['persistAll'], [], '', false);
 
-        $this->setExpectedException('TYPO3\\CMS\\Extbase\\Persistence\\Exception');
+        $this->expectException(\TYPO3\CMS\Extbase\Persistence\Exception::class);
 
         $this->subject->_setStatic('objectManager', $objectManager);
         $this->subject->_setStatic('persistenceManager', $persistenceManager);
@@ -140,7 +140,7 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testGetObjectManagerInstance_ReturnsObjectManager()
     {
         $this->mockSubject();
-        $objectManager = $this->getMock(
+        $objectManager = $this->getAccessibleMock(
             ObjectManager::class, ['get'], [], '', false
         );
         $this->subject->_setStatic('objectManager', $objectManager);
@@ -161,7 +161,7 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testGetPersistenceManagerInstance_ReturnsPersistenceManager()
     {
         $this->mockSubject();
-        $persistenceManager = $this->getMock(PersistenceManager::class, [], [], '', false);
+        $persistenceManager = $this->getAccessibleMock(PersistenceManager::class, [], [], '', false);
         $this->subject->_setStatic('persistenceManager', $persistenceManager);
 
         $this->assertSame($persistenceManager, $this->subject->_call('getPersistenceManagerInstance'));
@@ -173,8 +173,8 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testGetPersistenceManagerInstance_CreatesPersistenceManager()
     {
         $this->mockSubject();
-        $persistenceManager = $this->getMock(PersistenceManager::class, [], [], '', false);
-        $objectManager = $this->getMock(
+        $persistenceManager = $this->getAccessibleMock(PersistenceManager::class, [], [], '', false);
+        $objectManager = $this->getAccessibleMock(
             ObjectManager::class, ['get'], [], '', false
         );
         $objectManager->expects($this->once())->method('get')

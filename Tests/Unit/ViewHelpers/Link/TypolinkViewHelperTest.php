@@ -49,7 +49,7 @@ class TypolinkViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTest
 
     protected function createEmptyLinkHref()
     {
-        $mock = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getTypoLink_URL']);
+        $mock = $this->createPartialMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getTypoLink_URL']);
         $mock->expects($this->any())->method('getTypoLink_URL')
             ->willReturn(false);
         return $mock;
@@ -57,7 +57,7 @@ class TypolinkViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTest
 
     public function createNonEmptyLinkHref()
     {
-        $mock = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getTypoLink_URL']);
+        $mock = $this->createPartialMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getTypoLink_URL']);
         $mock->expects($this->any())->method('getTypoLink_URL')
             ->willReturn('Hello');
         return $mock;
@@ -65,7 +65,7 @@ class TypolinkViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTest
 
     protected function mockObjectManager($mockedContentObjectRenderer)
     {
-        $mock = $this->getMock(ObjectManager::class, ['get']);
+        $mock = $this->createPartialMock(ObjectManager::class, ['get']);
         $mock->expects($this->any())->method('get')->willReturn($mockedContentObjectRenderer);
         return $mock;
     }
