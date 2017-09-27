@@ -48,10 +48,10 @@ class IfAdminOrHasRoleViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHe
     {
         $this->mockSubject('backendUserIsAdmin', 'renderElseChild');
 
-        $viewHelperNode = $this->getMock(\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode::class, ['evaluateChildNodes'], [], '', false);
+        $viewHelperNode = $this->getAccessibleMock(\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode::class, ['evaluateChildNodes'], [], '', false);
         $this->subject->setViewHelperNode($viewHelperNode);
 
-        $beUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['isAdmin'], [], '', false);
+        $beUser = $this->getAccessibleMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['isAdmin'], [], '', false);
         $beUser->expects($this->once())->method('isAdmin')->will($this->returnValue(false));
         $GLOBALS['BE_USER'] = $beUser;
 
@@ -68,10 +68,10 @@ class IfAdminOrHasRoleViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHe
     {
         $this->mockSubject('backendUserIsAdmin', 'renderThenChild', 'evaluateChildNodes');
 
-        $viewHelperNode = $this->getMock(\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode::class, ['evaluateChildNodes'], [], '', false);
+        $viewHelperNode = $this->getAccessibleMock(\TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode::class, ['evaluateChildNodes'], [], '', false);
         $this->subject->setViewHelperNode($viewHelperNode);
 
-        $beUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['isAdmin'], [], '', false);
+        $beUser = $this->getAccessibleMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['isAdmin'], [], '', false);
         $beUser->expects($this->once())->method('isAdmin')->will($this->returnValue(true));
         $GLOBALS['BE_USER'] = $beUser;
 
@@ -84,7 +84,7 @@ class IfAdminOrHasRoleViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHe
     public function testBackendUserIsAdmin()
     {
         $this->mockSubject();
-        $beUser = $this->getMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['isAdmin'], [], '', false);
+        $beUser = $this->getAccessibleMock(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class, ['isAdmin'], [], '', false);
         $beUser->expects($this->once())->method('isAdmin');
 
         $GLOBALS['BE_USER'] = $beUser;

@@ -59,8 +59,8 @@ class AddJsFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTes
         $this->mockSubject('getDocInstance');
         $file = 'test';
 
-        $doc = $this->getMock(DocumentTemplate::class, ['getPageRenderer'], [], '', false);
-        $pageRenderer = $this->getMock(PageRenderer::class, ['addJsFile'], [], '', false);
+        $doc = $this->getAccessibleMock(DocumentTemplate::class, ['getPageRenderer'], [], '', false);
+        $pageRenderer = $this->getAccessibleMock(PageRenderer::class, ['addJsFile'], [], '', false);
         $this->subject
             ->expects($this->once())
             ->method('getDocInstance')
@@ -84,8 +84,8 @@ class AddJsFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTes
 
         $this->subject->setArguments(['external' => true]);
 
-        $doc = $this->getMock(DocumentTemplate::class, ['getPageRenderer'], [], '', false);
-        $pageRenderer = $this->getMock(PageRenderer::class, ['addJsFile'], [], '', false);
+        $doc = $this->getAccessibleMock(DocumentTemplate::class, ['getPageRenderer'], [], '', false);
+        $pageRenderer = $this->getAccessibleMock(PageRenderer::class, ['addJsFile'], [], '', false);
         $this->subject
             ->expects($this->once())
             ->method('getDocInstance')

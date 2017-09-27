@@ -38,7 +38,7 @@ namespace X4e\X4ebase\Tests\Unit\ViewHelpers;
 class YouTubeVideoViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTestBase
 {
 
-    /** @var  \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\YouTubeVideoViewHelper */
+    /** @var  \TYPO3\CMS\Core\Tests\AccessibleObjectInterface|\X4e\X4ebase\ViewHelpers\YouTubeVideoViewHelper */
     protected $subject;
 
     public function testRetrieveYoutubeHash()

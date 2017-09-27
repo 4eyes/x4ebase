@@ -61,7 +61,7 @@ class AddJsFileViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTes
 
         $file = 'test';
 
-        $pageRenderer = $this->getMock(PageRenderer::class, ['addJsFile'], [], '', false);
+        $pageRenderer = $this->getAccessibleMock(PageRenderer::class, ['addJsFile'], [], '', false);
         $pageRenderer->expects($this->once())->method('addJsFile');
         $this->subject->_set('pageRenderer', $pageRenderer);
 

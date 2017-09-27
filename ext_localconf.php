@@ -76,6 +76,14 @@ if (!$extConf['fileTimestamp.']['disable_fe'] || !$extConf['fileTimestamp.']['di
 }
 // endregion
 
+// region fluid interceptors
+// deactivated by default because of possible performance impact. Add this configuration to your project if needed
+/*
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['interceptors'][\X4e\X4ebase\View\Interceptor\ReplaceTabs::class] =
+    \X4e\X4ebase\View\Interceptor\ReplaceTabs::class;
+*/
+// endregion
+
 // We need to set the default implementation for Storage Backend & Query Settings
 // the code below is NO PUBLIC API! It's just to make sure that
 // Extbase works correctly in the backend if the page tree is empty or no

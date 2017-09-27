@@ -81,7 +81,7 @@ class LogHistoryUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
             false
         ];
 
-        $databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, ['exec_SELECTquery', 'sql_fetch_assoc'], [], '', false);
+        $databaseConnection = $this->getAccessibleMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, ['exec_SELECTquery', 'sql_fetch_assoc'], [], '', false);
         $databaseConnection->expects($this->once())->method('exec_SELECTquery')->with('uid_foreign', 'dolor', 'uid_local=42', '', 'sorting');
         $databaseConnection->expects($this->at(1))->method('sql_fetch_assoc')->willReturn($currentRecord[0]);
         $databaseConnection->expects($this->at(2))->method('sql_fetch_assoc')->willReturn($currentRecord[1]);

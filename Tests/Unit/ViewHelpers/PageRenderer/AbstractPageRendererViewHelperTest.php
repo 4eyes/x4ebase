@@ -61,10 +61,10 @@ class AbstractPageRendererViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\Vi
     {
         $this->mockSubject();
 
-        $contentObject = $this->getMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getUserObjectType'], [], '', false);
+        $contentObject = $this->getAccessibleMock(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class, ['getUserObjectType'], [], '', false);
         $contentObject->expects($this->atLeastOnce())->method('getUserObjectType')->willReturn(1);
 
-        $configurationManager = $this->getMock(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class, ['getContentObject'], [], '', false);
+        $configurationManager = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class, ['getContentObject'], [], '', false);
         $configurationManager->expects($this->atLeastOnce())->method('getContentObject')->willReturn($contentObject);
 
         $this->subject->_set('configurationManager', $configurationManager);

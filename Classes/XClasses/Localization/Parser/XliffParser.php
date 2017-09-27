@@ -49,7 +49,6 @@ class XliffParser extends \TYPO3\CMS\Core\Localization\Parser\XliffParser
     {
         $this->sourcePath = $sourcePath;
         $this->languageKey = $languageKey;
-        $this->charset = $this->getCharset($languageKey, $charset);
         if ($this->languageKey !== 'default') {
             $this->sourcePath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName(\TYPO3\CMS\Core\Utility\GeneralUtility::llXmlAutoFileName($this->sourcePath, $this->languageKey));
             if (!@is_file($this->sourcePath)) {

@@ -4,9 +4,15 @@ module.tx_x4ebase {
 		storagePid = {$module.tx_x4ebase.persistence.storagePid}
 	}
 	view {
-		templateRootPath = {$module.tx_x4ebase.view.templateRootPath}
-		partialRootPath = {$module.tx_x4ebase.view.partialRootPath}
-		layoutRootPath = {$module.tx_x4ebase.view.layoutRootPath}
+		templateRootPaths {
+			0 = {$module.tx_x4ebase.view.templateRootPaths.0}
+		}
+		partialRootPaths {
+			0 = {$module.tx_x4ebase.view.partialRootPaths.0}
+		}
+		layoutRootPaths {
+			0 = {$module.tx_x4ebase.view.layoutRootPaths.0}
+		}
 	}
 
 	settings {

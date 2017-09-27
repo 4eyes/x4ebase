@@ -60,7 +60,7 @@ class ModelGeneratorControllerTest extends \X4e\X4ebase\Tests\Unit\Base\Controll
         ];
 
         global $TYPO3_DB;
-        $databaseConnection = $this->getMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, ['sql_query', 'sql_fetch_row', 'sql_free_result', 'sql_fetch_assoc']);
+        $databaseConnection = $this->createPartialMock(\TYPO3\CMS\Core\Database\DatabaseConnection::class, ['sql_query', 'sql_fetch_row', 'sql_free_result', 'sql_fetch_assoc']);
 
         $databaseConnection->expects($this->exactly(2))->method('sql_free_result');
         $databaseConnection->expects($this->at(0))->method('sql_query')->willReturn(true);

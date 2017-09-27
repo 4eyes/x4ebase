@@ -45,7 +45,7 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testInjectObjectManager()
     {
         $this->mockSubject('initializeConcreteSessionStorage');
-        $objectManager = $this->getMock(ObjectManager::class, [], [], '', false);
+        $objectManager = $this->getAccessibleMock(ObjectManager::class, [], [], '', false);
         $this->subject->expects($this->once())->method('initializeConcreteSessionStorage');
         $this->subject->injectObjectManager($objectManager);
         $this->assertSame($objectManager, $this->subject->_get('objectManager'));
@@ -54,10 +54,10 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testInitializeConcreteSessionStorage_InFeMode()
     {
         $this->mockSubject();
-        $environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, ['isEnvironmentInFrontendMode'], [], '', false);
+        $environmentService = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, ['isEnvironmentInFrontendMode'], [], '', false);
         $environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->willReturn(true);
 
-        $objectManager = $this->getMock(ObjectManager::class, ['get'], [], '', false);
+        $objectManager = $this->getAccessibleMock(ObjectManager::class, ['get'], [], '', false);
         $objectManager->expects($this->at(0))->method('get')->with('TYPO3\CMS\Extbase\Service\EnvironmentService')->willReturn($environmentService);
         $objectManager->expects($this->at(1))->method('get')->with('X4e\X4ebase\Session\FrontendSessionStorage');
 
@@ -69,11 +69,11 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testInitializeConcreteSessionStorage_InBeMode()
     {
         $this->mockSubject();
-        $environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, ['isEnvironmentInFrontendMode', 'isEnvironmentInBackendMode'], [], '', false);
+        $environmentService = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, ['isEnvironmentInFrontendMode', 'isEnvironmentInBackendMode'], [], '', false);
         $environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->willReturn(false);
         $environmentService->expects($this->once())->method('isEnvironmentInBackendMode')->willReturn(true);
 
-        $objectManager = $this->getMock(ObjectManager::class, ['get'], [], '', false);
+        $objectManager = $this->getAccessibleMock(ObjectManager::class, ['get'], [], '', false);
         $objectManager->expects($this->at(0))->method('get')->with('TYPO3\CMS\Extbase\Service\EnvironmentService')->willReturn($environmentService);
         $objectManager->expects($this->at(1))->method('get')->with('X4e\X4ebase\Session\BackendSessionStorage');
 
@@ -85,11 +85,11 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testInitializeConcreteSessionStorage_InUndefinedMode()
     {
         $this->mockSubject();
-        $environmentService = $this->getMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, ['isEnvironmentInFrontendMode', 'isEnvironmentInBackendMode'], [], '', false);
+        $environmentService = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Service\EnvironmentService::class, ['isEnvironmentInFrontendMode', 'isEnvironmentInBackendMode'], [], '', false);
         $environmentService->expects($this->once())->method('isEnvironmentInFrontendMode')->willReturn(false);
         $environmentService->expects($this->once())->method('isEnvironmentInBackendMode')->willReturn(false);
 
-        $objectManager = $this->getMock(ObjectManager::class, ['get'], [], '', false);
+        $objectManager = $this->getAccessibleMock(ObjectManager::class, ['get'], [], '', false);
         $objectManager->expects($this->at(0))->method('get')->with('TYPO3\CMS\Extbase\Service\EnvironmentService')->willReturn($environmentService);
         $objectManager->expects($this->at(1))->method('get')->with('X4e\X4ebase\Session\NullSessionStorage');
 
@@ -101,7 +101,7 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testGet()
     {
         $this->mockSubject();
-        $concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class, ['get']);
+        $concreteSessionStorage = $this->createPartialMock(\X4e\X4ebase\Session\BackendSessionStorage::class, ['get']);
         $concreteSessionStorage->expects($this->once())->method('get')->with('lorem', 'ipsum');
         $this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
@@ -111,7 +111,7 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testSet()
     {
         $this->mockSubject();
-        $concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class, ['set']);
+        $concreteSessionStorage = $this->createPartialMock(\X4e\X4ebase\Session\BackendSessionStorage::class, ['set']);
         $concreteSessionStorage->expects($this->once())->method('set')->with('lorem', 'ipsum', 'dolor');
         $this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
@@ -121,7 +121,7 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testHas()
     {
         $this->mockSubject();
-        $concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class, ['has']);
+        $concreteSessionStorage = $this->createPartialMock(\X4e\X4ebase\Session\BackendSessionStorage::class, ['has']);
         $concreteSessionStorage->expects($this->once())->method('has')->with('lorem', 'ipsum');
         $this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
@@ -131,7 +131,7 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testRemove()
     {
         $this->mockSubject();
-        $concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class, ['remove']);
+        $concreteSessionStorage = $this->createPartialMock(\X4e\X4ebase\Session\BackendSessionStorage::class, ['remove']);
         $concreteSessionStorage->expects($this->once())->method('remove')->with('lorem', 'ipsum');
         $this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
@@ -141,7 +141,7 @@ class SessionStorageTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
     public function testgetConcreteSessionStorage()
     {
         $this->mockSubject();
-        $concreteSessionStorage = $this->getMock(\X4e\X4ebase\Session\BackendSessionStorage::class);
+        $concreteSessionStorage = $this->getMockClass(\X4e\X4ebase\Session\BackendSessionStorage::class);
         $this->subject->_set('concreteSessionStorage', $concreteSessionStorage);
 
         $this->assertSame($concreteSessionStorage, $this->subject->getConcreteSessionStorage());

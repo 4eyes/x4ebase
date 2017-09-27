@@ -44,7 +44,7 @@ class CheckboxViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTest
     public function testInitializeArguments()
     {
         $this->mockSubject('registerUniversalTagAttributes', 'registerArgument', 'overrideArgument');
-        $this->checkIfRegisterArgumentsGotCalledNTimes(6);
+        $this->checkIfRegisterArgumentsGotCalledNTimes(10);
         $this->subject->initializeArguments();
     }
 
@@ -52,7 +52,7 @@ class CheckboxViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTest
     {
         $this->mockSubject('getName');
         $this->subject->expects($this->once())->method('getName')->willReturn('test[]');
-        $this->viewHelperVariableContainer = $this->getMock(\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class, ['exists', 'get', 'addOrUpdate'], [], '', false);
+        $this->viewHelperVariableContainer = $this->getAccessibleMock(\TYPO3\CMS\Fluid\Core\ViewHelper\ViewHelperVariableContainer::class, ['exists', 'get', 'addOrUpdate'], [], '', false);
         $this->viewHelperVariableContainer->expects($this->once())->method('exists')->willReturn(true);
         $this->viewHelperVariableContainer->expects($this->once())->method('get')->willReturn(['hello']);
         $this->viewHelperVariableContainer->expects($this->once())->method('addOrUpdate')->with('TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper', 'renderedHiddenFields', ['hello', 'test']);

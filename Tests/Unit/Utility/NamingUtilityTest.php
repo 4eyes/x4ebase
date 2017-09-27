@@ -68,7 +68,7 @@ class NamingUtilityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     protected function initCM()
     {
-        $configurationManagerMock = $this->getMock(
+        $configurationManagerMock = $this->getAccessibleMock(
             'TYPO3\CMS\Extbase\Configuration\ConfigurationManager', ['getConfiguration'], [], '', false
         );
 

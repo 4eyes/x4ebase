@@ -49,7 +49,7 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
         $parameterName = 'lorem';
         $parameterValue = [];
 
-        $query = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['logicalOr', 'like', 'equals'], [], '', false);
+        $query = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['logicalOr', 'like', 'equals'], [], '', false);
         $query->expects($this->never())->method('logicalOr');
         $query->expects($this->never())->method($filterMethod)->with($parameterName, $parameterValue);
 
@@ -76,7 +76,7 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
         ];
 
         foreach ($testCases as $testCase) {
-            $query = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['logicalOr', 'like', 'equals'], [], '', false);
+            $query = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['logicalOr', 'like', 'equals'], [], '', false);
             $query->expects($this->once())->method('logicalOr');
             $query->expects($this->once())->method($testCase['filterMethod'])->with($testCase['parameterName'], $testCase['parameterValue'][0]);
 
@@ -93,7 +93,7 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
         $searchableParameters = [];
         $searchString = 'test';
 
-        $query = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['logicalOr', 'like'], [], '', false);
+        $query = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['logicalOr', 'like'], [], '', false);
         $query->expects($this->never())->method('logicalOr');
         $query->expects($this->never())->method('like');
 
@@ -112,7 +112,7 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
         ];
         $searchString = 'test';
 
-        $query = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['logicalOr', 'like', 'equals'], [], '', false);
+        $query = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['logicalOr', 'like', 'equals'], [], '', false);
         $query->expects($this->once())->method('logicalOr');
         $query->expects($this->once())->method('like')->with('lorem', '%test%');
         $query->expects($this->once())->method('equals')->with('ipsum', '%test%');
@@ -128,7 +128,7 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
         $this->mockSubject('filterByParameter', 'searchByParameter');
 
         /** @var \X4e\X4ebase\Template\FilterTemplate|\PHPUnit_Framework_MockObject_MockObject $filterTemplate */
-        $filterTemplate = $this->getMock(\X4e\X4ebase\Template\FilterTemplate::class, ['getFilterArray', 'getFilterMethodForParameter', 'getSearchStrings', 'getSearchableParameters']);
+        $filterTemplate = $this->createPartialMock(\X4e\X4ebase\Template\FilterTemplate::class, ['getFilterArray', 'getFilterMethodForParameter', 'getSearchStrings', 'getSearchableParameters']);
         $filterTemplate->expects($this->once())->method('getFilterArray')->willReturn([]);
         $filterTemplate->expects($this->never())->method('getFilterMethodForParameter');
         $filterTemplate->expects($this->once())->method('getSearchStrings')->willReturn([]);
@@ -137,7 +137,7 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
         $this->subject->expects($this->never())->method('filterByParameter');
         $this->subject->expects($this->never())->method('searchByParameter');
 
-        $query = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['matching', 'logicalAnd'], [], '', false);
+        $query = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['matching', 'logicalAnd'], [], '', false);
         $query->expects($this->never())->method('matching');
         $query->expects($this->never())->method('logicalAnd');
 
@@ -164,7 +164,7 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
         ];
 
         /** @var \X4e\X4ebase\Template\FilterTemplate|\PHPUnit_Framework_MockObject_MockObject $filterTemplate */
-        $filterTemplate = $this->getMock(\X4e\X4ebase\Template\FilterTemplate::class, ['getFilterArray', 'getFilterMethodForParameter', 'getSearchStrings', 'getSearchableParameters']);
+        $filterTemplate = $this->createPartialMock(\X4e\X4ebase\Template\FilterTemplate::class, ['getFilterArray', 'getFilterMethodForParameter', 'getSearchStrings', 'getSearchableParameters']);
         $filterTemplate->expects($this->once())->method('getFilterArray')->willReturn($filterArray);
         $filterTemplate->expects($this->exactly(2))->method('getFilterMethodForParameter')->willReturn('equals');
         $filterTemplate->expects($this->once())->method('getSearchStrings')->willReturn($searchStrings);
@@ -178,7 +178,7 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
             1, 2, 2
         ];
 
-        $query = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['matching', 'logicalAnd'], [], '', false);
+        $query = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['matching', 'logicalAnd'], [], '', false);
         $query->expects($this->once())->method('matching')->willReturn($query);
         $query->expects($this->once())->method('logicalAnd')->with($constraints);
 
@@ -192,13 +192,13 @@ class AbstractFilterRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Reposito
     {
         $this->mockSubject('createQuery', 'createMatching');
 
-        $filterTemplate = $this->getMock(\X4e\X4ebase\Template\FilterTemplate::class, ['setSearchableParameters', 'setFilterMethods']);
+        $filterTemplate = $this->createPartialMock(\X4e\X4ebase\Template\FilterTemplate::class, ['setSearchableParameters', 'setFilterMethods']);
         $filterTemplate->expects($this->once())->method('setSearchableParameters');
         $filterTemplate->expects($this->once())->method('setFilterMethods');
 
-        $documents = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, [], [], '', false);
+        $documents = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, [], [], '', false);
 
-        $query = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['execute'], [], '', false);
+        $query = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Query::class, ['execute'], [], '', false);
         $query->expects($this->once())->method('execute')->willReturn($documents);
 
         $this->subject->expects($this->once())->method('createQuery');

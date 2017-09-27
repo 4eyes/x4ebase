@@ -55,7 +55,7 @@ class BackendLayoutViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelpe
     public function testRender_NoPage_ReturnsFalse()
     {
         global $TYPO3_DB;
-        $TYPO3_DB = $this->getMock(
+        $TYPO3_DB = $this->createPartialMock(
             \TYPO3\CMS\Core\Database\DatabaseConnection::class,
             ['exec_SELECTgetSingleRow']
         );
@@ -71,7 +71,7 @@ class BackendLayoutViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelpe
     public function testRender_PageBackendLayoutGTZ_ReturnsBackendLayout()
     {
         global $TYPO3_DB;
-        $TYPO3_DB = $this->getMock(
+        $TYPO3_DB = $this->createPartialMock(
             \TYPO3\CMS\Core\Database\DatabaseConnection::class,
             ['exec_SELECTgetSingleRow']
         );
@@ -91,7 +91,7 @@ class BackendLayoutViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelpe
     {
         global $TYPO3_DB;
         global $TSFE;
-        $TYPO3_DB = $this->getMock(
+        $TYPO3_DB = $this->createPartialMock(
             \TYPO3\CMS\Core\Database\DatabaseConnection::class,
             ['exec_SELECTgetSingleRow']
         );
@@ -101,7 +101,7 @@ class BackendLayoutViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelpe
         $TYPO3_DB->expects($this->once())->method('exec_SELECTgetSingleRow')->willReturn($page);
 
         $TSFE = new TSFE_object();
-        $TSFE->sys_page = $this->getMock(
+        $TSFE->sys_page = $this->createPartialMock(
             \TYPO3\CMS\Frontend\Page\PageRepository::class,
             ['getRootLine']
         );
@@ -124,7 +124,7 @@ class BackendLayoutViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelpe
     {
         global $TYPO3_DB;
         global $TSFE;
-        $TYPO3_DB = $this->getMock(
+        $TYPO3_DB = $this->createPartialMock(
             \TYPO3\CMS\Core\Database\DatabaseConnection::class,
             ['exec_SELECTgetSingleRow']
         );
@@ -134,7 +134,7 @@ class BackendLayoutViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelpe
         $TYPO3_DB->expects($this->once())->method('exec_SELECTgetSingleRow')->willReturn($page);
 
         $TSFE = new TSFE_object();
-        $TSFE->sys_page = $this->getMock(
+        $TSFE->sys_page = $this->createPartialMock(
             \TYPO3\CMS\Frontend\Page\PageRepository::class,
             ['getRootLine']
         );

@@ -42,11 +42,11 @@ class PageLanguageOverlayRepositoryTest extends \X4e\X4ebase\Tests\Unit\Base\Rep
     {
         $this->mockSubject('setDefaultQuerySettings');
 
-        $querySettings = $this->getMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, ['setRespectStoragePage', 'setRespectSysLanguage'], [], '', false);
+        $querySettings = $this->getAccessibleMock(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class, ['setRespectStoragePage', 'setRespectSysLanguage'], [], '', false);
         $querySettings->expects($this->once())->method('setRespectStoragePage');
         $querySettings->expects($this->once())->method('setRespectSysLanguage');
 
-        $objectManager = $this->getMock(ObjectManager::class, ['get'], [], '', false);
+        $objectManager = $this->getAccessibleMock(ObjectManager::class, ['get'], [], '', false);
         $objectManager->expects($this->once())->method('get')->with('X4e\X4ebase\XClasses\Persistence\Generic\Typo3QuerySettings')->willReturn($querySettings);
 
         $this->subject->expects($this->once())->method('setDefaultQuerySettings')->with($querySettings);

@@ -240,7 +240,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
      */
     protected function objectGetterSetterTest($parameterName, $class)
     {
-        $testVars = [$this->getMock($class, [], [], '', false)];
+        $testVars = [$this->getAccessibleMock($class, [], [], '', false)];
         foreach ($testVars as $testVar) {
             $this->genericGetterSetterTest($parameterName, $testVar);
         }
@@ -271,7 +271,7 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
      */
     protected function objectStorageGetterSetterTest($parameterName, $typeOfModel)
     {
-        $item = $this->getMock($typeOfModel, [], [], '', false);
+        $item = $this->getAccessibleMock($typeOfModel, [], [], '', false);
         $objectStorage = new ObjectStorage;
         $objectStorage->attach($item);
 
@@ -294,8 +294,8 @@ class ModelTestBase extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
      */
     protected function objectStorageAddRemoveTest($parameterName, $typeOfModel, $addRemoveAlias = null)
     {
-        $newItem = $this->getMock($typeOfModel, [], [], '', false);
-        $storage = $this->getMock('\TYPO3\CMS\Extbase\Persistence\ObjectStorage', ['attach', 'detach'], [], '', false);
+        $newItem = $this->getAccessibleMock($typeOfModel, [], [], '', false);
+        $storage = $this->getAccessibleMock('\TYPO3\CMS\Extbase\Persistence\ObjectStorage', ['attach', 'detach'], [], '', false);
         $storage->expects($this->atLeastOnce())->method('attach')->with($this->equalTo($newItem));
         $storage->expects($this->atLeastOnce())->method('detach')->with($this->equalTo($newItem));
         $this->genericSetter($parameterName, $storage);

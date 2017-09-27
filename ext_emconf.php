@@ -27,13 +27,13 @@ $EM_CONF[$_EXTKEY] = [
     'modify_tables' => '',
     'clearCacheOnLoad' => 0,
     'lockType' => '',
-	'version' => '8.1.4',
-	'constraints' => array(
-		'depends' => array(
-			'extbase' => '8.0',
-			'fluid' => '8.0',
-			'typo3' => '8.0',
-            'php' => '5.3.5-0.0.0'
+    'version' => '8.1.4',
+    'constraints' => [
+        'depends' => [
+            'extbase' => '8.0',
+            'fluid' => '8.0',
+            'typo3' => '8.0',
+            'php' => '7.0.0-7.1.999'
         ],
         'conflicts' => [
         ],
