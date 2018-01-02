@@ -44,7 +44,7 @@ class CheckboxViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTest
     public function testInitializeArguments()
     {
         $this->mockSubject('registerUniversalTagAttributes', 'registerArgument', 'overrideArgument');
-        $this->checkIfRegisterArgumentsGotCalledNTimes(6);
+        $this->checkIfRegisterArgumentsGotCalledNTimes(7);
         $this->subject->initializeArguments();
     }
 
@@ -56,7 +56,7 @@ class CheckboxViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelperTest
         $this->viewHelperVariableContainer->expects($this->once())->method('exists')->willReturn(true);
         $this->viewHelperVariableContainer->expects($this->once())->method('get')->willReturn(['hello']);
         $this->viewHelperVariableContainer->expects($this->once())->method('addOrUpdate')->with('TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper', 'renderedHiddenFields', ['hello', 'test']);
-        $this->subject->setArguments(['defaultHiddenValue'=>'default']);
+        $this->subject->setArguments(['defaultHiddenValue'=>'default', 'renderHiddenField' => true]);
         $this->subject->_set('viewHelperVariableContainer', $this->viewHelperVariableContainer);
 
         $this->assertEquals('<input type="hidden" name="test" value="default" />', $this->subject->_call('renderHiddenFieldForEmptyValue'));
