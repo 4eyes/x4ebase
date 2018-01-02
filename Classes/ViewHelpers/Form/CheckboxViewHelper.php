@@ -45,6 +45,7 @@ class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\CheckboxViewH
     {
         parent::initializeArguments();
         $this->registerArgument('defaultHiddenValue', 'string', 'Default value of hidden field, which defines the value of the checkbox when unchecked', false, '');
+        $this->registerArgument('renderHiddenField', 'string', 'Defines if a hidden field has to be rendered for this element', false, true);
     }
 
     /**
@@ -54,19 +55,21 @@ class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\CheckboxViewH
      */
     protected function renderHiddenFieldForEmptyValue()
     {
-        $hiddenFieldNames = [];
-        if ($this->viewHelperVariableContainer->exists('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields')) {
-            $hiddenFieldNames = $this->viewHelperVariableContainer->get('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields');
-        }
-        $fieldName = $this->getName();
-        if (substr($fieldName, -2) === '[]') {
-            $fieldName = substr($fieldName, 0, -2);
-        }
-        if (!in_array($fieldName, $hiddenFieldNames)) {
-            $hiddenFieldNames[] = $fieldName;
-            $this->viewHelperVariableContainer->addOrUpdate('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields', $hiddenFieldNames);
-            $defaultHiddenValue = isset($this->arguments['defaultHiddenValue']) ? $this->arguments['defaultHiddenValue'] : '';
-            return '<input type="hidden" name="' . htmlspecialchars($fieldName) . '" value="' . $defaultHiddenValue . '" />';
+        if ($this->arguments['renderHiddenField'] === true) {
+            $hiddenFieldNames = [];
+            if ($this->viewHelperVariableContainer->exists('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields')) {
+                $hiddenFieldNames = $this->viewHelperVariableContainer->get('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields');
+            }
+            $fieldName = $this->getName();
+            if (substr($fieldName, -2) === '[]') {
+                $fieldName = substr($fieldName, 0, -2);
+            }
+            if (!in_array($fieldName, $hiddenFieldNames)) {
+                $hiddenFieldNames[] = $fieldName;
+                $this->viewHelperVariableContainer->addOrUpdate('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'renderedHiddenFields', $hiddenFieldNames);
+                $defaultHiddenValue = isset($this->arguments['defaultHiddenValue']) ? $this->arguments['defaultHiddenValue'] : '';
+                return '<input type="hidden" name="' . htmlspecialchars($fieldName) . '" value="' . $defaultHiddenValue . '" />';
+            }
         }
         return '';
     }
