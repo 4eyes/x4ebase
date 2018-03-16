@@ -1,4 +1,5 @@
 <?php
+
 namespace X4e\X4ebase\ViewHelpers\Format;
 
 /*                                                                        *
@@ -17,17 +18,44 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  *
  * @api
  */
-class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * Runs the given string through trimExplode of GeneralUtility Class
-	 *
-	 * @param string $value
-	 * @param string $delimiter
-	 * @return string The escaped string
-	 * @api
-	 */
-	public function render($value, $delimiter=",") {
-		return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiter, $value);
-	}
+    /**
+     * Runs the given string through trimExplode of GeneralUtility Class
+     *
+     * @param string $value
+     * @param string $delimiter
+     * @param bool $removeEmptyValues
+     * @param int $limit
+     *
+     * @return array The explorer string
+     * @api
+     */
+    public function render($value, $delimiter = ',', $removeEmptyValues = false, $limit = 0)
+    {
+        $delimiter = $this->getDelimiter($delimiter);
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiter, $value, $removeEmptyValues, $limit);
+        return $value;
+    }
+
+    /**
+     * @param $glue
+     *
+     * @return mixed
+     */
+    protected function getDelimiter($glue)
+    {
+        list($type, $value) = explode(':', $glue);
+        switch ($type) {
+            case 'constant':
+                $delimiter = constant($value);
+                break;
+            default:
+                $delimiter = $type;
+                break;
+        }
+
+        return $delimiter;
+    }
 }
