@@ -53,6 +53,6 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
             'source' => $uid,
             'dontCheckPid' => 1
         ];
-        return $this->cObj->RECORDS($conf);
+        return $this->cObj->cObjGetSingle('RECORDS', $conf);
     }
 }
