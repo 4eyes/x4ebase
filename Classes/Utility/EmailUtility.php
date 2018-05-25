@@ -190,8 +190,8 @@ class EmailUtility
      * @param string $subject subject of the email
      * @param string $templateName template name (UpperCamelCase)
      * @param string $templateRootPath
-     * @param string $layoutRootPath
-     * @param string $partialRootPath
+     * @param array $layoutRootPaths
+     * @param array $partialRootPaths
      * @param array $variables variables to be passed to the Fluid view
      * @param string $extensionName needed for f:translate
      * @param string $templateFolder
@@ -201,7 +201,7 @@ class EmailUtility
      *
      * @return TYPO3\CMS\Core\Mail\MailMessage
      */
-    protected static function createMailMessage(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = [], $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = [], $replyTo = [])
+    protected static function createMailMessage(array $recipient, array $sender, $subject, $templateName, $templateRootPath, array $layoutRootPaths, array $partialRootPaths, $variables = [], $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = [], $replyTo = [])
     {
         $objectManager = self::getObjectManagerInstance();
 
@@ -211,8 +211,8 @@ class EmailUtility
             $emailView = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 
         $templatePathAndFilename = $templateRootPath . $templateFolder . '/' . $templateName . '.html';
-        $emailView->setLayoutRootPath($layoutRootPath);
-        $emailView->setPartialRootPath($partialRootPath);
+        $emailView->setLayoutRootPaths($layoutRootPaths);
+        $emailView->setPartialRootPaths($partialRootPaths);
         $emailView->setTemplatePathAndFilename($templatePathAndFilename);
         $emailView->assignMultiple($variables);
         $emailView->getRequest()->setControllerExtensionName($extensionName);
