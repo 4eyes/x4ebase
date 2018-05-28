@@ -3,8 +3,32 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-$TCA['tx_x4ebase_domain_model_emaillog'] = [
-    'ctrl' => $TCA['tx_x4ebase_domain_model_emaillog']['ctrl'],
+return [
+    'ctrl' => [
+        'title'    => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog',
+        'label' => 'recipient',
+        'label_alt' => 'tstamp',
+        'label_alt_force' => 1,
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'cruser_id' => 'cruser_id',
+        'dividers2tabs' => true,
+
+        'versioningWS' => 2,
+        'versioning_followPages' => true,
+        'origUid' => 't3_origuid',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'delete' => 'deleted',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+            'starttime' => 'starttime',
+            'endtime' => 'endtime',
+        ],
+        'searchFields' => 'sender,recipient,subject,message,is_sent,error,',
+        'iconfile' => 'EXT:x4ebase/Resources/Public/Icons/tx_x4ebase_domain_model_emaillog.gif'
+    ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sender, recipient, subject, message, is_sent, error',
     ],
