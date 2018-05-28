@@ -76,9 +76,6 @@ if (TYPO3_MODE === 'BE') {
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_x4ebase_domain_model_emaillog', 'EXT:x4ebase/Resources/Private/Language/locallang_csh_tx_x4ebase_domain_model_emaillog.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_x4ebase_domain_model_emaillog');
-$TCA['tx_x4ebase_domain_model_emaillog'] = [
-
-];
 
 /**
  * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
