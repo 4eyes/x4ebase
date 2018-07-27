@@ -147,9 +147,10 @@ class FalUtility
      * @param string $fieldName
      * @param int $pid
      * @param string $tableLocal
+     * @param int $sortingForeign
      * @return bool
      */
-    public static function addFileReference($uidLocal, $uidForeign, $tableNames, $fieldName, $pid, $tableLocal = 'sys_file')
+    public static function addFileReference($uidLocal, $uidForeign, $tableNames, $fieldName, $pid, $tableLocal = 'sys_file', $sortingForeign = 0)
     {
         /**
          * Apparently there is no better way to do this right now.
@@ -167,7 +168,8 @@ class FalUtility
             'pid' => $pid,
             'table_local' => $tableLocal,
             'crdate' => $GLOBALS['EXEC_TIME'],
-            'tstamp' => $GLOBALS['EXEC_TIME']
+            'tstamp' => $GLOBALS['EXEC_TIME'],
+            'sorting_foreign' => (int)$sortingForeign
         ];
         $GLOBALS['TYPO3_DB']->exec_INSERTquery('sys_file_reference', $fileReferenceFields);
 
