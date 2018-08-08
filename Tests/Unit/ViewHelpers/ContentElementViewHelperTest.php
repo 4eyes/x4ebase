@@ -48,9 +48,9 @@ class ContentElementViewHelperTest extends \X4e\X4ebase\Tests\Unit\Base\ViewHelp
     {
         $contentObjectRenderer = $this->createPartialMock(
             \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class,
-            ['RECORDS']
+            ['cObjGetSingle']
         );
-        $contentObjectRenderer->expects($this->once())->method('RECORDS');
+        $contentObjectRenderer->expects($this->once())->method('cObjGetSingle');
         $this->subject->_set('cObj', $contentObjectRenderer);
         $this->subject->render(1);
     }
