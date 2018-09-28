@@ -25,7 +25,7 @@ namespace X4e\X4ebase\ContentObject\Exception;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Lemming\SentryClient\Client;
+use Networkteam\SentryClient\Client;
 use TYPO3\CMS\Frontend\ContentObject\Exception\ProductionExceptionHandler;
 
 /**
