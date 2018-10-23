@@ -54,23 +54,24 @@ class EmailUtility
      * @param string $subject subject of the email
      * @param string $templateName template name (UpperCamelCase)
      * @param string $templateRootPath
-     * @param string $layoutRootPath
-     * @param string $partialRootPath
+     * @param array $layoutRootPath
+     * @param array $partialRootPath
      * @param array $variables variables to be passed to the Fluid view
      * @param string $extensionName needed for f:translate
      * @param string $templateFolder
      * @param bool $isHtml true for html emails
      * @param array $attachments filepaths to attach to email
      * @param array $replyTo
+     * @param int $storagePid
      * @param bool $queued put email in queue rather than sent right away
      *
      * @return bool TRUE if send or queued
      */
     public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath,
-                                                $layoutRootPath, $partialRootPath,
+	                                            array $layoutRootPath, array $partialRootPath,
                                                 $variables = [], $extensionName = 'x4ebase',
                                                 $templateFolder = 'Email', $isHtml = true, $attachments = [],
-                                                $replyTo = [], $queued = false)
+                                                $replyTo = [], $storagePid = 0, $queued = false)
     {
         $success = false;
         $emailBody = '';
@@ -80,15 +81,15 @@ class EmailUtility
 
                 // queue can't handle mails with attachments
             if ($queued && empty($attachments)) {
-                self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, null);
+                self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $storagePid, $queued, $success, null);
                 $success = true;
             } else {
                 $message->send();
                 $success = $message->isSent();
-                self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, null);
+                self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $storagePid, $queued, $success, null);
             }
         } catch (\Exception $e) {
-            self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, $e->getMessage());
+            self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $storagePid, $queued, $success, $e->getMessage());
         }
         return $success;
     }
@@ -155,7 +156,7 @@ class EmailUtility
         return $isSent;
     }
 
-    public static function logEmail($recipient, $sender, $subject, $message, $isHtml, $replyTo, $queued, $isSent, $error = null)
+    public static function logEmail($recipient, $sender, $subject, $message, $isHtml, $replyTo, $storagePid = 0, $queued, $isSent, $error = null)
     {
         $objectManager = self::getObjectManagerInstance();
         $persistenceManager = self::getPersistenceManagerInstance();
@@ -173,7 +174,10 @@ class EmailUtility
                      ->setQueued($queued)
                      ->setIsHtml($isHtml)
                      ->setReplyTo($replyTo);
-                     //->setPid;
+
+            if ($storagePid !== 0) {
+	            $emailLog->setPid($storagePid);
+            }
 
             $emailLogRepository->add($emailLog);
             $persistenceManager->persistAll();

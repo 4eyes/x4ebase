@@ -107,7 +107,7 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
         $this->subject->_setStatic('objectManager', $objectManager);
         $this->subject->_setStatic('persistenceManager', $persistenceManager);
 
-        $this->subject->logEmail(['test@example.org'], [''], '', '', true, ['test@example.org'], false, true);
+        $this->subject->logEmail(['test@example.org'], [''], '', '', true, ['test@example.org'], 0, false, true);
     }
 
     /**
@@ -131,7 +131,7 @@ class EmailUtilityTest extends \X4e\X4ebase\Tests\Unit\Base\TestCaseBase
         $this->subject->_setStatic('objectManager', $objectManager);
         $this->subject->_setStatic('persistenceManager', $persistenceManager);
 
-        $this->subject->logEmail(['test@example.org'], [''], '', '', true, ['test@example.org'], false, true);
+        $this->subject->logEmail(['test@example.org'], [''], '', '', true, ['test@example.org'], 0, false, true);
     }
 
     /**
