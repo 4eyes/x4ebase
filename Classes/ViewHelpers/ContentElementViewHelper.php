@@ -40,17 +40,20 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
      */
     protected $cObj;
 
+    public function initializeArguments()
+    {
+        $this->registerArgument('uid', 'int', 'The uid of the content element to render', true);
+    }
+
+
     /**
-     * Parse a content element
-     *
-     * @param	int			UID of any content element
-     * @return 	string		Parsed Content Element
+     * @return string
      */
-    public function render($uid)
+    public function render()
     {
         $conf = [ // config
             'tables' => 'tt_content',
-            'source' => $uid,
+            'source' => $this->arguments['uid'],
             'dontCheckPid' => 1
         ];
         return $this->cObj->cObjGetSingle('RECORDS', $conf);
