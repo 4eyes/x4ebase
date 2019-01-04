@@ -25,33 +25,37 @@ namespace X4e\X4ebase\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
-
-	/**
-	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-	 * @inject
-	 */
-	protected $configurationManager;
-
-	/**
-	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-	 * @inject
-	 */
-	protected $cObj;
+class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
     /**
-     * Parse a content element
-     *
-	 * @param	int			UID of any content element
-     * @return 	string		Parsed Content Element
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @inject
      */
-    public function render($uid) {
+    protected $configurationManager;
 
-		$conf = array( // config
-			'tables' => 'tt_content',
-			'source' => $uid,
-			'dontCheckPid' => 1
-		);
-		return $this->cObj->RECORDS($conf);
+    /**
+     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @inject
+     */
+    protected $cObj;
+
+    public function initializeArguments()
+    {
+        $this->registerArgument('uid', 'int', 'The uid of the content element to render', true);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function render()
+    {
+        $conf = [ // config
+            'tables' => 'tt_content',
+            'source' => $this->arguments['uid'],
+            'dontCheckPid' => 1
+        ];
+        return $this->cObj->cObjGetSingle('RECORDS', $conf);
     }
 }
