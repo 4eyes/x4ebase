@@ -63,40 +63,42 @@ class EmailUtility
      * @param array $attachments filepaths to attach to email
      * @param array $replyTo
      * @param bool $queued put email in queue rather than sent right away
+     * @param array $bcc
      *
      * @return bool TRUE if send or queued
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception
      */
     public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, $templateRootPath,
-                                                $layoutRootPath, $partialRootPath,
-                                                $variables = [], $extensionName = 'x4ebase',
-                                                $templateFolder = 'Email', $isHtml = true, $attachments = [],
-                                                $replyTo = [], $queued = false)
+        $layoutRootPath, $partialRootPath,
+        $variables = [], $extensionName = 'x4ebase',
+        $templateFolder = 'Email', $isHtml = true, $attachments = [],
+        $replyTo = [], $queued = false, $bcc = [])
     {
         $success = false;
         $emailBody = '';
         try {
-            $message = self::createMailMessage($recipient, $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables, $extensionName, $templateFolder, $isHtml, $attachments, $replyTo);
+            $message = self::createMailMessage($recipient, $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables, $extensionName, $templateFolder, $isHtml, $attachments, $replyTo, $bcc);
             $emailBody = $message->getBody();
 
-                // queue can't handle mails with attachments
+            // queue can't handle mails with attachments
             if ($queued && empty($attachments)) {
-                self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, null);
+                self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, null, $bcc);
                 $success = true;
             } else {
                 $message->send();
                 $success = $message->isSent();
-                self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, null);
+                self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, null, $bcc);
             }
         } catch (\Exception $e) {
             // dont queue logged email with error. otherwise the mail is sent with empty body
             $queued = false;
 
-            self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, $e->getMessage());
+            self::logEmail($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $queued, $success, $e->getMessage(), $bcc);
         }
         return $success;
     }
 
-            /**
+    /**
      * Sends a mail from the queue
      *
      * @param \X4e\X4ebase\Domain\Model\EmailLog $emailLog
@@ -158,7 +160,7 @@ class EmailUtility
         return $isSent;
     }
 
-    public static function logEmail($recipient, $sender, $subject, $message, $isHtml, $replyTo, $queued, $isSent, $error = null)
+    public static function logEmail($recipient, $sender, $subject, $message, $isHtml, $replyTo, $queued, $isSent, $error = null, $bcc = [])
     {
         $objectManager = self::getObjectManagerInstance();
         $persistenceManager = self::getPersistenceManagerInstance();
@@ -168,15 +170,16 @@ class EmailUtility
         if ($emailLogRepository) {
             $emailLog = $objectManager->get('X4e\\X4ebase\\Domain\\Model\\EmailLog');
             $emailLog->setRecipient(serialize($recipient))
-                     ->setSender(serialize($sender))
-                     ->setSubject($subject)
-                     ->setMessage($message)
-                     ->setIsSent($isSent)
-                     ->setError($error)
-                     ->setQueued($queued)
-                     ->setIsHtml($isHtml)
-                     ->setReplyTo($replyTo);
-                     //->setPid;
+                ->setSender(serialize($sender))
+                ->setSubject($subject)
+                ->setMessage($message)
+                ->setIsSent($isSent)
+                ->setError($error)
+                ->setQueued($queued)
+                ->setIsHtml($isHtml)
+                ->setReplyTo($replyTo)
+                ->setBcc(serialize($bcc));
+            //->setPid;
 
             $emailLogRepository->add($emailLog);
             $persistenceManager->persistAll();
@@ -201,17 +204,19 @@ class EmailUtility
      * @param bool $isHtml true for html emails
      * @param array $attachments filepaths to attach to email
      * @param array $replyTo
+     * @param array $bcc
      *
      * @return TYPO3\CMS\Core\Mail\MailMessage
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      */
-    protected static function createMailMessage(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = [], $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = [], $replyTo = [])
+    protected static function createMailMessage(array $recipient, array $sender, $subject, $templateName, $templateRootPath, $layoutRootPath, $partialRootPath, $variables = [], $extensionName = 'x4ebase', $templateFolder = 'Email', $isHtml = true, $attachments = [], $replyTo = [], $bcc = [])
     {
         $objectManager = self::getObjectManagerInstance();
 
         /**
-             * @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView
-             */
-            $emailView = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+         * @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView
+         */
+        $emailView = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 
         $templatePathAndFilename = $templateRootPath . $templateFolder . '/' . $templateName . '.html';
         $emailView->setLayoutRootPath($layoutRootPath);
@@ -221,7 +226,7 @@ class EmailUtility
         $emailView->getRequest()->setControllerExtensionName($extensionName);
         $emailBody = $emailView->render();
 
-        $message = self::createBasicMailMessage($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo);
+        $message = self::createBasicMailMessage($recipient, $sender, $subject, $emailBody, $isHtml, $replyTo, $bcc);
 
         // Add attachments
         if (count($attachments)) {
@@ -233,7 +238,7 @@ class EmailUtility
         return $message;
     }
 
-            /**
+    /**
      * Creates a basic MailMessage without attachments
      *
      * @param array $recipient recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
@@ -242,28 +247,32 @@ class EmailUtility
      * @param string $emailBody
      * @param bool|true $isHtml true for html emails
      * @param array $replyTo
+     * @param string $bcc
      *
      * @return \TYPO3\CMS\Core\Mail\MailMessage
      */
-    protected static function createBasicMailMessage(array $recipient, array $sender, $subject, $emailBody, $isHtml = true, $replyTo = [])
+    protected static function createBasicMailMessage(array $recipient, array $sender, $subject, $emailBody, $isHtml = true, $replyTo = [], $bcc = '')
     {
         $objectManager = self::getObjectManagerInstance();
 
         /**
-             * @var $message \TYPO3\CMS\Core\Mail\MailMessage
-             */
-            $message = $objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+         * @var $message \TYPO3\CMS\Core\Mail\MailMessage
+         */
+        $message = $objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($recipient)
-                    ->setFrom($sender)
-                    ->setReplyTo($replyTo)
-                    ->setSubject($subject);
+            ->setFrom($sender)
+            ->setReplyTo($replyTo)
+            ->setSubject($subject);
+        if ($bcc) {
+            $message->setBcc($bcc);
+        }
 
         if ($isHtml) {
             // HTML Email
-                $message->setBody($emailBody, 'text/html');
+            $message->setBody($emailBody, 'text/html');
         } else {
             // Plain text Email
-                $message->setBody($emailBody, 'text/plain');
+            $message->setBody($emailBody, 'text/plain');
         }
 
         return $message;

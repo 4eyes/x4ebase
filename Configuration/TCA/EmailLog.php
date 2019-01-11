@@ -6,10 +6,10 @@ if (!defined('TYPO3_MODE')) {
 $TCA['tx_x4ebase_domain_model_emaillog'] = [
     'ctrl' => $TCA['tx_x4ebase_domain_model_emaillog']['ctrl'],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sender, recipient, subject, message, is_sent, error',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sender, recipient, bcc, subject, message, is_sent, error',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, sender, recipient, subject, message, is_sent, error,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, sender, recipient, bcc, subject, message, is_sent, error,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -105,6 +105,15 @@ $TCA['tx_x4ebase_domain_model_emaillog'] = [
         'recipient' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog.recipient',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
+        'bcc' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog.bcc',
             'config' => [
                 'type' => 'input',
                 'size' => 30,

@@ -13,7 +13,10 @@
 				<source>Recipient</source>
 			</trans-unit>
 			<trans-unit id="tx_x4ebase_domain_model_emaillog.replyTo">
-				<source>Recipient</source>
+				<source>Reply to</source>
+			</trans-unit>
+			<trans-unit id="tx_x4ebase_domain_model_emaillog.bcc">
+				<source>BCC</source>
 			</trans-unit>
 			<trans-unit id="tx_x4ebase_domain_model_emaillog.subject">
 				<source>Subject</source>

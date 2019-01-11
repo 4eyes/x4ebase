@@ -31,6 +31,7 @@ CREATE TABLE tx_x4ebase_domain_model_emaillog (
 	recipient varchar(255) DEFAULT '' NOT NULL,
 	subject varchar(255) DEFAULT '' NOT NULL,
 	replyTo varchar(255) DEFAULT '' NOT NULL,
+	bcc varchar(255) DEFAULT '' NOT NULL,
 	message text,
 	is_sent tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	is_html tinyint(1) unsigned DEFAULT '0' NOT NULL,

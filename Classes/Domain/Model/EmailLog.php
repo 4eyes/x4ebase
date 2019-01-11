@@ -98,6 +98,13 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $error;
 
     /**
+     * bcc
+     *
+     * @var string
+     */
+    protected $bcc;
+
+    /**
      * Returns the sender
      *
      * @return string
@@ -303,5 +310,21 @@ class EmailLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->error = $error;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBcc()
+    {
+        return $this->bcc;
+    }
+
+    /**
+     * @param string $bcc
+     */
+    public function setBcc($bcc)
+    {
+        $this->bcc = $bcc;
     }
 }
