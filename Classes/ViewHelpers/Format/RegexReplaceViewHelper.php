@@ -32,24 +32,54 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  */
 class RegexReplaceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    public function initializeArguments()
+    {
+
+        $this->registerArgument(
+            'pattern',
+            'mixed',
+            'The pattern to search for. It can be either a string or an array with strings.',
+            true,
+            0);
+        $this->registerArgument(
+            'replacement',
+            'mixed',
+            'The string or an array with strings to replace.',
+            true,
+            0);
+        $this->registerArgument(
+            'limit',
+            'mixed',
+            'The maximum possible replacements for each pattern in each subject string. Defaults to -1 (no limit).',
+            false,
+            -1);
+        $this->registerArgument(
+            'subject',
+            'mixed',
+            'The string to format',
+            false,
+            null);
+
+    }
 
     /**
      * Searches for matches to pattern and replaces them with replacement.
      *
-     * @param mixed $pattern The pattern to search for. It can be either a string or an array with strings.
-     * @param mixed $replacement The string or an array with strings to replace.
-     * @param int $limit The maximum possible replacements for each pattern in each subject string. Defaults to -1 (no limit).
-     * @param string $subject The string to format
      * @return string The processed value
      * @see http://www.php.net/manual/en/function.preg-replace.php
      */
-    public function render($pattern, $replacement = '', $limit = -1, $subject = null)
+    public function render()
     {
-        if ($subject === null) {
-            $subject = $this->renderChildren();
+        if ($this->arguments['subject'] === null) {
+            $this->arguments['subject']  = $this->renderChildren();
         }
 
-        $out = preg_replace($pattern, $replacement, $subject, $limit);
+        $out = preg_replace(
+            $this->arguments['pattern'],
+            $this->arguments['replacement'],
+            $this->arguments['subject'],
+            $this->arguments['limit']
+        );
         return $out;
     }
 }
