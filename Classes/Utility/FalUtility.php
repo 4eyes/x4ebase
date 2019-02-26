@@ -148,7 +148,7 @@ class FalUtility
      * @param int $pid
      * @param string $tableLocal
      * @param int $sortingForeign
-     * @return bool
+     * @return int Uid of the new file reference
      */
     public static function addFileReference($uidLocal, $uidForeign, $tableNames, $fieldName, $pid, $tableLocal = 'sys_file', $sortingForeign = 0)
     {
@@ -173,11 +173,15 @@ class FalUtility
         ];
         $GLOBALS['TYPO3_DB']->exec_INSERTquery('sys_file_reference', $fileReferenceFields);
 
+        $sysFileReferenceUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+
         // Update ref count on object
         $res = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow($fieldName, $tableNames, 'uid = ' . $uidForeign);
         $fileRef = intval($res[$fieldName]);
         $fileRef++;
         $GLOBALS['TYPO3_DB']->exec_UPDATEquery($tableNames, 'uid = ' . $uidForeign, [$fieldName => $fileRef]);
+
+        return $sysFileReferenceUid;
     }
 
     public static function removeFileReference($uid)
