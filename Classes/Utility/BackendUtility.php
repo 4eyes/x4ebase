@@ -111,7 +111,7 @@ class BackendUtility
                 // TODO: refactor as compatibility layer is removed with 6.2
                 //require_once(PATH_tslib . 'class.tslib_content.php');
 
-                \TYPO3\CMS\Frontend\Utility\EidUtility::connectDB(); //Connect to database
+                \TYPO3\CMS\Frontend\Utility\EidUtility::initTCA();
                 \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser(); //Initializes FeUser
 
                 /* @var $GLOBALS['TT'] \TYPO3\CMS\Core\TimeTracker\TimeTracker */
@@ -119,10 +119,8 @@ class BackendUtility
                 $GLOBALS['TT']->start();
 
                 $GLOBALS['TSFE'] = new \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController($TYPO3_CONF_VARS, $pid, 0, true);
-                $GLOBALS['TSFE']->connectToDB();
                 $GLOBALS['TSFE']->initFEuser();
                 $GLOBALS['TSFE']->determineId();
-                $GLOBALS['TSFE']->getCompressedTCarray();
                 $GLOBALS['TSFE']->newCObj();
                 $GLOBALS['TSFE']->renderCharset = 'utf-8';
                 self::initTypoScript();
