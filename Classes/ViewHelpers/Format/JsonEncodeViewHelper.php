@@ -31,6 +31,12 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  */
 class JsonEncodeViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Format\AbstractEncodingViewHelper implements \TYPO3\CMS\Core\SingletonInterface
 {
+    /**
+     * The output must not be escaped.
+     *
+     * @var bool
+     */
+    protected $escapeOutput = false;
 
     /**
      * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
