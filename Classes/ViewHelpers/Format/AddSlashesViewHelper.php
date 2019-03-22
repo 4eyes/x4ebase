@@ -19,6 +19,12 @@ namespace X4e\X4ebase\ViewHelpers\Format;
  */
 class AddSlashesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * The output must not be escaped.
+     *
+     * @var bool
+     */
+    protected $escapeOutput = false;
 
     /**
      * Runs the given string through php-function 'addslashes'
