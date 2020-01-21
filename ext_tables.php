@@ -45,32 +45,6 @@ if (TYPO3_MODE === 'BE') {
     );
 }
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
-    'pages',
-     [
-        'crdate' =>  [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:pages.tx_x4ebase_crdate',
-            'config' =>  [
-                'type' => 'none',
-                'format' => 'date',
-                'eval' => 'date',
-
-            ]
-        ],
-        'tstamp' =>  [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:pages.tx_x4ebase_crdate',
-            'config' =>  [
-                'type' => 'none',
-                'format' => 'date',
-                'eval' => 'date',
-
-            ]
-        ]
-    ]
-);
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Main', '4eyes Base');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/FilterAjax', '4eyes Base - Ajax Filters');
 
