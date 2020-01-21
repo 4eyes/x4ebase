@@ -14,9 +14,9 @@ $EM_CONF[$_EXTKEY] = [
     'title' => '4eyes Base',
     'description' => 'Basic extbase and fluid functionality, models and viewhelpers',
     'category' => 'misc',
-    'author' => 'Alessandro Bellafronte, Christoph Dörfel, Michel Georgy',
-    'author_email' => 'alessandro@4eyes.ch, christoph@4eyes.ch, michel@4eyes.ch',
-    'author_company' => '4eyes GmbH, 4eyes GmbH, 4eyes GmbH',
+    'author' => 'Alessandro Bellafronte, Michel Georgy',
+    'author_email' => 'alessandro@4eyes.ch, michel@4eyes.ch',
+    'author_company' => '4eyes GmbH',
     'shy' => '',
     'priority' => '',
     'module' => '',
@@ -27,11 +27,11 @@ $EM_CONF[$_EXTKEY] = [
     'modify_tables' => '',
     'clearCacheOnLoad' => 0,
     'lockType' => '',
-    'version' => '9.0.8',
+    'version' => '9.0.9',
     'constraints' => [
         'depends' => [
             'typo3' => '8.7.0-9.5.99',
-            'php' => '7.0.0-7.2.99'
+            'php' => '7.0.0-7.3.99'
         ],
         'conflicts' => [
         ],
