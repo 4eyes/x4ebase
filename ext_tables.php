@@ -45,12 +45,6 @@ if (TYPO3_MODE === 'BE') {
     );
 }
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Main', '4eyes Base');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/FilterAjax', '4eyes Base - Ajax Filters');
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_x4ebase_domain_model_emaillog', 'EXT:x4ebase/Resources/Private/Language/locallang_csh_tx_x4ebase_domain_model_emaillog.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_x4ebase_domain_model_emaillog');
-
 /**
  * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
  * [begin]
@@ -85,12 +79,3 @@ if (TYPO3_MODE === 'BE' && is_array($extConf) && $extConf['contextSkin.']['be.']
         ]
     ];
 }
-/**
- * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
- * [end]
- */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    $_EXTKEY,
-    'ContentExceptionTest',
-    'Content exception test'
-);

@@ -23,6 +23,12 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-//Removes the "[Translate to:]" - string for tt_content localizations
-//$TCA['tt_content']['columns']['header']['l10n_mode'] = '';
-//$TCA['tt_content']['columns']['bodytext']['l10n_mode'] = '';
+/**
+ * Include custom backend skin depending on current ApplicationContext (Can be enabled/Disabled in Extension Manager)
+ * [end]
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'x4ebase',
+    'ContentExceptionTest',
+    'Content exception test'
+);
