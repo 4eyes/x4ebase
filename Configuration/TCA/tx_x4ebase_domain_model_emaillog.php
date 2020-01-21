@@ -5,7 +5,7 @@ if (!defined('TYPO3_MODE')) {
 
 return [
     'ctrl' => [
-        'title'    => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog',
+        'title' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog',
         'label' => 'recipient',
         'label_alt' => 'tstamp',
         'label_alt_force' => 1,
@@ -13,9 +13,7 @@ return [
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
-
-        'versioningWS' => 2,
-        'versioning_followPages' => true,
+        'versioningWS' => true,
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -30,10 +28,10 @@ return [
         'iconfile' => 'EXT:x4ebase/Resources/Public/Icons/tx_x4ebase_domain_model_emaillog.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sender, recipient, subject, message, is_sent, error',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sender, recipient, bcc, subject, message, is_sent, error',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, sender, recipient, subject, message, is_sent, error,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sender, recipient, bcc, subject, message, is_sent, error,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -44,6 +42,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items' => [
@@ -58,6 +57,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
@@ -87,13 +87,12 @@ return [
         ],
         'starttime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
                 'size' => 13,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
@@ -103,13 +102,12 @@ return [
         ],
         'endtime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
                 'size' => 13,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
@@ -129,6 +127,15 @@ return [
         'recipient' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog.recipient',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
+        'bcc' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:tx_x4ebase_domain_model_emaillog.bcc',
             'config' => [
                 'type' => 'input',
                 'size' => 30,

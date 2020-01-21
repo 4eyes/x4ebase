@@ -17,14 +17,18 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBas
     public function initializeArguments()
     {
         $this->registerUniversalTagAttributes();
+
+        $this->registerTagAttribute('parameter', 'string', 'Specifies the typolink parameter');
     }
 
     /**
-     * @param string $parameter The typolink parameter to be turned into a link.
+     *
      * @return string Rendered email link
      */
-    public function render($parameter)
+    public function render()
     {
+        $parameter = $this->arguments['parameter'];
+
         if (TYPO3_MODE === 'FE') {
             $cObj = $GLOBALS['TSFE']->cObj;
         } else {

@@ -7,6 +7,7 @@ $tempColumns = [
         'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:pages.redirect_http_status',
         'config' => [
             'type' => 'select',
+            'renderType' => 'selectSingle',
             'items' => [
                 [
                     \TYPO3\CMS\Core\Utility\HttpUtility::HTTP_STATUS_301,

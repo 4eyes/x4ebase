@@ -21,15 +21,18 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBas
         $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
         $this->registerTagAttribute('rev', 'string', 'Specifies the relationship between the linked document and the current document');
         $this->registerTagAttribute('target', 'string', 'Specifies where to open the linked document');
+        $this->registerTagAttribute('parameter', 'string', 'Specifies the typolink parameter');
+        $this->registerTagAttribute('keepContent', 'string', 'render children when link is not valid');
     }
 
     /**
-     * @param string $parameter The typolink parameter to be turned into a link.
-     * @param bool $keepContent Set TRUE to render the tag content even if no typolink parameter was given or the link generation failed.
      * @return string Rendered email link
      */
-    public function render($parameter, $keepContent = false)
+    public function render()
     {
+        $parameter = $this->arguments['parameter'];
+        $keepContent = $this->arguments['keepContent'];
+
         if (TYPO3_MODE === 'FE') {
             $cObj = $GLOBALS['TSFE']->cObj;
         } else {
