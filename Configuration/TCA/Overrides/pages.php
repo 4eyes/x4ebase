@@ -29,6 +29,26 @@ $tempColumns = [
             'default' => 307
         ]
     ],
+    'crdate' =>  [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:pages.tx_x4ebase_crdate',
+        'config' =>  [
+            'type' => 'none',
+            'format' => 'date',
+            'eval' => 'date',
+
+        ]
+    ],
+    'tstamp' =>  [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:x4ebase/Resources/Private/Language/locallang_db.xlf:pages.tx_x4ebase_crdate',
+        'config' =>  [
+            'type' => 'none',
+            'format' => 'date',
+            'eval' => 'date',
+
+        ]
+    ]
 ];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', $tempColumns);
