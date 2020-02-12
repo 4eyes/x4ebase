@@ -1,6 +1,10 @@
 <?php
 namespace X4e\X4ebase\Utility;
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Resource\StorageRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -68,7 +72,13 @@ class FalUtility
 
                 if ($fileObject) {
                     // File is saved, now add the reference to the domain object
-                    $status = self::addFileReference($fileObject->getUid(), $foreignUid, $foreignTable, $fieldName, $foreignPid);
+                    $status = self::addFileReference(
+                        $fileObject->getUid(),
+                        $foreignUid,
+                        $foreignTable,
+                        $fieldName,
+                        $foreignPid
+                    );
                 }
             }
         }
@@ -84,7 +94,7 @@ class FalUtility
      */
     public static function getStorage($uid = 1)
     {
-        $storageRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\StorageRepository');
+        $storageRepository = GeneralUtility::makeInstance(StorageRepository::class);
         return $storageRepository->findByUid($uid);
     }
 
@@ -171,15 +181,37 @@ class FalUtility
             'tstamp' => $GLOBALS['EXEC_TIME'],
             'sorting_foreign' => (int)$sortingForeign
         ];
-        $GLOBALS['TYPO3_DB']->exec_INSERTquery('sys_file_reference', $fileReferenceFields);
 
-        $sysFileReferenceUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+
+        $connection = $connectionPool->getConnectionForTable('sys_file_reference');
+        $connection->insert(
+            'sys_file_reference',
+            $fileReferenceFields
+        );
+
+        $sysFileReferenceUid = $connection->lastInsertId('sys_file_reference');
 
         // Update ref count on object
-        $res = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow($fieldName, $tableNames, 'uid = ' . $uidForeign);
-        $fileRef = intval($res[$fieldName]);
+        $connection = $connectionPool->getConnectionForTable($tableNames);
+        $record = $connection->select(
+            [$fieldName],
+            $tableNames,
+            ['uid' => $uidForeign],
+            [],
+            [],
+            1
+        )->fetch();
+
+        $fileRef = intval($record[$fieldName]);
         $fileRef++;
-        $GLOBALS['TYPO3_DB']->exec_UPDATEquery($tableNames, 'uid = ' . $uidForeign, [$fieldName => $fileRef]);
+
+        $connection = $connectionPool->getConnectionForTable($tableNames);
+        $connection->update(
+            $tableNames,
+            [$fieldName => $fileRef],
+            ['uid' => $uidForeign]
+        );
 
         return $sysFileReferenceUid;
     }
@@ -188,19 +220,46 @@ class FalUtility
     {
         // Update ref count on object
         // get fileref row
-        $fileRef = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('*', 'sys_file_reference', 'uid = ' . $uid);
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+
+        $connection = $connectionPool->getConnectionForTable('sys_file_reference');
+        $fileRef = $connection->select(
+            ['*'],
+            'sys_file_reference',
+            ['uid' => $uid],
+            [],
+            [],
+            1
+        )->fetch();
 
         // get count on foreign table
-        $foreignField = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow($fileRef['fieldname'], $fileRef['tablenames'], 'uid = ' . $fileRef['uid_foreign']);
+        $connection = $connectionPool->getConnectionForTable($fileRef['tablenames']);
+        $foreignField = $connection->select(
+            [$fileRef['fieldname']],
+            $fileRef['tablenames'],
+            ['uid' => $fileRef['uid_foreign']],
+            [],
+            [],
+            1
+        )->fetch();
 
         // decrement count
-        $foreignFieldCount = intval($foreignFieldCount[$fileRef['fieldname']]);
+        $foreignFieldCount = intval($foreignField[$fileRef['fieldname']]);
         $foreignFieldCount--;
 
         // update ref count
-        $GLOBALS['TYPO3_DB']->exec_UPDATEquery($fileRef['tablenames'], 'uid = ' . $fileRef['uid_foreign'], [$fileRef['fieldname'] => $foreignFieldCount]);
+        $connection = $connectionPool->getConnectionForTable($fileRef['tablenames']);
+        $connection->update(
+            $fileRef['tablenames'],
+            [$fileRef['fieldname'] => $foreignFieldCount],
+            ['uid' => $fileRef['uid_foreign']]
+        );
 
         // delete file reference
-        $GLOBALS['TYPO3_DB']->exec_DELETEquery('sys_file_reference', 'uid = ' . $uid);
+        $connection = $connectionPool->getConnectionForTable('sys_file_reference');
+        $connection->delete(
+            'sys_file_reference',
+            ['uid' => $uid]
+        );
     }
 }
