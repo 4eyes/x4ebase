@@ -40,6 +40,26 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
      */
     protected $cObj;
 
+    /**
+     * Specifies whether the escaping interceptors should be disabled or enabled for the result of renderChildren() calls within this ViewHelper
+     * @see isChildrenEscapingEnabled()
+     *
+     * Note: If this is NULL the value of $this->escapingInterceptorEnabled is considered for backwards compatibility
+     *
+     * @var boolean
+     * @api
+     */
+    protected $escapeChildren = false;
+
+    /**
+     * Specifies whether the escaping interceptors should be disabled or enabled for the render-result of this ViewHelper
+     * @see isOutputEscapingEnabled()
+     *
+     * @var boolean
+     * @api
+     */
+    protected $escapeOutput = false;
+
     public function initializeArguments()
     {
         $this->registerArgument('uid', 'int', 'The uid of the content element to render', true);
