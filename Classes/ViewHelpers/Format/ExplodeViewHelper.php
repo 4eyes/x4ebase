@@ -21,21 +21,51 @@ namespace X4e\X4ebase\ViewHelpers\Format;
 class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
+    public function initializeArguments()
+    {
+
+        $this->registerArgument(
+            'value',
+            'string',
+            'String to explode',
+            true,
+            0);
+        $this->registerArgument(
+            'delimiter',
+            'string',
+            'Char or string to split the string into pieces',
+            true,
+            0);
+        $this->registerArgument(
+            'removeEmptyValues',
+            'bool',
+            'If true empty items will be removed',
+            false,
+            false);
+        $this->registerArgument(
+            'limit',
+            'int',
+            'The limit',
+            false,
+            0);
+
+    }
+
     /**
      * Runs the given string through trimExplode of GeneralUtility Class
-     *
-     * @param string $value
-     * @param string $delimiter
-     * @param bool $removeEmptyValues
-     * @param int $limit
      *
      * @return array The explorer string
      * @api
      */
-    public function render($value, $delimiter = ',', $removeEmptyValues = false, $limit = 0)
+    public function render()
     {
-        $delimiter = $this->getDelimiter($delimiter);
-        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiter, $value, $removeEmptyValues, $limit);
+        $delimiter = $this->getDelimiter($this->arguments['delimiter']);
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(
+            $delimiter,
+            $this->arguments['value'],
+            $this->arguments['removeEmptyValues'],
+            $this->arguments['limit']
+        );
         return $value;
     }
 
