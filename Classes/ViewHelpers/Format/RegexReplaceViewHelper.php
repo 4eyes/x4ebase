@@ -34,6 +34,13 @@ class RegexReplaceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 {
 
     /**
+     * The output must not be escaped.
+     *
+     * @var bool
+     */
+    protected $escapeOutput = false;
+
+    /**
      * Searches for matches to pattern and replaces them with replacement.
      *
      * @param mixed $pattern The pattern to search for. It can be either a string or an array with strings.

@@ -27,6 +27,14 @@ class AddSlashesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
     protected $escapeOutput = false;
 
     /**
+     * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
+     * can decode the text's entities.
+     *
+     * @var bool
+     */
+    protected $escapingInterceptorEnabled = false;
+
+    /**
      * Runs the given string through php-function 'addslashes'
      *
      * @return string The escaped string
