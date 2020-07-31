@@ -34,7 +34,7 @@ class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
             'delimiter',
             'string',
             'Char or string to split the string into pieces',
-            true,
+            false,
             0);
         $this->registerArgument(
             'removeEmptyValues',
